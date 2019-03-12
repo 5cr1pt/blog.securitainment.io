@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Nmap源码分析（脚本引擎）Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nmap 源代碼分析">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-nmap-source-analysis/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="Nmap源码分析（脚本引擎）Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png">
+<meta property="og:updated_time" content="2019-03-12T08:29:47.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nmap 源代碼分析">
+<meta name="twitter:description" content="Nmap源码分析（脚本引擎）Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚">
+<meta name="twitter:image" content="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-nmap-source-analysis/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>nmap 源代碼分析 | Securitainment.io</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-nmap-source-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nmap 源代碼分析
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 01:22:50" itemprop="dateCreated datePublished" datetime="2016-05-14T01:22:50+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:29:47" itemprop="dateModified" datetime="2019-03-12T16:29:47+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-nmap-source-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-nmap-source-analysis/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="Nmap源码分析（脚本引擎）"><a href="#Nmap源码分析（脚本引擎）" class="headerlink" title="Nmap源码分析（脚本引擎）"></a>Nmap源码分析（脚本引擎）</h2><p>Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚本来增强Nmap的扫描能力。</p>
+<ol>
+<li><p>简单引入</p>
+<ul>
+<li><p>实现原理</p>
+<p>  NSE（Nmap Scripting Engine）是Nmap最为强大、最为灵活的功能之一。<br>  NSE主要分为两大部分：内嵌Lua解释器与NSE library。<br>  解释器：Nmap采用嵌入的Lua解释器来支持Lua脚本语言。Lua语言小巧简单而且扩展灵活，能够很好地与Nmap自身的C/C++语言融合。<br>  NSE library：为Lua脚本与Nmap提供了连接，负责完成基本初始化及提供脚本调度、并发执行、IO框架及异常处理，并且提供了默认的实用的脚本程序。</p>
+</li>
+<li><p>脚本分类</p>
+<p>  NSE中提供的Lua脚本分为不同的类别（Category），目前的类别如下:</p>
+<ol>
+<li>auth  负责处理鉴权证书（绕开鉴权）的脚本</li>
+<li>broadcast  在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务。</li>
+<li>brute  提供暴力破解方式，针对常见的应用如http/snmp等</li>
+<li>default  这是使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力</li>
+<li>discovery  对网络进行更多的信息，如SMB枚举、SNMP查询等</li>
+<li>dos  用于进行拒绝服务攻击（denial of service）</li>
+<li>exploit  利用已知的漏洞入侵系统</li>
+<li>external  利用第三方的数据库或资源，例如进行whois解析</li>
+<li>fuzzer  模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</li>
+<li>intrusive 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</li>
+<li>malware 探测目标机是否感染了病毒、开启了后门等信息</li>
+<li>safe 此类与intrusive相反，属于安全性脚本</li>
+<li>version 负责增强服务与版本扫描（Version Detection）功能的脚本。</li>
+<li>vuln 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067。</li>
+</ol>
+</li>
+<li><p>命令行选项</p>
+<p>  Nmap提供的命令行参数如下：</p>
+<pre><code>-sC: 等价于--script=default，使用默认类别的脚本进行扫描。 
+
+--script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述
+
+--script-args=&lt;n1=v1,[n2=v2,...]&gt;: 为脚本提供默认参数
+
+--script-args-file=filename: 使用文件来为脚本提供参数
+
+--script-trace: 显示脚本执行过程中发送与接收的数据
+
+--script-updatedb: 更新脚本数据库
+
+--script-help=&lt;Lua scripts&gt;: 显示脚本的帮助信息，其中&lt;Lua scripts&gt;部分可以逗号分隔的文件或脚本类别。
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>实现框架</p>
+<ul>
+<li><p>文件组织</p>
+<p>  Nmap脚本引擎所需要的的文件：</p>
+<ul>
+<li>nse_main.cc/nse_main.h/nse_main.lua,这是核心流程文件，负责脚本的初始化与调度执行。</li>
+<li>nmap/nse_*文件，nmap源码目录下以nse开头的文件，负责为NSE提供调用库，例如提供dnet、nsock、ssl、pcrelib、fs、bit等操作的库函数。</li>
+<li>liblua目录，提供Lua语言默认的源码C语言文件（提供Lua库函数与解释器相关代码）</li>
+<li>nselib目录，Nmap实现的NSE库文件，以Lua语言形式提供基本的库函数</li>
+<li>scripts目录，Nmap内置的实用脚本，即对具体扫描任务相关的操作脚本。Nmap目前支持300多个脚本（14个类别）。</li>
+</ul>
+</li>
+<li><p>代码流程</p>
+<ul>
+<li><p>代码流程图</p>
+<p>  <img src="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png" alt></p>
+</li>
+<li><p>流程解析</p>
+<ul>
+<li><p>初始化流程</p>
+<p>在命令行参数中指定脚本（–script/-sC）或指定-A选项或指定-sV选项，都会触发Nmap启动脚本引擎。其中-A选项表示aggressive scan，会调用default类别的脚本扫描；而-sV选项表示应用与版本侦测，会调用Version类别的脚本，辅助侦测服务详细信息。</p>
+<p>在Nmap.cc的nmap_main()函数中，若判断到需要启动脚本引擎，那么调用open_nse()函数进行NSE环境的准备。在open_nse()中主要创建luaState（管理Lua解释器的执行的全局变量），然后调用init_main()进行详细的初始化过程。</p>
+<p>进入init_main()函数，首先加载Lua标准库与Nmap的扩展库，随后准备参数环境，然后加载并执行nse_main.lua文件。</p>
+<p>nse_main.lua脚本为后续的脚本执行准备Lua环境，加载用户选择的需要调用的脚本（例如，用户–script discovery，那么会将该类别中所有的脚本加载进来），返回一个main()函数对象给init_main()，该main()是否后续脚本扫描需要的主函数，被保存在Lua的环境的注册表中。<br>　　<br>在nse_main.lua中，定义两个核心的类，Script和Thread，Script用于管理NSE脚本，当新的脚本被加载时，调用Script.new创建脚本对象，该对象被保存下来在后续的扫描过程中使用；Thread用于管理脚本的执行，该类中也包含对脚本健全性的检查（sanity check，如是否包含Action函数）。在脚本执行时，如果脚本之间存在依赖关系，那么会将基础的无依赖的脚本统一执行完毕，再执行依赖性的脚本。</p>
+</li>
+<li><p>脚本扫描流程</p>
+<p>执行脚本扫描时，从nmap_main()中调用script_scan()函数。</p>
+</li>
+</ul>
+<p>　　在进入script_scan()后，会标记扫描阶段类型，然后进入到初始化阶段返回的main()函数（来自nse_main.lua脚本中的main）中，在函数中解析具体的扫描类型。</p>
+<p>　　main()函数负责处理三种类型的脚本扫描：预扫描（SCRIPT_PRE_SCAN）、脚本扫描（SCRIPT_SCAN）、后扫描（SCRIPT_POST_SCAN）。预扫描即在Nmap调用的最前面（没有进行主机发现、端口扫描等操作）执行的脚本扫描，通常该类扫描用于准备基本的信息，例如到第三服务器查询相关的DNS信息。而脚本扫描，是使用NSE脚本来扫描目标主机，这是最核心的扫描方式。后扫描，是整个扫描结束后，做一些善后处理的脚本，比如优化整理某些扫描。</p>
+<p>　　在NSE脚本中都会定义触发规则（rule），确定在什么阶段什么条件执行该脚本。NSE共有4中规则，prerule()，如果脚本定义该规则，则在预扫描阶段该脚本会被执行；hostrule(host)该规则在检测到主机在线时候才执行；port(host,port)，检测主机某个端口开放时才执行，通常用于侦查特定的服务类型；postrule()，在所有主机都被扫描完毕后执行。</p>
+<p>　　在main()函数中核心操作由run函数负责。而run()函数的本身设计用于执行所有同一级别的脚本（根据依赖关系划分的级别），直到所有线程执行完毕才退出。</p>
+<p>　　run()函数中实现三个队列：执行队列（Running Queue）、等待队列（Waiting Queue）、挂起队列（Pending Queue），并管理三个队列中线程的切换，直到全部队列为空或出错而退出。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>源码分析</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///L_NSE用于保存Lua程序的状态  </span></span><br><span class="line"><span class="keyword">static</span> lua_State *L_NSE = <span class="literal">NULL</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">///open_nse用于创建Lua状态，准备Lua解释器环境  </span></span><br><span class="line"><span class="comment">///调用init_main()完成初始化操作。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">open_nse</span> <span class="params">(<span class="keyword">void</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (L_NSE == <span class="literal">NULL</span>)    <span class="comment">///全局维护一份Lua状态  </span></span><br><span class="line">  &#123;  </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">     Set the random seed value on behalf of scripts.  Since Lua uses the </span></span><br><span class="line"><span class="comment">     C rand and srand functions, which have a static seed for the entire </span></span><br><span class="line"><span class="comment">     program, we don't want scripts doing this themselves. </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    srand(get_random_uint());  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">///创建Lua状态机，用于管理整个Lua程序的执行  </span></span><br><span class="line">    <span class="keyword">if</span> ((L_NSE = luaL_newstate()) == <span class="literal">NULL</span>)  </span><br><span class="line">      fatal(<span class="string">"%s: failed to open a Lua state!"</span>, SCRIPT_ENGINE);  </span><br><span class="line">    lua_atpanic(L_NSE, panic);  <span class="comment">///注册发生严重故障的回调函数为panic函数  </span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0  </span></span><br><span class="line">    <span class="comment">/* Lua 5.2 */</span>  </span><br><span class="line">    lua_pushcfunction(L_NSE, init_main);  </span><br><span class="line">    lua_pushlightuserdata(L_NSE, &amp;o.chosenScripts);  </span><br><span class="line">    <span class="keyword">if</span> (lua_pcall(L_NSE, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>  </span></span><br><span class="line">    <span class="comment">///此处lua_cpcall()以保护模式执行C语言函数init_main()  </span></span><br><span class="line">    <span class="keyword">if</span> (lua_cpcall(L_NSE, init_main, &amp;o.chosenScripts))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></span><br><span class="line">      fatal(<span class="string">"%s: failed to initialize the script engine:\n%s\n"</span>, SCRIPT_ENGINE,   </span><br><span class="line">          lua_tostring(L_NSE, <span class="number">-1</span>));  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">///scipt_scan函数具体执行脚本扫描的过程  </span></span><br><span class="line"><span class="comment">///设置扫描状态；调用run_main()函数执行具体脚本扫描过程。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">script_scan</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt; &amp;targets, stype scantype)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="comment">///设置全局的扫描状态为此处状态（可能是SCRIPT_PRE_SCAN/SCRIPT_SCAN/SCRIPT_POST_SCAN）  </span></span><br><span class="line">  o.current_scantype = scantype;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///断言L_NSE非空，并清空栈区（C与Lua调用交互过程均会在栈内完成）  </span></span><br><span class="line">  assert(L_NSE != <span class="literal">NULL</span>);  </span><br><span class="line">  lua_settop(L_NSE, <span class="number">0</span>); <span class="comment">/* clear the stack */</span>  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0  </span></span><br><span class="line">  <span class="comment">/* Lua 5.2 */</span>  </span><br><span class="line">  lua_pushcfunction(L_NSE, run_main);  </span><br><span class="line">  lua_pushlightuserdata(L_NSE, &amp;targets);  </span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L_NSE, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>  </span></span><br><span class="line">  <span class="comment">///此处lua_cpcall()以保护模式执行C语言函数run_main()  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_cpcall(L_NSE, run_main, &amp;targets))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></span><br><span class="line">    error(<span class="string">"%s: Script Engine Scan Aborted.\nAn error was thrown by the "</span>  </span><br><span class="line">          <span class="string">"engine: %s"</span>, SCRIPT_ENGINE, lua_tostring(L_NSE, <span class="number">-1</span>));  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">close_nse</span> <span class="params">(<span class="keyword">void</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="comment">///关闭Lua状态  </span></span><br><span class="line">  <span class="keyword">if</span> (L_NSE != <span class="literal">NULL</span>)  </span><br><span class="line">  &#123;  </span><br><span class="line">    lua_close(L_NSE);  </span><br><span class="line">    L_NSE = <span class="literal">NULL</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">init_main</span> <span class="params">(lua_State *L)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="keyword">char</span> path[MAXPATHLEN];  </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; *rules = (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; *)  </span><br><span class="line">      lua_touserdata(L, <span class="number">1</span>);  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load some basic libraries */</span>  </span><br><span class="line">  luaL_openlibs(L);       <span class="comment">///加载Lua自身的库  </span></span><br><span class="line">  set_nmap_libraries(L);  <span class="comment">///加载Nmap扩展的Lua库  </span></span><br><span class="line">  </span><br><span class="line">  lua_newtable(L);  </span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS);  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load debug.traceback for collecting any error tracebacks */</span>  </span><br><span class="line">  lua_settop(L, <span class="number">0</span>); <span class="comment">/* clear the stack */</span>  </span><br><span class="line">  lua_getglobal(L, <span class="string">"debug"</span>);  </span><br><span class="line">  lua_getfield(L, <span class="number">-1</span>, <span class="string">"traceback"</span>);  </span><br><span class="line">  lua_replace(L, <span class="number">1</span>); <span class="comment">// debug.traceback stack position 1  </span></span><br><span class="line">  lua_pushvalue(L, <span class="number">1</span>);  </span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_TRACEBACK); <span class="comment">/* save copy */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load main Lua code, stack position 2 */</span>  </span><br><span class="line">  <span class="comment">///将nse_main.lua文件加载进来，文件被转换为匿名函数（栈索引为2），后续调用lua_pcall()执行它。  </span></span><br><span class="line">  <span class="keyword">if</span> (nmap_fetchfile(path, <span class="keyword">sizeof</span>(path), <span class="string">"nse_main.lua"</span>) != <span class="number">1</span>)  </span><br><span class="line">    luaL_error(L, <span class="string">"could not locate nse_main.lua"</span>);  </span><br><span class="line">  <span class="keyword">if</span> (luaL_loadfile(L, path) != <span class="number">0</span>)  </span><br><span class="line">    luaL_error(L, <span class="string">"could not load nse_main.lua: %s"</span>, lua_tostring(L, <span class="number">-1</span>));  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The first argument to the NSE Main Lua code is the private nse </span></span><br><span class="line"><span class="comment">   * library table which exposes certain necessary C functions to </span></span><br><span class="line"><span class="comment">   * the Lua engine. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///加载提供给nse_main.lua调用的C语言函数表（栈索引为3）  </span></span><br><span class="line">  open_cnse(L); <span class="comment">// stack index 3  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The second argument is the script rules, including the </span></span><br><span class="line"><span class="comment">   * files/directories/categories passed as the userdata to this function. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///将脚本规则作为参数压入栈区（栈索引为4）  </span></span><br><span class="line">  lua_createtable(L, rules-&gt;size(), <span class="number">0</span>); <span class="comment">// stack index 4  </span></span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;::iterator si = rules-&gt;begin();  </span><br><span class="line">       si != rules-&gt;end(); si++)  </span><br><span class="line">  &#123;  </span><br><span class="line">    lua_pushstring(L, si-&gt;c_str());  </span><br><span class="line">    lua_rawseti(L, <span class="number">4</span>, lua_objlen(L, <span class="number">4</span>) + <span class="number">1</span>);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Get Lua main function */</span>  </span><br><span class="line">  <span class="comment">///调用由nse_main.lua转换后的匿名函数（栈索引2）：  </span></span><br><span class="line">  <span class="comment">///传入2个参数（栈索引3/4），输出1个结果（执行完毕后放在栈顶），  </span></span><br><span class="line">  <span class="comment">///错误处理函数对应的栈区索引为1（即debug.traceback）。  </span></span><br><span class="line">  <span class="comment">///功能：在nse_main.lua会加载用户选择的所有的脚本，并初始化Script/Thread类  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>) != <span class="number">0</span>) lua_error(L); <span class="comment">/* we wanted a traceback */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///将执行nse_main.lua返回的结果（nse_main.lua中的main函数对象）放入注册表中，  </span></span><br><span class="line">  <span class="comment">///以便后续的脚本扫描过程直接调用此main函数。  </span></span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_MAIN);  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">run_main</span> <span class="params">(lua_State *L)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt; *targets = (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target*&gt; *)  </span><br><span class="line">      lua_touserdata(L, <span class="number">1</span>);  </span><br><span class="line">  </span><br><span class="line">  lua_settop(L, <span class="number">0</span>); <span class="comment">///清空栈区  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* New host group */</span>  </span><br><span class="line">  lua_newtable(L);  <span class="comment">///清空当前主机组  </span></span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS);  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">///读出error traceback函数  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_TRACEBACK); <span class="comment">/* index 1 */</span>  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">///获取nse_main.lua中的main()函数  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_MAIN); <span class="comment">/* index 2 */</span>  </span><br><span class="line">  assert(lua_isfunction(L, <span class="number">-1</span>));  <span class="comment">///若不是函数，那此处必然有错  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The first and only argument to main is the list of targets. </span></span><br><span class="line"><span class="comment">   * This has all the target names, 1-N, in a list. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///main (hosts, scantype)  </span></span><br><span class="line">  <span class="comment">///main函数需要两个参数，被扫描的主机组与扫描类型（PRE/SCRIPT/POST）  </span></span><br><span class="line">  <span class="comment">///以下代码将逐次加入等待扫描主机到NSE_CURRENT_HOSTS表中  </span></span><br><span class="line">  lua_createtable(L, targets-&gt;size(), <span class="number">0</span>); <span class="comment">// stack index 3  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS); <span class="comment">/* index 4 */</span>  </span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt;::iterator ti = targets-&gt;begin();  </span><br><span class="line">       ti != targets-&gt;end(); ti++)  </span><br><span class="line">  &#123;  </span><br><span class="line">    Target *target = (Target *) *ti;  </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *TargetName = target-&gt;TargetName();  </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *targetipstr = target-&gt;targetipstr();  </span><br><span class="line">    lua_newtable(L);  </span><br><span class="line">    set_hostinfo(L, target);  </span><br><span class="line">    lua_rawseti(L, <span class="number">3</span>, lua_objlen(L, <span class="number">3</span>) + <span class="number">1</span>);  </span><br><span class="line">    <span class="keyword">if</span> (TargetName != <span class="literal">NULL</span> &amp;&amp; <span class="built_in">strcmp</span>(TargetName, <span class="string">""</span>) != <span class="number">0</span>)  </span><br><span class="line">      lua_pushstring(L, TargetName);  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      lua_pushstring(L, targetipstr);  </span><br><span class="line">    lua_pushlightuserdata(L, target);  </span><br><span class="line">    lua_rawset(L, <span class="number">4</span>); <span class="comment">/* add to NSE_CURRENT_HOSTS */</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">  lua_pop(L, <span class="number">1</span>); <span class="comment">/* pop NSE_CURRENT_HOSTS */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///设置main()第二个参数，扫描类型  </span></span><br><span class="line">  <span class="comment">/* push script scan type phase */</span>  </span><br><span class="line">  <span class="keyword">switch</span> (o.current_scantype)  </span><br><span class="line">  &#123;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_PRE_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_PRE_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_POST_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_POST_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">default</span>:  </span><br><span class="line">      fatal(<span class="string">"%s: failed to set the script scan phase.\n"</span>, SCRIPT_ENGINE);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///以保护模式运行main()函数，两个参数，0个返回值，错误处理函数在栈区的index1位置  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>) != <span class="number">0</span>) lua_error(L); <span class="comment">/* we wanted a traceback */</span>  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Jayce Links WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/14/2016-05-14-kali-notes/" rel="next" title="kali筆記">
+                <i class="fa fa-chevron-left"></i> kali筆記
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/14/2016-05-14-pentest-browser-problems/" rel="prev" title="瀏覽器問題收集">
+                瀏覽器問題收集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jayce Links</p>
+              <div class="site-description motion-element" itemprop="description">运维 | 安全 | 渗透</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nmap源码分析（脚本引擎）"><span class="nav-number">1.</span> <span class="nav-text">Nmap源码分析（脚本引擎）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">2.8378204901507734e+40 </a>&copy; 2015 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jayce Links</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://securitainment.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-nmap-source-analysis/";
+    this.page.identifier = "2016/05/14/2016-05-14-nmap-source-analysis/";
+    this.page.title = 'nmap 源代碼分析';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

