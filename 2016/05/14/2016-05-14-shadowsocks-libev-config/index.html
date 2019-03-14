@@ -98,17 +98,18 @@
 
 
 
-  <meta name="description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。 安装必要组件yum install build-essential">
+  <meta name="description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。">
+<meta name="keywords" content="shadowsocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shadowsocks_libev 配置">
 <meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-shadowsocks-libev-config/index.html">
 <meta property="og:site_name" content="Securitainment.io">
-<meta property="og:description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。 安装必要组件yum install build-essential">
+<meta property="og:description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T08:29:14.709Z">
+<meta property="og:updated_time" content="2019-03-14T16:25:17.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shadowsocks_libev 配置">
-<meta name="twitter:description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。 安装必要组件yum install build-essential">
+<meta name="twitter:description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。">
 
 
 
@@ -369,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-12 16:29:14" itemprop="dateModified" datetime="2019-03-12T16:29:14+08:00">2019-03-12</time>
+                <time title="Modified: 2019-03-15 00:25:17" itemprop="dateModified" datetime="2019-03-15T00:25:17+08:00">2019-03-15</time>
               
             
           </span>
@@ -416,8 +417,8 @@
       
 
       
-        <a id="more"></a>
-<h2 id="CentOS-搭建Shadowsocks-服务器"><a href="#CentOS-搭建Shadowsocks-服务器" class="headerlink" title="CentOS 搭建Shadowsocks 服务器"></a>CentOS 搭建Shadowsocks 服务器</h2><p>shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。</p>
+        <h2 id="CentOS-搭建Shadowsocks-服务器"><a href="#CentOS-搭建Shadowsocks-服务器" class="headerlink" title="CentOS 搭建Shadowsocks 服务器"></a>CentOS 搭建Shadowsocks 服务器</h2><p>shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。</p>
+<a id="more"></a>
 <h1 id="安装必要组件"><a href="#安装必要组件" class="headerlink" title="安装必要组件"></a>安装必要组件</h1><pre><code>yum install build-essential autoconf libtool openssl-devel gcc -y
 </code></pre><h1 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h1><pre><code>yum install git -y
 </code></pre><p>装完了执行<code>git --version</code>如果出现版本号则安装成功</p>
@@ -508,6 +509,12 @@ target     prot opt source               destination
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+          
+        </div>
       
 
       
@@ -606,7 +613,7 @@ target     prot opt source               destination
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -614,6 +621,27 @@ target     prot opt source               destination
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           

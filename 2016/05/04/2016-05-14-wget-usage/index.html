@@ -98,17 +98,18 @@
 
 
 
-  <meta name="description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -n">
+  <meta name="description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="wget 使用筆記">
 <meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/2016-05-14-wget-usage/index.html">
 <meta property="og:site_name" content="Securitainment.io">
-<meta property="og:description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -n">
+<meta property="og:description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T08:28:29.910Z">
+<meta property="og:updated_time" content="2019-03-14T16:24:25.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wget 使用筆記">
-<meta name="twitter:description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -n">
+<meta name="twitter:description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org/pub/path/ 在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org/pub/path/  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd">
 
 
 
@@ -369,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-12 16:28:29" itemprop="dateModified" datetime="2019-03-12T16:28:29+08:00">2019-03-12</time>
+                <time title="Modified: 2019-03-15 00:24:25" itemprop="dateModified" datetime="2019-03-15T00:24:25+08:00">2019-03-15</time>
               
             
           </span>
@@ -416,8 +417,7 @@
       
 
       
-        <a id="more"></a>
-<h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+        <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
 <pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/
 </code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
 <pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
@@ -434,6 +434,7 @@
 -A 指定要下载的文件样式列表，多个样式用逗号分隔
 -i 后面跟一个文件，文件内指明要下载的URL
 </code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
+<a id="more"></a>
 <h1 id="wget的常见用法"><a href="#wget的常见用法" class="headerlink" title="wget的常见用法"></a>wget的常见用法</h1><p><strong>wget的使用格式</strong></p>
 <pre><code>Usage: wget [OPTION]… [URL]…
 </code></pre><ul>
@@ -601,6 +602,12 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
 
       
       
@@ -698,7 +705,7 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -706,6 +713,27 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           

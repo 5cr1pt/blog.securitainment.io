@@ -307,205 +307,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ms07-040/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jayce">
-      <meta itemprop="description" content="运维 | 安全 | 渗透">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/05/14/2016-05-14-ms07-040/" class="post-title-link" itemprop="url">MS07-040 .NET Framework中的漏洞可能允许远程执行代码</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-05-14 00:58:49" itemprop="dateCreated datePublished" datetime="2016-05-14T00:58:49+08:00">2016-05-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-12 16:29:56" itemprop="dateModified" datetime="2019-03-12T16:29:56+08:00">2019-03-12</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2016/05/14/2016-05-14-ms07-040/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ms07-040/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h1 id="MS07-040"><a href="#MS07-040" class="headerlink" title="MS07-040"></a><a href="https://technet.microsoft.com/library/security/ms07-040" target="_blank" rel="noopener">MS07-040</a></h1><p><em>Microsoft .Net Framework多个空字节注入漏洞</em></p>
-<h2 id="受影响系统"><a href="#受影响系统" class="headerlink" title="受影响系统"></a>受影响系统</h2><pre><code>Microsoft .NET Framework 2.0
-Microsoft .NET Framework 1.1
-Microsoft .NET Framework 1.0
-</code></pre><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>BUGTRAQ  ID: <a href="http://www.securityfocus.com/bid/24791" target="_blank" rel="noopener">24791</a></p>
-<p>CVE(CAN) ID: <a href="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0042" target="_blank" rel="noopener">CVE-2007-0042</a></p>
-<p>Microsoft .NET Framework是一个流行的软件开发工具包。 </p>
-<p>.NET Framework在处理网页请求时存在漏洞，远程攻击可能利用此漏洞绕过安全限制访问到敏感信息。</p>
-<p>.NET Framework的Server.MapPath、Server.Execute、Server.Transfer、String.Compare、System.Net.Mail.SmtpMail.Send方式没有正确地验证某些用户输入参数，允许用户在提交的URI中注入任意空字节。成功地利用此漏洞的攻击者绕过ASP.NET网站的安全限制下载任何网页的内容。</p>
-<blockquote>
-<p>来源：Paul Craig （<a href="mailto:headpimp@pimp-industries.com" target="_blank" rel="noopener">headpimp@pimp-industries.com</a>）</p>
-</blockquote>
-<blockquote>
-<p>链接：<a href="http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera" target="_blank" rel="noopener">http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera</a><br><a href="http://secunia.com/advisories/26003/" target="_blank" rel="noopener">http://secunia.com/advisories/26003/</a><br><a href="http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true" target="_blank" rel="noopener">http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true</a><br><a href="http://www.us-cert.gov/cas/techalerts/TA07-191A.html" target="_blank" rel="noopener">http://www.us-cert.gov/cas/techalerts/TA07-191A.html</a></p>
-</blockquote>
-<h2 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h2><ul>
-<li><p>例1：</p>
-  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">              <span class="keyword">dim</span> name <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">              <span class="keyword">dim</span> realname <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">          name = request(<span class="string">"name"</span>) &amp; <span class="string">".uploaded"</span></span><br><span class="line">              realname = Mappath(<span class="string">"."</span>) &amp; <span class="string">"\" &amp; name</span></span><br><span class="line"><span class="string">          response.write("</span>Mappath <span class="keyword">of</span> name = &lt;b&gt;<span class="string">" &amp; MapPath(name) &amp; "</span>&lt;/b&gt;&lt;br&gt;<span class="string">")</span></span><br><span class="line"><span class="string">               response.write("</span>The real value <span class="keyword">is</span>: &lt;b&gt;<span class="string">" &amp; realname &amp; "</span>&lt;/b&gt;&lt;br&gt;<span class="string">")</span></span><br><span class="line"><span class="string">         End Sub</span></span><br><span class="line"><span class="string">      &lt;/script&gt;</span></span><br><span class="line"><span class="string">   &lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">   &lt;asp:label id="</span>Message<span class="string">" runat="</span>server<span class="string">"/&gt;</span></span><br><span class="line"><span class="string">   &lt;asp:label id="</span>Message2<span class="string">" runat="</span>server<span class="string">"/&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>例2：</p>
-  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">  			&lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">     			<span class="keyword">Sub</span> Page_Load()</span><br><span class="line">        		Server.Execute(request(<span class="string">"page"</span>))</span><br><span class="line">      		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">  			&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>例3：</p>
-  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">   &lt;title&gt;Server.execute &lt;/title&gt;</span><br><span class="line">   &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">      <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">      Server.Transfer(request(<span class="string">"page"</span>))</span><br><span class="line">      <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>例4：</p>
-  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;<span class="built_in">String</span>.<span class="keyword">Compare</span>&lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">			<span class="keyword">dim</span> allowed, sFirstItem, sSecondItem <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">		    sFirstItem = Request(<span class="string">"first"</span>)</span><br><span class="line">		    sSecondItem = Request(<span class="string">"second"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - First item = "</span> &amp; sFirstItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - Second item = "</span> &amp; sSecondItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">if</span> <span class="built_in">String</span>.<span class="keyword">Compare</span>(sFirstItem, sSecondItem) =<span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Matched! Strings are the same&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)    </span><br><span class="line">		    <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Failed!! Strings are diffrent &lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">		    <span class="keyword">if</span> sFirstItem=sSecondItem <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"Direct eval - Matched!"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		        <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;Direct eval - Failed!!&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">         <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>例5：</p>
-  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.Web.Mail"</span> %&gt;</span><br><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.IO"</span> %&gt;</span><br><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">		<span class="keyword">Private</span> <span class="keyword">Sub</span> Page_Load(sender <span class="keyword">As</span> <span class="built_in">Object</span>, e <span class="keyword">As</span> System.EventArgs)</span><br><span class="line">		<span class="keyword">Dim</span> m <span class="keyword">As</span> <span class="keyword">New</span> MailMessage()</span><br><span class="line">		m.<span class="keyword">From</span> = <span class="string">"tester@security-assessment.com"</span></span><br><span class="line">		m.<span class="keyword">To</span> = request(<span class="string">"to"</span>) &amp; <span class="string">"@security-assessment.com"</span></span><br><span class="line">		m.Subject = request(<span class="string">"subject"</span>) &amp; <span class="string">": FromWebsite"</span></span><br><span class="line">		m.Body = request(<span class="string">"body"</span>) &amp; <span class="string">"This message was submitted by a user."</span></span><br><span class="line">		Response.Write(<span class="string">"Sending mail to: "</span> &amp; m.<span class="keyword">to</span>)</span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"</span>, <span class="string">"1"</span>) <span class="comment">'basic authentication</span></span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendusername"</span>, <span class="string">"username-goes-here"</span>) </span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendpassword"</span>, <span class="string">"password-goes-here"</span>) <span class="comment">'set your </span></span><br><span class="line">		SmtpMail.SmtpServer = <span class="string">"mail.server.here"</span></span><br><span class="line">		SmtpMail.Send(m)</span><br><span class="line">		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1816,7 +1617,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-12 16:28:29" itemprop="dateModified" datetime="2019-03-12T16:28:29+08:00">2019-03-12</time>
+                <time title="Modified: 2019-03-15 00:24:25" itemprop="dateModified" datetime="2019-03-15T00:24:25+08:00">2019-03-15</time>
               
             
           </span>
@@ -1864,9 +1665,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
 
       
         
-          
-            <a id="more"></a>
-<h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+          <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
 <pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/
 </code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
 <pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
@@ -1883,130 +1682,15 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
 -A 指定要下载的文件样式列表，多个样式用逗号分隔
 -i 后面跟一个文件，文件内指明要下载的URL
 </code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
-<h1 id="wget的常见用法"><a href="#wget的常见用法" class="headerlink" title="wget的常见用法"></a>wget的常见用法</h1><p><strong>wget的使用格式</strong></p>
-<pre><code>Usage: wget [OPTION]… [URL]…
-</code></pre><ul>
-<li><p>用wget做站点镜像:</p>
-<pre><code>wget -r -p -np -k http://dsec.pku.edu.cn/~usr_name/
-</code></pre><p>  或者</p>
-<pre><code>wget -m http://www.tldp.org/LDP/abs/html/
-</code></pre></li>
-<li><p>在不稳定的网络上下载一个部分下载的文件，以及在空闲时段下载</p>
-<pre><code>wget -t 0 -w 31 -c http://dsec.pku.edu.cn/BBC.avi -o down.log &amp;
-</code></pre><p>  或者从filelist读入要下载的文件列表</p>
-<pre><code>wget -t 0 -w 31 -c -B ftp://dsec.pku.edu.cn/linuxsoft -i filelist.txt -o down.log &amp;
-</code></pre></li>
-</ul>
-<p>上面的代码还可以用来在网络比较空闲的时段进行下载。我的用法是:在mozilla中将不方便当时下载的URL链接拷贝到内存中然后粘贴到文件filelist.txt中，在晚上要出去系统前执行上面代码的第二条。</p>
-<ul>
-<li><p>使用代理下载</p>
-<pre><code>wget -Y on -p -k https://sourceforge.net/projects/wvware/
-</code></pre><p>  代理可以在环境变量或wgetrc文件中设定</p>
-<p>  在环境变量中设定代理</p>
-<pre><code>export PROXY=http://211.90.168.94:8080/
-</code></pre><p>  在~/.wgetrc中设定代理</p>
-<pre><code>http_proxy = http://proxy.yoyodyne.com:18023/
-ftp_proxy = http://proxy.yoyodyne.com:18023/
-</code></pre></li>
-</ul>
-<h1 id="wget各种选项分类列表"><a href="#wget各种选项分类列表" class="headerlink" title="wget各种选项分类列表"></a>wget各种选项分类列表</h1><ul>
-<li><p>启动</p>
-<pre><code>-V, –version 显示wget的版本后退出
--h, –help 打印语法帮助
--b, –background 启动后转入后台执行
--e, –execute=COMMAND 
-</code></pre><p>  执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc</p>
-</li>
-<li><p>记录和输入文件</p>
-<pre><code>-o, –output-file=FILE 把记录写到FILE文件中
--a, –append-output=FILE 把记录追加到FILE文件中
--d, –debug 打印调试输出
--q, –quiet 安静模式(没有输出)
--v, –verbose 冗长模式(这是缺省设置)
--nv, –non-verbose 关掉冗长模式，但不是安静模式
--i, –input-file=FILE 下载在FILE文件中出现的URLs
--F, –force-html 把输入文件当作HTML格式文件对待
--B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀
-–sslcertfile=FILE 可选客户端证书
-–sslcertkey=KEYFILE 可选客户端证书的KEYFILE
-–egd-file=FILE 指定EGD socket的文件名
-</code></pre></li>
-<li><p>下载</p>
-<pre><code>–bind-address=ADDRESS 
-</code></pre><p>  指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)</p>
-<pre><code>-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).
--O –output-document=FILE 把文档写到FILE文件中
--nc, –no-clobber 不要覆盖存在的文件或使用.#前缀
--c, –continue 接着下载没下载完的文件
-–progress=TYPE 设定进程条标记
--N, –timestamping 不要重新下载文件除非比本地文件新
--S, –server-response 打印服务器的回应
-–spider 不下载任何东西
--T, –timeout=SECONDS 设定响应超时的秒数
--w, –wait=SECONDS 两次尝试之间间隔SECONDS秒
-–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒
-–random-wait 在下载之间等待0…2*WAIT秒
--Y, –proxy=on/off 打开或关闭代理
--Q, –quota=NUMBER 设置下载的容量限制
-–limit-rate=RATE 限定下载输率
-</code></pre></li>
-<li><p>目录</p>
-<pre><code>-nd –no-directories 不创建目录
--x, –force-directories 强制创建目录
--nH, –no-host-directories 不创建主机目录
--P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…
-–cut-dirs=NUMBER 忽略 NUMBER层远程目录
-</code></pre></li>
-<li><p>HTTP 选项</p>
-<pre><code>–http-user=USER 设定HTTP用户名为 USER.
-–http-passwd=PASS 设定http密码为 PASS.
--C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许).
--E, –html-extension 将所有text/html文档以.html扩展名保存
-–ignore-length 忽略 `Content-Length&apos;头域
-–header=STRING 在headers中插入字符串 STRING
-–proxy-user=USER 设定代理的用户名为 USER
-–proxy-passwd=PASS 设定代理的密码为 PASS
-–referer=URL 在HTTP请求中包含 `Referer: URL&apos;头
--s, –save-headers 保存HTTP头到文件
--U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION.
-–no-http-keep-alive 关闭 HTTP活动链接 (永远链接).
-–cookies=off 不使用 cookies.
-–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie
-–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中
-</code></pre></li>
-<li><p>FTP 选项</p>
-<pre><code>-nr, –dont-remove-listing 不移走 `.listing&apos;文件
--g, –glob=on/off 打开或关闭文件名的 globbing机制
-–passive-ftp 使用被动传输模式 (缺省值).
-–active-ftp 使用主动传输模式
-–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)
-</code></pre></li>
-<li><p>递归下载</p>
-<pre><code>-r, –recursive 递归下载－－慎用!
--l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷).
-–delete-after 在现在完毕后局部删除文件
--k, –convert-links 转换非相对链接为相对链接
--K, –backup-converted 在转换文件X之前，将之备份为 X.orig
--m, –mirror 等价于 -r -N -l inf -nr.
--p, –page-requisites 下载显示HTML文件的所有图片
-</code></pre></li>
-<li><p>递归下载中的包含和不包含(accept/reject)</p>
-<pre><code>-A, –accept=LIST 分号分隔的被接受扩展名的列表
--R, –reject=LIST 分号分隔的不被接受的扩展名的列表
--D, –domains=LIST 分号分隔的被接受域的列表
-–exclude-domains=LIST 分号分隔的不被接受的域的列表
-–follow-ftp 跟踪HTML文档中的FTP链接
-–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表
--G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表
--H, –span-hosts 当递归时转到外部主机
--L, –relative 仅仅跟踪相对链接
--I, –include-directories=LIST 允许目录的列表
--X, –exclude-directories=LIST 不被包含目录的列表
--np, –no-parent 不要追溯到父目录
-</code></pre></li>
-</ul>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2016/05/04/2016-05-14-wget-usage/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -2268,7 +1952,7 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2276,6 +1960,27 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
