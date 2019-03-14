@@ -307,6 +307,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ms07-040/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-ms07-040/" class="post-title-link" itemprop="url">MS07-040 .NET Framework中的漏洞可能允许远程执行代码</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:58:49" itemprop="dateCreated datePublished" datetime="2016-05-14T00:58:49+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-12 16:29:56" itemprop="dateModified" datetime="2019-03-12T16:29:56+08:00">2019-03-12</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-ms07-040/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ms07-040/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="MS07-040"><a href="#MS07-040" class="headerlink" title="MS07-040"></a><a href="https://technet.microsoft.com/library/security/ms07-040" target="_blank" rel="noopener">MS07-040</a></h1><p><em>Microsoft .Net Framework多个空字节注入漏洞</em></p>
+<h2 id="受影响系统"><a href="#受影响系统" class="headerlink" title="受影响系统"></a>受影响系统</h2><pre><code>Microsoft .NET Framework 2.0
+Microsoft .NET Framework 1.1
+Microsoft .NET Framework 1.0
+</code></pre><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>BUGTRAQ  ID: <a href="http://www.securityfocus.com/bid/24791" target="_blank" rel="noopener">24791</a></p>
+<p>CVE(CAN) ID: <a href="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0042" target="_blank" rel="noopener">CVE-2007-0042</a></p>
+<p>Microsoft .NET Framework是一个流行的软件开发工具包。 </p>
+<p>.NET Framework在处理网页请求时存在漏洞，远程攻击可能利用此漏洞绕过安全限制访问到敏感信息。</p>
+<p>.NET Framework的Server.MapPath、Server.Execute、Server.Transfer、String.Compare、System.Net.Mail.SmtpMail.Send方式没有正确地验证某些用户输入参数，允许用户在提交的URI中注入任意空字节。成功地利用此漏洞的攻击者绕过ASP.NET网站的安全限制下载任何网页的内容。</p>
+<blockquote>
+<p>来源：Paul Craig （<a href="mailto:headpimp@pimp-industries.com" target="_blank" rel="noopener">headpimp@pimp-industries.com</a>）</p>
+</blockquote>
+<blockquote>
+<p>链接：<a href="http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera" target="_blank" rel="noopener">http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera</a><br><a href="http://secunia.com/advisories/26003/" target="_blank" rel="noopener">http://secunia.com/advisories/26003/</a><br><a href="http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true" target="_blank" rel="noopener">http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true</a><br><a href="http://www.us-cert.gov/cas/techalerts/TA07-191A.html" target="_blank" rel="noopener">http://www.us-cert.gov/cas/techalerts/TA07-191A.html</a></p>
+</blockquote>
+<h2 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h2><ul>
+<li><p>例1：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">              <span class="keyword">dim</span> name <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">              <span class="keyword">dim</span> realname <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">          name = request(<span class="string">"name"</span>) &amp; <span class="string">".uploaded"</span></span><br><span class="line">              realname = Mappath(<span class="string">"."</span>) &amp; <span class="string">"\" &amp; name</span></span><br><span class="line"><span class="string">          response.write("</span>Mappath <span class="keyword">of</span> name = &lt;b&gt;<span class="string">" &amp; MapPath(name) &amp; "</span>&lt;/b&gt;&lt;br&gt;<span class="string">")</span></span><br><span class="line"><span class="string">               response.write("</span>The real value <span class="keyword">is</span>: &lt;b&gt;<span class="string">" &amp; realname &amp; "</span>&lt;/b&gt;&lt;br&gt;<span class="string">")</span></span><br><span class="line"><span class="string">         End Sub</span></span><br><span class="line"><span class="string">      &lt;/script&gt;</span></span><br><span class="line"><span class="string">   &lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">   &lt;asp:label id="</span>Message<span class="string">" runat="</span>server<span class="string">"/&gt;</span></span><br><span class="line"><span class="string">   &lt;asp:label id="</span>Message2<span class="string">" runat="</span>server<span class="string">"/&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">  			&lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">     			<span class="keyword">Sub</span> Page_Load()</span><br><span class="line">        		Server.Execute(request(<span class="string">"page"</span>))</span><br><span class="line">      		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">  			&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">   &lt;title&gt;Server.execute &lt;/title&gt;</span><br><span class="line">   &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">      <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">      Server.Transfer(request(<span class="string">"page"</span>))</span><br><span class="line">      <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例4：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;<span class="built_in">String</span>.<span class="keyword">Compare</span>&lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">			<span class="keyword">dim</span> allowed, sFirstItem, sSecondItem <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">		    sFirstItem = Request(<span class="string">"first"</span>)</span><br><span class="line">		    sSecondItem = Request(<span class="string">"second"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - First item = "</span> &amp; sFirstItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - Second item = "</span> &amp; sSecondItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">if</span> <span class="built_in">String</span>.<span class="keyword">Compare</span>(sFirstItem, sSecondItem) =<span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Matched! Strings are the same&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)    </span><br><span class="line">		    <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Failed!! Strings are diffrent &lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">		    <span class="keyword">if</span> sFirstItem=sSecondItem <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"Direct eval - Matched!"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		        <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;Direct eval - Failed!!&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">         <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例5：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.Web.Mail"</span> %&gt;</span><br><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.IO"</span> %&gt;</span><br><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">		<span class="keyword">Private</span> <span class="keyword">Sub</span> Page_Load(sender <span class="keyword">As</span> <span class="built_in">Object</span>, e <span class="keyword">As</span> System.EventArgs)</span><br><span class="line">		<span class="keyword">Dim</span> m <span class="keyword">As</span> <span class="keyword">New</span> MailMessage()</span><br><span class="line">		m.<span class="keyword">From</span> = <span class="string">"tester@security-assessment.com"</span></span><br><span class="line">		m.<span class="keyword">To</span> = request(<span class="string">"to"</span>) &amp; <span class="string">"@security-assessment.com"</span></span><br><span class="line">		m.Subject = request(<span class="string">"subject"</span>) &amp; <span class="string">": FromWebsite"</span></span><br><span class="line">		m.Body = request(<span class="string">"body"</span>) &amp; <span class="string">"This message was submitted by a user."</span></span><br><span class="line">		Response.Write(<span class="string">"Sending mail to: "</span> &amp; m.<span class="keyword">to</span>)</span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"</span>, <span class="string">"1"</span>) <span class="comment">'basic authentication</span></span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendusername"</span>, <span class="string">"username-goes-here"</span>) </span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendpassword"</span>, <span class="string">"password-goes-here"</span>) <span class="comment">'set your </span></span><br><span class="line">		SmtpMail.SmtpServer = <span class="string">"mail.server.here"</span></span><br><span class="line">		SmtpMail.Send(m)</span><br><span class="line">		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2069,7 +2268,7 @@ ftp_proxy = http://proxy.yoyodyne.com:18023/
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
