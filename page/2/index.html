@@ -396,6 +396,17 @@
 
           
           
+            <span id="/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/" class="leancloud_visitors" data-flag-title="CVE-2016-3081_Struts2_detial">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
 
           
 
@@ -587,6 +598,17 @@
           
 
           
+          
+            <span id="/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/" class="leancloud_visitors" data-flag-title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -811,6 +833,17 @@
 
           
           
+            <span id="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" class="leancloud_visitors" data-flag-title="Discuz! admin_styles.inc.php get-webshell bug">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
 
           
 
@@ -1031,6 +1064,17 @@ formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5
 
           
           
+            <span id="/2016/05/14/2016-05-14-ucenter-bug-list/" class="leancloud_visitors" data-flag-title="Ucenter vuls list">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
 
           
 
@@ -1237,6 +1281,17 @@ formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5
           
 
           
+          
+            <span id="/2016/05/14/2016-05-14-discuz-bug-list/" class="leancloud_visitors" data-flag-title="Discuz vuls list">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -1475,6 +1530,17 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
 
           
           
+            <span id="/2016/05/14/2016-05-14-python-tips/" class="leancloud_visitors" data-flag-title="Python skill collection">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
 
           
 
@@ -1643,6 +1709,17 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
           
 
           
+          
+            <span id="/2016/05/04/2016-05-14-wget-usage/" class="leancloud_visitors" data-flag-title="wget 使用筆記">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -1833,6 +1910,17 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
           
 
           
+          
+            <span id="/2000/01/01/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Views: </span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
           
 
           
@@ -2174,6 +2262,74 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
 
 
   
+  
+  <script>
+    
+    function showTime(Counter) {
+      var entries = [];
+      var $visitors = $('.leancloud_visitors');
+
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
+        .done(function({ results }) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '4ydIkj4O3W4H5sHx83QYxqn1-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': '4ydIkj4O3W4H5sHx83QYxqn1-gzGzoHsz',
+                'X-LC-Key': 'qCz0ddlQEiAKBUjjoI5fbvKJ',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
+          
+        });
+    });
+  </script>
+
+
 
   
 
