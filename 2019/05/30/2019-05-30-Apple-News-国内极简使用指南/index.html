@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Apple News 是苹果在 iOS 和 macOS （10.14及之后的版本）设备上自带的新闻软件。目前仅在美国、英国和澳大利亚运营。它不生产内容，只搭建平台，方便各大媒体和内容创作者在上面提供内容。可以将其理解为更加开放些的微信公众平台或者今日头条。但是就目前来看，美区基本都是传统媒体和影响力较大的媒体接入。Apple News 的优势在于因为内容发布在同一平台，内容格式相对一致，用户体验">
+<meta name="keywords" content="ios">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apple News 国内极简使用指南">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="Apple News 是苹果在 iOS 和 macOS （10.14及之后的版本）设备上自带的新闻软件。目前仅在美国、英国和澳大利亚运营。它不生产内容，只搭建平台，方便各大媒体和内容创作者在上面提供内容。可以将其理解为更加开放些的微信公众平台或者今日头条。但是就目前来看，美区基本都是传统媒体和影响力较大的媒体接入。Apple News 的优势在于因为内容发布在同一平台，内容格式相对一致，用户体验">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591143208187.jpg">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/IMG_1465.jpg">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591398086835.jpg">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591396528920.jpg">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591396704093.jpg">
+<meta property="og:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591422876001.png">
+<meta property="og:updated_time" content="2019-05-30T09:38:49.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apple News 国内极简使用指南">
+<meta name="twitter:description" content="Apple News 是苹果在 iOS 和 macOS （10.14及之后的版本）设备上自带的新闻软件。目前仅在美国、英国和澳大利亚运营。它不生产内容，只搭建平台，方便各大媒体和内容创作者在上面提供内容。可以将其理解为更加开放些的微信公众平台或者今日头条。但是就目前来看，美区基本都是传统媒体和影响力较大的媒体接入。Apple News 的优势在于因为内容发布在同一平台，内容格式相对一致，用户体验">
+<meta name="twitter:image" content="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/media/15591142960108/15591143208187.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Apple News 国内极简使用指南 | Securitainment.io</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-137221448-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-137221448-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jayce">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Apple News 国内极简使用指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-30 14:52:16 / Modified: 17:38:49" itemprop="dateCreated datePublished" datetime="2019-05-30T14:52:16+08:00">2019-05-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/30/2019-05-30-Apple-News-国内极简使用指南/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="media/15591142960108/15591143208187.jpg" alt></p>
+<p>Apple News 是苹果在 iOS 和 macOS （10.14及之后的版本）设备上自带的新闻软件。目前仅在美国、英国和澳大利亚运营。它不生产内容，只搭建平台，方便各大媒体和内容创作者在上面提供内容。可以将其理解为更加开放些的微信公众平台或者今日头条。但是就目前来看，美区基本都是传统媒体和影响力较大的媒体接入。Apple News 的优势在于因为内容发布在同一平台，内容格式相对一致，用户体验极好。</p>
+<a id="more"></a>
+<p><img src="media/15591142960108/IMG_1465.jpg" alt="IMG_1465"></p>
+<p>上图是 Apple News iPhone 版本的展示。<br>一共有三栏：</p>
+<ul>
+<li><strong>Today</strong> 一栏，是编辑精选内容以及头条新闻，热门，个性化推荐，视频专区等等。也即是智能推荐和热门内容的合集。</li>
+<li><strong>News+</strong> 是 2019年3月25日 发布的全新订阅服务，整合了《洛杉矶时报》、《华尔街日报》在内超过300多家杂志和新闻内容。这里有一份完整的杂志列表：<a href="https://www.macstories.net/news/a-complete-list-of-all-the-magazines-available-for-apple-news-in-the-u-s-so-far/" target="_blank" rel="noopener">A Complete List of All the Magazines Available for Apple News+ in the U.S. (So Far)</a></li>
+<li><strong>Following</strong> 是个人关注，可以关注包括话题、频道等。</li>
+</ul>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>美区代理</li>
+<li>美区 ID</li>
+</ul>
+<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><p>Apple News 针对中国地区做了特殊的限制，iOS 设备会检测是不是在使用中国运营商网络，macOS 会检测地理位置缓存，这是已知的苹果对自己服务作出的最严格的地域限制。</p>
+<p>在iOS 设备使用 Apple News，需要：</p>
+<ol>
+<li>iTunes 中使用美区 Apple ID</li>
+<li>设置中地区切换为美国</li>
+<li>IP 地址为美国/英国/澳大利亚等运营区域</li>
+<li>使用非中国运营商网络/开启飞行模式</li>
+</ol>
+<p>在 macOS 设备上使用 Apple News 需要：</p>
+<ol>
+<li>设置中地区切换为美国</li>
+<li>网络 IP 地址是美国/英国/澳大利亚等运营区域</li>
+<li>清除地理位置缓存</li>
+</ol>
+<h3 id="iPhone-iPad-设备上使用-Apple-News"><a href="#iPhone-iPad-设备上使用-Apple-News" class="headerlink" title="iPhone/iPad 设备上使用 Apple News"></a>iPhone/iPad 设备上使用 Apple News</h3><ol>
+<li><p>启用 Apple News</p>
+<ul>
+<li>iTunes &amp; App Store 账号更换为美区</li>
+<li><p><code>设置 - 通用 - 语言/地区</code> 中，切换地区为美国</p>
+<p>在 iOS 的设置中将 iTunes &amp; App Store 换成美区 Apple ID，切换区域完成，Apple News, Apple TV 等软件就会出现在设备上了。</p>
+</li>
+</ul>
+</li>
+<li><p>正常使用 Apple News</p>
+<p> 在 iPhone 上开启飞行模式，打开 Wi-Fi，使用 VPN 或者 SS 类软件的全局代理。iOS 上，Apple News 对代理的 IP 没有特别限制，但建议使用主运营区域的。必须开启飞行模式这一点，等于屏蔽移动运营商网络，代价很大且不方便。</p>
+<p> 若在没有插 SIM 卡的 iPad 上，使用 VPN 或者 SS 类软件的全局代理即可。常在 Wi-Fi 网络下扔着的 iPad 更适合用 Apple News 来阅读新闻。</p>
+</li>
+<li><p>排查错误</p>
+<p> 如果按照上述步骤一步一步操作仍不可用，或者本来可用，突然不可用。可以尝试在 设置 中搜索 <code>Location</code> 选择 <code>Reset location and privacy</code>，这样可以重置对所有 APP 及服务的授权，重新打开 News 时关闭地理位置授权即可。</p>
+<p> 如果是购买国内常用的 SS 代理服务，部分美区节点可能没有被苹果识别为美国，多切换几个节点尝试。</p>
+</li>
+</ol>
+<h3 id="Mac-设备上使用-Apple-News"><a href="#Mac-设备上使用-Apple-News" class="headerlink" title="Mac 设备上使用 Apple News"></a>Mac 设备上使用 Apple News</h3><ol>
+<li><p>启用 Apple News</p>
+<p> <img src="media/15591142960108/15591398086835.jpg" alt="-w780"></p>
+<p> macOS 需升级到10.14 macOS Mojave。MacOS 上仅需要在 <code>系统设置-语言与地区</code> 中将地区更改为 <code>美国</code>，Apple News 就会出现在应用页面。若仍未出现，可以在 <code>应用程序</code> 文件夹中查看到，按住拖到 Dock 栏方便使用。</p>
+</li>
+<li><p>正确设置代理</p>
+<p> 使用 VPN 或者 SS 类软件的全局代理。若经常使用全局代理不方便，也可以考虑使用 Proxifier 针对电脑上的每个软件分别设置代理策略。</p>
+<p> 如果是 Surge 用户，开启增强模式后，增加针对 Apple News 的进程代理美国IP地址即可。如果是其他代理软件，觉得全局代理的体验较差，可以新增规则，将 <code>apple.news</code> 域名设置为 Proxy，将 <code>apple.comscoreresearch.com</code> 设置为 Deny。</p>
+<p> <strong>与iOS不同，macOS 上对 IP 地址还是有要求的，若使用加拿大或者其他非 Apple News 运营地区的 IP 地址，仍会显示为该地区不支持。</strong></p>
+</li>
+<li><p>清除地理位置缓存<br> 点开 Apple News，很可能还会提示该地区不支持。这是需要在设置中将保存的地理位置信息清除。具体位置在<code>System Preference -&gt; Security &amp; Privacy -&gt; Location Service -&gt; System Services -&gt; Details -&gt; Significant Locations -&gt; Details</code>，点击 <code>Clear History</code> 即可清除。<strong>这个步骤需要将左下角的锁打开</strong>。关闭并重新打开 Apple News 即可。</p>
+<p> <img src="media/15591142960108/15591396528920.jpg" alt="-w736"><br><img src="media/15591142960108/15591396704093.jpg" alt="-w661"></p>
+</li>
+<li><p>Trouble Shooting</p>
+<ul>
+<li>如果是购买国内常用的 SS 代理服务，部分美区节点可能没有被苹果识别为美国，多切换几个节点尝试。</li>
+<li>如果某次打开还提示该地区不支持，可能是又存在了地理位置缓存，重复上一步骤清除缓存即可。</li>
+</ul>
+</li>
+</ol>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>Apple News 的繁琐步骤能劝退很多人。<br>如果在国内对杂志数量有很高要求，可以使用如 Scribd、Kindle Unlimited 这些代替服务，或者 Calibre 的新闻下载功能；如果你只是固定关注特定几种刊物，有很大概率可以直接在官网免费读到多数纸刊文章，或者通过比较低廉的价格在亚马逊等平台上订阅。另外，图书馆往往会提供非常丰富的数字资源。</p>
+<p><img src="media/15591142960108/15591422876001.png" alt></p>
+<blockquote>
+<p>在发布会上，库克提到「站在书报亭前的满足感」，并以此为喻引出对 Apple News+ 的介绍。这是一个恰如其分的比喻——Apple News+ 的功用确实是，但同时也只是把书报亭搬到了用户面前。但究竟是能从中获取更广博的视野、更高质量的阅读材料，抑或是止步于视觉上的饱足和坐拥无限资源的富余感，就是我们身为读者只能自负其责的问题了。<br>– via: Neverland</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Jayce WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios/" rel="tag"># ios</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/03/regist-netflix/" rel="next" title="注册使用土耳其区 Netflix 教程">
+                <i class="fa fa-chevron-left"></i> 注册使用土耳其区 Netflix 教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jayce</p>
+              <div class="site-description motion-element" itemprop="description">运维 | 安全 | 渗透</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始使用"><span class="nav-number">2.</span> <span class="nav-text">开始使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iPhone-iPad-设备上使用-Apple-News"><span class="nav-number">2.1.</span> <span class="nav-text">iPhone/iPad 设备上使用 Apple News</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac-设备上使用-Apple-News"><span class="nav-number">2.2.</span> <span class="nav-text">Mac 设备上使用 Apple News</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">3.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jayce</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script id="dsq-count-scr" src="https://securitainment.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/";
+    this.page.identifier = "2019/05/30/2019-05-30-Apple-News-国内极简使用指南/";
+    this.page.title = 'Apple News 国内极简使用指南';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
