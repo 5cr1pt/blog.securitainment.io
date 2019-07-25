@@ -102,25 +102,25 @@
 
 
 
-  <meta name="description" content="启用 swap 创建 swapfile  123dd if=/dev/zero of=/swapfile bs=1M count=2048mkswap /swapfilechmod 600 /swapfile  使用 vi 打开 fstab  1vi /etc/fstab  将以下内容添加到文件中  1/swapfile swap swap defaults 0 0  （可选）设置当系统内存较小时">
-<meta name="keywords" content="linux">
+  <meta name="description" content="因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。">
+<meta name="keywords" content="centos,caddy,discourse">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在 Linux 中设置和修改 swap 空间">
-<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/index.html">
+<meta property="og:title" content="在 CentOS 上使用 Caddy 运行 Discourse 踩坑记">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/index.html">
 <meta property="og:site_name" content="Securitainment.io">
-<meta property="og:description" content="启用 swap 创建 swapfile  123dd if=/dev/zero of=/swapfile bs=1M count=2048mkswap /swapfilechmod 600 /swapfile  使用 vi 打开 fstab  1vi /etc/fstab  将以下内容添加到文件中  1/swapfile swap swap defaults 0 0  （可选）设置当系统内存较小时">
+<meta property="og:description" content="因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T02:51:58.787Z">
+<meta property="og:updated_time" content="2019-07-25T05:40:10.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在 Linux 中设置和修改 swap 空间">
-<meta name="twitter:description" content="启用 swap 创建 swapfile  123dd if=/dev/zero of=/swapfile bs=1M count=2048mkswap /swapfilechmod 600 /swapfile  使用 vi 打开 fstab  1vi /etc/fstab  将以下内容添加到文件中  1/swapfile swap swap defaults 0 0  （可选）设置当系统内存较小时">
+<meta name="twitter:title" content="在 CentOS 上使用 Caddy 运行 Discourse 踩坑记">
+<meta name="twitter:description" content="因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/">
+  <link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>在 Linux 中设置和修改 swap 空间 | Securitainment.io</title>
+  <title>在 CentOS 上使用 Caddy 运行 Discourse 踩坑记 | Securitainment.io</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="groot">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">在 Linux 中设置和修改 swap 空间
+          <h1 class="post-title" itemprop="name headline">在 CentOS 上使用 Caddy 运行 Discourse 踩坑记
 
               
             
@@ -368,24 +368,12 @@
                 
               
 
-              <time title="Created: 2019-07-24 10:50:16" itemprop="dateCreated datePublished" datetime="2019-07-24T10:50:16+08:00">2019-07-24</time>
+              <time title="Created: 2019-07-25 11:26:44 / Modified: 13:40:10" itemprop="dateCreated datePublished" datetime="2019-07-25T11:26:44+08:00">2019-07-25</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-25 10:51:58" itemprop="dateModified" datetime="2019-07-25T10:51:58+08:00">2019-07-25</time>
               
             
           </span>
@@ -403,8 +391,8 @@
                 </span>
             
                 <span class="post-meta-item-text">Comments: </span>
-                <a href="/2019/07/24/2019-07-22-add-or-resize-swapfile-size/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/24/2019-07-22-add-or-resize-swapfile-size/" itemprop="commentCount"></span>
+                <a href="/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -432,58 +420,76 @@
       
 
       
-        <h2 id="启用-swap"><a href="#启用-swap" class="headerlink" title="启用 swap"></a>启用 swap</h2><ol>
-<li><p>创建 swapfile</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/swapfile bs=1M count=2048</span><br><span class="line">mkswap /swapfile</span><br><span class="line">chmod 600 /swapfile</span><br></pre></td></tr></table></figure>
+        <p>因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。</p>
+<a id="more"></a>
+<p>先说为什么用 Caddy 来配合使用 Discourse：</p>
+<ul>
+<li>Caddy 官方论坛是用的 Discourse</li>
+<li>Caddy 自动部署免费的 SSl 证书：Let’s Encrypt</li>
+<li>HTTP2 和 QUIC </li>
+<li>配置简单</li>
+</ul>
+<h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><ul>
+<li>最低 1GB 内存</li>
+<li>CentOS 7 x64</li>
+</ul>
+<h2 id="设置-swapfile"><a href="#设置-swapfile" class="headerlink" title="设置 swapfile"></a>设置 swapfile</h2><p>Discourse 官方推荐配置最低为 2GB 内存，所以如果你的主机是 1GB 内存的话，需要创建一个 2GB 的 swapfile。</p>
+<p>创建教程请参考我的另一篇文章<a href="https://blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/" target="_blank" rel="noopener">《在 Linux 中设置和修改 swap 空间》</a>。</p>
+<h2 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h2><p>使用如下命令安装和配置 Docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install docker</span><br><span class="line">vi /etc/sysconfig/docker</span><br><span class="line"># 将下面一行注释掉，效果如下</span><br><span class="line">#OPTIONS=&apos;--selinux-enabled&apos;</span><br><span class="line"># 启用 Docker 服务，并添加开机启动</span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure></p>
+<p>如遇到问题，请搜索解决。</p>
+<h2 id="安装-Discourse"><a href="#安装-Discourse" class="headerlink" title="安装 Discourse"></a>安装 Discourse</h2><p>在 <code>/var</code> 文件夹创建一个 <code>discourse</code> 文件夹，将 Discourse 源代码克隆进去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /var/discourse</span><br><span class="line">sudo git clone https://github.com/discourse/discourse_docker.git /var/discourse</span><br></pre></td></tr></table></figure></p>
+<p>进入 <code>discourse</code> 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/discourse</span><br></pre></td></tr></table></figure></p>
+<p>拷贝 Discourse 的配置参考文件到 containers 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp samples/standalone.yml containers/app.yml</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置-Discourse"><a href="#配置-Discourse" class="headerlink" title="配置 Discourse"></a>配置 Discourse</h2><ol>
+<li><p>打开 <code>app.yml</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi containers/app.yml</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>使用 vi 打开 fstab</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br></pre></td></tr></table></figure>
+<li><p>如果你使用的是 1GB 的 VPS，将配置修改为如下参数</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db_shared_buffers: &quot;128MB&quot;</span><br><span class="line"></span><br><span class="line">## With 2GB we recommend 3-4 workers, with 1GB only 2</span><br><span class="line">UNICORN_WORKERS: 2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>将以下内容添加到文件中</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/swapfile swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+<li><p>配置你的管理员邮箱地址</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISCOURSE_DEVELOPER_EMAILS: &apos;you@youremail.com&apos;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>（可选）设置当系统内存较小时才使用 swapfile</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.swappiness=10</span><br><span class="line">echo vm.swappiness = 10 | tee -a /etc/sysctl.conf</span><br><span class="line">sysctl vm.vfs_cache_pressure=60</span><br><span class="line">echo vm.vfs_cache_pressure = 60 | tee -a /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<li><p>设置你的 Discourse 论坛域名，如 <code>discourse.example.com</code> 则将配置改为</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## TODO: The domain name this Discourse instance will respond to</span><br><span class="line">DISCOURSE_HOSTNAME: &apos;discourse.example.com&apos;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启用 swapfile.</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br><span class="line">swapon -a</span><br></pre></td></tr></table></figure>
+<li><p>配置邮件服务</p>
+<p> 推荐使用官方教程 <a href="https://github.com/discourse/discourse/blob/master/docs/INSTALL-email.md" target="_blank" rel="noopener">INSTALL-email.md</a></p>
+<p> 我尝试使用 Yandex 的免费自定义域名邮箱服务，但是配置完成后一直无法发送邮件，最后还是用了官方推荐的 Mailjet 服务。</p>
 </li>
-<li><p>检查 swapfile 状态</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="修改swap大小"><a href="#修改swap大小" class="headerlink" title="修改swap大小"></a>修改swap大小</h2><ol>
-<li><p>关闭 swap</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="2">
-<li><p>把当前的 swapfile 文件增大</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=/dev/zero of=/swapfile bs=1M count=1024</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<pre><code>bs 指的是 Block Size，就是每一块的大小。这里的例子是 1M，意思就是 count 的数字，是以 1M 为单位的。
-counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，就是说，新的 swap 文件是1G大小。
-</code></pre><ol start="3">
-<li><p>把增大后的文件变为swap文件。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkswap /swapfile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="4">
-<li><p>重新打开 swap</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="5">
-<li><p>让 swap 在启动的时候，自动生效。打开 <code>/etc/fstab</code> 文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
+<li><p>修改配置使 Discourse 可以运行在 Caddy Server</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">## 将下面两行注释掉</span><br><span class="line">#  - &quot;templates/web.ssl.template.yml&quot;</span><br><span class="line">#  - &quot;templates/web.letsencrypt.ssl.template.yml&quot;</span><br><span class="line"></span><br><span class="line">## 修改下面两行，注释掉 https，修改 http 端口，避免冲突（系统 apache/nginx 服务已经占用了 80 端口）</span><br><span class="line">expose:</span><br><span class="line">  - &quot;8080:80&quot;   # http，表示将容器外的 8080 端口映射到容器内的 80 端口</span><br><span class="line">#  - &quot;443:443&quot; # https</span><br><span class="line"></span><br><span class="line">env:</span><br><span class="line">  ## 将下面一行注释掉</span><br><span class="line">  #LETSENCRYPT_ACCOUNT_EMAIL: mymail@gmail.com</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol start="6">
-<li><p>(如果之前未设置) 打开 fstab <code>vi /etc/fstab</code>加上以下命令。然后保存。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/swapfile swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>保存并关闭 <code>app.yml</code> 文件</p>
+</li>
+<li><p>修改 Caddy 配置文件 <code>Caddyfile</code>，添加如下配置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">discourse.example.com # 你的论坛域名</span><br><span class="line">proxy / localhost:8080 &#123; # 8080 为之前在 app.yml 中配置的 http 端口</span><br><span class="line">    transparent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构建并启动 Discourse</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ./launcher bootstrap app</span><br><span class="line">sudo ./launcher start app</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<pre><code>如果构建之后修改了 `app.yml` 配置文件，则需要使用下面命令来重新构建 app 并启动
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./launcher stop app</span><br><span class="line">./launcher rebuild app</span><br><span class="line">./launcher start app</span><br></pre></td></tr></table></figure>
+</code></pre><ol>
+<li>在浏览器输入你在 <code>DISCOURSE_HOSTNAME</code> 配置的论坛域名，就可以看到部署完成的论坛了！</li>
+</ol>
+<h2 id="使用感受"><a href="#使用感受" class="headerlink" title="使用感受"></a>使用感受</h2><p>Discourse 给人的感觉就是很新，很简洁：</p>
+<ul>
+<li>弱化分类。Discourse 首页<strong>默认展示全站热帖</strong>（可配置），而不是分类目录</li>
+<li>简化发布。编辑器默认 <strong>Markdown</strong> 格式，纯文本，方便后期格式化展示；默认附件只能上传图片</li>
+<li>帖子以对话气泡的形式展示</li>
+<li>类似 Bootstrap 风格的标准交互控件，大量 Ajax 加载使用，话题跟踪与通知系统</li>
+<li>固定<strong>论坛分类的顺序</strong>需要在设置中将 <code>fixed category positions</code> 选中</li>
+<li>论坛分类<strong>最多两个层级</strong></li>
+</ul>
+<p><em>部分摘自<code>知乎：黎欣健</code></em></p>
+<blockquote>
+<p>参考<br><a href="https://meta.discourse.org/t/running-discourse-with-caddy-server/54716" target="_blank" rel="noopener">https://meta.discourse.org/t/running-discourse-with-caddy-server/54716</a><br><a href="https://www.vultr.com/docs/install-discourse-on-centos-7" target="_blank" rel="noopener">https://www.vultr.com/docs/install-discourse-on-centos-7</a><br><a href="https://github.com/discourse/discourse/blob/master/docs/INSTALL-email.md" target="_blank" rel="noopener">https://github.com/discourse/discourse/blob/master/docs/INSTALL-email.md</a></p>
+</blockquote>
 
       
     </div>
@@ -531,7 +537,11 @@ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag"># linux</a>
+            <a href="/tags/centos/" rel="tag"># centos</a>
+          
+            <a href="/tags/caddy/" rel="tag"># caddy</a>
+          
+            <a href="/tags/discourse/" rel="tag"># discourse</a>
           
         </div>
       
@@ -544,8 +554,8 @@ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/30/2019-05-30-Apple-News-国内极简使用指南/" rel="next" title="Apple News 国内极简使用指南">
-                <i class="fa fa-chevron-left"></i> Apple News 国内极简使用指南
+              <a href="/2019/07/25/2019-07-22-Install-PHP73&WordPress-On-CentOS7/" rel="next" title="在 CentOS 7 上使用 PHP73/Caddy 安装 WordPress">
+                <i class="fa fa-chevron-left"></i> 在 CentOS 7 上使用 PHP73/Caddy 安装 WordPress
               </a>
             
           </div>
@@ -553,10 +563,6 @@ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/25/2019-07-22-Install-PHP73&WordPress-On-CentOS7/" rel="prev" title="在 CentOS 7 上使用 PHP73/Caddy 安装 WordPress">
-                在 CentOS 7 上使用 PHP73/Caddy 安装 WordPress <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -719,7 +725,7 @@ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启用-swap"><span class="nav-number">1.</span> <span class="nav-text">启用 swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改swap大小"><span class="nav-number">2.</span> <span class="nav-text">修改swap大小</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Requirements"><span class="nav-number">1.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-swapfile"><span class="nav-number">2.</span> <span class="nav-text">设置 swapfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Docker"><span class="nav-number">3.</span> <span class="nav-text">安装 Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Discourse"><span class="nav-number">4.</span> <span class="nav-text">安装 Discourse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Discourse"><span class="nav-number">5.</span> <span class="nav-text">配置 Discourse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用感受"><span class="nav-number">6.</span> <span class="nav-text">使用感受</span></a></li></ol></div>
             
 
           </div>
@@ -878,9 +884,9 @@ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，
 
 <script>
   var disqus_config = function() {
-    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/";
-    this.page.identifier = "2019/07/24/2019-07-22-add-or-resize-swapfile-size/";
-    this.page.title = '在 Linux 中设置和修改 swap 空间';
+    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/";
+    this.page.identifier = "2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/";
+    this.page.title = '在 CentOS 上使用 Caddy 运行 Discourse 踩坑记';
     };
   function loadComments() {
     var d = document, s = d.createElement('script');
