@@ -321,6 +321,243 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-discuz-bug-list/" class="post-title-link" itemprop="url">Discuz vuls list</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 00:49:23" itemprop="dateCreated datePublished" datetime="2016-05-14T00:49:23+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-25 14:29:49" itemprop="dateModified" datetime="2019-07-25T14:29:49+08:00">2019-07-25</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-discuz-bug-list/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-bug-list/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
+
+Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
+
+Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
+
+Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
+
+Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
+
+Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
+
+Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
+
+Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
+
+Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
+
+Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
+
+Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
+
+Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
+
+Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
+
+Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
+
+Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
+
+Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
+
+Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
+
+Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
+
+Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
+
+Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
+
+Discuz 7.0-7.2:后台settings.inc.php中写shell漏洞
+
+Discuz 7.1-7.2：showmessage bug,利用方式:misc.php?action=imme_binding&amp;response[result]=aa:b&amp;scriptlang[aa][b]={${fputs(fopen(base64_decode(Yy5waHA),w),base64_decode(PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgPz4x))}}
+
+Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
+
+Discuz 7.2代码执行漏洞
+
+Discuz! x1-1.5 SQL 注入 GetShell EXP 
+
+Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
+
+Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
+
+DiscuzX1.5 门户管理权限SQL注入BUG
+
+DZ-X1.5 论坛后台拿WebShell
+
+discuz x1.5&amp;discuz 7.2 后台getshell 0day
+
+DISCUZ X1.5 本地文件包含漏洞
+
+Discuz! X2:SQL注入漏洞source\module\forum\forum_attachment.php
+
+Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+and+1=1
+
+Discuz!NT 2.x - 3.5.2 SQL注入(0day)
+
+Discuz!NT3.5.2文件编辑0Day获取Webshell
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-python-tips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -887,7 +1124,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -952,7 +1189,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

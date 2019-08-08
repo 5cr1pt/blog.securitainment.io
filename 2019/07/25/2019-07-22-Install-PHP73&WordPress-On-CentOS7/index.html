@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="Securitainment.io">
 <meta property="og:description" content="虽然 PHP 已经更新到 7，但是网上相关资源还是不多，大部分停留在 PHP5.6 之前。自己折腾了使用 PHP73 来安装 wordpress，并且使用 Caddy 作为中间件。以下是记录。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-25T03:20:26.636Z">
+<meta property="og:updated_time" content="2019-08-08T17:49:29.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 CentOS 7 上使用 PHP73&#x2F;Caddy 安装 WordPress">
 <meta name="twitter:description" content="虽然 PHP 已经更新到 7，但是网上相关资源还是不多，大部分停留在 PHP5.6 之前。自己折腾了使用 PHP73 来安装 wordpress，并且使用 Caddy 作为中间件。以下是记录。">
@@ -366,12 +366,24 @@
                 
               
 
-              <time title="Created: 2019-07-25 10:14:16 / Modified: 11:20:26" itemprop="dateCreated datePublished" datetime="2019-07-25T10:14:16+08:00">2019-07-25</time>
+              <time title="Created: 2019-07-25 10:14:16" itemprop="dateCreated datePublished" datetime="2019-07-25T10:14:16+08:00">2019-07-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-09 01:49:29" itemprop="dateModified" datetime="2019-08-09T01:49:29+08:00">2019-08-09</time>
               
             
           </span>
@@ -424,7 +436,7 @@
 <p>然后添加源：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line">sudo rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm</span><br></pre></td></tr></table></figure></p>
 <p>然后安装 PHP 和 WordPress 所依赖的PHP扩展：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum --enablerepo=remi install php73-php php73-php-pear php73-php-bcmath php73-php-pecl-jsond-devel php73-php-mysqlnd php73-php-gd php73-php-common php73-php-fpm php73-php-intl php73-php-cli php73-php php73-php-xml php73-php-opcache php73-php-pecl-apcu php73-php-pdo php73-php-gmp php73-php-process php73-php-pecl-imagick php73-php-devel php73-php-mbstring php73-php-zip php73-php-ldap php73-php-imap php73-php-pecl-mcrypt php73-php-mysql</span><br></pre></td></tr></table></figure></p>
 <p><em>下面是一些推荐配置：</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># The current PHP memory limit is below the recommended value of 512MB.</span><br><span class="line">sudo vi /etc/opt/remi/php73/php.ini</span><br><span class="line">memory_limit = 512M</span><br><span class="line"></span><br><span class="line"># 如果你运行的是nginx而不是apache，修改</span><br><span class="line">sudo vi /etc/opt/remi/php73/php-fpm.d/www.conf</span><br><span class="line">user = apache</span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line"># Replace the values with</span><br><span class="line">user = caddy</span><br><span class="line">group = caddy</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># The current PHP memory limit is below the recommended value of 512MB.</span><br><span class="line">sudo vi /etc/opt/remi/php73/php.ini</span><br><span class="line">memory_limit = 512M</span><br><span class="line"></span><br><span class="line"># 查看 caddy 是以哪个用户来运行的，这里以 caddy 为例：</span><br><span class="line">sudo vi /etc/opt/remi/php73/php-fpm.d/www.conf</span><br><span class="line">user = apache</span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line"># 改为运行 caddy 服务的用户：caddy</span><br><span class="line">user = caddy</span><br><span class="line">group = caddy</span><br></pre></td></tr></table></figure>
 <p>运行并查看版本， 重启命令， 添加自动启动，链接php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php73 -v</span><br><span class="line">sudo systemctl restart php73-php-fpm</span><br><span class="line">sudo systemctl enable php73-php-fpm</span><br><span class="line">sudo ln -s /opt/remi/php73/root/usr/bin/php /usr/bin/php</span><br></pre></td></tr></table></figure></p>
 <h2 id="安装-Caddy"><a href="#安装-Caddy" class="headerlink" title="安装 Caddy"></a>安装 Caddy</h2><p>Caddy 项目提供了一个安装脚本，用于安装 Caddy 服务器文件。要执行请输入：<br><code>curl -s https://getcaddy.com | bash</code><br>您可以通过访问 <a href="https://getcaddy.com" target="_blank" rel="noopener">https://getcaddy.com</a> 使用 wget 或 curl 下载文件来查看脚本。</p>
 <p>在安装过程中，脚本将用于 sudo 获取管理权限，以便将 Caddy 文件放在系统范围的目录中，因此它可能会提示您输入密码。</p>
@@ -459,11 +471,26 @@
 <p>单击“运行安装”以开始安装。</p>
 <p>注意：对于管理帐户，不推荐使用 Admin 等常用用户名，因为许多安全漏洞依赖于标准用户名和密码。选择唯一的用户名和强密码，以确保网站安全。</p>
 <p>单击安装 WordPress 完成后，将被定向到 WordPress 仪表板。</p>
+<h2 id="网站文件夹及文件权限设置"><a href="#网站文件夹及文件权限设置" class="headerlink" title="网站文件夹及文件权限设置"></a>网站文件夹及文件权限设置</h2><p>假设 Caddy 服务器运行的用户和用户组是 <code>caddy</code>，服务器用户为 <code>centos</code>，网站根目录是 <code>/var/www/wordpress</code>：</p>
+<ol>
+<li><p>首先设定网站目录和文件的所有者和所有组为 <code>centos,caddy</code>，如下命令：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R centos:caddy /var/www/wordpress</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置网站目录权限为750，750是 centos 用户对目录拥有读写执行的权限，这样 centos 用户可以在任何目录下创建文件，用户组有有读执行权限，这样才能进入目录，其它用户没有任何权限：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/wordpress</span><br><span class="line">find -type d -exec chmod 750 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置网站文件权限为640，640指只有 centos 用户对网站文件有更改的权限，Caddy 服务只有读取文件的权限，无法更改文件，其它用户无任何权限：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/wordpress</span><br><span class="line">find -not -type d -exec chmod 640 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>针对个别目录设置可写权限。比如网站的一些缓存目录就需要给 Caddy 服务有写入权限。比如 wordpress 的 <code>wp-content/uploads/</code> 目录就必须要有写入权限才能上传图片：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/wordpress</span><br><span class="line">find uploads -type d -exec chmod 770 &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <blockquote>
 <p>参考</p>
 </blockquote>
 <blockquote>
-<p><a href="https://park.mobayke.com/tools/bbpress.html" target="_blank" rel="noopener">https://park.mobayke.com/tools/bbpress.html</a><br><a href="https://cloud.tencent.com/developer/article/1169259" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1169259</a><br><a href="https://www.itgeeker.net/php7-3-yum-install-on-centos-7/" target="_blank" rel="noopener">https://www.itgeeker.net/php7-3-yum-install-on-centos-7/</a></p>
+<p><a href="https://park.mobayke.com/tools/bbpress.html" target="_blank" rel="noopener">https://park.mobayke.com/tools/bbpress.html</a><br><a href="https://cloud.tencent.com/developer/article/1169259" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1169259</a><br><a href="https://www.itgeeker.net/php7-3-yum-install-on-centos-7/" target="_blank" rel="noopener">https://www.itgeeker.net/php7-3-yum-install-on-centos-7/</a><br><a href="https://www.cnblogs.com/sochishun/p/7413572.html" target="_blank" rel="noopener">https://www.cnblogs.com/sochishun/p/7413572.html</a></p>
 </blockquote>
 
       
@@ -619,7 +646,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -684,7 +711,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -720,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-PHP73-使用的源"><span class="nav-number">1.</span> <span class="nav-text">添加 PHP73 使用的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Caddy"><span class="nav-number">2.</span> <span class="nav-text">安装 Caddy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-MySQL-数据库和专用用户"><span class="nav-number">3.</span> <span class="nav-text">创建 MySQL 数据库和专用用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-WordPress"><span class="nav-number">4.</span> <span class="nav-text">下载 WordPress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Caddy-为-WordPress-网站提供服务"><span class="nav-number">5.</span> <span class="nav-text">配置 Caddy 为 WordPress 网站提供服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-WordPress"><span class="nav-number">6.</span> <span class="nav-text">配置 WordPress</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-PHP73-使用的源"><span class="nav-number">1.</span> <span class="nav-text">添加 PHP73 使用的源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Caddy"><span class="nav-number">2.</span> <span class="nav-text">安装 Caddy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-MySQL-数据库和专用用户"><span class="nav-number">3.</span> <span class="nav-text">创建 MySQL 数据库和专用用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载-WordPress"><span class="nav-number">4.</span> <span class="nav-text">下载 WordPress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-Caddy-为-WordPress-网站提供服务"><span class="nav-number">5.</span> <span class="nav-text">配置 Caddy 为 WordPress 网站提供服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-WordPress"><span class="nav-number">6.</span> <span class="nav-text">配置 WordPress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站文件夹及文件权限设置"><span class="nav-number">7.</span> <span class="nav-text">网站文件夹及文件权限设置</span></a></li></ol></div>
             
 
           </div>
