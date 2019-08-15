@@ -545,12 +545,24 @@
                 
               
 
-              <time title="Created: 2019-08-03 15:52:17 / Modified: 15:53:58" itemprop="dateCreated datePublished" datetime="2019-08-03T15:52:17+08:00">2019-08-03</time>
+              <time title="Created: 2019-08-03 15:52:17" itemprop="dateCreated datePublished" datetime="2019-08-03T15:52:17+08:00">2019-08-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-15 17:12:12" itemprop="dateModified" datetime="2019-08-15T17:12:12+08:00">2019-08-15</time>
               
             
           </span>
@@ -598,60 +610,22 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>CentOS 据说可以通过 <code>yum install caddy</code> 来安装，不过前提是要安装 epel 安装源，不过我习惯从 Caddy 官方网站下载安装。</p>
+          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>CentOS 据说可以通过 <code>yum install caddy</code> 来安装，不过前提是要安装 epel 安装源，不过我习惯从 Caddy 官方网站下载安装。</p>
 <ul>
 <li><p>ssh 登录到 CentOS 系统里，运行</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 选择自己需要的模块一并安装</span><br><span class="line">curl https://getcaddy.com | bash -s personal http.cache,http.geoip,http.git,http.grpc</span><br></pre></td></tr></table></figure>
 <p>  因为 Caddy 就是一个可执行文件，所以下载就完了。<br><a href="media/Step-By-Step-Install-Caddy-On-CentOS.md">Step-By-Step-Install-Caddy-On-CentOS</a></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2></li>
+</li>
 </ul>
-<p>要启动 Caddy，需要建立一个 root 用户以外的账户，我新建的账户叫做 caddy，以下为 caddy 的配置过程：</p>
-<ol>
-<li><p>建立一个用于存放网页文件的目录，如 <code>/var/www</code>,命令如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /var/www</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立 caddy 用户</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser -r -d /var/www -s /sbin/nologin caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立 Caddy 配置文件的路径</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>建立一个空的 Caddy 工作配置参数文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /etc/caddy/Caddyfile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置路径的访问权限</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R root:caddy /etc/caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建用于存放 ssl 证书的路径，并给予正确的权限</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/ssl/caddy</span><br><span class="line">sudo chown -R caddy:root /etc/ssl/caddy</span><br><span class="line">sudo chmod 0770 /etc/ssl/caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>创建用于存放日志的路径</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /var/log/caddy</span><br><span class="line">sudo chown -R caddy:root /var/log/caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改存放网页的路径权限 <code>/var/www</code></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown caddy:caddy /var/www</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把 Caddy 安装为开机自动启动的服务</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -s https://raw.githubusercontent.com/mholt/caddy/master/dist/init/linux-systemd/caddy.service -o /etc/systemd/system/caddy.service</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置文件里面的用户信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 打开自动启动服务配置文件</span><br><span class="line">sudo vi /etc/systemd/system/caddy.service</span><br><span class="line"># 查找并修改：</span><br><span class="line">; User and group the process will run as.</span><br><span class="line">User=caddy</span><br><span class="line">Group=caddy</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl enable caddy.service</span><br></pre></td></tr></table></figure>
-<p><em>现在还不能正常成功启动 Caddy，因为还没有配置网站参数信息。</em></p>
-</li>
-<li><p>配置网站信息</p>
-<p>网站配置参数信息文件是 <code>/etc/caddy/Caddyfile</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 打开配置文件</span><br><span class="line">sudo vi /etc/caddy/Caddyfile</span><br><span class="line"># 添加如下信息</span><br><span class="line">www.example.com   # 把这里修改为实际网站的域名</span><br><span class="line">&#123;</span><br><span class="line">  log /var/log/caddy/caddy.log  # 日志文件</span><br><span class="line">  tls example@example.com   # 修改为个人邮箱帐号，用于自动申请 ssl 证书</span><br><span class="line">  root /var/www # 网站根目录</span><br><span class="line">  gzip</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="启动-Caddy-服务"><a href="#启动-Caddy-服务" class="headerlink" title="启动 Caddy 服务"></a>启动 Caddy 服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 重启 Caddy 服务</span><br><span class="line">sudo systemctl restart caddy</span><br><span class="line"># 查看运行状态</span><br><span class="line">sudo systemctl status caddy -l</span><br></pre></td></tr></table></figure>
-<p>如果提示自动加载证书失败,可以使用 <a href="https://certbot.eff.org/" target="_blank" rel="noopener">CertBot</a> 手动申请证书。</p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/08/03/2019-08-03-Step-By-Step-Install-Caddy-On-CentOS/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
