@@ -100,15 +100,18 @@
 
 
 
-  <meta name="keywords" content="centos,caddy,mediawiki,wiki">
+  <meta name="description" content="一个标准安装的 MediaWiki 除软件自身以外，还需要安装下列环境：  Web 服务器。用于服务客户端浏览器的请求。 PHP 运行环境。 数据库服务器。用于储存网站页面与数据。除上述必需的环境以外，还有若干可选依赖，如果你需要使用一些高级功能则需要安装这些依赖。">
+<meta name="keywords" content="centos,caddy,mediawiki,wiki">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 CentOS 7 上搭建 MediaWiki&#x2F;Caddy">
 <meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/index.html">
 <meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="一个标准安装的 MediaWiki 除软件自身以外，还需要安装下列环境：  Web 服务器。用于服务客户端浏览器的请求。 PHP 运行环境。 数据库服务器。用于储存网站页面与数据。除上述必需的环境以外，还有若干可选依赖，如果你需要使用一些高级功能则需要安装这些依赖。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-03T07:59:15.675Z">
+<meta property="og:updated_time" content="2019-08-15T08:54:08.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 CentOS 7 上搭建 MediaWiki&#x2F;Caddy">
+<meta name="twitter:description" content="一个标准安装的 MediaWiki 除软件自身以外，还需要安装下列环境：  Web 服务器。用于服务客户端浏览器的请求。 PHP 运行环境。 数据库服务器。用于储存网站页面与数据。除上述必需的环境以外，还有若干可选依赖，如果你需要使用一些高级功能则需要安装这些依赖。">
 
 
 
@@ -363,12 +366,24 @@
                 
               
 
-              <time title="Created: 2019-08-03 15:57:44 / Modified: 15:59:15" itemprop="dateCreated datePublished" datetime="2019-08-03T15:57:44+08:00">2019-08-03</time>
+              <time title="Created: 2019-08-03 15:57:44" itemprop="dateCreated datePublished" datetime="2019-08-03T15:57:44+08:00">2019-08-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-15 16:54:08" itemprop="dateModified" datetime="2019-08-15T16:54:08+08:00">2019-08-15</time>
               
             
           </span>
@@ -415,7 +430,31 @@
       
 
       
-        
+        <p>一个标准安装的 MediaWiki 除软件自身以外，还需要安装下列环境：</p>
+<ul>
+<li>Web 服务器。用于服务客户端浏览器的请求。</li>
+<li>PHP 运行环境。</li>
+<li>数据库服务器。用于储存网站页面与数据。<br>除上述必需的环境以外，还有若干可选依赖，如果你需要使用一些高级功能则需要安装这些依赖。</li>
+</ul>
+<a id="more"></a>
+<h2 id="安装-php、mariadb"><a href="#安装-php、mariadb" class="headerlink" title="安装 php、mariadb"></a>安装 php、mariadb</h2><ol>
+<li><p>安装 mariadb</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y mariadb-server mariadb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 php 及依赖</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum --enablerepo=remi install php73-php php73-php-apcu php73-php-intl php73-php-mbstring php73-php-xml php73-php-gd mariadb-server</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mariadb.service</span><br><span class="line"></span><br><span class="line"># 执行 mysql_secure_installation 命令，配置 MariaDB 安全权限：</span><br><span class="line">mysql_secure_installation</span><br><span class="line"></span><br><span class="line"># 执行完成后登录 MariaDB，初始化 MediaWiki 数据库</span><br><span class="line">CREATE USER &apos;wiki&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;InputPasswordHere&apos;;</span><br><span class="line">CREATE DATABASE wiki;</span><br><span class="line">GRANT ALL PRIVILEGES ON wiki.* TO &apos;wiki&apos;@&apos;localhost&apos;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<h2 id="安装及配置-MediaWiki"><a href="#安装及配置-MediaWiki" class="headerlink" title="安装及配置 MediaWiki"></a>安装及配置 MediaWiki</h2><ol>
+<li><p>下载并解压</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.0.tar.gz</span><br><span class="line">tar -zxvf mediawiki-1.33.0.tar.gz</span><br><span class="line"></span><br><span class="line"># 移动到网站根目录</span><br><span class="line">mv mediawiki-1.29.1 /var/www/html/wiki</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 MediaWiki</p>
+<p> 用浏览器打开 MediaWiki 页面，按照指示添加站点信息以及数据库等信息。</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -540,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -650,6 +698,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-php、mariadb"><span class="nav-number">1.</span> <span class="nav-text">安装 php、mariadb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置数据库"><span class="nav-number">2.</span> <span class="nav-text">配置数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装及配置-MediaWiki"><span class="nav-number">3.</span> <span class="nav-text">安装及配置 MediaWiki</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
