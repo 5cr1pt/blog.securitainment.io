@@ -17,36 +17,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://5cr1pt.github.io/blog.securitainment.io').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.6.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"5cr1pt.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="运维 | 安全">
 <meta property="og:type" content="website">
@@ -65,8 +39,8 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome : true,
+    isPost : false
   };
 </script>
 
@@ -109,6 +83,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -120,11 +102,8 @@
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
   </div>
 </div>
@@ -174,6 +153,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/" class="post-title-link" itemprop="url">在 QNAP NAS 中安装 Flexget 并配置 RSS 订阅下载</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-03-06 17:36:04 / Modified: 17:39:44" itemprop="dateCreated datePublished" datetime="2020-03-06T17:36:04+08:00">2020-03-06</time>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="0x00-下载安装-Flexget"><a href="#0x00-下载安装-Flexget" class="headerlink" title="0x00 下载安装 Flexget"></a>0x00 下载安装 Flexget</h1><blockquote>
+<p>参考官网：<a href="https://flexget.com/InstallWizard/QNAP" target="_blank" rel="noopener">https://flexget.com/InstallWizard/QNAP</a></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
     <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -217,7 +278,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -308,7 +369,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/08/03/2019-08-03-Step-By-Step-Install-Caddy-On-CentOS/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/08/03/2019-08-03-Step-By-Step-Install-Caddy-On-CentOS/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/2019-08-03-Step-By-Step-Install-Caddy-On-CentOS/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -394,7 +455,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/25/2019-07-25-Install-Discourse-On-CentOS-7-With-Caddy-Server/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -480,7 +541,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/07/25/2019-07-22-Install-PHP73&WordPress-On-CentOS7/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/07/25/2019-07-22-Install-PHP73&WordPress-On-CentOS7/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/25/2019-07-22-Install-PHP73&WordPress-On-CentOS7/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -566,7 +627,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/07/24/2019-07-22-add-or-resize-swapfile-size/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/07/24/2019-07-22-add-or-resize-swapfile-size/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/24/2019-07-22-add-or-resize-swapfile-size/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -686,7 +747,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/05/30/2019-05-30-Apple-News-How-To-in-the-mainland-of-China/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/05/30/2019-05-30-Apple-News-How-To-in-the-mainland-of-China/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/30/2019-05-30-Apple-News-How-To-in-the-mainland-of-China/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -773,7 +834,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/03/03/2019-03-03-regist-netflix-with-turkeys-rate/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/03/03/2019-03-03-regist-netflix-with-turkeys-rate/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/03/2019-03-03-regist-netflix-with-turkeys-rate/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -859,7 +920,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2018/12/12/2018-12-12-2018-Security-Book-List/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2018/12/12/2018-12-12-2018-Security-Book-List/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/12/2018-12-12-2018-Security-Book-List/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -945,7 +1006,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2018/12/12/2018-12-12-xss-attack-all-in-one/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2018/12/12/2018-12-12-xss-attack-all-in-one/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/12/2018-12-12-xss-attack-all-in-one/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -984,92 +1045,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/2016-05-14-shadowsocks-libev-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Groot">
-      <meta itemprop="description" content="运维 | 安全">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/14/2016-05-14-shadowsocks-libev-config/" class="post-title-link" itemprop="url">shadowsocks_libev 配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-05-14 01:26:13" itemprop="dateCreated datePublished" datetime="2016-05-14T01:26:13+08:00">2016-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:27:03" itemprop="dateModified" datetime="2019-07-25T14:27:03+08:00">2019-07-25</time>
-              </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2016/05/14/2016-05-14-shadowsocks-libev-config/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/2016-05-14-shadowsocks-libev-config/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="CentOS-搭建Shadowsocks-服务器"><a href="#CentOS-搭建Shadowsocks-服务器" class="headerlink" title="CentOS 搭建Shadowsocks 服务器"></a>CentOS 搭建Shadowsocks 服务器</h2><p>shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/05/14/2016-05-14-shadowsocks-libev-config/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1084,7 +1059,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -1140,12 +1115,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -1170,7 +1145,7 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -17,36 +17,10 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://5cr1pt.github.io/blog.securitainment.io').hostname,
-    root: '/',
-    scheme: 'Muse',
-    version: '7.6.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"5cr1pt.github.io","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="一个标准安装的 MediaWiki 除软件自身以外，还需要安装下列环境：  Web 服务器。用于服务客户端浏览器的请求。 PHP 运行环境。 数据库服务器。用于储存网站页面与数据。除上述必需的环境以外，还有若干可选依赖，如果你需要使用一些高级功能则需要安装这些依赖。">
 <meta property="og:type" content="article">
@@ -70,8 +44,8 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true
   };
 </script>
 
@@ -114,6 +88,14 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
   <div class="site-meta">
 
     <div>
@@ -125,11 +107,8 @@
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
   </div>
 </div>
@@ -221,7 +200,7 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/#comments" itemprop="discussionUrl">
+    <a title="disqus" href="/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/#disqus_thread" itemprop="discussionUrl">
       <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/" itemprop="commentCount"></span>
     </a>
   </span>
@@ -285,7 +264,10 @@
     <a href="/2019/08/03/2019-08-03-Step-By-Step-Install-Caddy-On-CentOS/" rel="prev" title="在 CentOS 上安装 Caddy 服务">
       <i class="fa fa-chevron-left"></i> 在 CentOS 上安装 Caddy 服务
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/06/2020-03-06-Install-Flexget-on-Qnap-NAS-md/" rel="next" title="在 QNAP NAS 中安装 Flexget 并配置 RSS 订阅下载">
+      在 QNAP NAS 中安装 Flexget 并配置 RSS 订阅下载 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -309,7 +291,7 @@
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -366,12 +348,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -396,7 +378,7 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -467,16 +449,16 @@
   window.addEventListener('load', loadCount, false);
 </script>
 <script>
+  var disqus_config = function() {
+    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/";
+    this.page.identifier = "2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/";
+    this.page.title = "在 CentOS 7 上搭建 MediaWiki/Caddy";
+    };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
       DISQUS.reset({
         reload: true,
-        config: {page: {
-            url: "http://5cr1pt.github.io/blog.securitainment.io/2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/",
-            identifier: "2019/08/03/2019-08-03-Install-MediaWiki-On-CentOS-with-Caddy/",
-            title: "在 CentOS 7 上搭建 MediaWiki/Caddy"
-          }
-        }
+        config: disqus_config
       });
     } else {
       var d = document, s = d.createElement('script');
