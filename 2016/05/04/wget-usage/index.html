@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"5cr1pt.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org&#x2F;pub&#x2F;path&#x2F;在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org&#x2F;pub&#x2F;path&#x2F;  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wget 使用筆記">
+<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/wget-usage/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="概况需要下载某个目录下面的所有文件。命令如下 wget -c -r -np -k -L -p www.xxx.org&#x2F;pub&#x2F;path&#x2F;在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。 wget -np -nH -r --span-hosts www.xxx.org&#x2F;pub&#x2F;path&#x2F;  -c 断点续传 -r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件 -nd">
+<meta property="article:published_time" content="2016-05-04T06:52:16.000Z">
+<meta property="article:modified_time" content="2019-07-25T06:26:17.000Z">
+<meta property="article:author" content="Groot">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/wget-usage/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>wget 使用筆記 | Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Securitainment.io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/wget-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          wget 使用筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-04 14:52:16" itemprop="dateCreated datePublished" datetime="2016-05-04T14:52:16+08:00">2016-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:17" itemprop="dateModified" datetime="2019-07-25T14:26:17+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/04/wget-usage/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/04/wget-usage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+<pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/</code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
+<pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
+
+-c 断点续传
+-r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件
+-nd 递归下载时不创建一层一层的目录，把所有的文件下载到当前目录
+-np 递归下载时不搜索上层目录，如wget -c -r www.xxx.org/pub/path/
+没有加参数-np，就会同时下载path的上一级目录pub下的其它文件
+-k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数
+-L 递归时不进入其它主机，如wget -c -r www.xxx.org/ </code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
+<pre><code>-p 下载网页所需的所有文件，如图片等
+-A 指定要下载的文件样式列表，多个样式用逗号分隔
+-i 后面跟一个文件，文件内指明要下载的URL</code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
+<a id="more"></a>
+
+<h1 id="wget的常见用法"><a href="#wget的常见用法" class="headerlink" title="wget的常见用法"></a>wget的常见用法</h1><p><strong>wget的使用格式</strong></p>
+<pre><code>Usage: wget [OPTION]… [URL]…</code></pre><ul>
+<li><p>用wget做站点镜像:</p>
+<pre><code>wget -r -p -np -k http://dsec.pku.edu.cn/~usr_name/</code></pre><p>  或者</p>
+<pre><code>wget -m http://www.tldp.org/LDP/abs/html/</code></pre></li>
+<li><p>在不稳定的网络上下载一个部分下载的文件，以及在空闲时段下载</p>
+<pre><code>wget -t 0 -w 31 -c http://dsec.pku.edu.cn/BBC.avi -o down.log &amp;</code></pre><p>  或者从filelist读入要下载的文件列表</p>
+<pre><code>wget -t 0 -w 31 -c -B ftp://dsec.pku.edu.cn/linuxsoft -i filelist.txt -o down.log &amp;</code></pre></li>
+</ul>
+<p>上面的代码还可以用来在网络比较空闲的时段进行下载。我的用法是:在mozilla中将不方便当时下载的URL链接拷贝到内存中然后粘贴到文件filelist.txt中，在晚上要出去系统前执行上面代码的第二条。</p>
+<ul>
+<li><p>使用代理下载</p>
+<pre><code>wget -Y on -p -k https://sourceforge.net/projects/wvware/</code></pre><p>  代理可以在环境变量或wgetrc文件中设定</p>
+<p>  在环境变量中设定代理</p>
+<pre><code>export PROXY=http://211.90.168.94:8080/</code></pre><p>  在~/.wgetrc中设定代理</p>
+<pre><code>http_proxy = http://proxy.yoyodyne.com:18023/
+ftp_proxy = http://proxy.yoyodyne.com:18023/</code></pre></li>
+</ul>
+<h1 id="wget各种选项分类列表"><a href="#wget各种选项分类列表" class="headerlink" title="wget各种选项分类列表"></a>wget各种选项分类列表</h1><ul>
+<li><p>启动</p>
+<pre><code>-V, –version 显示wget的版本后退出
+-h, –help 打印语法帮助
+-b, –background 启动后转入后台执行
+-e, –execute=COMMAND </code></pre><p>  执行`.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc</p>
+</li>
+<li><p>记录和输入文件</p>
+<pre><code>-o, –output-file=FILE 把记录写到FILE文件中
+-a, –append-output=FILE 把记录追加到FILE文件中
+-d, –debug 打印调试输出
+-q, –quiet 安静模式(没有输出)
+-v, –verbose 冗长模式(这是缺省设置)
+-nv, –non-verbose 关掉冗长模式，但不是安静模式
+-i, –input-file=FILE 下载在FILE文件中出现的URLs
+-F, –force-html 把输入文件当作HTML格式文件对待
+-B, –base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀
+–sslcertfile=FILE 可选客户端证书
+–sslcertkey=KEYFILE 可选客户端证书的KEYFILE
+–egd-file=FILE 指定EGD socket的文件名</code></pre></li>
+<li><p>下载</p>
+<pre><code>–bind-address=ADDRESS </code></pre><p>  指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)</p>
+<pre><code>-t, –tries=NUMBER 设定最大尝试链接次数(0 表示无限制).
+-O –output-document=FILE 把文档写到FILE文件中
+-nc, –no-clobber 不要覆盖存在的文件或使用.#前缀
+-c, –continue 接着下载没下载完的文件
+–progress=TYPE 设定进程条标记
+-N, –timestamping 不要重新下载文件除非比本地文件新
+-S, –server-response 打印服务器的回应
+–spider 不下载任何东西
+-T, –timeout=SECONDS 设定响应超时的秒数
+-w, –wait=SECONDS 两次尝试之间间隔SECONDS秒
+–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒
+–random-wait 在下载之间等待0…2*WAIT秒
+-Y, –proxy=on/off 打开或关闭代理
+-Q, –quota=NUMBER 设置下载的容量限制
+–limit-rate=RATE 限定下载输率</code></pre></li>
+<li><p>目录</p>
+<pre><code>-nd –no-directories 不创建目录
+-x, –force-directories 强制创建目录
+-nH, –no-host-directories 不创建主机目录
+-P, –directory-prefix=PREFIX 将文件保存到目录 PREFIX/…
+–cut-dirs=NUMBER 忽略 NUMBER层远程目录</code></pre></li>
+<li><p>HTTP 选项</p>
+<pre><code>–http-user=USER 设定HTTP用户名为 USER.
+–http-passwd=PASS 设定http密码为 PASS.
+-C, –cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许).
+-E, –html-extension 将所有text/html文档以.html扩展名保存
+–ignore-length 忽略 `Content-Length&apos;头域
+–header=STRING 在headers中插入字符串 STRING
+–proxy-user=USER 设定代理的用户名为 USER
+–proxy-passwd=PASS 设定代理的密码为 PASS
+–referer=URL 在HTTP请求中包含 `Referer: URL&apos;头
+-s, –save-headers 保存HTTP头到文件
+-U, –user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION.
+–no-http-keep-alive 关闭 HTTP活动链接 (永远链接).
+–cookies=off 不使用 cookies.
+–load-cookies=FILE 在开始会话前从文件 FILE中加载cookie
+–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中</code></pre></li>
+<li><p>FTP 选项</p>
+<pre><code>-nr, –dont-remove-listing 不移走 `.listing&apos;文件
+-g, –glob=on/off 打开或关闭文件名的 globbing机制
+–passive-ftp 使用被动传输模式 (缺省值).
+–active-ftp 使用主动传输模式
+–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)</code></pre></li>
+<li><p>递归下载</p>
+<pre><code>-r, –recursive 递归下载－－慎用!
+-l, –level=NUMBER 最大递归深度 (inf 或 0 代表无穷).
+–delete-after 在现在完毕后局部删除文件
+-k, –convert-links 转换非相对链接为相对链接
+-K, –backup-converted 在转换文件X之前，将之备份为 X.orig
+-m, –mirror 等价于 -r -N -l inf -nr.
+-p, –page-requisites 下载显示HTML文件的所有图片</code></pre></li>
+<li><p>递归下载中的包含和不包含(accept/reject)</p>
+<pre><code>-A, –accept=LIST 分号分隔的被接受扩展名的列表
+-R, –reject=LIST 分号分隔的不被接受的扩展名的列表
+-D, –domains=LIST 分号分隔的被接受域的列表
+–exclude-domains=LIST 分号分隔的不被接受的域的列表
+–follow-ftp 跟踪HTML文档中的FTP链接
+–follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表
+-G, –ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表
+-H, –span-hosts 当递归时转到外部主机
+-L, –relative 仅仅跟踪相对链接
+-I, –include-directories=LIST 允许目录的列表
+-X, –exclude-directories=LIST 不被包含目录的列表
+-np, –no-parent 不要追溯到父目录</code></pre></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2000/01/01/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/05/14/python-tips/" rel="next" title="Python skill collection">
+      Python skill collection <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概况"><span class="nav-number">1.</span> <span class="nav-text">概况</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wget的常见用法"><span class="nav-number">2.</span> <span class="nav-text">wget的常见用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wget各种选项分类列表"><span class="nav-number">3.</span> <span class="nav-text">wget各种选项分类列表</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Groot</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2016/05/04/wget-usage/";
+    this.page.identifier = "2016/05/04/wget-usage/";
+    this.page.title = "wget 使用筆記";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://securitainment.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
