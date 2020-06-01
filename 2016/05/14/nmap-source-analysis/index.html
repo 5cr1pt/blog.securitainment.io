@@ -19,13 +19,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"5cr1pt.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"blog.securitainment.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="Nmap源码分析（脚本引擎）Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nmap 源代碼分析">
-<meta property="og:url" content="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/nmap-source-analysis/index.html">
+<meta property="og:url" content="https://blog.securitainment.io/2016/05/14/nmap-source-analysis/index.html">
 <meta property="og:site_name" content="Securitainment.io">
 <meta property="og:description" content="Nmap源码分析（脚本引擎）Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua">
 <meta property="og:image" content="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png">
@@ -36,7 +36,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png">
 
-<link rel="canonical" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/nmap-source-analysis/">
+<link rel="canonical" href="https://blog.securitainment.io/2016/05/14/nmap-source-analysis/">
 
 
 <script id="page-configurations">
@@ -159,7 +159,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/nmap-source-analysis/">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/nmap-source-analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -519,7 +519,7 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://5cr1pt.github.io/blog.securitainment.io/2016/05/14/nmap-source-analysis/";
+    this.page.url = "https://blog.securitainment.io/2016/05/14/nmap-source-analysis/";
     this.page.identifier = "2016/05/14/nmap-source-analysis/";
     this.page.title = "nmap 源代碼分析";
     };
