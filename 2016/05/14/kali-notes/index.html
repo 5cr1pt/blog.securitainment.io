@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"blog.securitainment.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Kali linux 使用记录 安装完Kali linux 之后的配置 常用软件 记录[TOC] 0x01 更换源并更新root@kali:~# leafpad &#x2F;etc&#x2F;apt&#x2F;sources.list #kali官方源  deb cdrom:[Debian GNU&#x2F;Linux 2.0 _Sana_ - Official Snapshot i386 LIVE&#x2F;INSTALL Binary 2">
+  <meta name="description" content="Kali linux 使用记录 安装完Kali linux 之后的配置 常用软件 记录[TOC] 0x01 更换源并更新root@kali:~# leafpad &#x2F;etc&#x2F;apt&#x2F;sources.list #kali官方源 deb cdrom:[Debian GNU&#x2F;Linux 2.0 _Sana_ - Official Snapshot i386 LIVE&#x2F;INSTALL Binary 20">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kali筆記">
 <meta property="og:url" content="https://blog.securitainment.io/2016/05/14/kali-notes/index.html">
 <meta property="og:site_name" content="Securitainment.io">
-<meta property="og:description" content="Kali linux 使用记录 安装完Kali linux 之后的配置 常用软件 记录[TOC] 0x01 更换源并更新root@kali:~# leafpad &#x2F;etc&#x2F;apt&#x2F;sources.list #kali官方源  deb cdrom:[Debian GNU&#x2F;Linux 2.0 _Sana_ - Official Snapshot i386 LIVE&#x2F;INSTALL Binary 2">
+<meta property="og:description" content="Kali linux 使用记录 安装完Kali linux 之后的配置 常用软件 记录[TOC] 0x01 更换源并更新root@kali:~# leafpad &#x2F;etc&#x2F;apt&#x2F;sources.list #kali官方源 deb cdrom:[Debian GNU&#x2F;Linux 2.0 _Sana_ - Official Snapshot i386 LIVE&#x2F;INSTALL Binary 20">
 <meta property="og:image" content="http://image.3001.net/images/20160130/14540858194014.png">
 <meta property="og:image" content="http://static.oschina.net/uploads/img/201403/06002415_wAFS.png">
 <meta property="og:image" content="http://static.oschina.net/uploads/space/2014/0304/231551_SyDR_615783.png">
 <meta property="article:published_time" content="2016-05-13T17:03:28.000Z">
-<meta property="article:modified_time" content="2019-07-25T06:29:08.000Z">
+<meta property="article:modified_time" content="2020-06-09T02:10:12.161Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="pentest">
 <meta property="article:tag" content="kali">
@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:29:08" itemprop="dateModified" datetime="2019-07-25T14:29:08+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:10:12" itemprop="dateModified" datetime="2020-06-09T10:10:12+08:00">2020-06-09</time>
               </span>
 
           
@@ -204,9 +204,9 @@
         <a id="more"></a>
 
 <h2 id="Kali-linux-使用记录"><a href="#Kali-linux-使用记录" class="headerlink" title="Kali linux 使用记录"></a>Kali linux 使用记录</h2><p><img src="http://image.3001.net/images/20160130/14540858194014.png" alt=""></p>
-<h1 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h1><p>[TOC]</p>
-<h2 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h2><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
-<pre><code>#kali官方源 
+<h2 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h2><p>[TOC]</p>
+<h3 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h3><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
+<pre><code>#kali官方源
 deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
 deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
 deb http://http.kali.org/kali sana main non-free contrib
@@ -275,14 +275,14 @@ sudo fc-cache -fv</code></pre><p>最后，去系统－首选项－高级设置 �
 <p> 其次<code>root@kali:update-flashplugin-nonfree –install</code></p>
 </li>
 <li><p>安装Tor Browser</p>
-<pre><code>root@kali:apt-get install tor 
-root@kali:service tor start 
+<pre><code>root@kali:apt-get install tor
+root@kali:service tor start
 root@kali:proxychains iceweasel</code></pre></li>
 </ol>
 <h2 id="0x05-拼音输入法（需要注销重新登录）"><a href="#0x05-拼音输入法（需要注销重新登录）" class="headerlink" title="0x05 拼音输入法（需要注销重新登录）"></a>0x05 拼音输入法（需要注销重新登录）</h2><pre><code>apt-get install ibus ibus-pinyin              #经典的ibus
 apt-get install fcitx fcitx-pinyin fcitx-module-cloudpinyin fcitx-googlepinyin    #fcitx拼音</code></pre><h2 id="0x06-科学上网"><a href="#0x06-科学上网" class="headerlink" title="0x06 科学上网"></a>0x06 科学上网</h2><ul>
 <li><p>默认安装，是没有激活VPN的，能看到VPN选项，但是不能点击VPN连接</p>
-<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome </code></pre></li>
+<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome</code></pre></li>
 <li><p><a href="https://github.com/getlantern/lantern-binaries" target="_blank" rel="noopener">lantern</a></p>
 <p>  方法就是下载对应的版本，然后dpkg安装下，然后打开lantern自动跳转到浏览器，然后就没有然后了。。。</p>
 </li>
@@ -343,7 +343,7 @@ bff9VcTSJk7sRDLqKRVz1XGKbMqw3G
 =========== Sjolzy.cn =============</code></pre></li>
 <li><p>安装add-apt-repository和pip</p>
 <pre><code>add-apt-repository
-apt-get install python-software-properties 
+apt-get install python-software-properties
 nano app-apt-repository.sh
 
 #!/bin/bash        // 添加如下代码
@@ -389,13 +389,13 @@ update-alternatives --config javac</code></pre></li>
 <pre><code>/*
 sublime-imfix.c
 Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.
-By Cjacker Huang 
+By Cjacker Huang
 
 gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
 LD_PRELOAD=./libsublime-imfix.so sublime_text
 */
-#include 
-#include 
+#include
+#include
 typedef GdkSegment GdkRegionBox;
 
 struct _GdkRegion
@@ -423,8 +423,8 @@ gdk_region_get_clipbox (const GdkRegion *region,
   rect.x = rectangle-&gt;x;
   rect.y = rectangle-&gt;y;
   rect.width = 0;
-  rect.height = rectangle-&gt;height; 
-  //The caret width is 2; 
+  rect.height = rectangle-&gt;height;
+  //The caret width is 2;
   //Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.
   if(rectangle-&gt;width == 2 &amp;&amp; GTK_IS_IM_CONTEXT(local_context)) {
         gtk_im_context_set_cursor_location(local_context, rectangle);
@@ -463,7 +463,7 @@ void gtk_im_context_set_client_window (GtkIMContext *context,
     gtk_im_context_focus_in(context);
     local_context = context;
   }
-  gdk_window_add_filter (window, event_filter, context); 
+  gdk_window_add_filter (window, event_filter, context);
 }</code></pre></li>
 <li><p>编译动态库</p>
 <pre><code>gcc -shared -o libsublime-imfix.so sublime_imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</code></pre></li>
@@ -596,7 +596,7 @@ http://www.blackmoreops.com/2014/02/27/change-install-theme-kali-linux-gtk-3-the
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kali-linux-使用记录"><span class="nav-number">1.</span> <span class="nav-text">Kali linux 使用记录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装完Kali-linux-之后的配置-常用软件-记录"><span class="nav-number"></span> <span class="nav-text">安装完Kali linux 之后的配置 常用软件 记录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-更换源并更新"><span class="nav-number">1.</span> <span class="nav-text">0x01 更换源并更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-安装内核头"><span class="nav-number">2.</span> <span class="nav-text">0x02 安装内核头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-安装字体"><span class="nav-number">3.</span> <span class="nav-text">0x03 安装字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-安装浏览器"><span class="nav-number">4.</span> <span class="nav-text">0x04 安装浏览器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-拼音输入法（需要注销重新登录）"><span class="nav-number">5.</span> <span class="nav-text">0x05 拼音输入法（需要注销重新登录）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-科学上网"><span class="nav-number">6.</span> <span class="nav-text">0x06 科学上网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-定制终端"><span class="nav-number">7.</span> <span class="nav-text">0x07 定制终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-配置Python及Java环境"><span class="nav-number">8.</span> <span class="nav-text">0x08 配置Python及Java环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-安装代码编辑器"><span class="nav-number">9.</span> <span class="nav-text">0x09 安装代码编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x10-安装-git"><span class="nav-number">10.</span> <span class="nav-text">0x10 安装 git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x11-一些工具"><span class="nav-number">11.</span> <span class="nav-text">0x11 一些工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x12-娱乐"><span class="nav-number">12.</span> <span class="nav-text">0x12 娱乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x13-wps等一系列软件"><span class="nav-number">13.</span> <span class="nav-text">0x13 wps等一系列软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考网站："><span class="nav-number">14.</span> <span class="nav-text">参考网站：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kali-linux-使用记录"><span class="nav-number">1.</span> <span class="nav-text">Kali linux 使用记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装完Kali-linux-之后的配置-常用软件-记录"><span class="nav-number">2.</span> <span class="nav-text">安装完Kali linux 之后的配置 常用软件 记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-更换源并更新"><span class="nav-number">2.1.</span> <span class="nav-text">0x01 更换源并更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-安装内核头"><span class="nav-number">3.</span> <span class="nav-text">0x02 安装内核头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-安装字体"><span class="nav-number">4.</span> <span class="nav-text">0x03 安装字体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-安装浏览器"><span class="nav-number">5.</span> <span class="nav-text">0x04 安装浏览器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-拼音输入法（需要注销重新登录）"><span class="nav-number">6.</span> <span class="nav-text">0x05 拼音输入法（需要注销重新登录）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-科学上网"><span class="nav-number">7.</span> <span class="nav-text">0x06 科学上网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-定制终端"><span class="nav-number">8.</span> <span class="nav-text">0x07 定制终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-配置Python及Java环境"><span class="nav-number">9.</span> <span class="nav-text">0x08 配置Python及Java环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-安装代码编辑器"><span class="nav-number">10.</span> <span class="nav-text">0x09 安装代码编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x10-安装-git"><span class="nav-number">11.</span> <span class="nav-text">0x10 安装 git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x11-一些工具"><span class="nav-number">12.</span> <span class="nav-text">0x11 一些工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x12-娱乐"><span class="nav-number">13.</span> <span class="nav-text">0x12 娱乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x13-wps等一系列软件"><span class="nav-number">14.</span> <span class="nav-text">0x13 wps等一系列软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考网站："><span class="nav-number">15.</span> <span class="nav-text">参考网站：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

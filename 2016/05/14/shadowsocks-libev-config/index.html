@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Securitainment.io">
 <meta property="og:description" content="CentOS 搭建Shadowsocks 服务器shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。">
 <meta property="article:published_time" content="2016-05-13T17:26:13.000Z">
-<meta property="article:modified_time" content="2019-07-25T06:27:03.000Z">
+<meta property="article:modified_time" content="2020-06-09T02:08:17.875Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="shadowsocks">
 <meta property="article:tag" content="centos">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:27:03" itemprop="dateModified" datetime="2019-07-25T14:27:03+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:08:17" itemprop="dateModified" datetime="2020-06-09T10:08:17+08:00">2020-06-09</time>
               </span>
 
           
@@ -199,13 +199,13 @@
         <h2 id="CentOS-搭建Shadowsocks-服务器"><a href="#CentOS-搭建Shadowsocks-服务器" class="headerlink" title="CentOS 搭建Shadowsocks 服务器"></a>CentOS 搭建Shadowsocks 服务器</h2><p>shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。</p>
 <a id="more"></a>
 
-<h1 id="安装必要组件"><a href="#安装必要组件" class="headerlink" title="安装必要组件"></a>安装必要组件</h1><pre><code>yum install build-essential autoconf libtool openssl-devel gcc -y</code></pre><h1 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h1><pre><code>yum install git -y</code></pre><p>装完了执行<code>git --version</code>如果出现版本号则安装成功</p>
-<h1 id="下载Shadowsocks-libev-源码包并编译"><a href="#下载Shadowsocks-libev-源码包并编译" class="headerlink" title="下载Shadowsocks-libev 源码包并编译"></a>下载Shadowsocks-libev 源码包并编译</h1><pre><code>git clone https://github.com/shadowsocks/shadowsocks-libev.git
+<h2 id="安装必要组件"><a href="#安装必要组件" class="headerlink" title="安装必要组件"></a>安装必要组件</h2><pre><code>yum install build-essential autoconf libtool openssl-devel gcc -y</code></pre><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><pre><code>yum install git -y</code></pre><p>装完了执行<code>git --version</code>如果出现版本号则安装成功</p>
+<h2 id="下载Shadowsocks-libev-源码包并编译"><a href="#下载Shadowsocks-libev-源码包并编译" class="headerlink" title="下载Shadowsocks-libev 源码包并编译"></a>下载Shadowsocks-libev 源码包并编译</h2><pre><code>git clone https://github.com/shadowsocks/shadowsocks-libev.git
 cd shadowsocks-libev
 ./configure
-make &amp;&amp; make install</code></pre><h1 id="运行Shadowsocks"><a href="#运行Shadowsocks" class="headerlink" title="运行Shadowsocks"></a>运行Shadowsocks</h1><pre><code>nohup /usr/local/bin/ss-server -s IP -p PORT -k PASSWORD -m ENCRYPT_METHOD &amp;
+make &amp;&amp; make install</code></pre><h2 id="运行Shadowsocks"><a href="#运行Shadowsocks" class="headerlink" title="运行Shadowsocks"></a>运行Shadowsocks</h2><pre><code>nohup /usr/local/bin/ss-server -s IP -p PORT -k PASSWORD -m ENCRYPT_METHOD &amp;
 比如：
-nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;</code></pre><h1 id="加入开机自动启动"><a href="#加入开机自动启动" class="headerlink" title="加入开机自动启动"></a>加入开机自动启动</h1><pre><code>echo &quot;nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;&quot;&gt;&gt;/etc/rc.local</code></pre><h1 id="防火墙例外"><a href="#防火墙例外" class="headerlink" title="防火墙例外"></a>防火墙例外</h1><p>添加例外：</p>
+nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;</code></pre><h2 id="加入开机自动启动"><a href="#加入开机自动启动" class="headerlink" title="加入开机自动启动"></a>加入开机自动启动</h2><pre><code>echo &quot;nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;&quot;&gt;&gt;/etc/rc.local</code></pre><h2 id="防火墙例外"><a href="#防火墙例外" class="headerlink" title="防火墙例外"></a>防火墙例外</h2><p>添加例外：</p>
 <pre><code>iptables -A INPUT -p tcp --dport PORT -j ACCEPT</code></pre><p>不过我没成功所以我是直接清除防火墙规则的。</p>
 <p>查看防火墙规则：</p>
 <pre><code>[root@vultr ~]# iptables -L -n
@@ -321,7 +321,7 @@ target     prot opt source               destination</code></pre><p><strong>Shad
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-搭建Shadowsocks-服务器"><span class="nav-number">1.</span> <span class="nav-text">CentOS 搭建Shadowsocks 服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装必要组件"><span class="nav-number"></span> <span class="nav-text">安装必要组件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Git"><span class="nav-number"></span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载Shadowsocks-libev-源码包并编译"><span class="nav-number"></span> <span class="nav-text">下载Shadowsocks-libev 源码包并编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行Shadowsocks"><span class="nav-number"></span> <span class="nav-text">运行Shadowsocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加入开机自动启动"><span class="nav-number"></span> <span class="nav-text">加入开机自动启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防火墙例外"><span class="nav-number"></span> <span class="nav-text">防火墙例外</span></a></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-搭建Shadowsocks-服务器"><span class="nav-number">1.</span> <span class="nav-text">CentOS 搭建Shadowsocks 服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装必要组件"><span class="nav-number">2.</span> <span class="nav-text">安装必要组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Git"><span class="nav-number">3.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载Shadowsocks-libev-源码包并编译"><span class="nav-number">4.</span> <span class="nav-text">下载Shadowsocks-libev 源码包并编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行Shadowsocks"><span class="nav-number">5.</span> <span class="nav-text">运行Shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入开机自动启动"><span class="nav-number">6.</span> <span class="nav-text">加入开机自动启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防火墙例外"><span class="nav-number">7.</span> <span class="nav-text">防火墙例外</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

