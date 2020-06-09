@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Securitainment.io">
 <meta property="og:description" content="Flexget 配合种子下载软件（Transmission&#x2F;Deluge 等），可以根据 RSS 链接和配置文件，自动下载订阅的种子，或进行相应的过滤，不必总是去种子站守资源或者搜索。一般的 PT 站都提供 RSS 订阅下载功能，订阅下载资源非常方便。">
 <meta property="article:published_time" content="2020-03-06T09:36:04.000Z">
-<meta property="article:modified_time" content="2020-06-09T02:06:02.260Z">
+<meta property="article:modified_time" content="2020-06-09T02:16:39.645Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="nas">
 <meta property="article:tag" content="qnap">
@@ -184,7 +184,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-09 10:06:02" itemprop="dateModified" datetime="2020-06-09T10:06:02+08:00">2020-06-09</time>
+                <time title="Modified: 2020-06-09 10:16:39" itemprop="dateModified" datetime="2020-06-09T10:16:39+08:00">2020-06-09</time>
               </span>
 
           
@@ -202,8 +202,9 @@
 <a id="more"></a>
 
 <h2 id="0x00-下载安装-Flexget"><a href="#0x00-下载安装-Flexget" class="headerlink" title="0x00 下载安装 Flexget"></a>0x00 下载安装 Flexget</h2><blockquote>
-<p>参考官网：<a href="https://flexget.com/InstallWizard/QNAP" target="_blank" rel="noopener">https://flexget.com/InstallWizard/QNAP</a><br>SSH 连接到 NAS 并输入下面的命令：</p>
+<p>参考官网：<a href="https://flexget.com/InstallWizard/QNAP" target="_blank" rel="noopener">https://flexget.com/InstallWizard/QNAP</a></p>
 </blockquote>
+<p>SSH 连接到 NAS 并输入下面的命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install -y python-pip</span><br><span class="line">pip install --upgrade setuptools</span><br><span class="line">pip install flexget</span><br><span class="line">mkdir /root/.flexget</span><br><span class="line"><span class="built_in">cd</span> /root/.flexget</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x01-配置-RSS-订阅下载"><a href="#0x01-配置-RSS-订阅下载" class="headerlink" title="0x01 配置 RSS 订阅下载"></a>0x01 配置 RSS 订阅下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 flexget.yml 文件</span></span><br><span class="line">vim flexget.yml</span><br><span class="line"><span class="comment"># 修改下面的配置信息并粘贴</span></span><br><span class="line">tasks:</span><br><span class="line">  my_feed:</span><br><span class="line">    rss: https://somerssfeed.com/feed.xml   <span class="comment"># rss 订阅链接</span></span><br><span class="line">    accept_all: yes</span><br><span class="line">    transmission:</span><br><span class="line">      host: *transmission-host* <span class="comment"># transmission 地址</span></span><br><span class="line">      port: *transmission-port* <span class="comment"># transmission 端口号</span></span><br><span class="line">      username: *transmission-username* <span class="comment"># transmission 用户名</span></span><br><span class="line">      password: *transmission-password* <span class="comment"># transmission 密码</span></span><br><span class="line">      path: /path/to/download   <span class="comment"># 订阅下载的目录</span></span><br></pre></td></tr></table></figure>
@@ -320,13 +321,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">30</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
