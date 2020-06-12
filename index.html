@@ -150,6 +150,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2020/06/12/clean-up-storage-for-vps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/12/clean-up-storage-for-vps/" class="post-title-link" itemprop="url">查找并清理 CentOS 的存储空间</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-12 11:41:04 / Modified: 14:08:20" itemprop="dateCreated datePublished" datetime="2020-06-12T11:41:04+08:00">2020-06-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/12/clean-up-storage-for-vps/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
     <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2020/06/09/secure-your-centos-vps/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -830,81 +896,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2019/03/03/regist-netflix-with-turkeys-rate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Groot">
-      <meta itemprop="description" content="运维 | 安全">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/03/regist-netflix-with-turkeys-rate/" class="post-title-link" itemprop="url">注册使用土耳其/阿根廷区 Netflix 教程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-03-03 23:39:05" itemprop="dateCreated datePublished" datetime="2019-03-03T23:39:05+08:00">2019-03-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-09 10:07:22" itemprop="dateModified" datetime="2020-06-09T10:07:22+08:00">2020-06-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>写在前面：土耳其区 Netflix 的价格十分便宜（汇率问题），目前最贵的高级套餐 （支持 4K，最多 4 个屏幕同时观看）仅售价 47.99TL，兑换成人民币<strong>不到 50</strong>，合租的话 4 个人一起每个人仅需不到 15rmb/月。而且 Netflix 的账单只和第一次收费时的地区有关，<strong>即：第一次绑定收费时使用的是土耳其IP，以后每次结算都是土耳其价格，不会因为观看IP改变。</strong></p>
-<blockquote>
-<p>20200525 更新：Netflix 禁止了土耳其区域注册的帐号使用香港 IP 观看节目，如果您是使用<strong>土耳其区</strong>的帐号，暂时只能使用其他地区 IP 观看节目，或等待到期后注销帐号并重新申请阿根廷区帐号。<br>20200310 更新：土耳其区由于大量用户注册，新用户可能需要验证土耳其手机号码，且无法跳过。可选方案：1. 注册阿根廷区，无需验证手机号；2. <em>（推荐）</em>先注册订阅香港/澳门等地区，之后再停止订阅，等到订单终止后，再使用新地区的 IP 登录并重新订阅，即可切换区域。具体参考：<a href="https://help.netflix.com/zh-tw/node/24853" target="_blank" rel="noopener">Traveling or Relocating with Netflix</a>。<br>出现问题先清理浏览器 Cookie 试试。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/03/regist-netflix-with-turkeys-rate/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -974,7 +965,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

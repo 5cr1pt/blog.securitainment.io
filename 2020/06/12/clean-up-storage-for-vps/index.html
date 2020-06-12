@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.securitainment.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查找并清理 CentOS 的存储空间">
+<meta property="og:url" content="https://blog.securitainment.io/2020/06/12/clean-up-storage-for-vps/index.html">
+<meta property="og:site_name" content="Securitainment.io">
+<meta property="og:description" content="最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。">
+<meta property="article:published_time" content="2020-06-12T03:41:04.000Z">
+<meta property="article:modified_time" content="2020-06-12T06:08:20.399Z">
+<meta property="article:author" content="Groot">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="vps">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.securitainment.io/2020/06/12/clean-up-storage-for-vps/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>查找并清理 CentOS 的存储空间 | Securitainment.io</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Securitainment.io</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Watch, and have fun.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2020/06/12/clean-up-storage-for-vps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          查找并清理 CentOS 的存储空间
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-12 11:41:04 / Modified: 14:08:20" itemprop="dateCreated datePublished" datetime="2020-06-12T11:41:04+08:00">2020-06-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</p>
+<a id="more"></a>
+
+<p>以下是记录。</p>
+<h2 id="查看磁盘空间使用量"><a href="#查看磁盘空间使用量" class="headerlink" title="查看磁盘空间使用量"></a>查看磁盘空间使用量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ df</span><br><span class="line">Filesystem          1K-blocks    Used Available Use% Mounted on</span><br><span class="line">devtmpfs               402712       0    402712   0% /dev</span><br><span class="line">tmpfs                  420388       0    420388   0% /dev/shm</span><br><span class="line">tmpfs                  420388   42556    377832  11% /run</span><br><span class="line">tmpfs                  420388       0    420388   0% /sys/fs/cgroup</span><br><span class="line">/dev/mapper/cl-root  52403200 2397228  50005972   5% /</span><br><span class="line">/dev/mapper/cl-home  49082968  555580  48527388   2% /home</span><br><span class="line">/dev/vda1              999320  178620    751888  20% /boot</span><br><span class="line">tmpfs                   84076       0     84076   0% /run/user/0</span><br><span class="line">tmpfs                   84076       0     84076   0% /run/user/1000</span><br></pre></td></tr></table></figure>
+
+<h2 id="排查大文件所在目录"><a href="#排查大文件所在目录" class="headerlink" title="排查大文件所在目录"></a>排查大文件所在目录</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ du -sh .[!.]* <span class="comment"># 查看当前目录下子目录大小（du: disk usage）;-s: 显示总和；-h: 易读模式</span></span><br><span class="line">4.0K	.bash_history</span><br><span class="line">4.0K	.bash_logout</span><br><span class="line">4.0K	.bash_profile</span><br><span class="line">4.0K	.bashrc</span><br><span class="line">4.0K	.ssh</span><br><span class="line">4.0K	.wget-hsts</span><br><span class="line"></span><br><span class="line">$ du -sh /usr/[!.]* <span class="comment"># 查看 /usr/ 目录下各个子目录大小</span></span><br><span class="line">202M	/usr/bin</span><br><span class="line">0	/usr/games</span><br><span class="line">84K	/usr/include</span><br><span class="line">614M	/usr/lib</span><br><span class="line">270M	/usr/lib64</span><br><span class="line">84M	/usr/libexec</span><br><span class="line">4.0K	/usr/<span class="built_in">local</span></span><br><span class="line">64M	/usr/sbin</span><br><span class="line">374M	/usr/share</span><br><span class="line">0	/usr/src</span><br><span class="line">0	/usr/tmp</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看大文件"><a href="#查看大文件" class="headerlink" title="查看大文件"></a>查看大文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ls -laShs</span><br><span class="line">total 20K</span><br><span class="line">4.0K -rw-------. 1 groot groot 2.8K Jun 11 17:10 .bash_history</span><br><span class="line">4.0K -rw-r--r--. 1 groot groot  312 Nov  9  2019 .bashrc</span><br><span class="line">4.0K -rw-rw-r--. 1 groot groot  204 Jun 12 13:32 .wget-hsts</span><br><span class="line">4.0K -rw-r--r--. 1 groot groot  141 Nov  9  2019 .bash_profile</span><br><span class="line">4.0K -rw-r--r--. 1 groot groot   18 Nov  9  2019 .bash_logout</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看已标记为删除的文件占用的空间"><a href="#查看已标记为删除的文件占用的空间" class="headerlink" title="查看已标记为删除的文件占用的空间"></a>查看已标记为删除的文件占用的空间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ lsof -n | grep deleted</span><br><span class="line">systemd-j   619                           root  txt       REG              253,0   234488     650779 /usr/lib/systemd/systemd-journald (deleted)</span><br><span class="line">qemu-ga     843                           root  txt       REG              253,0   449064    1079814 /usr/bin/qemu-ga (deleted)</span><br><span class="line">systemd<span class="_">-l</span>   873                           root  txt       REG              253,0   481696     650781 /usr/lib/systemd/systemd-logind (deleted)</span><br><span class="line">NetworkMa   891                           root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager (deleted)</span><br><span class="line">NetworkMa   891   902 gmain               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager (deleted)</span><br><span class="line">NetworkMa   891   903 gdbus               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager (deleted)</span><br></pre></td></tr></table></figure>
+
+<h2 id="释放空间已删除文件所占空间"><a href="#释放空间已删除文件所占空间" class="headerlink" title="释放空间已删除文件所占空间"></a>释放空间已删除文件所占空间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">kill</span> -9 %PID% <span class="comment"># 结束相应的进程</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="https://blog.csdn.net/lk_db/article/details/78341698" target="_blank" rel="noopener">https://blog.csdn.net/lk_db/article/details/78341698</a></p>
+<p><a href="https://jaminzhang.github.io/os/File-Deleted-And-Still-Use-The-Filesystem-Space-Problem-In-Linux/" target="_blank" rel="noopener">https://jaminzhang.github.io/os/File-Deleted-And-Still-Use-The-Filesystem-Space-Problem-In-Linux/</a></p>
+<p><a href="http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html" target="_blank" rel="noopener">http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html</a></p>
+<p><a href="http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html" target="_blank" rel="noopener">http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html</a></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/centos/" rel="tag"># centos</a>
+              <a href="/tags/vps/" rel="tag"># vps</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/09/secure-your-centos-vps/" rel="prev" title="CentOS VPS 安全加固">
+      <i class="fa fa-chevron-left"></i> CentOS VPS 安全加固
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看磁盘空间使用量"><span class="nav-number">1.</span> <span class="nav-text">查看磁盘空间使用量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查大文件所在目录"><span class="nav-number">2.</span> <span class="nav-text">排查大文件所在目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看大文件"><span class="nav-number">3.</span> <span class="nav-text">查看大文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看已标记为删除的文件占用的空间"><span class="nav-number">4.</span> <span class="nav-text">查看已标记为删除的文件占用的空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#释放空间已删除文件所占空间"><span class="nav-number">5.</span> <span class="nav-text">释放空间已删除文件所占空间</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Groot</p>
+  <div class="site-description" itemprop="description">运维 | 安全</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Groot</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
