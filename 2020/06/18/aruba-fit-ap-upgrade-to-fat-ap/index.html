@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175437.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg">
 <meta property="article:published_time" content="2020-06-18T09:59:00.000Z">
-<meta property="article:modified_time" content="2020-06-23T02:31:25.708Z">
+<meta property="article:modified_time" content="2020-06-23T02:40:32.244Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="aruba">
 <meta property="article:tag" content="ap">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-23 10:31:25" itemprop="dateModified" datetime="2020-06-23T10:31:25+08:00">2020-06-23</time>
+                <time title="Modified: 2020-06-23 10:40:32" itemprop="dateModified" datetime="2020-06-23T10:40:32+08:00">2020-06-23</time>
               </span>
 
           
@@ -211,7 +211,7 @@
 <a id="more"></a>
 
 <h2 id="购买一条-TTL-线"><a href="#购买一条-TTL-线" class="headerlink" title="购买一条 TTL 线"></a>购买一条 TTL 线</h2><p>查看 aruba 官网相应版本的说明书（<code>AP-XXX_Install_Guide.pdf</code>），找到相应的 <code>Console Port</code> 说明信息，再查找推荐的 <code>AP-CBL-SERU cable</code> 信息，根据文档里的 <code>CONNECTOR</code> 去淘宝找相应的型号，根据文档提供的线序购买。</p>
-<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618174916.jpg" alt=""><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175122.jpg" alt=""><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175155.jpg" alt=""><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175252.jpg" alt=""><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175301.jpeg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618174916.jpg" alt="查询 Installation Guide"><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175122.jpg" alt="查看 Console Port 支持的线缆"><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175155.jpg" alt="查询相关线缆"><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175252.jpg" alt="查看线缆线序和新片"><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175301.jpeg" alt="购买 Console 线"></p>
 <h2 id="准备软件和资料"><a href="#准备软件和资料" class="headerlink" title="准备软件和资料"></a>准备软件和资料</h2><ul>
 <li>Serial（串口）连接软件（Windows: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" target="_blank" rel="noopener">Putty</a>; macOS: <a href="https://www.decisivetactics.com/products/serial/" target="_blank" rel="noopener">Serial.app</a>）</li>
 <li>TFTP Server 软件（Windows: <a href="https://www.solarwinds.com/free-tools/free-tftp-server" target="_blank" rel="noopener">SolarWinds TFTP Server</a>; macOS: 自带 TFTP Server）</li>
@@ -222,19 +222,19 @@
 <li>！重要：关闭电脑防火墙</li>
 </ul>
 <h2 id="启动-AP"><a href="#启动-AP" class="headerlink" title="启动 AP"></a>启动 AP</h2><p>（使用的软件以 Windows 平台为例）首先断开 AP 的电源，把 AP 通过串口连接到电脑上，等待提示驱动安装成功后，打开 Putty，选择连接方式为 <code>Serial</code>，按照<code>开始菜单（右键） - 设备管理器</code>中显示的串口号，选择连接的串口，如 <code>COM1</code>，点击 <code>Open</code> 打开：</p>
-<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/2020/06/DeviceMgr.jpg" alt=""><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175335.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/2020/06/DeviceMgr.jpg" alt="查看设备的串口号"><br><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175335.jpg" alt="Putty 配置"></p>
 <p>然后把 AP 接上电源，等待窗口出现：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hit &lt;Enter&gt; to stop autoboot</span><br></pre></td></tr></table></figure>
 <p>立即按回车，进入 <code>apboot</code> 模式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apboot&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><p>将 AP 通过网线连接到电脑，在电脑上设置相关接口为固定 IP 地址，如 <code>192.168.2.10</code>：</p>
-<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175402.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175402.jpg" alt="和 AP 连接的网卡 IP 配置"></p>
 <p>然后开始设置 AP 的地址和 TFTP 服务器</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apboot&gt; setenv ipaddr 192.168.2.20  <span class="comment"># 配置 AP 的 IP 地址</span></span><br><span class="line">apboot&gt; setenv netmask 255.255.255.0    <span class="comment"># 配置 AP 的子网掩码</span></span><br><span class="line">apboot&gt; setenv serverip 192.168.2.10    <span class="comment"># 配置 TFTP 服务器地址，即电脑的 IP 地址</span></span><br></pre></td></tr></table></figure>
 
 <p>启动 SolarWinds TFTP Server ，显示如下：</p>
-<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175437.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175437.jpg" alt="SolarWinds TFTP Server"></p>
 <h2 id="开始给-AP-刷入新固件"><a href="#开始给-AP-刷入新固件" class="headerlink" title="开始给 AP 刷入新固件"></a>开始给 AP 刷入新固件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">apboot&gt; osinfo  <span class="comment"># 显示系统中的固件</span></span><br><span class="line">Partition 0:</span><br><span class="line">    image <span class="built_in">type</span>: 0</span><br><span class="line">  machine <span class="built_in">type</span>: 46</span><br><span class="line">          size: 13864872</span><br><span class="line">       version: 6.5.2.0-6.5.2.0</span><br><span class="line">  build string: ArubaOS version 6.5.2.0-6.5.2.0 <span class="keyword">for</span> Vela (p4build@pr-hpn-build01) (gcc version 4.7.2) <span class="comment">#59123 Fri Apr 7 09:37:25 AST 2017</span></span><br><span class="line">         flags: Instant preserve</span><br><span class="line">           oem: aruba</span><br><span class="line"></span><br><span class="line">Image is signed; verifying checksum... passed</span><br><span class="line">SHA2 Signature available</span><br><span class="line">Signer Cert OK</span><br><span class="line">Policy Cert OK</span><br><span class="line">RSA signature verified using SHA2.</span><br><span class="line"></span><br><span class="line">Partition 1:</span><br><span class="line">    image <span class="built_in">type</span>: 0</span><br><span class="line">  machine <span class="built_in">type</span>: 46</span><br><span class="line">          size: 13864872</span><br><span class="line">       version: 6.5.2.0-6.5.2.0</span><br><span class="line">  build string: ArubaOS version 6.5.2.0-6.5.2.0 <span class="keyword">for</span> Vela (p4build@pr-hpn-build01) (gcc version 4.7.2) <span class="comment">#59123 Fri Apr 7 09:37:25 AST 2017</span></span><br><span class="line">         flags: Instant preserve</span><br><span class="line">           oem: aruba</span><br><span class="line"></span><br><span class="line">Image is signed; verifying checksum... passed</span><br><span class="line">SHA2 Signature available</span><br><span class="line">Signer Cert OK</span><br><span class="line">Policy Cert OK</span><br><span class="line">RSA signature verified using SHA2.</span><br><span class="line">apboot&gt; clear os 0  <span class="comment"># 清除分区 0 的系统</span></span><br><span class="line">apboot&gt; upgrade os 0 ArubaInstant_Vela_8.5.0.3_72498    <span class="comment"># os 0 刷入 TFTP Server 中的 ArubaInstant_Vela_8.5.0.3_72498 固件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当看到 Upgrade successful 表示刷入成功</span></span><br><span class="line"></span><br><span class="line">apboot&gt; factory_reset   <span class="comment"># ！重要：清除原来的配置</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -248,7 +248,7 @@
 <li>配置 - 网络：设置 Wi-Fi，新建即可，在高级选项中可以选择 2.4G 或 5G 网络，是否隐藏 SSID，加密方式等</li>
 </ul>
 <p>设置完毕，将 AP 连接到路由器上就可以正常使用了。</p>
-<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg" alt="Overview"></p>
 
     </div>
 
