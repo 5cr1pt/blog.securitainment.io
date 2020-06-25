@@ -150,6 +150,72 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2020/06/25/progit-note-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/25/progit-note-01/" class="post-title-link" itemprop="url">Pro Git 笔记 01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-25 11:11:36 / Modified: 11:12:17" itemprop="dateCreated datePublished" datetime="2020-06-25T11:11:36+08:00">2020-06-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/25/progit-note-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
     <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2020/06/18/aruba-fit-ap-upgrade-to-fat-ap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -789,112 +855,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2019/07/24/add-or-resize-swapfile-size/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Groot">
-      <meta itemprop="description" content="运维 | 安全">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/24/add-or-resize-swapfile-size/" class="post-title-link" itemprop="url">在 Linux 中设置和修改 swap 空间</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-24 10:50:16" itemprop="dateCreated datePublished" datetime="2019-07-24T10:50:16+08:00">2019-07-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 16:53:22" itemprop="dateModified" datetime="2019-07-25T16:53:22+08:00">2019-07-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="启用-swap"><a href="#启用-swap" class="headerlink" title="启用 swap"></a>启用 swap</h2><ol>
-<li><p>创建 swapfile</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;swapfile bs&#x3D;1M count&#x3D;2048</span><br><span class="line">mkswap &#x2F;swapfile</span><br><span class="line">chmod 600 &#x2F;swapfile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 vi 打开 fstab</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;fstab</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将以下内容添加到文件中</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;swapfile swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>（可选）设置当系统内存较小时才使用 swapfile</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w vm.swappiness&#x3D;10</span><br><span class="line">echo vm.swappiness &#x3D; 10 | tee -a &#x2F;etc&#x2F;sysctl.conf</span><br><span class="line">sysctl vm.vfs_cache_pressure&#x3D;60</span><br><span class="line">echo vm.vfs_cache_pressure &#x3D; 60 | tee -a &#x2F;etc&#x2F;sysctl.conf</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启用 swapfile.</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount -a</span><br><span class="line">swapon -a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查 swapfile 状态</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="修改swap大小"><a href="#修改swap大小" class="headerlink" title="修改swap大小"></a>修改swap大小</h2><ol>
-<li><p>关闭 swap</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff -a</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把当前的 swapfile 文件增大</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;swapfile bs&#x3D;1M count&#x3D;1024</span><br></pre></td></tr></table></figure>
-<p> bs 指的是 Block Size，就是每一块的大小。这里的例子是 1M，意思就是 count 的数字，是以 1M 为单位的。<br> counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，就是说，新的 swap 文件是 1G 大小。</p>
-</li>
-<li><p>把增大后的文件变为swap文件。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkswap &#x2F;swapfile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重新打开 swap</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon &#x2F;swapfile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>让 swap 在启动的时候，自动生效。打开 <code>/etc/fstab</code> 文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim &#x2F;etc&#x2F;fstab</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>(如果之前未设置) 打开 fstab <code>vi /etc/fstab</code>加上以下命令。然后保存。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;swapfile swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -964,13 +924,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
