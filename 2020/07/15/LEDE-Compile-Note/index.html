@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="Securitainment.io">
 <meta property="og:description" content="在使用了几年 Linksys WRT1200AC 安装 OpenWrt 固件，用来正常上网后，这两年手头需要正常上网的设备越来越多（Netflix、Apple TV+、美区 iCloud 同步等），终于感觉网速有点不够用了，于是在 NAS 的虚拟机里安装了 LEDE 作为旁路由。在连续多次编译了 lean 大佬的 lede 固件，尝试做到了对于单网口旁路由来说使用最佳，然后记录了更方便进行再次编译">
 <meta property="article:published_time" content="2020-07-15T15:30:32.000Z">
-<meta property="article:modified_time" content="2020-07-16T03:31:49.808Z">
+<meta property="article:modified_time" content="2020-07-16T10:18:24.011Z">
 <meta property="article:author" content="Groot">
 <meta property="article:tag" content="lede">
 <meta property="article:tag" content="openwrt">
@@ -254,7 +254,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-16 11:31:49" itemprop="dateModified" datetime="2020-07-16T11:31:49+08:00">2020-07-16</time>
+                <time title="Modified: 2020-07-16 18:18:24" itemprop="dateModified" datetime="2020-07-16T18:18:24+08:00">2020-07-16</time>
               </span>
 
           
@@ -280,8 +280,8 @@
 </ol>
 <h3 id="编译命令如下："><a href="#编译命令如下：" class="headerlink" title="编译命令如下："></a>编译命令如下：</h3><ol>
 <li>首先装好 Ubuntu 64bit，推荐 Ubuntu 18 LTS x64</li>
-<li>命令行输入 <code>sudo apt-get update</code> ，然后输入 <code>sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget swig</code></li>
-<li>使用 <code>git clone https://github.com/coolsnowwolf/lede</code> 命令下载好源代码，然后 <code>cd lede</code> 进入目录</li>
+<li>命令行输入 <code>sudo apt-get -y update</code> 更新系统软件源，然后输入命令安装依赖：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3.5 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget swig</span><br></pre></td></tr></table></figure></li>
+<li>使用 <code>git clone https://github.com/coolsnowwolf/lede</code> 命令下载源代码，然后 <code>cd lede</code> 进入目录</li>
 </ol>
 <p><strong>进行完上面的步骤，就可以开始自定义自己需要的固件了：</strong></p>
 <h3 id="启用-SSR-Plus"><a href="#启用-SSR-Plus" class="headerlink" title="启用 SSR-Plus"></a>启用 SSR-Plus</h3><p>编辑 <code>./feeds.conf.default</code> 文件，取消注释 <code>#src-git helloworld https://github.com/fw876/helloworld</code>，修改完成后该文件如下：</p>
