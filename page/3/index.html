@@ -150,6 +150,380 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/kali-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/kali-notes/" class="post-title-link" itemprop="url">kali筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:03:28" itemprop="dateCreated datePublished" datetime="2016-05-14T01:03:28+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-09 10:10:12" itemprop="dateModified" datetime="2020-06-09T10:10:12+08:00">2020-06-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Kali-linux-使用记录"><a href="#Kali-linux-使用记录" class="headerlink" title="Kali linux 使用记录"></a>Kali linux 使用记录</h2><p><img src="http://image.3001.net/images/20160130/14540858194014.png" alt=""></p>
+<h2 id="安装完Kali-linux-之后的配置-常用软件-记录"><a href="#安装完Kali-linux-之后的配置-常用软件-记录" class="headerlink" title="安装完Kali linux 之后的配置 常用软件 记录"></a>安装完Kali linux 之后的配置 常用软件 记录</h2><p>[TOC]</p>
+<h3 id="0x01-更换源并更新"><a href="#0x01-更换源并更新" class="headerlink" title="0x01 更换源并更新"></a>0x01 更换源并更新</h3><p><code>root@kali:~# leafpad /etc/apt/sources.list</code></p>
+<pre><code>#kali官方源
+deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
+deb cdrom:[Debian GNU/Linux 2.0 _Sana_ - Official Snapshot i386 LIVE/INSTALL Binary 20150811-09:06]/ sana contrib main non-free
+deb http://http.kali.org/kali sana main non-free contrib
+deb-src http://http.kali.org/kali sana main non-free contrib
+deb http://security.kali.org/kali-security/ sana/updates main contrib non-free
+deb-src http://security.kali.org/kali-security/ sana/updates main contrib non-free
+deb http://http.kali.org/kali kali main non-free contrib
+deb-src http://http.kali.org/kali kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+
+#阿里云Kali源
+deb http://mirrors.aliyun.com/kali kali main non-free contrib
+deb-src http://mirrors.aliyun.com/kali kali main non-free contrib
+deb http://mirrors.aliyun.com/kali-security kali/updates main contrib non-free
+
+#kali新加坡源的地址
+deb http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb-src http://mirror.nus.edu.sg/kali/kali/ kali main non-free contrib
+deb http://security.kali.org/kali-security kali/updates main contrib non-free
+deb http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+deb-src http://mirror.nus.edu.sg/kali/kali-security kali/updates main contrib non-free
+
+#debian_wheezy国内源的地址
+deb http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian wheezy main non-free contrib
+deb http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian wheezy-proposed-updates main non-free contrib
+deb http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+deb-src http://ftp.sjtu.edu.cn/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian wheezy main non-free contrib
+deb-src http://mirrors.163.com/debian wheezy main non-free contrib
+deb http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+deb-src http://mirrors.163.com/debian wheezy-proposed-updates main non-free contrib
+deb-src http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+deb http://mirrors.163.com/debian-security wheezy/updates main non-free contrib
+
+#中科大kali源
+deb http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb-src http://mirrors.ustc.edu.cn/kali kali main non-free contrib
+deb http://mirrors.ustc.edu.cn/kali-security kali/updates main contrib non-free</code></pre><p>然后更新并安装</p>
+<p><code>root@kali:~# apt-get update &amp;&amp; apt-get dist-upgrade</code></p>
+<h2 id="0x02-安装内核头"><a href="#0x02-安装内核头" class="headerlink" title="0x02 安装内核头"></a>0x02 安装内核头</h2><p><code>root@kali:apt-get install linux-headers-$(uname -r)</code></p>
+<p>或者</p>
+<p><code>aptitude -r install linux-headers-$(uname -r</code></p>
+<h2 id="0x03-安装字体"><a href="#0x03-安装字体" class="headerlink" title="0x03 安装字体"></a>0x03 安装字体</h2><pre><code>apt-get install ttf-arphic-uming ttf-wqy-zenhei ttf-wqy-microhei ttf-arphic-ukai</code></pre><p>或者 ，自己下载字体包<br>把雅黑的ttf文件拷到/usr/share/fonts/的任意目录下，假设雅黑ttf叫做Yahei.ttf：</p>
+<pre><code>sudo mkdir -p /usr/share/fonts/vista
+sudo cp Yahei.ttf /usr/share/fonts/vista/</code></pre><p>然后，改变权限：</p>
+<p><code>sudo chmod 644 /usr/share/fonts/vista/*.ttf</code></p>
+<p>安装：</p>
+<pre><code>cd /usr/share/fonts/vista/
+sudo mkfontscale
+sudo mkfontdir
+sudo fc-cache -fv</code></pre><p>最后，去系统－首选项－高级设置 里修改 debain字体</p>
+<h2 id="0x04-安装浏览器"><a href="#0x04-安装浏览器" class="headerlink" title="0x04 安装浏览器"></a>0x04 安装浏览器</h2><ol>
+<li><p>自带浏览器汉化方法：</p>
+<p> <code>root@kali:apt-get install iceweasel-l10n-zh-cn</code></p>
+</li>
+<li><p>如果有强迫症删了系统自带浏览器，然后重新安装了一个新的火狐可能遇到的问题：</p>
+<p> 可能会出现gnome桌面被误删，从而导致系统进不去，并且即使你安装了一个新的火狐然后你就卸载不了了，会一直提示报错，并且此时如果你还想安装其他浏览器的话也会报错，如果真遇到的话你又不想重装系统有个治标不治本的方法（root@kali:sudo apt-get install –reinstall firefox-mozilla-build），还有说道如果桌面崩溃处理方法就是ctrl+alt+Fn(数字)进入非图形化界面然后重新安装下桌面环境。</p>
+</li>
+<li><p>安装谷歌浏览器</p>
+<p> 官网上下载谷歌浏览器（可能你访问不了，有时候等等还是可以出现下载链接的，如果访问不了去百度上搜索下然后下载个deb包），然后到下载目录安装下：root@kali:dpkg -i google-chrome-stable（具体以实际包的名称为准）。安装完之后，如果你是root运行，会提示你不给root执行的。解决方法：root@kali:gedit /usr/bin/google-chrome，然后在最后一行尾加入–user-data-dir（注意空格喔）。</p>
+</li>
+<li><p>安装Flash</p>
+<p> 首先<code>root@kali:apt-get install flashplugin-nonfree</code></p>
+<p> 其次<code>root@kali:update-flashplugin-nonfree –install</code></p>
+</li>
+<li><p>安装Tor Browser</p>
+<pre><code>root@kali:apt-get install tor
+root@kali:service tor start
+root@kali:proxychains iceweasel</code></pre></li>
+</ol>
+<h2 id="0x05-拼音输入法（需要注销重新登录）"><a href="#0x05-拼音输入法（需要注销重新登录）" class="headerlink" title="0x05 拼音输入法（需要注销重新登录）"></a>0x05 拼音输入法（需要注销重新登录）</h2><pre><code>apt-get install ibus ibus-pinyin              #经典的ibus
+apt-get install fcitx fcitx-pinyin fcitx-module-cloudpinyin fcitx-googlepinyin    #fcitx拼音</code></pre><h2 id="0x06-科学上网"><a href="#0x06-科学上网" class="headerlink" title="0x06 科学上网"></a>0x06 科学上网</h2><ul>
+<li><p>默认安装，是没有激活VPN的，能看到VPN选项，但是不能点击VPN连接</p>
+<pre><code>apt-get install -y pptpd network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-manager-vpnc-gnome</code></pre></li>
+<li><p><a href="https://github.com/getlantern/lantern-binaries" target="_blank" rel="noopener">lantern</a></p>
+<p>  方法就是下载对应的版本，然后dpkg安装下，然后打开lantern自动跳转到浏览器，然后就没有然后了。。。</p>
+</li>
+<li><p>Shadowsocks</p>
+<p>  首先搭建shadowsocks客户端</p>
+<p>  git下 <a href="https://github.com/shadowsocks/shadowsocks-qt5" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-qt5</a> 以及其安装指南 <a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks-qt5/wiki/%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97</a></p>
+<p>  或者直接用pip安装</p>
+<p>  <code>pip install shadowsocks</code></p>
+<p>  <code>/usr/local/python/bin/sslocal   //ss位置</code></p>
+<p>  建立一个为ss.conf的配置文件</p>
+<pre><code>{
+&quot;server&quot; : &quot;100.100.100.100&quot;,
+&quot;server_port&quot; : 8888,
+&quot;local_port&quot; : 1080,
+&quot;password&quot; : &quot;123456&quot;,
+&quot;timeout&quot; : 600,
+&quot;method&quot; : &quot;aes-256-cfb&quot;
+}</code></pre><p>  然后运行</p>
+<p>  <code>sslocal -c /filepath/ss.conf</code></p>
+<p>  其次安装privoxy实现socks5转换成http</p>
+<p>  privoxy-3.0.23-stable-src.tar.gz   // <a href="http://www.privoxy.org/" target="_blank" rel="noopener">http://www.privoxy.org/</a> 官网下载源码</p>
+<pre><code>tar xf privoxy-3.0.23-stable-src.tar.gz   //解压缩
+cd privoxy-3.0.23-stable
+useradd privoxy                      //进入目录后创建privoxy用户，然后安装
+ autoheader &amp;&amp; autoconf
+./configure
+ make &amp;&amp; make install
+Vim /usr/local/etc/privoxy/config   修改配置文件
+listen-address 127.0.0.1:8118         //找到783行，去掉注释即可
+forward-socks5t / 127.0.0.1:1080.    //找到1336行，去掉注释即可，保证1080端口和ss配置中一致，注意1080后面与个小数点。</code></pre><p>  最后让终端走代理</p>
+<p>  <code>vim /ect/profile</code></p>
+<p>  添加两行</p>
+<pre><code>export http_proxy=http://127.0.0.1:8118
+export ftp_proxy=http://127.0.0.1:8118</code></pre><p>  然后打开shadowsocks privoxy</p>
+<pre><code>sslocal -c /filepath/ss.conf
+service privoxy start</code></pre><p>  测试<br>  <code>curl www.google.com</code><br>  访问谷歌即可，如果不行查看配置或者重启下。</p>
+</li>
+</ul>
+<h2 id="0x07-定制终端"><a href="#0x07-定制终端" class="headerlink" title="0x07 定制终端"></a>0x07 定制终端</h2><ul>
+<li><p>设置启动终端快捷键</p>
+<p>  系统》设置》快捷键<br>  添加如下命令：</p>
+<pre><code>gnome-terminal</code></pre><p>  然后设置 快捷启动终端的键（例如ctrl+alt+T）</p>
+</li>
+<li><p>多命令终端</p>
+<p>  byobu介绍 <a href="http://blog.csdn.net/lqhbupt/article/details/7786153" target="_blank" rel="noopener">http://blog.csdn.net/lqhbupt/article/details/7786153</a></p>
+</li>
+</ul>
+<h2 id="0x08-配置Python及Java环境"><a href="#0x08-配置Python及Java环境" class="headerlink" title="0x08 配置Python及Java环境"></a>0x08 配置Python及Java环境</h2><ul>
+<li><p>python IDE安装</p>
+<p>  下载最新的 tar 包，解压出来，进入 bin  , ./pycharm.sh 即可启动</p>
+<p>  3.1 pycharm 注册码</p>
+<pre><code>EMBRACE
+========= Sjolzy.cn =========
+14203-12042010
+0000107Iq75C621P7X1SFnpJDivKnX
+6zcwYOYaGK3euO3ehd1MiTT&quot;2!Jny8
+bff9VcTSJk7sRDLqKRVz1XGKbMqw3G
+=========== Sjolzy.cn =============</code></pre></li>
+<li><p>安装add-apt-repository和pip</p>
+<pre><code>add-apt-repository
+apt-get install python-software-properties
+nano app-apt-repository.sh
+
+#!/bin/bash        // 添加如下代码
+if [ $# -eq 1 ]
+NM=`uname -a &amp;&amp; date`
+NAME=`echo $NM | md5sum | cut -f1 -d&quot; &quot;`</code></pre><p>  或者其他方法：<a href="http://www.blackmoreops.com/2014/02/21/kali-linux-add-ppa-repository-add-apt-repository/" target="_blank" rel="noopener">http://www.blackmoreops.com/2014/02/21/kali-linux-add-ppa-repository-add-apt-repository/</a>  Pip</p>
+<pre><code>apt-get python-setuptools
+easy_install pip
+pip gevent --upgrade</code></pre><p>  注：如果最后一步出错，执行<code>root@kali:pip install setuptools --no-use-wheel --upgrade</code></p>
+</li>
+<li><p>Java 环境安装</p>
+<p>  <code>mkdir /usr/lib/jdk</code></p>
+<p>  压缩包 cp 到 <code>/usr/lib/jdk</code><br>  解压之后配置环境变量</p>
+<p>  <code>gedit /etc/profile</code>  # 最末尾添加</p>
+<pre><code>export JAVA_HOME=/usr/lib/jdk/jdk1.7.0_03
+export JRE_HOME=/usr/lib/jdk/jdk1.7.0_03/jre
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib</code></pre><p>  将系统默认的jdk修改过来，也就是java 和javac 命令有系统自带到换成你自己安装的</p>
+<pre><code>update-alternatives --install /usr/bin/java java /usr/lib/jdk/jdk1.7.0_03/bin/java 300
+update-alternatives --install /usr/bin/javac javac /usr/lib/jdk/jdk1.7.0_03/bin/javac 300
+update-alternatives --config java
+update-alternatives --config javac</code></pre></li>
+</ul>
+<p><img src="http://static.oschina.net/uploads/img/201403/06002415_wAFS.png" alt=""></p>
+<ul>
+<li><p>IDEA 13 下载及安装</p>
+<p>  下载最新的 tar 包，解压出来，进入 bin    ./idea.sh 即可 启动</p>
+<p>  注册码：</p>
+<pre><code>用户名：qianbi
+注册码：00667-3LLZU-A174Q-GQ9WU-QCR2R-8RXG3
+注册码：00701-AWVMK-JG2K1-OPKFI-099ZF-LJNS4
+注册码：00122-PHU9A-1C01F-1QOID-GYCT8-B3NM3
+注册码：00979-DV75L-VEUEI-3ZNBS-GKD3C-ZKNX2
+注册码：00127-DDFPG-E91IA-DP5U3-4WYJE-8HF34
+注册码：00310-I608W-EA5YT-Z6IJ2-M2KU2-STY95
+注册码：00965-VFZO8-8190O-8T2MR-XR8VQ-GUBA3
+注册码：00422-4SO2M-1VXOY-LB4K1-XW05P-XT3E3</code></pre></li>
+</ul>
+<h2 id="0x09-安装代码编辑器"><a href="#0x09-安装代码编辑器" class="headerlink" title="0x09 安装代码编辑器"></a>0x09 安装代码编辑器</h2><ul>
+<li><p>sublime解决不能输入中文方法：</p>
+<ol>
+<li><p>新建并保存下面的代码为sublime_imfix.c</p>
+<pre><code>/*
+sublime-imfix.c
+Use LD_PRELOAD to interpose some function to fix sublime input method support for linux.
+By Cjacker Huang
+
+gcc -shared -o libsublime-imfix.so sublime_imfix.c  `pkg-config --libs --cflags gtk+-2.0` -fPIC
+LD_PRELOAD=./libsublime-imfix.so sublime_text
+*/
+#include
+#include
+typedef GdkSegment GdkRegionBox;
+
+struct _GdkRegion
+{
+  long size;
+  long numRects;
+  GdkRegionBox *rects;
+  GdkRegionBox extents;
+};
+
+GtkIMContext *local_context;
+
+void
+gdk_region_get_clipbox (const GdkRegion *region,
+            GdkRectangle    *rectangle)
+{
+  g_return_if_fail (region != NULL);
+  g_return_if_fail (rectangle != NULL);
+
+  rectangle-&gt;x = region-&gt;extents.x1;
+  rectangle-&gt;y = region-&gt;extents.y1;
+  rectangle-&gt;width = region-&gt;extents.x2 - region-&gt;extents.x1;
+  rectangle-&gt;height = region-&gt;extents.y2 - region-&gt;extents.y1;
+  GdkRectangle rect;
+  rect.x = rectangle-&gt;x;
+  rect.y = rectangle-&gt;y;
+  rect.width = 0;
+  rect.height = rectangle-&gt;height;
+  //The caret width is 2;
+  //Maybe sometimes we will make a mistake, but for most of the time, it should be the caret.
+  if(rectangle-&gt;width == 2 &amp;&amp; GTK_IS_IM_CONTEXT(local_context)) {
+        gtk_im_context_set_cursor_location(local_context, rectangle);
+  }
+}
+
+//this is needed, for example, if you input something in file dialog and return back the edit area
+//context will lost, so here we set it again.
+
+static GdkFilterReturn event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer im_context)
+{
+    XEvent *xev = (XEvent *)xevent;
+    if(xev-&gt;type == KeyRelease &amp;&amp; GTK_IS_IM_CONTEXT(im_context)) {
+       GdkWindow * win = g_object_get_data(G_OBJECT(im_context),&quot;window&quot;);
+       if(GDK_IS_WINDOW(win))
+         gtk_im_context_set_client_window(im_context, win);
+    }
+    return GDK_FILTER_CONTINUE;
+}
+
+void gtk_im_context_set_client_window (GtkIMContext *context,
+          GdkWindow    *window)
+{
+  GtkIMContextClass *klass;
+  g_return_if_fail (GTK_IS_IM_CONTEXT (context));
+  klass = GTK_IM_CONTEXT_GET_CLASS (context);
+  if (klass-&gt;set_client_window)
+    klass-&gt;set_client_window (context, window);
+
+  if(!GDK_IS_WINDOW (window))
+    return;
+  g_object_set_data(G_OBJECT(context),&quot;window&quot;,window);
+  int width = gdk_window_get_width(window);
+  int height = gdk_window_get_height(window);
+  if(width != 0 &amp;&amp; height !=0) {
+    gtk_im_context_focus_in(context);
+    local_context = context;
+  }
+  gdk_window_add_filter (window, event_filter, context);
+}</code></pre></li>
+<li><p>编译动态库</p>
+<pre><code>gcc -shared -o libsublime-imfix.so sublime_imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</code></pre></li>
+<li><p>设置 LD_PRELOAD 并启动 Sublime Text：</p>
+<pre><code>LD_PRELOAD=./libsublime-imfix.so sublime_text</code></pre><p>解决界面汉化：网上搜索下载Sublime_Text_CN_3059.zip，解压之后得到Default.sublime-package文件，其实就是个package，在菜单中选择preferences——Browse packages进入到<code>/home/siat/.config/sublime-text-3/Packages</code>然后向上一级进入到<code>/home/siat/.config/sublime-text-3/Installed Packages</code>，把Default.sublime-package包复制到Installed    Packages文件夹下，这时sublime text3立刻变成中文了。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="0x10-安装-git"><a href="#0x10-安装-git" class="headerlink" title="0x10 安装 git"></a>0x10 安装 git</h2><p>安装：</p>
+<pre><code>aptitude install git-core
+aptitude install git-doc git-svn git-email git-gui gitk</code></pre><p>配置：</p>
+<pre><code>ssh-keygen -t rsa -C &quot;xxxx@email.com&quot;</code></pre><p>进入 github 设置  SSH Keys：</p>
+<p><img src="http://static.oschina.net/uploads/space/2014/0304/231551_SyDR_615783.png" alt=""></p>
+<p><code>ssh -T git@github.com</code></p>
+<p>看其是否返回：</p>
+<p><code>Hi xxx! You&#39;ve successfully authenticated, but GitHub does not provide shell access .</code></p>
+<p><strong>设置git 全局变量 ，name 和 email</strong></p>
+<pre><code>git config --global user.name &quot;yourusername&quot;
+git config --global user.email &quot;youremailaddress&quot;</code></pre><h2 id="0x11-一些工具"><a href="#0x11-一些工具" class="headerlink" title="0x11 一些工具"></a>0x11 一些工具</h2><pre><code>apt-get install gnome-tweak-tool                 #安装gnome管理软件
+apt-get install synaptic                  #安装新立德
+apt-get install software-center                   #安装ubuntu软件中心
+apt-get install file-roller                            #安装解压缩软件
+apt-get install gedit                        #安装gedit编辑软件
+apt-get install audacious                   #audacious音乐播放器
+apt-get install smplayer                 #安装smplayer视频播放器</code></pre><h2 id="0x12-娱乐"><a href="#0x12-娱乐" class="headerlink" title="0x12 娱乐"></a>0x12 娱乐</h2><ul>
+<li><p>安装dota2和steam平台</p>
+<p>  <strong>（64位适合）</strong></p>
+<p>  首选官网下载steam并且dpkg安装下，然后如果你是root运行会有提示。解决方法终端执行：</p>
+<pre><code>/usr/bin
+gedit steam</code></pre><p>  然后找到如下位置，并且把双引号中的0改成1即可</p>
+<pre><code># Don’t allow running as root
+if [ &quot;$(id -u)&quot; == &quot;0&quot; ]; then
+show_message –error $”Cannot run as root user”
+exit 1
+Fi</code></pre><p>  然后登陆账号，下载dota2。</p>
+</li>
+<li><p>网易云音乐</p>
+<p>  首先git下 <a href="https://github.com/cosven/FeelUOwn" target="_blank" rel="noopener">https://github.com/cosven/FeelUOwn</a></p>
+<p>  然后下载后依次输入</p>
+<pre><code>root@kali:git clone https://github.com/cosven/FeelUOwn.git
+root@kali:cd FeelUOwn
+root@kali:./install.sh</code></pre></li>
+</ul>
+<h2 id="0x13-wps等一系列软件"><a href="#0x13-wps等一系列软件" class="headerlink" title="0x13 wps等一系列软件"></a>0x13 wps等一系列软件</h2><pre><code>链接: http://pan.baidu.com/s/1c0b2qiO 密码: l3bj</code></pre><h2 id="参考网站："><a href="#参考网站：" class="headerlink" title="参考网站："></a>参考网站：</h2><pre><code>http://www.cnblogs.com/Kali-BT/p/4199533.html
+http://www.th7.cn/system/lin/201508/127806.shtml  //sublime text3
+http://www.blackmoreops.com/
+http://www.blackmoreops.com/2014/02/27/change-install-theme-kali-linux-gtk-3-themes/</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
     <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/dvwa-install-log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,87 +1365,10 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2000/01/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Groot">
-      <meta itemprop="description" content="运维 | 安全">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2000/01/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2000-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2000-01-01T00:00:00+08:00">2000-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-03-12 16:34:05" itemprop="dateModified" datetime="2019-03-12T16:34:05+08:00">2019-03-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1137,13 +1434,13 @@ Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">38</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
