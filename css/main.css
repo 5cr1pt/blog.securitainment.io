@@ -889,7 +889,6 @@ pre code {
   outline: 0;
   padding: 0.25em 0.75em;
   text-align: center;
-  transition: all 0.2s ease-out;
 }
 .post-body .tabs ul.nav-tabs li.tab a i,
 .tabs-comment ul.nav-tabs li.tab a i {
@@ -2677,7 +2676,7 @@ hr {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #7fff1f;
+  background: #ffd5ff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2703,4 +2702,7 @@ hr {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+.utterances {
+  max-width: unset;
 }
