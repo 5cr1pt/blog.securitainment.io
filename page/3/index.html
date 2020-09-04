@@ -186,13 +186,13 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">38</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,6 +224,81 @@
 
         <div class="content index posts-expand">
           
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/pentest-browser-problems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Groot">
+      <meta itemprop="description" content="运维 | 安全">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Securitainment.io">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/14/pentest-browser-problems/" class="post-title-link" itemprop="url">瀏覽器問題收集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-05-14 01:24:16" itemprop="dateCreated datePublished" datetime="2016-05-14T01:24:16+08:00">2016-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-09 10:10:59" itemprop="dateModified" datetime="2020-06-09T10:10:59+08:00">2020-06-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<h2 id="Mantra-Browser-crash"><a href="#Mantra-Browser-crash" class="headerlink" title="Mantra Browser crash"></a>Mantra Browser crash</h2><p><img src="https://camo.githubusercontent.com/e1d81bb96e290c1e4cb21fc0548f365c2cb6ca58/687474703a2f2f322e62702e626c6f6773706f742e636f6d2f2d6d476c6438576d505237492f55575f624b3262445041492f41414141414141414158302f6a7758664b436a425150492f73313630302f53637265656e73686f742b2d2b30343138323031332b2d2b30363a33333a30312b504d2e706e67" alt=""></p>
+<p>Solution:</p>
+<p>Edit file “OWASP Mantra” and change the following lines:</p>
+<p><code>echo &quot;${app}portable:Debug/Info: 0=&quot;$0&quot;&quot;</code></p>
+<p><code>dir=${0%/*}</code></p>
+<p>to</p>
+<p><code>#echo &quot;${app}portable:Debug/Info: 0=&quot;$0&quot;&quot;</code></p>
+<p><code>#dir=${0%/*}</code></p>
+<p><code>dir=/yourmantrarootfolder/</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1433,73 +1508,6 @@ Discuz! X2:SQL注入member.php?mod=logging&amp;action=login，提交username=1+a
 Discuz!NT 2.x - 3.5.2 SQL注入(0day)
 
 Discuz!NT3.5.2文件编辑0Day获取Webshell</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
-    <link itemprop="mainEntityOfPage" href="https://blog.securitainment.io/2016/05/14/python-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Groot">
-      <meta itemprop="description" content="运维 | 安全">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Securitainment.io">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/05/14/python-tips/" class="post-title-link" itemprop="url">Python skill collection</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-05-14 00:45:07" itemprop="dateCreated datePublished" datetime="2016-05-14T00:45:07+08:00">2016-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-07-25 14:27:12" itemprop="dateModified" datetime="2019-07-25T14:27:12+08:00">2019-07-25</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-
-<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/" target="_blank" rel="noopener">Python代码调试技巧</a></p>
-
       
     </div>
 
