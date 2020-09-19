@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      progit 笔记 02 - Git 基础
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="progit 笔记 02 - Git 基础" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。" />
+<meta property="og:description" content="本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。" />
+<link rel="canonical" href="http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html" />
+<meta property="og:url" content="http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-20T00:46:25+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html"},"description":"本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。","headline":"progit 笔记 02 - Git 基础","dateModified":"2020-07-20T00:46:25+08:00","datePublished":"2020-07-20T00:46:25+08:00","url":"http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>progit 笔记 02 - Git 基础</h1>
+<p>本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。</p>
+
+<!--more-->
+
+<h2 id="获取-git-仓库">获取 Git 仓库</h2>
+<h3 id="在现有的项目目录中初始化仓库">在现有的项目目录中初始化仓库</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div></div>
+
+<p>该命令将创建一个 <code class="language-plaintext highlighter-rouge">.git</code> 子目录，这个子目录包含初始化的 Git 仓库中所有的必须文件，这些文件是 Git 仓库的骨干。 这时仅做了初始化，项目文件还没有被跟踪。通过以下命令跟踪并提交</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="k">*</span>.c
+<span class="nv">$ </span>git add LICENSE
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'initial project version'</span>
+</code></pre></div></div>
+
+<p>这样就得到了一个跟踪着若干文件的 Git 仓库。</p>
+
+<h3 id="克隆现有仓库">克隆现有仓库</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">git clone</code> 命令克隆一个现有仓库，比如克隆 <code class="language-plaintext highlighter-rouge">libgit2</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/libgit2/libgit2
+</code></pre></div></div>
+
+<p>这会在当前目录下创建一个 <code class="language-plaintext highlighter-rouge">libgit2</code> 目录，并在该目录下初始化一个 <code class="language-plaintext highlighter-rouge">.git</code> 文件夹，从远程仓库拉取所有数据存放在 <code class="language-plaintext highlighter-rouge">.git</code> 文件夹内，然后从中读取最新版本的拷贝，并且存放在应该在的位置。</p>
+
+<p>如果想要自定义本地仓库的名字，可以使用下面的命令：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/libgit2/libgit2 mylibgit
+</code></pre></div></div>
+
+<p>这样在本地创建的仓库名字就会变为 <code class="language-plaintext highlighter-rouge">mylibgit</code>。</p>
+
+<h2 id="检查当前文件状态">检查当前文件状态</h2>
+<p>使用 <code class="language-plaintext highlighter-rouge">git status</code> 命令查看仓库中哪些文件处于什么状态。如果检查刚克隆后的 <code class="language-plaintext highlighter-rouge">libgit2</code> 仓库，会看到类似输出：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+
+On branch master
+
+nothing to commit, working directory clean
+</code></pre></div></div>
+
+<p>此时新建一个 <code class="language-plaintext highlighter-rouge">README</code> 文件，再次使用 <code class="language-plaintext highlighter-rouge">git status</code> 命令时，将看到一个新的未追踪文件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'My Project'</span> <span class="o">&gt;</span> README
+<span class="nv">$ </span>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to include <span class="k">in </span>what will be committed<span class="o">)</span>
+	README
+
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">"git add"</span> to track<span class="o">)</span>
+</code></pre></div></div>
+
+<p>在状态报告中可以看到 <code class="language-plaintext highlighter-rouge">README</code> 文件出现在 <code class="language-plaintext highlighter-rouge">untracked files</code> 下面。未跟踪的文件意味着 Git 在之前的快照（提交）中没有这些文件；Git 不会自动将之纳入跟踪范围，除非你明明白白地告诉它“我需要跟踪该文件”。</p>
+
+<h3 id="跟踪新文件">跟踪新文件</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">git add</code> 命令开始跟踪一个文件。<code class="language-plaintext highlighter-rouge">git add</code> 命令使用文件或目录的路径作为参数；如果参数是目录的路径，该命令将递归地跟踪该目录下的所有文件。比如要跟踪 <code class="language-plaintext highlighter-rouge">README</code> 文件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add README
+</code></pre></div></div>
+
+<p>此时再运行 <code class="language-plaintext highlighter-rouge">git status</code> 检查状态，会看到 <code class="language-plaintext highlighter-rouge">README</code> 文件已被跟踪，并且处于暂存状态：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	new file:   README
+
+</code></pre></div></div>
+
+<p>这里可以看到文件在 <code class="language-plaintext highlighter-rouge">Changes to be committed</code> 下面，说明是已暂存状态。</p>
+
+<h3 id="暂存已修改的文件">暂存已修改的文件</h3>
+<p>如果修改了 <code class="language-plaintext highlighter-rouge">README</code> 文件，再次运行 <code class="language-plaintext highlighter-rouge">git status</code> 时将会看到：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	new file:   README
+
+Changes not staged <span class="k">for </span>commit:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git restore &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+	modified:   README
+
+</code></pre></div></div>
+
+<p>这时 <code class="language-plaintext highlighter-rouge">README</code> 文件同时出现在等待提交区（暂存区）和未暂存区，是因为 Git 只暂存了上次运行 <code class="language-plaintext highlighter-rouge">git add</code> 命令时的那个版本，而不是当前修改过的版本。</p>
+
+<p>在 <code class="language-plaintext highlighter-rouge">Changes not staged for commit:</code> 看到 <code class="language-plaintext highlighter-rouge">README</code> 说明已修改了但是没有放到暂存区。要暂存这次更新，需要运行 <code class="language-plaintext highlighter-rouge">git add</code> 命令。 这是个多功能命令：可以用它开始跟踪新文件，或者把已跟踪的文件放到暂存区，还能用于合并时把有冲突的文件标记为已解决状态等。这个命令理解为“添加内容到下一次提交中”而不是“将一个文件添加到项目中”要更加合适。</p>
+
+<p>将修改后的 <code class="language-plaintext highlighter-rouge">README</code> 文件添加到下一次提交，并再次查看状态：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add README
+<span class="nv">$ </span>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git rm --cached &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	new file:   README
+
+</code></pre></div></div>
+
+<h3 id="状态简览">状态简览</h3>
+<p><code class="language-plaintext highlighter-rouge">git status</code> 命令输出当前仓库状态信息。使用 <code class="language-plaintext highlighter-rouge">git status -s</code> 或 <code class="language-plaintext highlighter-rouge">git status --short</code> 获得更为紧凑的状态信息：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status <span class="nt">-s</span>
+A  NEWADD
+M  README
+MM UNSTAGED
+?? LICENSE.txt
+</code></pre></div></div>
+
+<p>上面的报告表示，<code class="language-plaintext highlighter-rouge">NEWADD</code> 文件前的 <code class="language-plaintext highlighter-rouge">A</code> 表示该文件是新添加的并且放入了暂存区，<code class="language-plaintext highlighter-rouge">README</code> 前的 <code class="language-plaintext highlighter-rouge">M</code> 表示文件被修改了并且放入了暂存区，<code class="language-plaintext highlighter-rouge">UNSTAGED</code> 文件前左边的 <code class="language-plaintext highlighter-rouge">M</code> 表示被修改并且放入了暂存区，右边的 <code class="language-plaintext highlighter-rouge">M</code> 表示文件被修改但还未放入暂存区，<code class="language-plaintext highlighter-rouge">LICENSE.txt</code> 前的 <code class="language-plaintext highlighter-rouge">??</code> 表示文件未被追踪。</p>
+
+<h3 id="忽略文件">忽略文件</h3>
+<p>创建 <code class="language-plaintext highlighter-rouge">.gitignore</code> 文件来忽略日志文件，或者编译过程中创建的临时文件等。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .gitignore
+
+<span class="k">*</span>.[oa]
+
+<span class="k">*</span>~
+</code></pre></div></div>
+
+<p>第一行表示忽略后缀名是 <code class="language-plaintext highlighter-rouge">o</code> 或者以 <code class="language-plaintext highlighter-rouge">a</code> 的文件，第二行告诉 Git 忽略所有以 <code class="language-plaintext highlighter-rouge">~</code> 符号结尾的文件。</p>
+
+<p>文件 <code class="language-plaintext highlighter-rouge">.gitignore</code> 的格式规范如下：</p>
+<ul>
+  <li>所有空行或者以 ＃ 开头的行都会被 Git 忽略。</li>
+  <li>可以使用标准的 glob 模式匹配。</li>
+  <li>匹配模式可以以（/）开头防止递归。</li>
+  <li>匹配模式可以以（/）结尾指定目录。</li>
+  <li>要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。</li>
+</ul>
+
+<p>glob 模式是指 shell 所使用的简化了的正则表达式。</p>
+
+<blockquote>
+  <p>GitHub 有一个十分详细的针对数十种项目及语言的 .gitignore 文件列表，你可以在 <a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a> 找到它.</p>
+</blockquote>
+
+<h3 id="查看已暂存和未暂存的修改">查看已暂存和未暂存的修改</h3>
+<p><code class="language-plaintext highlighter-rouge">git diff</code> 命令查看未暂存的文件更新了哪些部分：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff
+diff <span class="nt">--git</span> a/UNSTAGED b/UNSTAGED
+index f3229c5..eb1ae45 100644
+<span class="nt">---</span> a/UNSTAGED
++++ b/UNSTAGED
+@@ <span class="nt">-1</span> +1 @@
+-..
++...
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<p>若要查看已暂存的将要提交到下次更新里的内容，可以使用 <code class="language-plaintext highlighter-rouge">git diff --cached</code> 或者 <code class="language-plaintext highlighter-rouge">git diff --staged</code>（Git &gt;= 1.6.1）命令查看：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff <span class="nt">--staged</span>
+diff <span class="nt">--git</span> a/NEWADD b/NEWADD
+new file mode 100644
+index 0000000..e69de29
+diff <span class="nt">--git</span> a/README b/README
+index 0e6bdc2..e00a688 100644
+<span class="nt">---</span> a/README
++++ b/README
+@@ <span class="nt">-1</span> +1 @@
+<span class="nt">-my</span> project.
++my project..
+diff <span class="nt">--git</span> a/UNSTAGED b/UNSTAGED
+index 9c558e3..f3229c5 100644
+<span class="nt">---</span> a/UNSTAGED
++++ b/UNSTAGED
+@@ <span class="nt">-1</span> +1 @@
+-.
++..
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>还可以通过 <code class="language-plaintext highlighter-rouge">git difftool</code> 命令使用图形化界面分析文件差异</p>
+</blockquote>
+
+<h3 id="提交更新">提交更新</h3>
+<p>当确保修改过的文件都已暂存（通过 <code class="language-plaintext highlighter-rouge">git add</code> 添加修改过但还未暂存的文件），就可以准备提交了。运行提交命令 <code class="language-plaintext highlighter-rouge">git commit</code>：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit
+</code></pre></div></div>
+
+<p>该命令会启动文本编辑器，以便输入本次提交更新的说明。编辑器会显示下面的文本信息：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Changes to be committed:
+#       new file:   NEWADD
+#       modified:   README
+#       modified:   UNSTAGED
+#
+# Changes not staged for commit:
+#       modified:   UNSTAGED
+#
+# Untracked files:
+#       LICENSE.txt
+#
+</code></pre></div></div>
+
+<p>默认的提交信息会包括最后一次运行 <code class="language-plaintext highlighter-rouge">git status</code> 的输出，放在注释行里，并且开头有一空行，用来输入提交说明。另外可以使用 <code class="language-plaintext highlighter-rouge">git commit -m</code> 来将提交信息和命令放在同一行进行提交：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Story 182: Fix benchmarks for speed"</span>
+<span class="o">[</span>master c800db7] Story 182: Fix benchmarks <span class="k">for </span>speed
+ 3 files changed, 2 insertions<span class="o">(</span>+<span class="o">)</span>, 2 deletions<span class="o">(</span>-<span class="o">)</span>
+ create mode 100644 NEWADD
+</code></pre></div></div>
+
+<p>此时便完成了提交。</p>
+
+<h3 id="跳过使用暂存区域">跳过使用暂存区域</h3>
+<p>使用 <code class="language-plaintext highlighter-rouge">git commit -a -m</code> 来跳过暂存步骤，Git 会自动把所有已经跟踪过的文件暂存起来一并提交:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch master
+Changes not staged <span class="k">for </span>commit:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git restore &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+	modified:   CONTRIBUTING.md
+
+no changes added to commit <span class="o">(</span>use <span class="s2">"git add"</span> and/or <span class="s2">"git commit -a"</span><span class="o">)</span>
+
+<span class="nv">$ </span>git commit <span class="nt">-a</span> <span class="nt">-m</span> <span class="s2">"added new benchmarks"</span>
+<span class="o">[</span>master 4520c36] added new benchmarks
+ 1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="移除文件">移除文件</h3>
+<p>要从 Git 中移除某个文件，要从已跟踪的文件清单中移除（从暂存区移除），然后提交。使用 <code class="language-plaintext highlighter-rouge">git rm</code> 命令，连带从工作目录中删除指定文件，这样以后就不会出现在未跟踪文件清单中了。</p>
+
+<p>如果只是手动从工作目录中删除文件，运行 <code class="language-plaintext highlighter-rouge">git status</code> 时就会在 <code class="language-plaintext highlighter-rouge">“Changes not staged for commit”</code> 部分（也就是<em>未暂存清单</em>）看到：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>PROJECTS.md
+<span class="nv">$ </span>git status
+On branch master
+Changes not staged <span class="k">for </span>commit:
+  <span class="o">(</span>use <span class="s2">"git add/rm &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git restore &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+	deleted:    PROJECTS.md
+
+no changes added to commit <span class="o">(</span>use <span class="s2">"git add"</span> and/or <span class="s2">"git commit -a"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>然后需要再运行 <code class="language-plaintext highlighter-rouge">git rm</code> 操作来移除此文件，这样下次提交时，该文件就不再纳入版本管理了。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">rm </span>PROJECTS.md
+<span class="nv">$ </span>git status
+On branch master
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	deleted:    PROJECTS.md
+
+</code></pre></div></div>
+
+<p>如果删除之前，已修改过并且放入了暂存区，必须使用强制删除选项 <code class="language-plaintext highlighter-rouge">-f</code> 。</p>
+
+<p>如果我们想把文件从暂存区删除，但是不想删除本地文件的话，使用 <code class="language-plaintext highlighter-rouge">--cached</code> 选项：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">rm</span> <span class="nt">--cached</span> README
+</code></pre></div></div>
+
+<h3 id="移动文件">移动文件</h3>
+<p>要在 Git 中修改文件名，可以使用下面的命令：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">mv </span>file_from file_to
+</code></pre></div></div>
+
+<p>此时查看状态信息：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">mv </span>README README.md
+<span class="nv">$ </span>git status
+On branch master
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+	renamed:    README -&gt; README.md
+
+</code></pre></div></div>
+
+<p>该命令相当于：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mv </span>README README.md
+<span class="nv">$ </span>git <span class="nb">rm </span>README
+<span class="nv">$ </span>git add README.md
+</code></pre></div></div>
+
+<h2 id="查看提交历史">查看提交历史</h2>
+<p>使用 <code class="language-plaintext highlighter-rouge">git log</code> 命令查看并回顾提交历史：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log
+commit ca82a6dff817ec66f44342007202690a93763949 <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span>
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 <span class="nt">-0700</span>
+
+    changed the verison number
+
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Sat Mar 15 16:40:33 2008 <span class="nt">-0700</span>
+
+    removed unnecessary <span class="nb">test </span>code
+
+commit a11bef06a3f659402fe7563abf99ad00de2209e6
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Sat Mar 15 10:31:28 2008 <span class="nt">-0700</span>
+
+    first commit
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">-p</code> 参数，来显示每次提交的内容差异。也可以加上 <code class="language-plaintext highlighter-rouge">-2</code> 来显示仅最近2次提交：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-p</span> <span class="nt">-2</span>
+commit ca82a6dff817ec66f44342007202690a93763949 <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span>
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 <span class="nt">-0700</span>
+
+    changed the verison number
+
+diff <span class="nt">--git</span> a/Rakefile b/Rakefile
+index a874b73..8f94139 100644
+<span class="nt">---</span> a/Rakefile
++++ b/Rakefile
+@@ <span class="nt">-5</span>,7 +5,7 @@ require <span class="s1">'rake/gempackagetask'</span>
+ spec <span class="o">=</span> Gem::Specification.new <span class="k">do</span> |s|
+     s.platform  <span class="o">=</span>   Gem::Platform::RUBY
+     s.name      <span class="o">=</span>   <span class="s2">"simplegit"</span>
+-    s.version   <span class="o">=</span>   <span class="s2">"0.1.0"</span>
++    s.version   <span class="o">=</span>   <span class="s2">"0.1.1"</span>
+     s.author    <span class="o">=</span>   <span class="s2">"Scott Chacon"</span>
+     s.email     <span class="o">=</span>   <span class="s2">"schacon@gmail.com"</span>
+     s.summary   <span class="o">=</span>   <span class="s2">"A simple gem for using Git in Ruby code."</span>
+
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Sat Mar 15 16:40:33 2008 <span class="nt">-0700</span>
+
+    removed unnecessary <span class="nb">test </span>code
+
+diff <span class="nt">--git</span> a/lib/simplegit.rb b/lib/simplegit.rb
+index a0a60ae..47c6340 100644
+<span class="nt">---</span> a/lib/simplegit.rb
++++ b/lib/simplegit.rb
+@@ <span class="nt">-18</span>,8 +18,3 @@ class SimpleGit
+     end
+
+ end
+-
+<span class="nt">-if</span> <span class="nv">$0</span> <span class="o">==</span> __FILE__
+-  git <span class="o">=</span> SimpleGit.new
+-  puts git.show
+<span class="nt">-end</span>
+</code></pre></div></div>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">--stat</code> 选项，显示每次提交的简略信息：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--stat</span>
+commit ca82a6dff817ec66f44342007202690a93763949 <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span>
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 <span class="nt">-0700</span>
+
+    changed the verison number
+
+ Rakefile | 2 +-
+ 1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>, 1 deletion<span class="o">(</span>-<span class="o">)</span>
+
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Sat Mar 15 16:40:33 2008 <span class="nt">-0700</span>
+
+    removed unnecessary <span class="nb">test </span>code
+
+ lib/simplegit.rb | 5 <span class="nt">-----</span>
+ 1 file changed, 5 deletions<span class="o">(</span>-<span class="o">)</span>
+
+commit a11bef06a3f659402fe7563abf99ad00de2209e6
+Author: Scott Chacon &lt;schacon@gmail.com&gt;
+Date:   Sat Mar 15 10:31:28 2008 <span class="nt">-0700</span>
+
+    first commit
+
+ README           |  6 ++++++
+ Rakefile         | 23 +++++++++++++++++++++++
+ lib/simplegit.rb | 25 +++++++++++++++++++++++++
+ 3 files changed, 54 insertions<span class="o">(</span>+<span class="o">)</span>
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">--pretty=&lt;&gt;</code> 选项来用不同的方式展示提交历史，如：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>online
+ca82a6dff817ec66f44342007202690a93763949 <span class="o">(</span>HEAD -&gt; master, origin/master, origin/HEAD<span class="o">)</span> changed the verison number
+085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnecessary <span class="nb">test </span>code
+a11bef06a3f659402fe7563abf99ad00de2209e6 first commit
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">format</code> 参数来定制显示的记录格式：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s2">"%h - %an, %ar : %s"</span>
+ca82a6d - Scott Chacon, 12 years ago : changed the verison number
+085bb3b - Scott Chacon, 12 years ago : removed unnecessary <span class="nb">test </span>code
+a11bef0 - Scott Chacon, 12 years ago : first commit
+<span class="o">(</span>END<span class="o">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>更多选项查看 <a href="https://git-scm.com/docs/pretty-formats">pretty-formats</a></p>
+</blockquote>
+
+<p>如果使用 <code class="language-plaintext highlighter-rouge">online</code> 或 <code class="language-plaintext highlighter-rouge">format</code> 选项时配合 <code class="language-plaintext highlighter-rouge">--graph</code> 使用，会添加一些 ASCII 字符串来形象的展示分支、合并历史：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--pretty</span><span class="o">=</span>online <span class="nt">--graph</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">git log</code> 详细参数参考 <a href="https://git-scm.com/docs/git-log">git-log</a></p>
+</blockquote>
+
+<h2 id="撤消操作">撤消操作</h2>
+<p>有些撤消操作是不可逆的。 这是在使用 Git 的过程中，会因为操作失误而导致之前的工作丢失的少有的几个地方之一。</p>
+
+<p>当我们提交完成后发现漏掉了文件，或者提交信息填写错误，可以运行带有 <code class="language-plaintext highlighter-rouge">--amend</code> 选项的提交命令，重新提交。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s1">'initial commit'</span>
+
+<span class="nv">$ </span>git add forgotten_file
+
+<span class="nv">$ </span>git commit <span class="nt">--amend</span>
+</code></pre></div></div>
+
+<p>这个命令会将暂存区的文件提交；如果暂存区没有文件（自上次提交后没有修改，如上次提交后马上执行此命令），那么快照会保持不变，只是提示修改提交信息。最终只会有一个提交，第二次提交将替代第一次提交。</p>
+
+<h3 id="取消暂存的文件">取消暂存的文件</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">git reset HEAD &lt;file&gt;...</code> 来取消暂存某个文件：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+
+On branch master
+
+Changes to be committed:
+
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+
+
+
+    renamed:    README.md -&gt; README
+
+    modified:   CONTRIBUTING.md
+
+<span class="nv">$ </span>git reset HEAD CONTRIBUTING.md
+
+Unstaged changes after reset:
+
+M CONTRIBUTING.md
+
+<span class="nv">$ </span>git status
+
+On branch master
+
+Changes to be committed:
+
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+
+
+
+    renamed:    README.md -&gt; README
+
+
+
+Changes not staged <span class="k">for </span>commit:
+
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to update what will be committed<span class="o">)</span>
+
+  <span class="o">(</span>use <span class="s2">"git checkout -- &lt;file&gt;..."</span> to discard changes <span class="k">in </span>working directory<span class="o">)</span>
+
+
+
+    modified:   CONTRIBUTING.md
+
+</code></pre></div></div>
+
+<h3 id="撤消对文件的修改">撤消对文件的修改</h3>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">git checkout -- &lt;file&gt;...</code> 来把文件还原到上次提交时的样子。如还原 <code class="language-plaintext highlighter-rouge">CONTRIBUTING.md</code> 文件：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">--</span> CONTRIBUTING.md
+
+<span class="nv">$ </span>git status
+
+On branch master
+
+Changes to be committed:
+
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+
+
+
+    renamed:    README.md -&gt; README
+
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">git checkout -- [file]</code> 是一个危险的命令，Git 只是拷贝了另一个文件来覆盖它，所以对它做的修改历史都会消失。</p>
+</blockquote>
+
+<h2 id="远程仓库的使用">远程仓库的使用</h2>
+<h3 id="查看远程仓库">查看远程仓库</h3>
+<p>使用 <code class="language-plaintext highlighter-rouge">git remote</code> 命令查看已经配置了的远程仓库服务器。如果你试着在自己克隆的项目目录运行 <code class="language-plaintext highlighter-rouge">git remote</code> 那么至少能看到 <code class="language-plaintext highlighter-rouge">origin</code>：这是 Git 给克隆的仓库服务器的默认名字：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/schacon/ticgit
+<span class="nv">$ </span><span class="nb">cd </span>ticgit
+<span class="nv">$ </span>git remote
+
+使用 <span class="sb">`</span>git remote <span class="nt">-v</span><span class="sb">`</span> 会显示远程仓库的 Git 简写以及对应的 URL。
+
+<span class="sb">```</span>bash
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+
+origin https://github.com/schacon/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+
+origin https://github.com/schacon/ticgit <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<p>如果远程仓库不止一个（与多个协作者合作的仓库），那么输出将会像是这样：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>grit
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+
+bakkdoor  https://github.com/bakkdoor/grit <span class="o">(</span>fetch<span class="o">)</span>
+
+bakkdoor  https://github.com/bakkdoor/grit <span class="o">(</span>push<span class="o">)</span>
+
+cho45     https://github.com/cho45/grit <span class="o">(</span>fetch<span class="o">)</span>
+
+cho45     https://github.com/cho45/grit <span class="o">(</span>push<span class="o">)</span>
+
+defunkt   https://github.com/defunkt/grit <span class="o">(</span>fetch<span class="o">)</span>
+
+defunkt   https://github.com/defunkt/grit <span class="o">(</span>push<span class="o">)</span>
+
+koke      git://github.com/koke/grit.git <span class="o">(</span>fetch<span class="o">)</span>
+
+koke      git://github.com/koke/grit.git <span class="o">(</span>push<span class="o">)</span>
+
+origin    git@github.com:mojombo/grit.git <span class="o">(</span>fetch<span class="o">)</span>
+
+origin    git@github.com:mojombo/grit.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<p>我们可以拉取任何一个用户的贡献。</p>
+
+<h3 id="添加远程仓库">添加远程仓库</h3>
+<p>运行 <code class="language-plaintext highlighter-rouge">git remote add &lt;shortname&gt; &lt;url&gt;</code> 添加一个远程仓库，同时指定一个简写：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote
+
+origin
+
+<span class="nv">$ </span>git remote add pb https://github.com/paulboone/ticgit
+<span class="nv">$ </span>git remote <span class="nt">-v</span>
+
+origin https://github.com/schacon/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+origin https://github.com/schacon/ticgit <span class="o">(</span>push<span class="o">)</span>
+pb https://github.com/paulboone/ticgit <span class="o">(</span>fetch<span class="o">)</span>
+pb https://github.com/paulboone/ticgit <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<p>以后就可以使用 <code class="language-plaintext highlighter-rouge">pb</code> 来代替整个 URL。如想要拉取 paulboone 的仓库，只需要输入：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git fetch pb
+remote: Counting objects: 43, <span class="k">done</span><span class="nb">.</span>
+remote: Compressing objects: 100% <span class="o">(</span>36/36<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+remote: Total 43 <span class="o">(</span>delta 10<span class="o">)</span>, reused 31 <span class="o">(</span>delta 5<span class="o">)</span>
+Unpacking objects: 100% <span class="o">(</span>43/43<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+From https://github.com/paulboone/ticgit
+<span class="k">*</span> <span class="o">[</span>new branch]      master     -&gt; pb/master
+<span class="k">*</span> <span class="o">[</span>new branch]      ticgit     -&gt; pb/ticgit
+</code></pre></div></div>
+
+<p>然后就可以在本地通过 <code class="language-plaintext highlighter-rouge">pb/master</code> 访问到了。</p>
+
+<h3 id="从远程仓库中抓取与拉取">从远程仓库中抓取与拉取</h3>
+<p>如上面所见，从远程仓库中获得数据，可以执行 <code class="language-plaintext highlighter-rouge">git fetch [remote-name]</code> 命令。这个命令会访问远程仓库，拉取本地没有的数据。执行完成后，可以随时合并或查看。</p>
+
+<p>如果是使用 <code class="language-plaintext highlighter-rouge">git clone</code> 命令克隆了一个仓库，命令会自动将其添加为远程仓库并以 <code class="language-plaintext highlighter-rouge">origin</code> 为简写。所以 <code class="language-plaintext highlighter-rouge">git fetch origin</code> 会抓取 <code class="language-plaintext highlighter-rouge">git clone</code> 后（或上一次 <code class="language-plaintext highlighter-rouge">git fetch</code> 后新推送的所有工作。</p>
+
+<p>需要注意的是 <code class="language-plaintext highlighter-rouge">git fetch</code> 命令只会将数据拉取到本地，但是不会自动合并或修改当前分支，需要你自己准备好的时候手动合并。</p>
+
+<p>如果你需要从默认远程分支上抓取并合并，可以使用 <code class="language-plaintext highlighter-rouge">git pull</code> 命令。该命令自动抓取默认的远程仓库分支，并尝试合并到当前本地分支。一般情况下，<code class="language-plaintext highlighter-rouge">git clone</code> 命令会自动设置本地 <code class="language-plaintext highlighter-rouge">master</code> 分支跟踪并克隆远程仓库的 <code class="language-plaintext highlighter-rouge">master</code> 分支（或其他名字的默认分支）。</p>
+
+<h3 id="推送到远程仓库">推送到远程仓库</h3>
+<p>当你想要分享项目时，必须将其推送到上游，使用 <code class="language-plaintext highlighter-rouge">git push [remote-name] [branch-name]</code> 命令来操作。比如当你想要将本地的 <code class="language-plaintext highlighter-rouge">master</code> 分支推送到远程 <code class="language-plaintext highlighter-rouge">origin</code> 服务器时（这一般是克隆时命令自动设置的远程服务器名字），那么运行如下代码：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin master
+</code></pre></div></div>
+
+<p>只有你拥有远程仓库的写入权限，并且之前没有人推送过时，该命令才能生效。如果在你克隆后，其他人先推送了项目到上游，此时你需要先将他们的工作拉取下来并合并到你的工作后，才能推送成功。</p>
+
+<h3 id="查看远程仓库-1">查看远程仓库</h3>
+<p>如果想要查看远程仓库的更多信息，可以使用 <code class="language-plaintext highlighter-rouge">git remote show [remote-name]</code> 命令。如查看 <code class="language-plaintext highlighter-rouge">origin</code>：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote show origin
+<span class="k">*</span> remote origin
+  Fetch URL: https://github.com/schacon/ticgit
+    Push  URL: https://github.com/schacon/ticgit
+    HEAD branch: master
+    Remote branches:
+      master                               tracked
+        dev-branch                           tracked
+      Local branch configured <span class="k">for</span> <span class="s1">'git pull'</span>:
+      master merges with remote master
+      Local ref configured <span class="k">for</span> <span class="s1">'git push'</span>:
+      master pushes to master <span class="o">(</span>up to <span class="nb">date</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>该命令会列出远程仓库的 URL 和跟踪分支的信息。该输出表示你正处于 <code class="language-plaintext highlighter-rouge">master</code> 分支（<code class="language-plaintext highlighter-rouge">HEAD branch: master</code>），并且如果你运行 <code class="language-plaintext highlighter-rouge">git pull</code>，就会抓取所有远程引用，然后将远程 <code class="language-plaintext highlighter-rouge">master</code> 分支合并到本地 <code class="language-plaintext highlighter-rouge">master</code> 分支（<code class="language-plaintext highlighter-rouge">master merges with remote master</code>）。</p>
+
+<p>如果是 Git 的重度使用着，将会通过 <code class="language-plaintext highlighter-rouge">git remote show</code> 看到更多信息：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote show origin
+<span class="k">*</span> remote origin
+  URL: https://github.com/my-org/complex-project
+    Fetch URL: https://github.com/my-org/complex-project
+    Push  URL: https://github.com/my-org/complex-project
+    HEAD branch: master
+    Remote branches:
+      master                           tracked
+        dev-branch                       tracked
+        markdown-strip                   tracked
+        issue-43                         new <span class="o">(</span>next fetch will store <span class="k">in </span>remotes/origin<span class="o">)</span>
+        issue-45                         new <span class="o">(</span>next fetch will store <span class="k">in </span>remotes/origin<span class="o">)</span>
+        refs/remotes/origin/issue-11     stale <span class="o">(</span>use <span class="s1">'git remote prune'</span> to remove<span class="o">)</span>
+      Local branches configured <span class="k">for</span> <span class="s1">'git pull'</span>:
+      dev-branch merges with remote dev-branch
+        master     merges with remote master
+      Local refs configured <span class="k">for</span> <span class="s1">'git push'</span>:
+      dev-branch                     pushes to dev-branch                     <span class="o">(</span>up to <span class="nb">date</span><span class="o">)</span>
+        markdown-strip                 pushes to markdown-strip                 <span class="o">(</span>up to <span class="nb">date</span><span class="o">)</span>
+        master                         pushes to master                         <span class="o">(</span>up to <span class="nb">date</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>这里输出显示了当你在特定分支上执行 <code class="language-plaintext highlighter-rouge">git push</code> 时会将本地项目推送到哪个远程分支，还列出了哪些分支不在本地，哪些远程分支已经从服务器删除，还有当你执行 <code class="language-plaintext highlighter-rouge">git pull</code> 时哪些分支会自动合并。</p>
+
+<h3 id="远程仓库的移除与重命名">远程仓库的移除与重命名</h3>
+<p>重命名远程引用，可以通过 <code class="language-plaintext highlighter-rouge">git remote rename</code> 修改。例如将上面的 <code class="language-plaintext highlighter-rouge">pb</code> 重命名为 <code class="language-plaintext highlighter-rouge">paul</code> 可以通过下面命令实现：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote rename pb paul
+<span class="nv">$ </span>git remote
+origin
+paul
+</code></pre></div></div>
+
+<p>需要注意的是这也同样会修改远程分支中的名字，那些之前引用 <code class="language-plaintext highlighter-rouge">pb/master</code> 的现在会引用 <code class="language-plaintext highlighter-rouge">paul/master</code>。</p>
+
+<p>如果需要移除一个远程仓库，可以使用 <code class="language-plaintext highlighter-rouge">git remote rm</code> 命令：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote <span class="nb">rm </span>paul
+<span class="nv">$ </span>git remote
+roigin
+</code></pre></div></div>
+
+<h2 id="打标签">打标签</h2>
+<h3 id="列出标签">列出标签</h3>
+<p>使用 <code class="language-plaintext highlighter-rouge">git tag</code> 命令列出标签：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag
+v0.1
+v1.3
+</code></pre></div></div>
+
+<p>该命令默认以字幕顺序列出标签。</p>
+
+<p>你也可以使用特定的模式查找标签，如查看 Git 自身源代码仓库的 1.8.5 系列，可以运行：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-l</span> <span class="s1">'v1.8.5*'</span>
+v1.8.5
+v1.8.5-rc0
+v1.8.5-rc1
+v1.8.5-rc2
+v1.8.5-rc3
+v1.8.5.1
+v1.8.5.2
+v1.8.5.3
+v1.8.5.4
+v1.8.5.5
+
+</code></pre></div></div>
+
+<h3 id="创建标签">创建标签</h3>
+<p>Git 使用轻量标签（lightweight）与附注标签（annotated）两种标签。</p>
+
+<p>轻量标签很像一个不会改变的分支 - 它只是一个特定提交的引用。</p>
+
+<p>附注标签是存储在 Git 数据库中的一个完整对象。他们是可以被校验的，包括：打标签者的名字、电子邮件地址、日期时间、标签信息，并且可以使用 GNU Privace Guard（GPG）签名与验证。通常建议创建附注标签，这样就可以拥有以上所有信息；但如果想要临时标签，或者不想保存这些信息，轻量标签也是可以的。</p>
+
+<h4 id="附注标签">附注标签</h4>
+<p>在运行 <code class="language-plaintext highlighter-rouge">git tag</code> 时指定 <code class="language-plaintext highlighter-rouge">-a</code> 选项，来创建一个附注标签：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> v1.4 <span class="nt">-m</span> <span class="s1">'my version 1.4'</span>
+<span class="nv">$ </span>git tag
+v1.4
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">-a</code> 选项指定了一条需要存储在标签中的信息，如果没有指定信息，Git 会通过运行编辑器来要求你输入信息。</p>
+
+<p>通过使用 <code class="language-plaintext highlighter-rouge">git show</code> 命令可以看到标签信息和对应的提交信息：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show v1.4
+Tagger: Ben Straub &lt;ben@straub.cc&gt;
+Date:   Sat May 3 20:19:12 2014 <span class="nt">-0700</span>
+
+my version 1.4
+
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon &lt;schacon@gee-mail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 <span class="nt">-0700</span>
+
+    changed the version number
+</code></pre></div></div>
+
+<h4 id="轻量标签">轻量标签</h4>
+<p>轻量标签本质上是将提交校验和存储到一个文件中 - 没有保存任何其他信息。创建轻量标签只需要提供标签名字：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag v1.4-lw
+<span class="nv">$ </span>git tag
+v1.4
+v1.4-lw
+</code></pre></div></div>
+
+<p>这是如果在标签上运行 <code class="language-plaintext highlighter-rouge">git show</code> 将不会看到额外的信息。命令只显示提交信息：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show v1.4-lw
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon &lt;schacon@gee-mail.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 <span class="nt">-0700</span>
+
+    changed the version number
+</code></pre></div></div>
+
+<h3 id="后期打标签">后期打标签</h3>
+<p>通过指定提交的校验和，来对历史提交进行打标签。</p>
+
+<p>比如一个这样的提交历史：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--pretty-oneline</span>
+15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch <span class="s1">'experiment'</span>
+a6b4c97498bd301d84096da251c98a07c7723e65 beginning write support
+0d52aaab4479697da7686c15f77a3d64d9165190 one more thing
+9fceb02d0ae598e95dc970b74767f19372d61af8 updated rakefile
+</code></pre></div></div>
+
+<p>假设在 v1.2 时忘记打标签，也就是在 <code class="language-plaintext highlighter-rouge">updated rakefile</code> 提交，可以在命令末尾添加校验和（或部分校验和）：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag <span class="nt">-a</span> v1.2 9fceb02
+</code></pre></div></div>
+
+<p>通过 <code class="language-plaintext highlighter-rouge">git show v1.2</code> 可以看到已经打上了标签：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show v1.2
+tag v1.2
+Tagger: Scott Chacon &lt;schacon@gee-mail.com&gt;
+Date:   Mon Feb 9 15:32:16 2009 <span class="nt">-0800</span>
+
+version 1.2
+commit 9fceb02d0ae598e95dc970b74767f19372d61af8
+Author: Magnus Chacon &lt;mchacon@gee-mail.com&gt;
+Date:   Sun Apr 27 20:43:35 2008 <span class="nt">-0700</span>
+
+    updated rakefile
+</code></pre></div></div>
+
+<h3 id="共享标签">共享标签</h3>
+<p>默认情况下 <code class="language-plaintext highlighter-rouge">git push</code> 命令不会推送标签到远程服务器。可以显式的将标签推送到共享服务器：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin v1.5
+Counting objects: 14, <span class="k">done</span><span class="nb">.</span>
+Delta compression using up to 8 threads.
+Compressing objects: 100% <span class="o">(</span>12/12<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>14/14<span class="o">)</span>, 2.05 KiB | 0 bytes/s, <span class="k">done</span><span class="nb">.</span>
+Total 14 <span class="o">(</span>delta 3<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To git@github.com:schacon/simplegit.git
+<span class="k">*</span> <span class="o">[</span>new tag]         v1.5 -&gt; v1.5
+</code></pre></div></div>
+
+<p>如果需要一次推送多个标签，可以使用带有 <code class="language-plaintext highlighter-rouge">--tags</code> 选项的 <code class="language-plaintext highlighter-rouge">git push</code> 命令。这将会把所有不在远程仓库服务器上的标签全部推送过去。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin <span class="nt">--tags</span>
+Counting objects: 1, <span class="k">done</span><span class="nb">.</span>
+Writing objects: 100% <span class="o">(</span>1/1<span class="o">)</span>, 160 bytes | 0 bytes/s, <span class="k">done</span><span class="nb">.</span>
+Total 1 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To git@github.com:schacon/simplegit.git
+<span class="k">*</span> <span class="o">[</span>new tag]         v1.4 -&gt; v1.4
+<span class="k">*</span> <span class="o">[</span>new tag]         v1.4-lw -&gt; v1.4-lw
+</code></pre></div></div>
+
+<h3 id="检出标签">检出标签</h3>
+<p>在 Git 中并不能真正的检出一个标签。因为标签不能像分支一样来回移动。如果需要工作目录与仓库中特定的标签版本完全一样，可以使用 <code class="language-plaintext highlighter-rouge">git checkout -b [branchname] [tagname]</code> 在特定的标签上创建一个新分支：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> version2 v2.0.0
+Switched to a new branch <span class="s1">'version2'</span>
+</code></pre></div></div>
+
+<p>当然，如果在这之后又进行了一次提交，<code class="language-plaintext highlighter-rouge">version2</code> 分支会因为改动向前移动，那么 <code class="language-plaintext highlighter-rouge">version2</code> 分支就和 <code class="language-plaintext highlighter-rouge">v2.0.0</code> 标签有些不同了。</p>
+
+<h2 id="git-别名">Git 别名</h2>
+
+<p>Git 并不会在你输入部分命令时自动推断你想要的命令。如果不想每次输入完整的 Git 命令，可以通过 <code class="language-plaintext highlighter-rouge">git config</code> 文件来为每个命令设置一个别名。比如：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> alias.br branch
+</code></pre></div></div>
+
+<p>这意味着，当你需要输入 <code class="language-plaintext highlighter-rouge">git commit</code> 命令时，只需要输入 <code class="language-plaintext highlighter-rouge">git ci</code>。</p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      在 CentOS 上安装 Caddy 服务
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="在 CentOS 上安装 Caddy 服务" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="安装" />
+<meta property="og:description" content="安装" />
+<link rel="canonical" href="http://localhost:4000/caddy/centos/webserver/2019/08/03/Step-By-Step-Install-Caddy-On-CentOS.html" />
+<meta property="og:url" content="http://localhost:4000/caddy/centos/webserver/2019/08/03/Step-By-Step-Install-Caddy-On-CentOS.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-03T23:52:17+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/caddy/centos/webserver/2019/08/03/Step-By-Step-Install-Caddy-On-CentOS.html"},"description":"安装","headline":"在 CentOS 上安装 Caddy 服务","dateModified":"2019-08-03T23:52:17+08:00","datePublished":"2019-08-03T23:52:17+08:00","url":"http://localhost:4000/caddy/centos/webserver/2019/08/03/Step-By-Step-Install-Caddy-On-CentOS.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>在 CentOS 上安装 Caddy 服务</h1>
+<h2 id="安装">安装</h2>
+
+<p>CentOS 据说可以通过 <code class="language-plaintext highlighter-rouge">yum install caddy</code> 来安装，不过前提是要安装 epel 安装源，不过我习惯从 Caddy 官方网站下载安装。</p>
+
+<ul>
+  <li>
+    <p>ssh 登录到 CentOS 系统里，运行</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # 选择自己需要的模块一并安装
+  curl https://getcaddy.com | bash -s personal http.cache,http.geoip,http.git,http.grpc
+</code></pre></div>    </div>
+    <p>因为 Caddy 就是一个可执行文件，所以下载就完了。</p>
+  </li>
+</ul>
+
+<!--more-->
+
+<h2 id="配置">配置</h2>
+
+<p>要启动 Caddy，需要建立一个 root 用户以外的账户，我新建的账户叫做 caddy，以下为 caddy 的配置过程：</p>
+
+<ol>
+  <li>
+    <p>建立一个用于存放网页文件的目录，如 <code class="language-plaintext highlighter-rouge">/var/www</code>,命令如下：</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo mkdir /var/www
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>建立 caddy 用户</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo adduser -r -d /var/www -s /sbin/nologin caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>建立 Caddy 配置文件的路径</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mkdir /etc/caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>建立一个空的 Caddy 工作配置参数文件</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo touch /etc/caddy/Caddyfile
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>设置路径的访问权限</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo chown -R root:caddy /etc/caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>创建用于存放 ssl 证书的路径，并给予正确的权限</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo mkdir /etc/ssl/caddy
+ sudo chown -R caddy:root /etc/ssl/caddy
+ sudo chmod 0770 /etc/ssl/caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>创建用于存放日志的路径</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo mkdir /var/log/caddy
+ sudo chown -R caddy:root /var/log/caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改存放网页的路径权限 <code class="language-plaintext highlighter-rouge">/var/www</code></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo chown caddy:caddy /var/www
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>把 Caddy 安装为开机自动启动的服务</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo curl -s https://raw.githubusercontent.com/mholt/caddy/master/dist/init/linux-systemd/caddy.service -o /etc/systemd/system/caddy.service
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修改配置文件里面的用户信息</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 打开自动启动服务配置文件
+sudo vi /etc/systemd/system/caddy.service
+# 查找并修改：
+; User and group the process will run as.
+User=caddy
+Group=caddy
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>设置服务</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl daemon-reload
+sudo systemctl enable caddy.service
+</code></pre></div>    </div>
+
+    <p><em>现在还不能正常成功启动 Caddy，因为还没有配置网站参数信息。</em></p>
+  </li>
+  <li>
+    <p>配置网站信息</p>
+
+    <p>网站配置参数信息文件是 <code class="language-plaintext highlighter-rouge">/etc/caddy/Caddyfile</code></p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 打开配置文件
+sudo vi /etc/caddy/Caddyfile
+# 添加如下信息
+www.example.com   # 把这里修改为实际网站的域名
+{
+  log /var/log/caddy/caddy.log  # 日志文件
+  tls example@example.com   # 修改为个人邮箱帐号，用于自动申请 ssl 证书
+  root /var/www # 网站根目录
+  gzip
+}
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="启动-caddy-服务">启动 Caddy 服务</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 重启 Caddy 服务
+sudo systemctl restart caddy
+# 查看运行状态
+sudo systemctl status caddy -l
+</code></pre></div></div>
+<p>如果提示自动加载证书失败,可以使用 <a href="https://certbot.eff.org/">CertBot</a> 手动申请证书。</p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

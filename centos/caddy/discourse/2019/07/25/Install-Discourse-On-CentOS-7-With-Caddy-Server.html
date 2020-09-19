@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      在 CentOS 上使用 Caddy 运行 Discourse 踩坑记
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="在 CentOS 上使用 Caddy 运行 Discourse 踩坑记" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。" />
+<meta property="og:description" content="因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。" />
+<link rel="canonical" href="http://localhost:4000/centos/caddy/discourse/2019/07/25/Install-Discourse-On-CentOS-7-With-Caddy-Server.html" />
+<meta property="og:url" content="http://localhost:4000/centos/caddy/discourse/2019/07/25/Install-Discourse-On-CentOS-7-With-Caddy-Server.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-25T19:26:44+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/centos/caddy/discourse/2019/07/25/Install-Discourse-On-CentOS-7-With-Caddy-Server.html"},"description":"因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。","headline":"在 CentOS 上使用 Caddy 运行 Discourse 踩坑记","dateModified":"2019-07-25T19:26:44+08:00","datePublished":"2019-07-25T19:26:44+08:00","url":"http://localhost:4000/centos/caddy/discourse/2019/07/25/Install-Discourse-On-CentOS-7-With-Caddy-Server.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>在 CentOS 上使用 Caddy 运行 Discourse 踩坑记</h1>
+<p>因为想体验下论坛，所以在自己 VPS 上安装了 Discourse，这个号称论坛下一个十年的服务。</p>
+
+<!--more-->
+
+<p>先说为什么用 Caddy 来配合使用 Discourse：</p>
+<ul>
+  <li>Caddy 官方论坛是用的 Discourse</li>
+  <li>Caddy 自动部署免费的 SSl 证书：Let’s Encrypt</li>
+  <li>HTTP2 和 QUIC</li>
+  <li>配置简单</li>
+</ul>
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>最低 1GB 内存</li>
+  <li>CentOS 7 x64</li>
+</ul>
+
+<h2 id="设置-swapfile">设置 swapfile</h2>
+
+<p>Discourse 官方推荐配置最低为 2GB 内存，所以如果你的主机是 1GB 内存的话，需要创建一个 2GB 的 swapfile。</p>
+
+<p>创建教程请参考我的另一篇文章<a href="https://blog.securitainment.io/2019/07/24/2019-07-22-add-or-resize-swapfile-size/">《在 Linux 中设置和修改 swap 空间》</a>。</p>
+
+<h2 id="安装-docker">安装 Docker</h2>
+
+<p>使用如下命令安装和配置 Docker</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo yum install docker
+vi /etc/sysconfig/docker
+# 将下面一行注释掉，效果如下
+#OPTIONS='--selinux-enabled'
+# 启用 Docker 服务，并添加开机启动
+sudo systemctl start docker
+sudo systemctl enable docker
+</code></pre></div></div>
+
+<p>如遇到问题，请搜索解决。</p>
+
+<h2 id="安装-discourse">安装 Discourse</h2>
+
+<p>在 <code class="language-plaintext highlighter-rouge">/var</code> 文件夹创建一个 <code class="language-plaintext highlighter-rouge">discourse</code> 文件夹，将 Discourse 源代码克隆进去</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo mkdir /var/discourse
+sudo git clone https://github.com/discourse/discourse_docker.git /var/discourse
+</code></pre></div></div>
+
+<p>进入 <code class="language-plaintext highlighter-rouge">discourse</code> 文件夹</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /var/discourse
+</code></pre></div></div>
+
+<p>拷贝 Discourse 的配置参考文件到 containers 文件夹</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo cp samples/standalone.yml containers/app.yml
+</code></pre></div></div>
+
+<h2 id="配置-discourse">配置 Discourse</h2>
+
+<ol>
+  <li>
+    <p>打开 <code class="language-plaintext highlighter-rouge">app.yml</code></p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo vi containers/app.yml
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果你使用的是 1GB 的 VPS，将配置修改为如下参数</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> db_shared_buffers: "128MB"
+
+ ## With 2GB we recommend 3-4 workers, with 1GB only 2
+ UNICORN_WORKERS: 2
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>配置你的管理员邮箱地址</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> DISCOURSE_DEVELOPER_EMAILS: 'you@youremail.com'
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>设置你的 Discourse 论坛域名，如 <code class="language-plaintext highlighter-rouge">discourse.example.com</code> 则将配置改为</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ## TODO: The domain name this Discourse instance will respond to
+ DISCOURSE_HOSTNAME: 'discourse.example.com'
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>配置邮件服务</p>
+
+    <p>推荐使用官方教程 <a href="https://github.com/discourse/discourse/blob/master/docs/INSTALL-email.md">INSTALL-email.md</a></p>
+
+    <p>我尝试使用 Yandex 的免费自定义域名邮箱服务，但是配置完成后一直无法发送邮件，最后还是用了官方推荐的 Mailjet 服务。</p>
+  </li>
+  <li>
+    <p>修改配置使 Discourse 可以运行在 Caddy Server</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ## 将下面两行注释掉
+ #  - "templates/web.ssl.template.yml"
+ #  - "templates/web.letsencrypt.ssl.template.yml"
+
+ ## 修改下面两行，注释掉 https，修改 http 端口，避免冲突（系统 apache/nginx 服务已经占用了 80 端口）
+ expose:
+   - "8080:80"   # http，表示将容器外的 8080 端口映射到容器内的 80 端口
+ #  - "443:443" # https
+
+ env:
+   ## 将下面一行注释掉
+   #LETSENCRYPT_ACCOUNT_EMAIL: you@youremail.com
+</code></pre></div>    </div>
+  </li>
+  <li>保存并关闭 <code class="language-plaintext highlighter-rouge">app.yml</code> 文件</li>
+  <li>
+    <p>修改 Caddy 配置文件 <code class="language-plaintext highlighter-rouge">Caddyfile</code>，添加如下配置</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> discourse.example.com # 你的论坛域名
+ proxy / localhost:8080 { # 8080 为之前在 app.yml 中配置的 http 端口
+     transparent
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>构建并启动 Discourse</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo ./launcher bootstrap app
+ sudo ./launcher start app
+</code></pre></div>    </div>
+    <p>如果构建之后修改了 <code class="language-plaintext highlighter-rouge">app.yml</code> 配置文件，则需要使用下面命令来重新构建 app 并启动</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ./launcher stop app
+ ./launcher rebuild app
+ ./launcher start app
+</code></pre></div>    </div>
+  </li>
+  <li>在浏览器输入你在 <code class="language-plaintext highlighter-rouge">DISCOURSE_HOSTNAME</code> 配置的论坛域名，如<code class="language-plaintext highlighter-rouge">discourse.example.com</code>，就可以看到部署完成的论坛了！</li>
+  <li>
+    <p>手动激活管理员账户</p>
+
+    <p>如果你的邮件服务器配置存在问题，或者始终无法收到激活邮件，则使用下面命令手动激活管理员账户</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo ./launcher enter app
+ rake admin:create
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="使用感受">使用感受</h2>
+
+<p>Discourse 给人的感觉就是很新，很简洁：</p>
+
+<ul>
+  <li>弱化分类。Discourse 首页<strong>默认展示全站热帖</strong>（可配置），而不是分类目录</li>
+  <li>简化发布。编辑器默认 <strong>Markdown</strong> 格式，纯文本，方便后期格式化展示；默认附件只能上传图片</li>
+  <li>帖子以对话气泡的形式展示</li>
+  <li>类似 Bootstrap 风格的标准交互控件，大量 Ajax 加载使用，话题跟踪与通知系统</li>
+  <li>固定<strong>论坛分类的顺序</strong>需要在设置中将 <code class="language-plaintext highlighter-rouge">fixed category positions</code> 选中</li>
+  <li>论坛分类<strong>最多两个层级</strong></li>
+</ul>
+
+<p><em>部分摘自<code class="language-plaintext highlighter-rouge">知乎：黎欣健</code></em></p>
+
+<blockquote>
+  <p>参考
+https://meta.discourse.org/t/running-discourse-with-caddy-server/54716
+https://www.vultr.com/docs/install-discourse-on-centos-7
+https://github.com/discourse/discourse/blob/master/docs/INSTALL-email.md</p>
+</blockquote>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      CentOS 配置登录会话超时，防止 SSH 自动退出
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="CentOS 配置登录会话超时，防止 SSH 自动退出" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。" />
+<meta property="og:description" content="在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。" />
+<link rel="canonical" href="http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html" />
+<meta property="og:url" content="http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-04T22:53:40+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html"},"description":"在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。","headline":"CentOS 配置登录会话超时，防止 SSH 自动退出","dateModified":"2020-09-04T22:53:40+08:00","datePublished":"2020-09-04T22:53:40+08:00","url":"http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>CentOS 配置登录会话超时，防止 SSH 自动退出</h1>
+<p>在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。</p>
+
+<!--more-->
+
+<p><code class="language-plaintext highlighter-rouge">/etc/ssh/sshd_config</code> 文件中的两个参数，和 SSH 无活动会话超时自动退出有关：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ClientAliveInterval
+ClientAliveCountMax
+</code></pre></div></div>
+
+<p>在 <code class="language-plaintext highlighter-rouge">sshd_config</code> 的 <code class="language-plaintext highlighter-rouge">man</code> 帮助页面有对于这两个参数的解释：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ man sshd_config
+     ClientAliveCountMax
+             Sets the number of client alive messages (see below) which may be sent without sshd(8) receiving any messages back from the client. If this threshold is reached while client alive messages are being sent, sshd will disconnect the client, terminating the session. It is important to note that the use of client alive messages is very different from TCPKeepAlive (below). The client alive messages are sent through the encrypted channel and therefore will not be spoofable. The TCP keepalive option enabled by TCPKeepAlive is spoofable.  The client alive mechanism is valuable when the client or server depend on knowing when a connection has become inactive. The default value is 3. If ClientAliveInterval (see below) is set to 15, and ClientAliveCountMax is left at the default, unresponsive SSH clients will be disconnected after approximately 45 seconds. This option applies to protocol version 2 only.
+
+     ClientAliveInterval
+             Sets a timeout interval in seconds after which if no data has been received from the client, sshd(8) will send a message through the encrypted channel to request a response from the client. The default is 0, indicating that these messages will not be sent to the client. This option applies to protocol version 2 only.
+</code></pre></div></div>
+
+<p>所以有两种方法来配置无活动会话超时。</p>
+
+<h2 id="method-1">Method 1</h2>
+
+<ul>
+  <li>在 <code class="language-plaintext highlighter-rouge">/etc/ssh/sshd_config</code> 文件中配置超时参数</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi /etc/ssh/sshd_config
+ClientAliveInterval 5m          <span class="c"># 5 分钟</span>
+ClientAliveCountMax 2           <span class="c"># 2 次</span>
+</code></pre></div></div>
+
+<ul>
+  <li>重启 <code class="language-plaintext highlighter-rouge">sshd</code> 服务</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service sshd restart
+</code></pre></div></div>
+
+<p>这样就将超时时间设置成了 10 分钟（5分钟检测一次客户端活动，共检测两次）。</p>
+
+<h2 id="method-2">Method 2</h2>
+
+<ul>
+  <li>通过设置 <code class="language-plaintext highlighter-rouge">ClientAliveCountMax</code> 为 0，<code class="language-plaintext highlighter-rouge">ClientAliveInterval</code> 为 10m 来达到同样的效果</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi /etc/ssh/sshd_config
+ClientAliveInterval 10m          <span class="c"># 10 minutes</span>
+ClientAliveCountMax 0            <span class="c"># 0 times</span>
+</code></pre></div></div>
+
+<ul>
+  <li>重启 <code class="language-plaintext highlighter-rouge">sshd</code> 服务</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service sshd restart
+</code></pre></div></div>
+
+<h2 id="method-1-和-method-2-的不同">Method 1 和 Method 2 的不同</h2>
+
+<p>Method 1 ：如果客户端 5 分钟没有活动，<code class="language-plaintext highlighter-rouge">sshd</code> 会向客户端发送保持连接信息，最多发送两次，如果达到两次则断开客户端连接。</p>
+
+<p>Method 2 ：<code class="language-plaintext highlighter-rouge">sshd</code> 不会向客户端发送信息，如果客户端 10 分钟没有活动（服务端 10 分钟没有收到客户端消息），服务端会直接断开连接。</p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

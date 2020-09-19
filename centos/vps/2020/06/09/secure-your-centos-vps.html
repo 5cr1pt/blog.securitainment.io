@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      CentOS VPS 安全加固
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="CentOS VPS 安全加固" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。" />
+<meta property="og:description" content="由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。" />
+<link rel="canonical" href="http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html" />
+<meta property="og:url" content="http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-09T18:24:13+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html"},"description":"由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。","headline":"CentOS VPS 安全加固","dateModified":"2020-06-09T18:24:13+08:00","datePublished":"2020-06-09T18:24:13+08:00","url":"http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>CentOS VPS 安全加固</h1>
+<p>由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</p>
+
+<!--more-->
+
+<h2 id="添加-alias-信息">添加 alias 信息</h2>
+<p>编辑本地 <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> 文件，添加 VPS 的 alias 信息，方便以后通过 <code class="language-plaintext highlighter-rouge">ssh alias-name</code> 连接 VPS。</p>
+
+<p>以 masOS 为例，首先打开 <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> 文件：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi ~/.ssh/config
+</code></pre></div></div>
+
+<p>然后将自己的 VPS 信息填写进去，格式如下：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host alias-name	<span class="c"># 自定义的主机昵称</span>
+   HostName ip_address	<span class="c"># VPS 主机地址</span>
+   Port port_number	<span class="c"># 端口号</span>
+   User user	<span class="c"># 登陆用户名</span>
+</code></pre></div></div>
+<p>如果记不住那么多机器的 alias ，可以写个脚本命令列出已经添加的配置，例如 <code class="language-plaintext highlighter-rouge">sshl</code> ，每次需要的显示一下敲一下就 OK 了。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">alias </span><span class="nv">sshl</span><span class="o">=</span><span class="s1">'cat ~/.ssh/config | grep "Host "'</span>
+</code></pre></div></div>
+<h2 id="安装-ntp-服务">安装 NTP 服务</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nb">install </span>ntp ntpdate	<span class="c"># 安装 ntp 服务</span>
+<span class="nv">$ </span>chkconfig ntpd on	<span class="c"># 开机自动启动</span>
+<span class="nv">$ </span>ntpdate pool.ntp.org	<span class="c"># 添加 ntp 服务器</span>
+<span class="nv">$ </span>systemctl start ntpd	<span class="c"># 启动 ntp 服务</span>
+</code></pre></div></div>
+
+<h3 id="centos-8-使用-chrony">CentOS 8 使用 chrony</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nb">install </span>chrony
+<span class="nv">$ </span>systemctl start chronyd
+</code></pre></div></div>
+
+<h2 id="在登陆时提示上次登录失败的信息">在登陆时提示上次登录失败的信息</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vim /etc/pam.d/systemd-user
+<span class="c"># 将下面这一行复制进去</span>
+session required pam_lastlog.so showfailed
+</code></pre></div></div>
+<h2 id="设置每个会话最大密码尝试次数">设置每个会话最大密码尝试次数</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vim  /etc/pam.d/systemd-user
+<span class="c"># 将下面这一行复制进去</span>
+auth pam_pwquality.so  <span class="nv">retry</span><span class="o">=</span>3
+</code></pre></div></div>
+<h2 id="阻止错误密码尝试">阻止错误密码尝试</h2>
+<p>编辑 <code class="language-plaintext highlighter-rouge">/etc/pam.d/system-auth</code> 和 <code class="language-plaintext highlighter-rouge">/etc/pam.d/password-auth</code> 两个 PAM 配置文件（尝试3次错误锁定20分钟），添加下面两行进去</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auth <span class="o">[</span><span class="nv">default</span><span class="o">=</span>die] pam_faillock.so authfail <span class="nv">deny</span><span class="o">=</span>3 <span class="nv">unlock_time</span><span class="o">=</span>1200 <span class="nv">fail_interval</span><span class="o">=</span>900
+auth required pam_faillock.so authsucc <span class="nv">deny</span><span class="o">=</span>3 <span class="nv">unlock_time</span><span class="o">=</span>1200 <span class="nv">fail_interval</span><span class="o">=</span>900
+</code></pre></div></div>
+<h2 id="限制密码重用">限制密码重用</h2>
+<p>使用 PAM 模块配置，在 <code class="language-plaintext highlighter-rouge">/etc/pam.d/system-auth</code> 这个 PAM 配置文件里面，在 <code class="language-plaintext highlighter-rouge">pam_unix.so</code> 所在的行添加 <code class="language-plaintext highlighter-rouge">remember=24</code> 。这样服务器就会记录历史上的前 24 个旧密码，为啥为 24？因为这是美国国防部的标准。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password sufficient  pam_unix.so existing_options  <span class="nv">remember</span><span class="o">=</span>24
+</code></pre></div></div>
+<h2 id="设置-bootgrub2grubcfg-权限">设置 /boot/grub2/grub.cfg 权限</h2>
+<p>设置 <code class="language-plaintext highlighter-rouge">/boot/grub2/grub.cfg</code> 的权限为 600</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo chmod </span>600 /boot/grub2/grub.cfg
+</code></pre></div></div>
+<h2 id="创建具有-sudo-权限的普通用户">创建具有 sudo 权限的普通用户</h2>
+<h3 id="创建一个新用户">创建一个新用户</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adduser demo
+passwd demo
+</code></pre></div></div>
+<h3 id="查看当前活跃用户">查看当前活跃用户</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>w
+</code></pre></div></div>
+<h3 id="查看用户列表">查看用户列表</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/passwd|grep <span class="nt">-v</span> nologin|grep <span class="nt">-v</span> halt|grep <span class="nt">-v</span> shutdown|awk <span class="nt">-F</span><span class="s2">":"</span> <span class="s1">'{ print $1"|"$3"|"$4 }'</span>|more
+</code></pre></div></div>
+<h3 id="给新用户-sudo-权限">给新用户 sudo 权限</h3>
+<p>现在，我们有了普通用户，进行普通的操作，但是有时，我们需要更大的权限进行操作，如 <code class="language-plaintext highlighter-rouge">yum update</code>，进行这样的操作，我们一般不会使用 root 登进登录，一般使用 <code class="language-plaintext highlighter-rouge">sudo</code> （Super User do）命令。</p>
+
+<p>为了将 <code class="language-plaintext highlighter-rouge">sudo</code> 权限给普通用户，我们需要将新用户加入 wheel 组中，CentOS 默认的 wheel 组有运行 <code class="language-plaintext highlighter-rouge">sudo</code> 的权限。</p>
+
+<p>我们使用 root 用户，将 demo 用户加入到 wheel 组中。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpasswd <span class="nt">-a</span> demo wheel
+</code></pre></div></div>
+<h2 id="配置-ssh-服务">配置 SSH 服务</h2>
+<p>我们添加了普通用户，也可以执行 <code class="language-plaintext highlighter-rouge">sudo</code> 命令，需要配置 ssh 服务，去掉 root 用户的远程登录，这样更加安全。</p>
+
+<h3 id="登录到服务器">登录到服务器</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh demo@SERVER_IP_ADDRESS
+</code></pre></div></div>
+<h3 id="进行配置">进行配置</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ssh/sshd_config
+</code></pre></div></div>
+<p>将</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#PermitRootLogin yes</span>
+</code></pre></div></div>
+<p>改为</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PermitRootLogin no
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">:wq</code> 保存并退出。</p>
+<h3 id="重启-ssh-服务">重启 ssh 服务</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl reload sshd
+</code></pre></div></div>
+<p>这样，服务器的 root 用户就被禁止了远程登录。</p>
+
+<h3 id="修改端口">修改端口</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/ssh/sshd_config
+Port <span class="k">*</span>
+</code></pre></div></div>
+<h3 id="禁止空密码登录">禁止空密码登录</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /etc/ssh/sshd_config:
+
+PermitEmptyPasswords no
+</code></pre></div></div>
+<h3 id="只允许-ssh-proto-2">只允许 ssh proto 2</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim /etc/ssh/sshd_config
+
+Protocol 2
+</code></pre></div></div>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

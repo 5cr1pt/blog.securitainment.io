@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      查找并清理 CentOS 的存储空间
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="查找并清理 CentOS 的存储空间" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。" />
+<meta property="og:description" content="最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。" />
+<link rel="canonical" href="http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html" />
+<meta property="og:url" content="http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-12T19:41:04+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html"},"description":"最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。","headline":"查找并清理 CentOS 的存储空间","dateModified":"2020-06-12T19:41:04+08:00","datePublished":"2020-06-12T19:41:04+08:00","url":"http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>查找并清理 CentOS 的存储空间</h1>
+<p>最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</p>
+
+<!--more-->
+
+<p>以下是记录。</p>
+
+<h2 id="查看磁盘空间使用量">查看磁盘空间使用量</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">df</span> <span class="nt">-h</span>
+Filesystem           Size  Used Avail Use% Mounted on
+devtmpfs             394M     0  394M   0% /dev
+tmpfs                411M     0  411M   0% /dev/shm
+tmpfs                411M   42M  369M  11% /run
+tmpfs                411M     0  411M   0% /sys/fs/cgroup
+/dev/mapper/cl-root   50G  2.3G   48G   5% /
+/dev/mapper/cl-home   47G  367M   47G   1% /home
+/dev/vda1            976M  175M  735M  20% /boot
+tmpfs                 83M     0   83M   0% /run/user/0
+tmpfs                 83M     0   83M   0% /run/user/1000
+</code></pre></div></div>
+
+<h2 id="排查大文件所在目录">排查大文件所在目录</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">du</span> <span class="nt">-sh</span> .[!.]<span class="k">*</span> <span class="c"># 查看当前目录下子目录大小（du: disk usage）;-s: 显示总和；-h: 易读模式</span>
+4.0K	.bash_history
+4.0K	.bash_logout
+4.0K	.bash_profile
+4.0K	.bashrc
+4.0K	.ssh
+4.0K	.wget-hsts
+
+<span class="nv">$ </span><span class="nb">du</span> <span class="nt">-sh</span> /usr/[!.]<span class="k">*</span> <span class="c"># 查看 /usr/ 目录下各个子目录大小</span>
+202M	/usr/bin
+0	/usr/games
+84K	/usr/include
+614M	/usr/lib
+270M	/usr/lib64
+84M	/usr/libexec
+4.0K	/usr/local
+64M	/usr/sbin
+374M	/usr/share
+0	/usr/src
+0	/usr/tmp
+</code></pre></div></div>
+
+<h2 id="查看大文件">查看大文件</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-laShs</span>
+total 20K
+4.0K <span class="nt">-rw-------</span><span class="nb">.</span> 1 groot groot 2.8K Jun 11 17:10 .bash_history
+4.0K <span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 groot groot  312 Nov  9  2019 .bashrc
+4.0K <span class="nt">-rw-rw-r--</span><span class="nb">.</span> 1 groot groot  204 Jun 12 13:32 .wget-hsts
+4.0K <span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 groot groot  141 Nov  9  2019 .bash_profile
+4.0K <span class="nt">-rw-r--r--</span><span class="nb">.</span> 1 groot groot   18 Nov  9  2019 .bash_logout
+</code></pre></div></div>
+
+<h2 id="查看已标记为删除的文件占用的空间">查看已标记为删除的文件占用的空间</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>lsof <span class="nt">-n</span> | <span class="nb">grep </span>deleted
+systemd-j   619                           root  txt       REG              253,0   234488     650779 /usr/lib/systemd/systemd-journald <span class="o">(</span>deleted<span class="o">)</span>
+qemu-ga     843                           root  txt       REG              253,0   449064    1079814 /usr/bin/qemu-ga <span class="o">(</span>deleted<span class="o">)</span>
+systemd-l   873                           root  txt       REG              253,0   481696     650781 /usr/lib/systemd/systemd-logind <span class="o">(</span>deleted<span class="o">)</span>
+NetworkMa   891                           root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager <span class="o">(</span>deleted<span class="o">)</span>
+NetworkMa   891   902 gmain               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager <span class="o">(</span>deleted<span class="o">)</span>
+NetworkMa   891   903 gdbus               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager <span class="o">(</span>deleted<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="释放空间已删除文件所占空间">释放空间已删除文件所占空间</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">kill</span> <span class="nt">-9</span> %PID% <span class="c"># 结束相应的进程</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>https://blog.csdn.net/lk_db/article/details/78341698</p>
+
+  <p>https://jaminzhang.github.io/os/File-Deleted-And-Still-Use-The-Filesystem-Space-Problem-In-Linux/</p>
+
+  <p>http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html</p>
+
+  <p>http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html</p>
+</blockquote>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

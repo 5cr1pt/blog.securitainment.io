@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。" />
+<meta property="og:description" content="当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。" />
+<link rel="canonical" href="http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html" />
+<meta property="og:url" content="http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-23T00:19:54+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html"},"description":"当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。","headline":"修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题","dateModified":"2020-03-23T00:19:54+08:00","datePublished":"2020-03-23T00:19:54+08:00","url":"http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题</h1>
+<blockquote>
+  <p>当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 <strong>myQNAPcloud</strong> 应用中，<strong>My DDNS</strong> 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 <code class="language-plaintext highlighter-rouge">*.myqnapcloud.com</code> 域名远程访问 NAS。</p>
+</blockquote>
+
+<!--more-->
+
+<h2 id="1-家庭网络拓扑图家庭中的-nas-是怎么连接到互联网的">1. 家庭网络拓扑图（家庭中的 NAS 是怎么连接到互联网的）</h2>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322162710.png" alt="" />
+其中入口路由器和无线路由器可以是同一个，即家庭中的 PPPOE 拨号上网和无线 WiFi 路由器；或者可以是多个，比如旁路翻墙的设备等。</p>
+
+<h2 id="2-ddns-ip-更新错误的问题可能导致无法通过自定义的-myqnapcloudcom-域名访问-nas">2. DDNS IP 更新错误的问题（可能导致无法通过自定义的 <code class="language-plaintext highlighter-rouge">\*.myqnapcloud.com</code> 域名访问 NAS）</h2>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322163320.png" alt="" />
+如图，DDNS IP 可能被识别为翻墙服务的 IP 地址，而不是实际的宽带外网地址。</p>
+
+<h2 id="3-原因分析并修复">3. 原因分析并修复</h2>
+
+<p>在 QNAP 系统的 <code class="language-plaintext highlighter-rouge">/etc/init.d/</code> 目录下有一个 <code class="language-plaintext highlighter-rouge">get_external_ip.sh</code> 的脚本，该脚本的内容为：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># Script for getting an external WAN IP</span>
+
+<span class="c"># get external IP from qcloud API</span>
+<span class="nv">WAN_IP</span><span class="o">=</span><span class="sb">`</span>/usr/local/bin/qcloud_cli <span class="nt">-x</span> 13 <span class="nt">-e</span><span class="sb">`</span>
+<span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$WAN_IP</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>1
+<span class="nb">echo</span> <span class="nv">$WAN_IP</span>
+<span class="nb">exit </span>0
+</code></pre></div></div>
+<p>可以看到获取 WAN_IP 也就是宽带外网 IP 是通过 <code class="language-plaintext highlighter-rouge">/usr/local/bin/qcloud_cli -x 13 -e</code> 来实现的，通过追踪该可执行文件，发现该文件通过解析 <code class="language-plaintext highlighter-rouge">edge.api.myqnapcloud.com</code> 这个域名并访问，来获取外部 IP 地址的。</p>
+
+<h3 id="31-修复问题">3.1 修复问题</h3>
+<p>在正常上网服务的配置里添加例外即可。</p>
+
+<p>如在路由器固件为 OPENWRT/LEDE 的路由器上使用 <code class="language-plaintext highlighter-rouge">ShadowSocksR Plus+</code> 实现的，可以将 <code class="language-plaintext highlighter-rouge">edge.api.myqnapcloud.com</code> 域名添加到 <code class="language-plaintext highlighter-rouge">访问控制 -&gt; 不走代理的域名</code> 中：
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322164521.png" alt="" /></p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

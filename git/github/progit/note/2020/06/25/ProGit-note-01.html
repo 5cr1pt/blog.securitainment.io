@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      progit 笔记 01
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="progit 笔记 01" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。" />
+<meta property="og:description" content="本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。" />
+<link rel="canonical" href="http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html" />
+<meta property="og:url" content="http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-25T19:11:36+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html"},"description":"本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。","headline":"progit 笔记 01","dateModified":"2020-06-25T19:11:36+08:00","datePublished":"2020-06-25T19:11:36+08:00","url":"http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>progit 笔记 01</h1>
+<p>本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</p>
+
+<!--more-->
+
+<h2 id="git-基础">Git 基础</h2>
+<h3 id="git-直接记录快照而非差异比较">Git 直接记录快照（而非差异比较</h3>
+<p>每次提交更新，或在 Git 中保存项目状态时，Git 对当时的全部文件制作一个快照并保存这个快照的索引。如果文件没有修改，Git 将不再重新存储该文件，而是保留一个指向之前存储的文件的链接。Git 对待数据更像是一个<strong>快照流</strong></p>
+
+<h3 id="近乎所有操作都是本地执行">近乎所有操作都是本地执行</h3>
+<p>Git 的绝大多数操作都只需要访问本地文件和资源，本地磁盘上有项目的的完整历史。如果想要查看当前版本和一个月前的版本之间的修改，Git 会查找一个月前的文件做一次本地的差异计算，而不是由远程服务器处理。</p>
+
+<h3 id="git-保证完整性">Git 保证完整性</h3>
+<p>Git 中的所有数据在存储前都计算校验和，然后以校验和来引用。Git 使用 SHA-1 散列（hash，哈希）作为计算校验和的机制。Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。</p>
+
+<h3 id="git-一般只添加数据">Git 一般只添加数据</h3>
+<p>Git 操作一般只往 Git 数据库中增加数据，很难让 Git 执行任何不可逆操作，或者清除数据。</p>
+
+<h3 id="git-的三种状态">Git 的三种状态</h3>
+<p>Git 有三种状态：已提交（committed）、已修改（modified）、和已暂存（staged）。</p>
+<ul>
+  <li>committed: 表示数据已经安全的保存在本地数据库中</li>
+  <li>modified: 表示修改了文件，但还没有保存到数据库中</li>
+  <li>staged: 表示对一个已修改的文件的当前版本做了标记，使之包含在下次提交的快照中</li>
+</ul>
+
+<p>Git 项目的三个工作区域：Git 仓库、工作目录以及暂存区域。</p>
+<ul>
+  <li>Git 仓库目录是 Git 用来保存项目的元数据和对象数据库的地方。从其他计算机克隆仓库时，拷贝的就是这里的数据</li>
+  <li>工作目录是对项目的某个版本独立提取出来的内容，从 Git 仓库的压缩数据库中提取出来的文件，放在磁盘上供使用或修改</li>
+  <li>暂存区域是一个文件，保存了下次将提交的文件列表信息，一般在 Git 仓库目录中。有时也被称作“索引”</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200625111105.jpeg" alt="Figure 1-6.jpeg" /></p>
+
+<p>基本的 Git 工作流程：</p>
+<ol>
+  <li>在工作目录中修改文件</li>
+  <li>暂存文件，将文件的快照放入暂存区域</li>
+  <li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录</li>
+</ol>
+
+<h2 id="初次运行-git-前的配置">初次运行 Git 前的配置</h2>
+<p>Git 自带一个 <code class="language-plaintext highlighter-rouge">git config</code> 的工具来帮助控制 Git 的外观和行为的配置变量，这些变量存储在三个不同的位置：</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/etc/gitconfig</code> 文件：包含系统上每一个用户以及他们仓库的通用配置。如果使用带有 <code class="language-plaintext highlighter-rouge">--system</code> 选项的 <code class="language-plaintext highlighter-rouge">git config</code> 时，它会从此文件读写配置变量</li>
+  <li><code class="language-plaintext highlighter-rouge">~/.gitconfig</code> 或 <code class="language-plaintext highlighter-rouge">~/.config/git/config</code> 文件：指针对当前用户。可以传递 <code class="language-plaintext highlighter-rouge">--global</code> 选项让 Git 读写此文件</li>
+  <li>当前使用仓库的 Git 目录中的 <code class="language-plaintext highlighter-rouge">config</code> 文件（就是 <code class="language-plaintext highlighter-rouge">.git/config</code>）：针对该仓库</li>
+</ul>
+
+<h3 id="用户信息">用户信息</h3>
+<p>安装完成 Git 后做的第一件事就是设置用户名称与邮件地址。每一次 Git 提交都会使用这些信息，并且会写入到每一次提交中，不可更改。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"John Doe"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email johndoe@example.com
+</code></pre></div></div>
+
+<blockquote>
+  <p>如果使用了 <code class="language-plaintext highlighter-rouge">--global</code> 选项，那么命令只需要运行一次，以后 Git 都会使用这些信息。如果需要针对项目使用不同的用户名称与邮件地址，可以在项目目录下运行没有 <code class="language-plaintext highlighter-rouge">--global</code> 选项的命令来配置。</p>
+</blockquote>
+
+<h3 id="文本编辑器">文本编辑器</h3>
+<p>配置默认文本编辑器，Git 需要输入信息时会调用它。如果未配置，Git 会使用操作系统默认的文本编辑器，通常是 Vim。如果想使用 Emacs：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> core.editor emacs
+</code></pre></div></div>
+
+<h3 id="检查配置信息">检查配置信息</h3>
+<p>如果想要检查配置信息，可以使用 <code class="language-plaintext highlighter-rouge">git config --list</code> 命令来列出所有 Git 当时能找到的配置。</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--list</span>
+user.name<span class="o">=</span>John Doe
+
+user.email<span class="o">=</span>johndoe@example.com
+
+color.status<span class="o">=</span>auto
+
+color.branch<span class="o">=</span>auto
+
+color.interactive<span class="o">=</span>auto
+
+color.diff<span class="o">=</span>auto
+
+...
+</code></pre></div></div>
+
+<p>可能会出现重复的变量名，因为 Git 会从不同的文件中读取同一个配置（例如从 <code class="language-plaintext highlighter-rouge">/tec/gitconfig</code> 与 <code class="language-plaintext highlighter-rouge">~/.gitconfig</code>）。这时 Git 会使用它找到的每一个变量的最后一个配置。</p>
+
+<p>可以通过 <code class="language-plaintext highlighter-rouge">git config &lt;key&gt;</code> 来检查 Git 的某一想配置</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config user.name
+John Doe
+</code></pre></div></div>
+
+<h2 id="获取帮助">获取帮助</h2>
+<p>有三种方法找到 Git 命令的使用手册：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span> &lt;verb&gt;
+<span class="nv">$ </span>git &lt;verb&gt; <span class="nt">--help</span>
+<span class="nv">$ </span>man git-&lt;verb&gt;
+</code></pre></div></div>
+
+<p>例如获取 <code class="language-plaintext highlighter-rouge">config</code> 命令的帮助手册</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help </span>config
+</code></pre></div></div>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

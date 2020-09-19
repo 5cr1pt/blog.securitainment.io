@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      shadowsocks_libev 配置
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="shadowsocks_libev 配置" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CentOS 搭建Shadowsocks 服务器" />
+<meta property="og:description" content="CentOS 搭建Shadowsocks 服务器" />
+<link rel="canonical" href="http://localhost:4000/shadowsocks/centos/2016/05/14/shadowsocks-libev-config.html" />
+<meta property="og:url" content="http://localhost:4000/shadowsocks/centos/2016/05/14/shadowsocks-libev-config.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-05-14T09:26:13+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/shadowsocks/centos/2016/05/14/shadowsocks-libev-config.html"},"description":"CentOS 搭建Shadowsocks 服务器","headline":"shadowsocks_libev 配置","dateModified":"2016-05-14T09:26:13+08:00","datePublished":"2016-05-14T09:26:13+08:00","url":"http://localhost:4000/shadowsocks/centos/2016/05/14/shadowsocks-libev-config.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>shadowsocks_libev 配置</h1>
+<h2 id="centos-搭建shadowsocks-服务器">CentOS 搭建Shadowsocks 服务器</h2>
+
+<p>shadowsocks-libev是shadowsocks众多版本中的一种，它使用libuv + C 编写，500不到的代码，资源消耗非常小，再破的VPS都能跑得起来。相对于其他版本的shadowsocks，shadowsocks-libev不会出现掉进程或cpu 100%的问题。</p>
+
+<!--more-->
+
+<h2 id="安装必要组件">安装必要组件</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install build-essential autoconf libtool openssl-devel gcc -y
+</code></pre></div></div>
+
+<h2 id="安装git">安装Git</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install git -y
+</code></pre></div></div>
+
+<p>装完了执行<code class="language-plaintext highlighter-rouge">git --version</code>如果出现版本号则安装成功</p>
+
+<h2 id="下载shadowsocks-libev-源码包并编译">下载Shadowsocks-libev 源码包并编译</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/shadowsocks/shadowsocks-libev.git
+cd shadowsocks-libev
+./configure
+make &amp;&amp; make install
+</code></pre></div></div>
+
+<h2 id="运行shadowsocks">运行Shadowsocks</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nohup /usr/local/bin/ss-server -s IP -p PORT -k PASSWORD -m ENCRYPT_METHOD &amp;
+比如：
+nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;
+</code></pre></div></div>
+
+<h2 id="加入开机自动启动">加入开机自动启动</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "nohup /usr/local/bin/ss-server -s 192.168.1.1 -p 8838 -k password -m rc4-md5 &amp;"&gt;&gt;/etc/rc.local
+</code></pre></div></div>
+
+<h2 id="防火墙例外">防火墙例外</h2>
+
+<p>添加例外：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables -A INPUT -p tcp --dport PORT -j ACCEPT
+</code></pre></div></div>
+
+<p>不过我没成功所以我是直接清除防火墙规则的。</p>
+
+<p>查看防火墙规则：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@vultr ~]# iptables -L -n
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED
+ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     all  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22
+REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+REJECT     all  --  0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</code></pre></div></div>
+
+<p>清除掉所有规则：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[root@vultr ~]# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+</code></pre></div></div>
+
+<p><strong>Shadowsocks 客户端</strong></p>
+
+<p>shadowsocks <a href="https://shadowsocks.org/en/download/clients.html">下载地址</a></p>
+
+<p><strong>加密方式</strong></p>
+
+<p>如果启动命令里不写<code class="language-plaintext highlighter-rouge">-m aes-256-cfb</code>的话，则默认的加密方式为table，我也推荐使用这种加密，因为速度最快。选择aes-256-cfb则比较安全，其实对速度也几乎没有影响。</p>
+
+<p><strong>关于结束服务</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">ps aux</code>会看到<code class="language-plaintext highlighter-rouge">/usr/local/bin/ss-server ……</code>的进程，kill掉即可，比如<code class="language-plaintext highlighter-rouge">kill 29899</code></p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

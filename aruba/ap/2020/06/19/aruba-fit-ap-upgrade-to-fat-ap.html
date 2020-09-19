@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。" />
+<meta property="og:description" content="由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。" />
+<link rel="canonical" href="http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html" />
+<meta property="og:url" content="http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-19T01:59:00+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html"},"description":"由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。","headline":"捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）","dateModified":"2020-06-19T01:59:00+08:00","datePublished":"2020-06-19T01:59:00+08:00","url":"http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）</h1>
+<p>由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</p>
+
+<!--more-->
+
+<h2 id="购买一条-ttl-线">购买一条 TTL 线</h2>
+
+<p>查看 aruba 官网相应版本的说明书（<code class="language-plaintext highlighter-rouge">AP-XXX_Install_Guide.pdf</code>），找到相应的 <code class="language-plaintext highlighter-rouge">Console Port</code> 说明信息，再查找推荐的 <code class="language-plaintext highlighter-rouge">AP-CBL-SERU cable</code> 信息，根据文档里的 <code class="language-plaintext highlighter-rouge">CONNECTOR</code> 去淘宝找相应的型号，根据文档提供的线序购买。</p>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618174916.jpg" alt="查询 Installation Guide" />
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175122.jpg" alt="查看 Console Port 支持的线缆" />
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175155.jpg" alt="查询相关线缆" />
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175252.jpg" alt="查看线缆线序和新片" />
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175301.jpeg" alt="购买 Console 线" /></p>
+
+<h2 id="准备软件和资料">准备软件和资料</h2>
+
+<ul>
+  <li>Serial（串口）连接软件（Windows: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a>; macOS: <a href="https://www.decisivetactics.com/products/serial/">Serial.app</a>）</li>
+  <li>TFTP Server 软件（Windows: <a href="https://www.solarwinds.com/free-tools/free-tftp-server">SolarWinds TFTP Server</a>; macOS: 自带 TFTP Server）</li>
+  <li>需要刷入 AP 的系统固件（如 <code class="language-plaintext highlighter-rouge">ArubaInstant_Vela_8.5.0.3_72498</code>，以及<a href="https://support.arubanetworks.com/Documentation/tabid/77/DMXModule/512/Default.aspx?EntryId=8868">其他固件</a>）
+    <ul>
+      <li>将固件移动到 TFTP Server 的根目录下，如 SolarWinds TFTP Server 的 <code class="language-plaintext highlighter-rouge">C:\TFTP-Root</code></li>
+    </ul>
+  </li>
+  <li><strong>重要</strong>：关闭电脑防火墙</li>
+  <li>启动 SolarWinds TFTP Server ，显示如下：
+  <img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175437.jpg" alt="SolarWinds TFTP Server" /></li>
+</ul>
+
+<h2 id="启动-ap">启动 AP</h2>
+
+<p>（使用的软件以 Windows 平台为例）首先断开 AP 的电源，把 AP 通过串口连接到电脑上，等待提示驱动安装成功后，打开 Putty，选择连接方式为 <code class="language-plaintext highlighter-rouge">Serial</code>，按照<code class="language-plaintext highlighter-rouge">开始菜单（右键） - 设备管理器</code>中显示的串口号，选择连接的串口，如 <code class="language-plaintext highlighter-rouge">COM1</code>，点击 <code class="language-plaintext highlighter-rouge">Open</code> 打开：</p>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/2020/06/DeviceMgr.jpg" alt="查看设备的串口号" />
+<img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175335.jpg" alt="Putty 配置" /></p>
+
+<p>然后把 AP 接上电源，等待窗口中出现如下字符：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hit &lt;Enter&gt; to stop autoboot:  5
+</code></pre></div></div>
+<p>立即按回车，进入 <code class="language-plaintext highlighter-rouge">apboot</code> 模式：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apboot&gt;
+</code></pre></div></div>
+
+<h2 id="配置网络">配置网络</h2>
+
+<p>将 AP 通过网线连接到电脑，在电脑上设置相关接口为固定 IP 地址，如 <code class="language-plaintext highlighter-rouge">192.168.2.10</code>：</p>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175402.jpg" alt="和 AP 连接的网卡 IP 配置" /></p>
+
+<p>然后开始设置 AP 的地址和 TFTP 服务器</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apboot&gt; setenv ipaddr 192.168.2.20  <span class="c"># 配置 AP 的 IP 地址</span>
+apboot&gt; setenv netmask 255.255.255.0    <span class="c"># 配置 AP 的子网掩码</span>
+apboot&gt; setenv serverip 192.168.2.10    <span class="c"># 配置 TFTP 服务器地址，即电脑的 IP 地址</span>
+</code></pre></div></div>
+
+<h2 id="开始给-ap-刷入新固件">开始给 AP 刷入新固件</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apboot&gt; osinfo  <span class="c"># 显示系统中的固件</span>
+Partition 0:
+    image <span class="nb">type</span>: 0
+  machine <span class="nb">type</span>: 46
+          size: 13864872
+       version: 6.5.2.0-6.5.2.0
+  build string: ArubaOS version 6.5.2.0-6.5.2.0 <span class="k">for </span>Vela <span class="o">(</span>p4build@pr-hpn-build01<span class="o">)</span> <span class="o">(</span>gcc version 4.7.2<span class="o">)</span> <span class="c">#59123 Fri Apr 7 09:37:25 AST 2017</span>
+         flags: Instant preserve
+           oem: aruba
+
+Image is signed<span class="p">;</span> verifying checksum... passed
+SHA2 Signature available
+Signer Cert OK
+Policy Cert OK
+RSA signature verified using SHA2.
+
+Partition 1:
+    image <span class="nb">type</span>: 0
+  machine <span class="nb">type</span>: 46
+          size: 13864872
+       version: 6.5.2.0-6.5.2.0
+  build string: ArubaOS version 6.5.2.0-6.5.2.0 <span class="k">for </span>Vela <span class="o">(</span>p4build@pr-hpn-build01<span class="o">)</span> <span class="o">(</span>gcc version 4.7.2<span class="o">)</span> <span class="c">#59123 Fri Apr 7 09:37:25 AST 2017</span>
+         flags: Instant preserve
+           oem: aruba
+
+Image is signed<span class="p">;</span> verifying checksum... passed
+SHA2 Signature available
+Signer Cert OK
+Policy Cert OK
+RSA signature verified using SHA2.
+
+apboot&gt; clear os 0  <span class="c"># 清除分区 0 的系统</span>
+apboot&gt; upgrade os 0 ArubaInstant_Vela_8.5.0.3_72498    <span class="c"># os 0 分区刷入 TFTP Server 中的 ArubaInstant_Vela_8.5.0.3_72498 固件</span>
+
+<span class="c"># 当看到 Upgrade successful 表示刷入成功</span>
+
+apboot&gt; factory_reset   <span class="c"># ！重要：清除原来的配置</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>建议将两个分区刷入同样的固件。</p>
+</blockquote>
+
+<h2 id="配置-iap">配置 IAP</h2>
+
+<p>等待 5 分钟左右，会出现一个 <code class="language-plaintext highlighter-rouge">SetMeUp-XX:XX:XX</code> 类似的名字的 Wi-Fi 信号，就是刷新后的 Aruba IAP 的初始网络。</p>
+
+<p>连接上去后，打开浏览器，输入网址 <code class="language-plaintext highlighter-rouge">https://setmeup.arubanetworks.com:4343/</code> （有可能浏览器会提示此网站证书不受信任，直接点仍然继续访问）进入 web 设置界面，使用账号 <code class="language-plaintext highlighter-rouge">admin</code> 和密码 <code class="language-plaintext highlighter-rouge">机器的 SN 号</code> 登陆（8.5 以下系统是 <code class="language-plaintext highlighter-rouge">admin/admin</code>，开始和普通无线路由器一样设置网络。</p>
+
+<p>需要配置的地方为：</p>
+<ul>
+  <li>配置 - 接入点：设置 AP 的接入方式，如连接主路由，只需要在 <code class="language-plaintext highlighter-rouge">常规</code>选项中选择 DHCP 即可</li>
+  <li>配置 - 网络：设置 Wi-Fi，新建即可，在高级选项中可以选择 2.4G 或 5G 网络，是否隐藏 SSID，加密方式等</li>
+</ul>
+
+<p>设置完毕，将 AP 连接到路由器上就可以正常使用了。</p>
+
+<p><img src="https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg" alt="Overview" /></p>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

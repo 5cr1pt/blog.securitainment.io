@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      在 Linux 中设置和修改 swap 空间
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="在 Linux 中设置和修改 swap 空间" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="启用 swap" />
+<meta property="og:description" content="启用 swap" />
+<link rel="canonical" href="http://localhost:4000/linux/2019/07/24/add-or-resize-swapfile-size.html" />
+<meta property="og:url" content="http://localhost:4000/linux/2019/07/24/add-or-resize-swapfile-size.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-24T18:50:16+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/linux/2019/07/24/add-or-resize-swapfile-size.html"},"description":"启用 swap","headline":"在 Linux 中设置和修改 swap 空间","dateModified":"2019-07-24T18:50:16+08:00","datePublished":"2019-07-24T18:50:16+08:00","url":"http://localhost:4000/linux/2019/07/24/add-or-resize-swapfile-size.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>在 Linux 中设置和修改 swap 空间</h1>
+<h2 id="启用-swap">启用 swap</h2>
+
+<ol>
+  <li>
+    <p>创建 swapfile</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> dd if=/dev/zero of=/swapfile bs=1M count=2048
+ mkswap /swapfile
+ chmod 600 /swapfile
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>使用 vi 打开 fstab</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> vi /etc/fstab
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将以下内容添加到文件中</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /swapfile swap swap defaults 0 0
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>（可选）设置当系统内存较小时才使用 swapfile</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sysctl -w vm.swappiness=10
+ echo vm.swappiness = 10 | tee -a /etc/sysctl.conf
+ sysctl vm.vfs_cache_pressure=60
+ echo vm.vfs_cache_pressure = 60 | tee -a /etc/sysctl.conf
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>启用 swapfile.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mount -a
+ swapon -a
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>检查 swapfile 状态</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> swapon -s
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="修改swap大小">修改swap大小</h2>
+
+<ol>
+  <li>
+    <p>关闭 swap</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo swapoff -a
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>把当前的 swapfile 文件增大</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo dd if=/dev/zero of=/swapfile bs=1M count=1024
+</code></pre></div>    </div>
+    <p>bs 指的是 Block Size，就是每一块的大小。这里的例子是 1M，意思就是 count 的数字，是以 1M 为单位的。
+ counter 是告诉程序，新的 swapfile 要多少个 block。这里是 1024，就是说，新的 swap 文件是 1G 大小。</p>
+  </li>
+  <li>
+    <p>把增大后的文件变为swap文件。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo mkswap /swapfile
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>重新打开 swap</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo swapon /swapfile
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>让 swap 在启动的时候，自动生效。打开 <code class="language-plaintext highlighter-rouge">/etc/fstab</code> 文件</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo vim /etc/fstab
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>(如果之前未设置) 打开 fstab <code class="language-plaintext highlighter-rouge">vi /etc/fstab</code>加上以下命令。然后保存。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /swapfile swap swap defaults 0 0
+</code></pre></div>    </div>
+  </li>
+</ol>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>

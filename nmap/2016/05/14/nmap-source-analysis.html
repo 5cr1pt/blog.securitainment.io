@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      nmap 源代碼分析
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="nmap 源代碼分析" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="learn code hack" />
+<meta property="og:description" content="learn code hack" />
+<link rel="canonical" href="http://localhost:4000/nmap/2016/05/14/nmap-source-analysis.html" />
+<meta property="og:url" content="http://localhost:4000/nmap/2016/05/14/nmap-source-analysis.html" />
+<meta property="og:site_name" content="Securitainment.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-05-14T09:22:50+08:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/nmap/2016/05/14/nmap-source-analysis.html"},"description":"learn code hack","headline":"nmap 源代碼分析","dateModified":"2016-05-14T09:22:50+08:00","datePublished":"2016-05-14T09:22:50+08:00","url":"http://localhost:4000/nmap/2016/05/14/nmap-source-analysis.html","@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Securitainment.io" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/main.css" />
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+        <div class="wrapper">
+            <a href="http://localhost:4000"></a>
+<h1>nmap 源代碼分析</h1>
+<!--more-->
+
+<h2 id="nmap源码分析脚本引擎">Nmap源码分析（脚本引擎）</h2>
+
+<p>Nmap提供了强大的脚本引擎（NSE），以支持通过Lua编程来扩展Nmap的功能。目前脚本库已经包含300多个常用的Lua脚本，辅助完成Nmap的主机发现、端口扫描、服务侦测、操作系统侦测四个基本功能，并补充了其他扫描能力：如执行HTTP服务详细的探测、暴力破解简单密码、检查常见的漏洞信息等等。如果用户需要对特定的应用做更深入的探究，可以按照NSE脚本格式编写Lua脚本来增强Nmap的扫描能力。</p>
+
+<ol>
+  <li>
+    <p>简单引入</p>
+
+    <ul>
+      <li>
+        <p>实现原理</p>
+
+        <p>NSE（Nmap Scripting Engine）是Nmap最为强大、最为灵活的功能之一。
+  NSE主要分为两大部分：内嵌Lua解释器与NSE library。
+  解释器：Nmap采用嵌入的Lua解释器来支持Lua脚本语言。Lua语言小巧简单而且扩展灵活，能够很好地与Nmap自身的C/C++语言融合。
+  NSE library：为Lua脚本与Nmap提供了连接，负责完成基本初始化及提供脚本调度、并发执行、IO框架及异常处理，并且提供了默认的实用的脚本程序。</p>
+      </li>
+      <li>
+        <p>脚本分类</p>
+
+        <p>NSE中提供的Lua脚本分为不同的类别（Category），目前的类别如下:</p>
+        <ol>
+          <li>auth  负责处理鉴权证书（绕开鉴权）的脚本</li>
+          <li>broadcast  在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务。</li>
+          <li>brute  提供暴力破解方式，针对常见的应用如http/snmp等</li>
+          <li>default  这是使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力</li>
+          <li>discovery  对网络进行更多的信息，如SMB枚举、SNMP查询等</li>
+          <li>dos  用于进行拒绝服务攻击（denial of service）</li>
+          <li>exploit  利用已知的漏洞入侵系统</li>
+          <li>external  利用第三方的数据库或资源，例如进行whois解析</li>
+          <li>fuzzer  模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</li>
+          <li>intrusive 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽</li>
+          <li>malware 探测目标机是否感染了病毒、开启了后门等信息</li>
+          <li>safe 此类与intrusive相反，属于安全性脚本</li>
+          <li>version 负责增强服务与版本扫描（Version Detection）功能的脚本。</li>
+          <li>vuln 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067。</li>
+        </ol>
+      </li>
+      <li>
+        <p>命令行选项</p>
+
+        <p>Nmap提供的命令行参数如下：</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -sC: 等价于--script=default，使用默认类别的脚本进行扫描。
+
+  --script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述
+
+  --script-args=&lt;n1=v1,[n2=v2,...]&gt;: 为脚本提供默认参数
+
+  --script-args-file=filename: 使用文件来为脚本提供参数
+
+  --script-trace: 显示脚本执行过程中发送与接收的数据
+
+  --script-updatedb: 更新脚本数据库
+
+  --script-help=&lt;Lua scripts&gt;: 显示脚本的帮助信息，其中&lt;Lua scripts&gt;部分可以逗号分隔的文件或脚本类别。
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>实现框架</p>
+
+    <ul>
+      <li>
+        <p>文件组织</p>
+
+        <p>Nmap脚本引擎所需要的的文件：</p>
+
+        <ul>
+          <li>nse_main.cc/nse_main.h/nse_main.lua,这是核心流程文件，负责脚本的初始化与调度执行。</li>
+          <li>nmap/nse_*文件，nmap源码目录下以nse开头的文件，负责为NSE提供调用库，例如提供dnet、nsock、ssl、pcrelib、fs、bit等操作的库函数。</li>
+          <li>liblua目录，提供Lua语言默认的源码C语言文件（提供Lua库函数与解释器相关代码）</li>
+          <li>nselib目录，Nmap实现的NSE库文件，以Lua语言形式提供基本的库函数</li>
+          <li>scripts目录，Nmap内置的实用脚本，即对具体扫描任务相关的操作脚本。Nmap目前支持300多个脚本（14个类别）。</li>
+        </ul>
+      </li>
+      <li>
+        <p>代码流程</p>
+
+        <ul>
+          <li>
+            <p>代码流程图</p>
+
+            <p><img src="http://img.my.csdn.net/uploads/201209/07/1347030259_3581.png" alt="" /></p>
+          </li>
+          <li>
+            <p>流程解析</p>
+            <ul>
+              <li>初始化流程</li>
+            </ul>
+
+            <p>在命令行参数中指定脚本（–script/-sC）或指定-A选项或指定-sV选项，都会触发Nmap启动脚本引擎。其中-A选项表示aggressive scan，会调用default类别的脚本扫描；而-sV选项表示应用与版本侦测，会调用Version类别的脚本，辅助侦测服务详细信息。</p>
+
+            <p>在Nmap.cc的nmap_main()函数中，若判断到需要启动脚本引擎，那么调用open_nse()函数进行NSE环境的准备。在open_nse()中主要创建luaState（管理Lua解释器的执行的全局变量），然后调用init_main()进行详细的初始化过程。</p>
+
+            <p>进入init_main()函数，首先加载Lua标准库与Nmap的扩展库，随后准备参数环境，然后加载并执行nse_main.lua文件。</p>
+
+            <p>nse_main.lua脚本为后续的脚本执行准备Lua环境，加载用户选择的需要调用的脚本（例如，用户–script discovery，那么会将该类别中所有的脚本加载进来），返回一个main()函数对象给init_main()，该main()是否后续脚本扫描需要的主函数，被保存在Lua的环境的注册表中。
+　　
+  在nse_main.lua中，定义两个核心的类，Script和Thread，Script用于管理NSE脚本，当新的脚本被加载时，调用Script.new创建脚本对象，该对象被保存下来在后续的扫描过程中使用；Thread用于管理脚本的执行，该类中也包含对脚本健全性的检查（sanity check，如是否包含Action函数）。在脚本执行时，如果脚本之间存在依赖关系，那么会将基础的无依赖的脚本统一执行完毕，再执行依赖性的脚本。</p>
+
+            <ul>
+              <li>脚本扫描流程</li>
+            </ul>
+
+            <p>执行脚本扫描时，从nmap_main()中调用script_scan()函数。</p>
+          </li>
+        </ul>
+
+        <p>　　在进入script_scan()后，会标记扫描阶段类型，然后进入到初始化阶段返回的main()函数（来自nse_main.lua脚本中的main）中，在函数中解析具体的扫描类型。</p>
+
+        <p>　　main()函数负责处理三种类型的脚本扫描：预扫描（SCRIPT_PRE_SCAN）、脚本扫描（SCRIPT_SCAN）、后扫描（SCRIPT_POST_SCAN）。预扫描即在Nmap调用的最前面（没有进行主机发现、端口扫描等操作）执行的脚本扫描，通常该类扫描用于准备基本的信息，例如到第三服务器查询相关的DNS信息。而脚本扫描，是使用NSE脚本来扫描目标主机，这是最核心的扫描方式。后扫描，是整个扫描结束后，做一些善后处理的脚本，比如优化整理某些扫描。</p>
+
+        <p>　　在NSE脚本中都会定义触发规则（rule），确定在什么阶段什么条件执行该脚本。NSE共有4中规则，prerule()，如果脚本定义该规则，则在预扫描阶段该脚本会被执行；hostrule(host)该规则在检测到主机在线时候才执行；port(host,port)，检测主机某个端口开放时才执行，通常用于侦查特定的服务类型；postrule()，在所有主机都被扫描完毕后执行。</p>
+
+        <p>　　在main()函数中核心操作由run函数负责。而run()函数的本身设计用于执行所有同一级别的脚本（根据依赖关系划分的级别），直到所有线程执行完毕才退出。</p>
+
+        <p>　　run()函数中实现三个队列：执行队列（Running Queue）、等待队列（Waiting Queue）、挂起队列（Pending Queue），并管理三个队列中线程的切换，直到全部队列为空或出错而退出。</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>源码分析</p>
+
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">///L_NSE用于保存Lua程序的状态</span>
+ <span class="k">static</span> <span class="n">lua_State</span> <span class="o">*</span><span class="n">L_NSE</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+
+ <span class="c1">///open_nse用于创建Lua状态，准备Lua解释器环境</span>
+ <span class="c1">///调用init_main()完成初始化操作。</span>
+ <span class="kt">void</span> <span class="nf">open_nse</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">L_NSE</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>    <span class="c1">///全局维护一份Lua状态</span>
+   <span class="p">{</span>
+     <span class="cm">/*
+      Set the random seed value on behalf of scripts.  Since Lua uses the
+      C rand and srand functions, which have a static seed for the entire
+      program, we don't want scripts doing this themselves.
+      */</span>
+     <span class="n">srand</span><span class="p">(</span><span class="n">get_random_uint</span><span class="p">());</span>
+
+     <span class="c1">///创建Lua状态机，用于管理整个Lua程序的执行</span>
+     <span class="k">if</span> <span class="p">((</span><span class="n">L_NSE</span> <span class="o">=</span> <span class="n">luaL_newstate</span><span class="p">())</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+       <span class="n">fatal</span><span class="p">(</span><span class="s">"%s: failed to open a Lua state!"</span><span class="p">,</span> <span class="n">SCRIPT_ENGINE</span><span class="p">);</span>
+     <span class="n">lua_atpanic</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="n">panic</span><span class="p">);</span>  <span class="c1">///注册发生严重故障的回调函数为panic函数</span>
+
+ <span class="c">#if 0
+     /* Lua 5.2 */
+     lua_pushcfunction(L_NSE, init_main);
+     lua_pushlightuserdata(L_NSE, &amp;o.chosenScripts);
+     if (lua_pcall(L_NSE, 1, 0, 0))
+ #else</span>
+     <span class="c1">///此处lua_cpcall()以保护模式执行C语言函数init_main()</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">lua_cpcall</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="n">init_main</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">o</span><span class="p">.</span><span class="n">chosenScripts</span><span class="p">))</span>
+ <span class="cp">#endif
+</span>       <span class="n">fatal</span><span class="p">(</span><span class="s">"%s: failed to initialize the script engine:</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">SCRIPT_ENGINE</span><span class="p">,</span>
+           <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+ <span class="c1">///scipt_scan函数具体执行脚本扫描的过程</span>
+ <span class="c1">///设置扫描状态；调用run_main()函数执行具体脚本扫描过程。</span>
+ <span class="kt">void</span> <span class="nf">script_scan</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Target</span> <span class="o">*&gt;</span> <span class="o">&amp;</span><span class="n">targets</span><span class="p">,</span> <span class="n">stype</span> <span class="n">scantype</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="c1">///设置全局的扫描状态为此处状态（可能是SCRIPT_PRE_SCAN/SCRIPT_SCAN/SCRIPT_POST_SCAN）</span>
+   <span class="n">o</span><span class="p">.</span><span class="n">current_scantype</span> <span class="o">=</span> <span class="n">scantype</span><span class="p">;</span>
+
+   <span class="c1">///断言L_NSE非空，并清空栈区（C与Lua调用交互过程均会在栈内完成）</span>
+   <span class="n">assert</span><span class="p">(</span><span class="n">L_NSE</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+   <span class="n">lua_settop</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="cm">/* clear the stack */</span>
+
+ <span class="c">#if 0
+   /* Lua 5.2 */
+   lua_pushcfunction(L_NSE, run_main);
+   lua_pushlightuserdata(L_NSE, &amp;targets);
+   if (lua_pcall(L_NSE, 1, 0, 0))
+ #else</span>
+   <span class="c1">///此处lua_cpcall()以保护模式执行C语言函数run_main()</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">lua_cpcall</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="n">run_main</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">targets</span><span class="p">))</span>
+ <span class="cp">#endif
+</span>     <span class="n">error</span><span class="p">(</span><span class="s">"%s: Script Engine Scan Aborted.</span><span class="se">\n</span><span class="s">An error was thrown by the "</span>
+           <span class="s">"engine: %s"</span><span class="p">,</span> <span class="n">SCRIPT_ENGINE</span><span class="p">,</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+ <span class="p">}</span>
+
+ <span class="kt">void</span> <span class="nf">close_nse</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="c1">///关闭Lua状态</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">L_NSE</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">lua_close</span><span class="p">(</span><span class="n">L_NSE</span><span class="p">);</span>
+     <span class="n">L_NSE</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="k">static</span> <span class="kt">int</span> <span class="nf">init_main</span> <span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="kt">char</span> <span class="n">path</span><span class="p">[</span><span class="n">MAXPATHLEN</span><span class="p">];</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">*</span><span class="n">rules</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">)</span>
+       <span class="n">lua_touserdata</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+   <span class="cm">/* Load some basic libraries */</span>
+   <span class="n">luaL_openlibs</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>       <span class="c1">///加载Lua自身的库</span>
+   <span class="n">set_nmap_libraries</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>  <span class="c1">///加载Nmap扩展的Lua库</span>
+
+   <span class="n">lua_newtable</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+   <span class="n">lua_setfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_CURRENT_HOSTS</span><span class="p">);</span>
+
+   <span class="cm">/* Load debug.traceback for collecting any error tracebacks */</span>
+   <span class="n">lua_settop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="cm">/* clear the stack */</span>
+   <span class="n">lua_getglobal</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">"debug"</span><span class="p">);</span>
+   <span class="n">lua_getfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s">"traceback"</span><span class="p">);</span>
+   <span class="n">lua_replace</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// debug.traceback stack position 1</span>
+   <span class="n">lua_pushvalue</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+   <span class="n">lua_setfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_TRACEBACK</span><span class="p">);</span> <span class="cm">/* save copy */</span>
+
+   <span class="cm">/* Load main Lua code, stack position 2 */</span>
+   <span class="c1">///将nse_main.lua文件加载进来，文件被转换为匿名函数（栈索引为2），后续调用lua_pcall()执行它。</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">nmap_fetchfile</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="s">"nse_main.lua"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+     <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">"could not locate nse_main.lua"</span><span class="p">);</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">luaL_loadfile</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+     <span class="n">luaL_error</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="s">"could not load nse_main.lua: %s"</span><span class="p">,</span> <span class="n">lua_tostring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+
+   <span class="cm">/* The first argument to the NSE Main Lua code is the private nse
+    * library table which exposes certain necessary C functions to
+    * the Lua engine.
+    */</span>
+   <span class="c1">///加载提供给nse_main.lua调用的C语言函数表（栈索引为3）</span>
+   <span class="n">open_cnse</span><span class="p">(</span><span class="n">L</span><span class="p">);</span> <span class="c1">// stack index 3</span>
+
+   <span class="cm">/* The second argument is the script rules, including the
+    * files/directories/categories passed as the userdata to this function.
+    */</span>
+   <span class="c1">///将脚本规则作为参数压入栈区（栈索引为4）</span>
+   <span class="n">lua_createtable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">rules</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// stack index 4</span>
+   <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">si</span> <span class="o">=</span> <span class="n">rules</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
+        <span class="n">si</span> <span class="o">!=</span> <span class="n">rules</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">();</span> <span class="n">si</span><span class="o">++</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">si</span><span class="o">-&gt;</span><span class="n">c_str</span><span class="p">());</span>
+     <span class="n">lua_rawseti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">lua_objlen</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+   <span class="p">}</span>
+
+   <span class="cm">/* Get Lua main function */</span>
+   <span class="c1">///调用由nse_main.lua转换后的匿名函数（栈索引2）：</span>
+   <span class="c1">///传入2个参数（栈索引3/4），输出1个结果（执行完毕后放在栈顶），</span>
+   <span class="c1">///错误处理函数对应的栈区索引为1（即debug.traceback）。</span>
+   <span class="c1">///功能：在nse_main.lua会加载用户选择的所有的脚本，并初始化Script/Thread类</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">lua_pcall</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">lua_error</span><span class="p">(</span><span class="n">L</span><span class="p">);</span> <span class="cm">/* we wanted a traceback */</span>
+
+   <span class="c1">///将执行nse_main.lua返回的结果（nse_main.lua中的main函数对象）放入注册表中，</span>
+   <span class="c1">///以便后续的脚本扫描过程直接调用此main函数。</span>
+   <span class="n">lua_setfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_MAIN</span><span class="p">);</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="k">static</span> <span class="kt">int</span> <span class="nf">run_main</span> <span class="p">(</span><span class="n">lua_State</span> <span class="o">*</span><span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Target</span> <span class="o">*&gt;</span> <span class="o">*</span><span class="n">targets</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Target</span><span class="o">*&gt;</span> <span class="o">*</span><span class="p">)</span>
+       <span class="n">lua_touserdata</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+   <span class="n">lua_settop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">///清空栈区</span>
+
+   <span class="cm">/* New host group */</span>
+   <span class="n">lua_newtable</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>  <span class="c1">///清空当前主机组</span>
+   <span class="n">lua_setfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_CURRENT_HOSTS</span><span class="p">);</span>
+
+   <span class="c1">///读出error traceback函数</span>
+   <span class="n">lua_getfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_TRACEBACK</span><span class="p">);</span> <span class="cm">/* index 1 */</span>
+
+   <span class="c1">///获取nse_main.lua中的main()函数</span>
+   <span class="n">lua_getfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_MAIN</span><span class="p">);</span> <span class="cm">/* index 2 */</span>
+   <span class="n">assert</span><span class="p">(</span><span class="n">lua_isfunction</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>  <span class="c1">///若不是函数，那此处必然有错</span>
+
+   <span class="cm">/* The first and only argument to main is the list of targets.
+    * This has all the target names, 1-N, in a list.
+    */</span>
+   <span class="c1">///main (hosts, scantype)</span>
+   <span class="c1">///main函数需要两个参数，被扫描的主机组与扫描类型（PRE/SCRIPT/POST）</span>
+   <span class="c1">///以下代码将逐次加入等待扫描主机到NSE_CURRENT_HOSTS表中</span>
+   <span class="n">lua_createtable</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">targets</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// stack index 3</span>
+   <span class="n">lua_getfield</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">LUA_REGISTRYINDEX</span><span class="p">,</span> <span class="n">NSE_CURRENT_HOSTS</span><span class="p">);</span> <span class="cm">/* index 4 */</span>
+   <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Target</span> <span class="o">*&gt;::</span><span class="n">iterator</span> <span class="n">ti</span> <span class="o">=</span> <span class="n">targets</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
+        <span class="n">ti</span> <span class="o">!=</span> <span class="n">targets</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">();</span> <span class="n">ti</span><span class="o">++</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">Target</span> <span class="o">*</span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">Target</span> <span class="o">*</span><span class="p">)</span> <span class="o">*</span><span class="n">ti</span><span class="p">;</span>
+     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">TargetName</span> <span class="o">=</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">TargetName</span><span class="p">();</span>
+     <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">targetipstr</span> <span class="o">=</span> <span class="n">target</span><span class="o">-&gt;</span><span class="n">targetipstr</span><span class="p">();</span>
+     <span class="n">lua_newtable</span><span class="p">(</span><span class="n">L</span><span class="p">);</span>
+     <span class="n">set_hostinfo</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+     <span class="n">lua_rawseti</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">lua_objlen</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">TargetName</span> <span class="o">!=</span> <span class="nb">NULL</span> <span class="o">&amp;&amp;</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">TargetName</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+       <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">TargetName</span><span class="p">);</span>
+     <span class="k">else</span>
+       <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">targetipstr</span><span class="p">);</span>
+     <span class="n">lua_pushlightuserdata</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+     <span class="n">lua_rawset</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="cm">/* add to NSE_CURRENT_HOSTS */</span>
+   <span class="p">}</span>
+   <span class="n">lua_pop</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="cm">/* pop NSE_CURRENT_HOSTS */</span>
+
+   <span class="c1">///设置main()第二个参数，扫描类型</span>
+   <span class="cm">/* push script scan type phase */</span>
+   <span class="k">switch</span> <span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">current_scantype</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="k">case</span> <span class="n">SCRIPT_PRE_SCAN</span><span class="p">:</span>
+       <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">NSE_PRE_SCAN</span><span class="p">);</span>
+       <span class="k">break</span><span class="p">;</span>
+     <span class="k">case</span> <span class="n">SCRIPT_SCAN</span><span class="p">:</span>
+       <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">NSE_SCAN</span><span class="p">);</span>
+       <span class="k">break</span><span class="p">;</span>
+     <span class="k">case</span> <span class="n">SCRIPT_POST_SCAN</span><span class="p">:</span>
+       <span class="n">lua_pushstring</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">NSE_POST_SCAN</span><span class="p">);</span>
+       <span class="k">break</span><span class="p">;</span>
+     <span class="nl">default:</span>
+       <span class="n">fatal</span><span class="p">(</span><span class="s">"%s: failed to set the script scan phase.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">SCRIPT_ENGINE</span><span class="p">);</span>
+   <span class="p">}</span>
+
+   <span class="c1">///以保护模式运行main()函数，两个参数，0个返回值，错误处理函数在栈区的index1位置</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">lua_pcall</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">lua_error</span><span class="p">(</span><span class="n">L</span><span class="p">);</span> <span class="cm">/* we wanted a traceback */</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+<br/><p>Comments:</p>
+
+<script src="https://utteranc.es/client.js"
+        repo="5cr1pt/commnets.blog.securitainment.io"
+        issue-term="url"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<div style="display:none">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-137221448-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</div>
+
+        </div>
+    </main>
+
+    
+    </body>
+</html>
