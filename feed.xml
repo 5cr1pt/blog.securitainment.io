@@ -1,4 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-09-19T16:02:07+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">progit note 03</title><link href="https://blog.securitainment.io/git/github/progit/note/2020/09/18/ProGit-note-03.html" rel="alternate" type="text/html" title="progit note 03" /><published>2020-09-18T20:29:01+08:00</published><updated>2020-09-18T20:29:01+08:00</updated><id>https://blog.securitainment.io/git/github/progit/note/2020/09/18/ProGit-note-03</id><content type="html" xml:base="https://blog.securitainment.io/git/github/progit/note/2020/09/18/ProGit-note-03.html">&lt;p&gt;本部分主要介绍 Git 的分支功能。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-09-29T16:56:57+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook</title><link href="http://localhost:4000/pentest/2020/09/29/hack-facebook-by-mdm.html" rel="alternate" type="text/html" title="学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook" /><published>2020-09-29T00:53:00+08:00</published><updated>2020-09-29T00:53:00+08:00</updated><id>http://localhost:4000/pentest/2020/09/29/hack-facebook-by-mdm</id><content type="html" xml:base="http://localhost:4000/pentest/2020/09/29/hack-facebook-by-mdm.html">&lt;h2 id=&quot;整理-mobileiron&quot;&gt;整理 MobileIron&lt;/h2&gt;
+
+&lt;p&gt;使用 Google Search 在一个公开网站根目录找到疑似开发商测试用的 RPM 包&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://devco.re/assets/img/blog/20200912/1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下载的版本是 2018 年初版。&lt;/p&gt;
+
+&lt;p&gt;MobileIron 使用 Java 开发，对外开放 443，8443， 9997 端口，各个端口的功能如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;443 為使用者裝置註冊介面&lt;/li&gt;
+  &lt;li&gt;8443 為設備管理介面&lt;/li&gt;
+  &lt;li&gt;9997 為一個 MobileIron 私有的裝置同步協定 (MI Protocol)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;三个端口都使用 TLS 保证安全性，网页部分则是通过 Apache Reverse Proxy 架构连接到后端，由 Tomcat 部署的网页应用处理，网页应用由 Spring MVC 开发。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://devco.re/assets/img/blog/20200912/2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;由于使用的技术相对较新，传统漏洞如 SQL Injection 比较难从单一的点来发现，因此转向理解程序逻辑，并配合框架层面的攻击。&lt;/p&gt;
+
+&lt;h2 id=&quot;漏洞总结&quot;&gt;漏洞总结&lt;/h2&gt;
+
+&lt;p&gt;Web Service 使用了 Hessian 格式处理资料，而产生了反序列化漏洞。&lt;/p&gt;
+
+&lt;h2 id=&quot;漏洞详解&quot;&gt;漏洞详解&lt;/h2&gt;
+
+&lt;p&gt;现在已知 MobileIron 在处理 Web Service 的地方存在 Hessian 反序列化漏洞，但是无法直接接触到。&lt;/p&gt;
+
+&lt;p&gt;可触发 Hessian 反序列化的路径分别在：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一般使用界面：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://mobileiron/mifs/services/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;管理界面：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://mobileiron:8443/mifs/services/&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;管理界面一般可以轻松接触到 Web Service，但一般用户界面则无法接触到 Web Service，由于一般企业不会将管理页面端口开放在外网，因此只能通过其他方式发现漏洞。&lt;/p&gt;
+
+&lt;p&gt;研究 MobileIron 的阻挡方式，发现是通过 Apache 上使用 Rewrite Rules 来阻挡一般用户访问 Web Service：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;RewriteRule ^/mifs/services/(.*)$ https://%{SERVER_NAME}:8443/mifs/services/$1 [R=307,L]
+RewriteRule ^/mifs/services [F]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;由于是在前端做的阻挡，联想到 2015 年的研究，针对 Reverse Proxy 架构的新攻击面 &lt;a href=&quot;https://blog.orange.tw/2018/08/how-i-chained-4-bugs-features-into-rce-on-amazon.html&quot;&gt;Breaking Parser Logic&lt;/a&gt;，这个技巧最近也被利用在 &lt;a href=&quot;https://support.f5.com/csp/article/K52145254&quot;&gt;CVE-2020-5902&lt;/a&gt;，F5 BIG-IP TMUI 的远程代码执行漏洞上。&lt;/p&gt;
+
+&lt;p&gt;通过 Apache 与 Tomcat 对路径的理解不一致，可以使用以下方式绕过 Rewrite Rule 攻击 Web Service：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://mobileiron/mifs/.;/services/someService
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样就可以直接接触到有 Hessian 反序列化存在的 Web Service 了。&lt;/p&gt;
+
+&lt;h2 id=&quot;利用漏洞&quot;&gt;利用漏洞&lt;/h2&gt;
+
+&lt;p&gt;针对 Hessian 反序列化，&lt;a href=&quot;https://github.com/mbechler&quot;&gt;Moritz Bechler&lt;/a&gt; 在 &lt;a href=&quot;https://www.github.com/mbechler/marshalsec/blob/master/marshalsec.pdf&quot;&gt;Java Unmarshaller Security&lt;/a&gt; 中做了详细的研究报告，从他开源的 &lt;a href=&quot;https://github.com/mbechler/marshalsec&quot;&gt;marshalsec&lt;/a&gt; 源码中，能学习到 Hessian 在反序列化过程中除了通过 HashMap 触发 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;equals()&lt;/code&gt; 以及 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hashcode()&lt;/code&gt;等，也可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;XString&lt;/code&gt; 到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;toString()&lt;/code&gt;，而目前关于 Hessian 反序列化已存在的利用链有四条：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache XBean&lt;/li&gt;
+  &lt;li&gt;Caucho Resin&lt;/li&gt;
+  &lt;li&gt;Spring AOP&lt;/li&gt;
+  &lt;li&gt;ROME EqualsBean/ToStringBean&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;而根据目标环境，只有 Sprint AOP 这条利用链可以用。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;–&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Effect&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;Apache XBean&lt;/td&gt;
+      &lt;td&gt;JNDI 注入&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;Caucho Resin&lt;/td&gt;
+      &lt;td&gt;JNDI 注入&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;√&lt;/td&gt;
+      &lt;td&gt;Spring AOP&lt;/td&gt;
+      &lt;td&gt;JNDI 注入&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x&lt;/td&gt;
+      &lt;td&gt;ROME EqualsBean&lt;/td&gt;
+      &lt;td&gt;RCE&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;现在有了 JNDI 注入，只要通过 &lt;a href=&quot;https://twitter.com/pwntester&quot;&gt;Alvaro Muñoz&lt;/a&gt; 和 &lt;a href=&quot;https://twitter.com/olekmirosh&quot;&gt;Oleksandr Mirosh&lt;/a&gt; 在 Black Hat USA 2016 上发表的 &lt;a href=&quot;https://www.blackhat.com/us-16/briefings.html#a-journey-from-jndi-ldap-manipulation-to-remote-code-execution-dream-land&quot;&gt;A Journey From JNDI/LDAP to RCE Dream Land&lt;/a&gt; 就可以取得远程命令执行了。&lt;/p&gt;
+
+&lt;p&gt;自从 &lt;a href=&quot;https://twitter.com/pwntester&quot;&gt;Alvaro Muñoz&lt;/a&gt; 和 &lt;a href=&quot;https://twitter.com/olekmirosh&quot;&gt;Oleksandr Mirosh&lt;/a&gt; 在 Black Hat 发表了这个新的攻击向量后，帮助了不知道多少黑客，甚至有人认为“遇到反序列化用 JNDI”就对了！，但是自从 2018 年 10 月，Java 把 JNDI 注入的最后一个拼图修复了，这条修复被记录在 &lt;a href=&quot;https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-3149&quot;&gt;CVE-2018-3149&lt;/a&gt; 中，从此以后，所有 Java 版本高于 8u181, 7u191, 6u201 的版本皆无法通过 JNDI/LDAP 的方式执行代码，因此如果要在最新版 MobileIron 上实现攻击，需要另外寻找出路。&lt;/p&gt;
+
+&lt;p&gt;关于 CVE-2018-3149，是通过将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;com.sun.jndi.ldap.object.trustURLCodebase&lt;/code&gt; 的默认值设置为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;False&lt;/code&gt; 的方式以达到禁止攻击者下载远程 Bytecode 执行代码。&lt;/p&gt;
+
+&lt;p&gt;但是我们依然可以通过 JNDI 的 Naming Reference 到本机已经有的 Class Factory 上。通过类似 &lt;a href=&quot;https://en.wikipedia.org/wiki/Return-oriented_programming&quot;&gt;Return-Oriented Programming&lt;/a&gt; 的概念，寻找本地可以利用的类别做进一步的利用，详细手法参考 &lt;a href=&quot;https://twitter.com/artsploit&quot;&gt;Michael Stepankin&lt;/a&gt; 在 2019 年年初发表的 &lt;a href=&quot;https://www.veracode.com/blog/research/exploiting-jndi-injections-java&quot;&gt;Exploiting JNDI Injections in Java&lt;/a&gt;，里面详细介绍了如何通过 Tomcat 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt; 去载入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ELProcessor&lt;/code&gt; 达到任意代码执行。&lt;/p&gt;
+
+&lt;p&gt;但是由于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ELProcessor&lt;/code&gt; 在 Tomcat 8 以后才被引入，但是目标是 Tomcat 7.x，因此需要为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt; 寻找一个新的利用链。&lt;/p&gt;
+
+&lt;p&gt;经过搜索，发现在 &lt;a href=&quot;https://github.com/welk1n&quot;&gt;Welkin&lt;/a&gt; 的&lt;a href=&quot;https://www.cnblogs.com/Welk1n/p/11066397.html&quot;&gt;文章&lt;/a&gt;中提到：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;除了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;javax.el.ELProcessor&lt;/code&gt;，当然也还有很多其他的类符合条件可以作为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beanClass&lt;/code&gt; 注入到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BeanFactory&lt;/code&gt; 中实现利用。举个例子，如果目标机器 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;classpath&lt;/code&gt; 中有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;groovy&lt;/code&gt; 的库，则可以结合之前 Orange 师傅发过的 &lt;a href=&quot;https://blog.orange.tw/2019/02/abusing-meta-programming-for-unauthenticated-rce.html&quot;&gt;Jenkins 的漏洞实现利用&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目标的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ClassPath&lt;/code&gt; 上刚好有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Groovy&lt;/code&gt; 存在，但是版本为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.5.6&lt;/code&gt;，是一个距今十年不支持 Meta Programming 的版本，所以最后基于 Groovy 的代码，重新寻找了一个在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GroovyShell&lt;/code&gt; 上的利用链，详细信息参考提交给 &lt;a href=&quot;https://github.com/welk1n/JNDI-Injection-Bypass&quot;&gt;JNDI-Injection-Bypass&lt;/a&gt; 的这个 &lt;a href=&quot;https://github.com/welk1n/JNDI-Injection-Bypass/pull/1&quot;&gt;Pull Request&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;攻击-facebook&quot;&gt;攻击 Facebook&lt;/h2&gt;
+
+&lt;p&gt;有了基于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JNDI&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BEANFACTORY&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GROOVYSHELL&lt;/code&gt; 的完美远程代码执行漏洞，就可以攻击 Facebook 了。但是检查时发现首页变成了 403 Forbidden，索性 Web Service 还在。&lt;/p&gt;
+
+&lt;p&gt;联系到上次的攻击经验，由于安全考虑，Facebook 会禁止所有针对外部的连接，JNDI 注入的核心就是通过受害者连接至攻击者控制的恶意服务器，并接受回传的恶意 Naming Reference 后所导致的一系列利用，无法连接到攻击者的恶意服务器，就没有办法利用。&lt;/p&gt;
+
+&lt;p&gt;由此，JNDI 注入的路被全部封杀，只能回到 Hessian 反序列化利用。&lt;/p&gt;
+
+&lt;p&gt;为了寻在新的利用链，必须先深入理解已存在的利用链的原理及成因。在重读 &lt;a href=&quot;https://github.com/mbechler/marshalsec/blob/master/marshalsec.pdf&quot;&gt;Java Unmarshaller Security&lt;/a&gt; 的论文后，其中一句话：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Cannot restore Groovy’s MethodClosure as readResolve() is called which throws an exception.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;猜想：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;作者評估過把 Groovy 當成利用鏈的可行性，雖然被限制住了，但一定覺得有機會才會寫進論文中!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;从这个猜想触发，虽然 Groovy 的利用链被 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readResolve()&lt;/code&gt; 限制住了，但是目标版本的 Groovy 比较旧，有可能还没进行限制。&lt;/p&gt;
+
+&lt;p&gt;比较 Groovy-1.5.6 和最新版本关于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;groovy/runtime/MethodClosure.java&lt;/code&gt; 中 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;readSolve()&lt;/code&gt; 的实现：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;diff 1_5_6/MethodClosure.java 3_0_4/MethodClosure.java
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;     private Object readResolve&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ALLOW_RESOLVE&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;             &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;this&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;         throw new UnsupportedOperationException&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以看到旧版没有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ALLOW_RESOLVE&lt;/code&gt; 限制，后来经过查证发现这个限制其实是 Groovy 因为 2015 年出现的 Java 反序列化漏洞而做的缓解措施，而且还被分配了 &lt;a href=&quot;https://groovy-lang.org/security.html&quot;&gt;CVE-2015-3253&lt;/a&gt; 这个漏洞编号。由于 Groovy 只是一个在内部使用，不会对外的小配角，因此没有特别需求下开发者也不会特地去更新，因此这成为了攻击链中的重要一环。&lt;/p&gt;
+
+&lt;p&gt;最后攻击成功，取得 Facebook 服务器上的 Shell。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://youtu.be/hGTLIIOb14A&quot; title=&quot;MobileIron MDM unauthenticated REC&quot;&gt;&lt;img src=&quot;https://img.youtube.com/vi/hGTLIIOb14A/0.jpg&quot; alt=&quot;MobileIron MDM unauthenticated REC&quot; /&gt;&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="pentest" /><summary type="html">整理 MobileIron</summary></entry><entry><title type="html">progit note 03</title><link href="http://localhost:4000/git/github/progit/note/2020/09/18/ProGit-note-03.html" rel="alternate" type="text/html" title="progit note 03" /><published>2020-09-18T20:29:01+08:00</published><updated>2020-09-18T20:29:01+08:00</updated><id>http://localhost:4000/git/github/progit/note/2020/09/18/ProGit-note-03</id><content type="html" xml:base="http://localhost:4000/git/github/progit/note/2020/09/18/ProGit-note-03.html">&lt;p&gt;本部分主要介绍 Git 的分支功能。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -508,7 +660,7 @@ Applying: added staged &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;
 
 &lt;p&gt;一种观点认为仓库的提交历史是 &lt;strong&gt;记录实际发生过什么&lt;/strong&gt; ；另一种是 &lt;strong&gt;项目过程中发生的故事&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;p&gt;总的原则是，只对尚未推送或分享给他人的本地修改执行变基操作，清理历史，从不对已推送的提交执行变基操作。&lt;/p&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍 Git 的分支功能。</summary></entry><entry><title type="html">CentOS 配置登录会话超时，防止 SSH 自动退出</title><link href="https://blog.securitainment.io/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html" rel="alternate" type="text/html" title="CentOS 配置登录会话超时，防止 SSH 自动退出" /><published>2020-09-04T22:53:40+08:00</published><updated>2020-09-04T22:53:40+08:00</updated><id>https://blog.securitainment.io/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout</id><content type="html" xml:base="https://blog.securitainment.io/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html">&lt;p&gt;在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。&lt;/p&gt;
+&lt;p&gt;总的原则是，只对尚未推送或分享给他人的本地修改执行变基操作，清理历史，从不对已推送的提交执行变基操作。&lt;/p&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍 Git 的分支功能。</summary></entry><entry><title type="html">CentOS 配置登录会话超时，防止 SSH 自动退出</title><link href="http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html" rel="alternate" type="text/html" title="CentOS 配置登录会话超时，防止 SSH 自动退出" /><published>2020-09-04T22:53:40+08:00</published><updated>2020-09-04T22:53:40+08:00</updated><id>http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout</id><content type="html" xml:base="http://localhost:4000/centos/ssh/2020/09/04/CentOS-setup-session-timeout-for-ssh-auto-logout.html">&lt;p&gt;在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -570,7 +722,7 @@ ClientAliveCountMax 0            &lt;span class=&quot;c&quot;&gt;# 0 times&lt;/s
 
 &lt;p&gt;Method 1 ：如果客户端 5 分钟没有活动，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sshd&lt;/code&gt; 会向客户端发送保持连接信息，最多发送两次，如果达到两次则断开客户端连接。&lt;/p&gt;
 
-&lt;p&gt;Method 2 ：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sshd&lt;/code&gt; 不会向客户端发送信息，如果客户端 10 分钟没有活动（服务端 10 分钟没有收到客户端消息），服务端会直接断开连接。&lt;/p&gt;</content><author><name></name></author><category term="centos" /><category term="ssh" /><summary type="html">在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。</summary></entry><entry><title type="html">progit 笔记 02 - Git 基础</title><link href="https://blog.securitainment.io/git/github/progit/note/2020/07/20/ProGit-note-02.html" rel="alternate" type="text/html" title="progit 笔记 02 - Git 基础" /><published>2020-07-20T00:46:25+08:00</published><updated>2020-07-20T00:46:25+08:00</updated><id>https://blog.securitainment.io/git/github/progit/note/2020/07/20/ProGit-note-02</id><content type="html" xml:base="https://blog.securitainment.io/git/github/progit/note/2020/07/20/ProGit-note-02.html">&lt;p&gt;本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。&lt;/p&gt;
+&lt;p&gt;Method 2 ：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sshd&lt;/code&gt; 不会向客户端发送信息，如果客户端 10 分钟没有活动（服务端 10 分钟没有收到客户端消息），服务端会直接断开连接。&lt;/p&gt;</content><author><name></name></author><category term="centos" /><category term="ssh" /><summary type="html">在远程管理 VPS 的时候经常会遇到登录会话无活动，导致会话超时 SSH 自动退出的问题，可以通过两个方式在服务端修改配置解决。</summary></entry><entry><title type="html">progit 笔记 02 - Git 基础</title><link href="http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html" rel="alternate" type="text/html" title="progit 笔记 02 - Git 基础" /><published>2020-07-20T00:46:25+08:00</published><updated>2020-07-20T00:46:25+08:00</updated><id>http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02</id><content type="html" xml:base="http://localhost:4000/git/github/progit/note/2020/07/20/ProGit-note-02.html">&lt;p&gt;本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1388,7 +1540,7 @@ Switched to a new branch &lt;span class=&quot;s1&quot;&gt;'version2'&lt;/span&gt
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; alias.br branch
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;这意味着，当你需要输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit&lt;/code&gt; 命令时，只需要输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git ci&lt;/code&gt;。&lt;/p&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。</summary></entry><entry><title type="html">LEDE 旁路由 x86 固件定制记录</title><link href="https://blog.securitainment.io/lede/openwrt/2020/07/16/LEDE-Compile-Note.html" rel="alternate" type="text/html" title="LEDE 旁路由 x86 固件定制记录" /><published>2020-07-16T07:30:32+08:00</published><updated>2020-07-16T07:30:32+08:00</updated><id>https://blog.securitainment.io/lede/openwrt/2020/07/16/LEDE-Compile-Note</id><content type="html" xml:base="https://blog.securitainment.io/lede/openwrt/2020/07/16/LEDE-Compile-Note.html">&lt;p&gt;在使用了几年 Linksys WRT1200AC 安装 OpenWrt 固件，用来正常上网后，这两年手头需要正常上网的设备越来越多（Netflix、Apple TV+、美区 iCloud 同步等），终于感觉网速有点不够用了，于是在 NAS 的虚拟机里安装了 LEDE 作为旁路由。在连续多次编译了 lean 大佬的 lede 固件，尝试做到了对于&lt;strong&gt;单网口旁路由&lt;/strong&gt;来说使用最佳，然后记录了更方便进行再次编译的配置方式。&lt;/p&gt;
+&lt;p&gt;这意味着，当你需要输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit&lt;/code&gt; 命令时，只需要输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git ci&lt;/code&gt;。&lt;/p&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分涵盖 Git 使用中的各种基本命令，包括初始化仓库（repository）、开始或停止跟踪（track）文件、暂存（stage）或提交（commit）更改；配置 Git 来忽略指定的文件和文件模式、撤销错误操作、浏览项目的历史版本以及不同提交（commits）间的差异、推送（push）到远程仓库以及从远程仓库拉取（pull）文件等。</summary></entry><entry><title type="html">LEDE 旁路由 x86 固件定制记录</title><link href="http://localhost:4000/lede/openwrt/2020/07/16/LEDE-Compile-Note.html" rel="alternate" type="text/html" title="LEDE 旁路由 x86 固件定制记录" /><published>2020-07-16T07:30:32+08:00</published><updated>2020-07-16T07:30:32+08:00</updated><id>http://localhost:4000/lede/openwrt/2020/07/16/LEDE-Compile-Note</id><content type="html" xml:base="http://localhost:4000/lede/openwrt/2020/07/16/LEDE-Compile-Note.html">&lt;p&gt;在使用了几年 Linksys WRT1200AC 安装 OpenWrt 固件，用来正常上网后，这两年手头需要正常上网的设备越来越多（Netflix、Apple TV+、美区 iCloud 同步等），终于感觉网速有点不够用了，于是在 NAS 的虚拟机里安装了 LEDE 作为旁路由。在连续多次编译了 lean 大佬的 lede 固件，尝试做到了对于&lt;strong&gt;单网口旁路由&lt;/strong&gt;来说使用最佳，然后记录了更方便进行再次编译的配置方式。&lt;/p&gt;
 
 &lt;p&gt;下面通过本地编译开始，然后转移到使用 Github Action 自动编译，做到完全伸手可得。&lt;/p&gt;
 
@@ -1641,7 +1793,7 @@ Switched to a new branch &lt;span class=&quot;s1&quot;&gt;'version2'&lt;/span&gt
   &lt;li&gt;接口的 DNS 地址为主路由地址，也可以为自定义 DNS 地址&lt;/li&gt;
   &lt;li&gt;接口的 DHCP 设置为&lt;strong&gt;忽略此接口&lt;/strong&gt;（DHCP 由主路由来分配）&lt;/li&gt;
   &lt;li&gt;设置相关插件（SSR Plus，广告屏蔽大师 Plus 等）&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><category term="lede" /><category term="openwrt" /><summary type="html">在使用了几年 Linksys WRT1200AC 安装 OpenWrt 固件，用来正常上网后，这两年手头需要正常上网的设备越来越多（Netflix、Apple TV+、美区 iCloud 同步等），终于感觉网速有点不够用了，于是在 NAS 的虚拟机里安装了 LEDE 作为旁路由。在连续多次编译了 lean 大佬的 lede 固件，尝试做到了对于单网口旁路由来说使用最佳，然后记录了更方便进行再次编译的配置方式。</summary></entry><entry><title type="html">progit 笔记 01</title><link href="https://blog.securitainment.io/git/github/progit/note/2020/06/25/ProGit-note-01.html" rel="alternate" type="text/html" title="progit 笔记 01" /><published>2020-06-25T19:11:36+08:00</published><updated>2020-06-25T19:11:36+08:00</updated><id>https://blog.securitainment.io/git/github/progit/note/2020/06/25/ProGit-note-01</id><content type="html" xml:base="https://blog.securitainment.io/git/github/progit/note/2020/06/25/ProGit-note-01.html">&lt;p&gt;本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。&lt;/p&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="lede" /><category term="openwrt" /><summary type="html">在使用了几年 Linksys WRT1200AC 安装 OpenWrt 固件，用来正常上网后，这两年手头需要正常上网的设备越来越多（Netflix、Apple TV+、美区 iCloud 同步等），终于感觉网速有点不够用了，于是在 NAS 的虚拟机里安装了 LEDE 作为旁路由。在连续多次编译了 lean 大佬的 lede 固件，尝试做到了对于单网口旁路由来说使用最佳，然后记录了更方便进行再次编译的配置方式。</summary></entry><entry><title type="html">progit 笔记 01</title><link href="http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html" rel="alternate" type="text/html" title="progit 笔记 01" /><published>2020-06-25T19:11:36+08:00</published><updated>2020-06-25T19:11:36+08:00</updated><id>http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01</id><content type="html" xml:base="http://localhost:4000/git/github/progit/note/2020/06/25/ProGit-note-01.html">&lt;p&gt;本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1739,7 +1891,7 @@ John Doe
 
 &lt;p&gt;例如获取 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config&lt;/code&gt; 命令的帮助手册&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</summary></entry><entry><title type="html">捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）</title><link href="https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html" rel="alternate" type="text/html" title="捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）" /><published>2020-06-19T01:59:00+08:00</published><updated>2020-06-19T01:59:00+08:00</updated><id>https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap</id><content type="html" xml:base="https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html">&lt;p&gt;由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</summary></entry><entry><title type="html">捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）</title><link href="http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html" rel="alternate" type="text/html" title="捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）" /><published>2020-06-19T01:59:00+08:00</published><updated>2020-06-19T01:59:00+08:00</updated><id>http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap</id><content type="html" xml:base="http://localhost:4000/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html">&lt;p&gt;由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1852,7 +2004,7 @@ apboot&amp;gt; factory_reset   &lt;span class=&quot;c&quot;&gt;# ！重要：清
 
 &lt;p&gt;设置完毕，将 AP 连接到路由器上就可以正常使用了。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg&quot; alt=&quot;Overview&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="aruba" /><category term="ap" /><summary type="html">由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</summary></entry><entry><title type="html">查找并清理 CentOS 的存储空间</title><link href="https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html" rel="alternate" type="text/html" title="查找并清理 CentOS 的存储空间" /><published>2020-06-12T19:41:04+08:00</published><updated>2020-06-12T19:41:04+08:00</updated><id>https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps</id><content type="html" xml:base="https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html">&lt;p&gt;最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg&quot; alt=&quot;Overview&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="aruba" /><category term="ap" /><summary type="html">由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</summary></entry><entry><title type="html">查找并清理 CentOS 的存储空间</title><link href="http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html" rel="alternate" type="text/html" title="查找并清理 CentOS 的存储空间" /><published>2020-06-12T19:41:04+08:00</published><updated>2020-06-12T19:41:04+08:00</updated><id>http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps</id><content type="html" xml:base="http://localhost:4000/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html">&lt;p&gt;最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -1927,7 +2079,7 @@ NetworkMa   891   903 gdbus               root  txt       REG              253,0
   &lt;p&gt;http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html&lt;/p&gt;
 
   &lt;p&gt;http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><category term="linux" /><summary type="html">最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</summary></entry><entry><title type="html">CentOS VPS 安全加固</title><link href="https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps.html" rel="alternate" type="text/html" title="CentOS VPS 安全加固" /><published>2020-06-09T18:24:13+08:00</published><updated>2020-06-09T18:24:13+08:00</updated><id>https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps</id><content type="html" xml:base="https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps.html">&lt;p&gt;由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><category term="linux" /><summary type="html">最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</summary></entry><entry><title type="html">CentOS VPS 安全加固</title><link href="http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html" rel="alternate" type="text/html" title="CentOS VPS 安全加固" /><published>2020-06-09T18:24:13+08:00</published><updated>2020-06-09T18:24:13+08:00</updated><id>http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps</id><content type="html" xml:base="http://localhost:4000/centos/vps/2020/06/09/secure-your-centos-vps.html">&lt;p&gt;由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。&lt;/p&gt;
 
 &lt;!--more--&gt;
 
@@ -2036,7 +2188,7 @@ PermitEmptyPasswords no
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/ssh/sshd_config
 
 Protocol 2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><summary type="html">由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</summary></entry><entry><title type="html">修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题</title><link href="https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html" rel="alternate" type="text/html" title="修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题" /><published>2020-03-23T00:19:54+08:00</published><updated>2020-03-23T00:19:54+08:00</updated><id>https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect</id><content type="html" xml:base="https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html">&lt;blockquote&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><summary type="html">由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</summary></entry><entry><title type="html">修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题</title><link href="http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html" rel="alternate" type="text/html" title="修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题" /><published>2020-03-23T00:19:54+08:00</published><updated>2020-03-23T00:19:54+08:00</updated><id>http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect</id><content type="html" xml:base="http://localhost:4000/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html">&lt;blockquote&gt;
   &lt;p&gt;当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 &lt;strong&gt;myQNAPcloud&lt;/strong&gt; 应用中，&lt;strong&gt;My DDNS&lt;/strong&gt; 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.myqnapcloud.com&lt;/code&gt; 域名远程访问 NAS。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -2071,68 +2223,4 @@ Protocol 2
 &lt;p&gt;在正常上网服务的配置里添加例外即可。&lt;/p&gt;
 
 &lt;p&gt;如在路由器固件为 OPENWRT/LEDE 的路由器上使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ShadowSocksR Plus+&lt;/code&gt; 实现的，可以将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edge.api.myqnapcloud.com&lt;/code&gt; 域名添加到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;访问控制 -&amp;gt; 不走代理的域名&lt;/code&gt; 中：
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322164521.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="nas" /><category term="qnap" /><summary type="html">当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。</summary></entry><entry><title type="html">在 QNAP NAS 中安装 Flexget 并配置 RSS 订阅下载</title><link href="https://blog.securitainment.io/nas/qnap/flexget/rss/2020/03/07/Install-Flexget-on-Qnap-NAS-md.html" rel="alternate" type="text/html" title="在 QNAP NAS 中安装 Flexget 并配置 RSS 订阅下载" /><published>2020-03-07T01:36:04+08:00</published><updated>2020-03-07T01:36:04+08:00</updated><id>https://blog.securitainment.io/nas/qnap/flexget/rss/2020/03/07/Install-Flexget-on-Qnap-NAS-md</id><content type="html" xml:base="https://blog.securitainment.io/nas/qnap/flexget/rss/2020/03/07/Install-Flexget-on-Qnap-NAS-md.html">&lt;p&gt;Flexget 配合种子下载软件（Transmission/Deluge 等），可以根据 RSS 链接和配置文件，自动下载订阅的种子，或进行相应的过滤，不必总是去种子站守资源或者搜索。一般的 PT 站都提供 RSS 订阅下载功能，订阅下载资源非常方便。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;0x00-下载安装-flexget&quot;&gt;0x00 下载安装 Flexget&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;参考官网：https://flexget.com/InstallWizard/QNAP&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;SSH 连接到 NAS 并输入下面的命令：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; python-pip
-pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; setuptools
-pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;flexget
-&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; /root/.flexget
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /root/.flexget
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;0x01-配置-rss-订阅下载&quot;&gt;0x01 配置 RSS 订阅下载&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 创建 flexget.yml 文件&lt;/span&gt;
-vim flexget.yml
-&lt;span class=&quot;c&quot;&gt;# 修改下面的配置信息并粘贴&lt;/span&gt;
-tasks:
-  my_feed:
-    rss: https://somerssfeed.com/feed.xml   &lt;span class=&quot;c&quot;&gt;# rss 订阅链接&lt;/span&gt;
-    accept_all: &lt;span class=&quot;nb&quot;&gt;yes
-    &lt;/span&gt;transmission:
-      host: &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;transmission-host&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# transmission 地址&lt;/span&gt;
-      port: &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;transmission-port&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# transmission 端口号&lt;/span&gt;
-      username: &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;transmission-username&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# transmission 用户名&lt;/span&gt;
-      password: &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;transmission-password&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# transmission 密码&lt;/span&gt;
-      path: /path/to/download   &lt;span class=&quot;c&quot;&gt;# 订阅下载的目录&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;0x02-配置自动刷新脚本&quot;&gt;0x02 配置自动刷新脚本&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 创建脚本&lt;/span&gt;
-vim flexget.sh
-&lt;span class=&quot;c&quot;&gt;# 将下面的配置粘贴到脚本中&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8
-&lt;span class=&quot;nv&quot;&gt;FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/root/.flexget/flexget.log'&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 配置日志文件&lt;/span&gt;
-flexget &lt;span class=&quot;nt&quot;&gt;--cron&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--logfile&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/root/.flexget/flexget.yml'&lt;/span&gt; execute    &lt;span class=&quot;c&quot;&gt;# 执行首次 RSS 订阅下载更新&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# 记录错误信息到日志文件&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/ CRITICAL \s*rss .* HTTP error 502 received from /d'&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/ CRITICAL \s*rss .* Internal server exception on task /d'&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/ WARNING \s*task .* Aborting task /d'&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/ INFO \s*manager .* Running database cleanup\./d'&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/ INFO \s*db_analyze .* Running ANALYZE on database to improve performance\./d'&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$FLEXGETLOGFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;给脚本分配执行的权限：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x flexget.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;执行下面的命令，设置自动刷新（默认是每天刷新一次）：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;0 * * * * '/root/.flexget/flexget.sh'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/etc/config/crontab'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;如果想要手动刷新 RSS 订阅下载信息的话，可以执行下面的命令：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flexget &lt;span class=&quot;nt&quot;&gt;--cron&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--logfile&lt;/span&gt; /root/.flexget/flexget.log &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/root/.flexget/flexget.yml'&lt;/span&gt; execute
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;或者直接运行创建好的 flexget.sh 脚本：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /root/.flexget/
-./flexget.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;每次重启 NAS 之后，所有配置信息都会丢失，需要重新填写。所以请备份第一次的配置信息方便恢复。&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><category term="nas" /><category term="qnap" /><category term="flexget" /><category term="rss" /><summary type="html">Flexget 配合种子下载软件（Transmission/Deluge 等），可以根据 RSS 链接和配置文件，自动下载订阅的种子，或进行相应的过滤，不必总是去种子站守资源或者搜索。一般的 PT 站都提供 RSS 订阅下载功能，订阅下载资源非常方便。</summary></entry></feed>
+&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322164521.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="nas" /><category term="qnap" /><summary type="html">当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。</summary></entry></feed>
