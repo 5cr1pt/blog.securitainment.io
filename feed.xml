@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-09-29T16:59:40+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook</title><link href="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html" rel="alternate" type="text/html" title="学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook" /><published>2020-09-29T00:53:00+08:00</published><updated>2020-09-29T00:53:00+08:00</updated><id>https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm</id><content type="html" xml:base="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html">&lt;h2 id=&quot;整理-mobileiron&quot;&gt;整理 MobileIron&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-09-30T14:55:00+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">iOS 测试 - 准备</title><link href="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html" rel="alternate" type="text/html" title="iOS 测试 - 准备" /><published>2020-09-29T22:21:00+08:00</published><updated>2020-09-29T22:21:00+08:00</updated><id>https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing</id><content type="html" xml:base="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html">&lt;h2 id=&quot;设备越狱&quot;&gt;设备越狱&lt;/h2&gt;
+&lt;p&gt;目前稳定的越狱途径是使用 &lt;a href=&quot;https://checkra.in/linux&quot;&gt;checkra1n&lt;/a&gt;，或者使用 &lt;a href=&quot;https://github.com/foxlet/bootra1n&quot;&gt;bootra1n&lt;/a&gt;，一个包含 checkra1n 的 USB Linux 启动盘。&lt;/p&gt;
+
+&lt;h2 id=&quot;安装需要测试的-app&quot;&gt;安装需要测试的 app&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;注册一个不包含个人信息的测试帐号&lt;/li&gt;
+  &lt;li&gt;登录 App Store，安装需要测试的 app（或者使用 &lt;a href=&quot;http://www.3u.com/&quot;&gt;3uTools&lt;/a&gt; 安装）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dump-ipa-文件&quot;&gt;Dump IPA 文件&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;在已越狱的设备上
+    &lt;ul&gt;
+      &lt;li&gt;打开 Cydia 商店，安装 &lt;a href=&quot;https://frida.re/docs/ios/&quot;&gt;frida-server&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;在 Kali VM 里安装 frida&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip instal frida-tools
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kali 安装 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;frida-ios-dump&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libusbmuxd-tools
+ssh &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 22 root@localhost    &lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+git clone https://github.com/AloneMonkey/frida-ios-dump.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;frida-ios-dump
+pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 dump.py &amp;lt;target_app_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;frida-ps&lt;/code&gt; 来找到正确的 app 名称&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frida-ps &lt;span class=&quot;nt&quot;&gt;-Uai&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;mobsf-静态扫描&quot;&gt;MobSF 静态扫描&lt;/h2&gt;
+&lt;p&gt;参照&lt;a href=&quot;https://linuxhint.com/install_docker_kali_linux/&quot;&gt;手册&lt;/a&gt;安装 docker 版 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MobSF&lt;/code&gt; 并启动：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker pull opensecurity/mobile-security-framework-mobsf
+docker run opensecurity/mobile-security-framework-mobsf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;查找该 docker MobSF 监听的端口：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps
+docker inspect &amp;lt;container_id&amp;gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;IPAddress
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后浏览器访问 &lt;a href=&quot;http://IPAddress:8000/&quot;&gt;http://IPAddress:8000/&lt;/a&gt;，将上一步 dump 的 ipa 文件上传并开始静态分析。&lt;/p&gt;</content><author><name></name></author><category term="ios" /><category term="pentest" /><category term="mobile" /><summary type="html">设备越狱 目前稳定的越狱途径是使用 checkra1n，或者使用 bootra1n，一个包含 checkra1n 的 USB Linux 启动盘。</summary></entry><entry><title type="html">学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook</title><link href="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html" rel="alternate" type="text/html" title="学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook" /><published>2020-09-29T00:53:00+08:00</published><updated>2020-09-29T00:53:00+08:00</updated><id>https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm</id><content type="html" xml:base="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html">&lt;h2 id=&quot;整理-mobileiron&quot;&gt;整理 MobileIron&lt;/h2&gt;
 
 &lt;p&gt;使用 Google Search 在一个公开网站根目录找到疑似开发商测试用的 RPM 包&lt;/p&gt;
 
@@ -2188,39 +2240,4 @@ PermitEmptyPasswords no
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/ssh/sshd_config
 
 Protocol 2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><summary type="html">由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</summary></entry><entry><title type="html">修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题</title><link href="https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html" rel="alternate" type="text/html" title="修复 QNAP NAS 特殊情况下 DDNS 服务识别外部 IP 错误的问题" /><published>2020-03-23T00:19:54+08:00</published><updated>2020-03-23T00:19:54+08:00</updated><id>https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect</id><content type="html" xml:base="https://blog.securitainment.io/nas/qnap/2020/03/23/fix-the-qnap-incorrect-ddns-ip-detect.html">&lt;blockquote&gt;
-  &lt;p&gt;当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 &lt;strong&gt;myQNAPcloud&lt;/strong&gt; 应用中，&lt;strong&gt;My DDNS&lt;/strong&gt; 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.myqnapcloud.com&lt;/code&gt; 域名远程访问 NAS。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;1-家庭网络拓扑图家庭中的-nas-是怎么连接到互联网的&quot;&gt;1. 家庭网络拓扑图（家庭中的 NAS 是怎么连接到互联网的）&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322162710.png&quot; alt=&quot;&quot; /&gt;
-其中入口路由器和无线路由器可以是同一个，即家庭中的 PPPOE 拨号上网和无线 WiFi 路由器；或者可以是多个，比如旁路翻墙的设备等。&lt;/p&gt;
-
-&lt;h2 id=&quot;2-ddns-ip-更新错误的问题可能导致无法通过自定义的-myqnapcloudcom-域名访问-nas&quot;&gt;2. DDNS IP 更新错误的问题（可能导致无法通过自定义的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;\*.myqnapcloud.com&lt;/code&gt; 域名访问 NAS）&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322163320.png&quot; alt=&quot;&quot; /&gt;
-如图，DDNS IP 可能被识别为翻墙服务的 IP 地址，而不是实际的宽带外网地址。&lt;/p&gt;
-
-&lt;h2 id=&quot;3-原因分析并修复&quot;&gt;3. 原因分析并修复&lt;/h2&gt;
-
-&lt;p&gt;在 QNAP 系统的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/init.d/&lt;/code&gt; 目录下有一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_external_ip.sh&lt;/code&gt; 的脚本，该脚本的内容为：&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Script for getting an external WAN IP&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# get external IP from qcloud API&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;WAN_IP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;/usr/local/bin/qcloud_cli &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; 13 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-z&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$WAN_IP&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$WAN_IP&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;可以看到获取 WAN_IP 也就是宽带外网 IP 是通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/local/bin/qcloud_cli -x 13 -e&lt;/code&gt; 来实现的，通过追踪该可执行文件，发现该文件通过解析 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edge.api.myqnapcloud.com&lt;/code&gt; 这个域名并访问，来获取外部 IP 地址的。&lt;/p&gt;
-
-&lt;h3 id=&quot;31-修复问题&quot;&gt;3.1 修复问题&lt;/h3&gt;
-&lt;p&gt;在正常上网服务的配置里添加例外即可。&lt;/p&gt;
-
-&lt;p&gt;如在路由器固件为 OPENWRT/LEDE 的路由器上使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ShadowSocksR Plus+&lt;/code&gt; 实现的，可以将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edge.api.myqnapcloud.com&lt;/code&gt; 域名添加到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;访问控制 -&amp;gt; 不走代理的域名&lt;/code&gt; 中：
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200322164521.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="nas" /><category term="qnap" /><summary type="html">当 QNAP NAS 设备接入的网络配置了自动翻墙的话，在 QNAP NAS 的 myQNAPcloud 应用中，My DDNS 功能就有可能将 IPv4 地址识别为翻墙的代理 IP 地址，从而无法通过系统设置的 DDNS 功能从自定义的 *.myqnapcloud.com 域名远程访问 NAS。</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><summary type="html">由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</summary></entry></feed>
