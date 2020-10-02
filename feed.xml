@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-09-30T14:57:48+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">iOS 测试 - 准备</title><link href="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html" rel="alternate" type="text/html" title="iOS 测试 - 准备" /><published>2020-09-29T22:21:00+08:00</published><updated>2020-09-29T22:21:00+08:00</updated><id>https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing</id><content type="html" xml:base="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html">&lt;h2 id=&quot;设备越狱&quot;&gt;设备越狱&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-10-02T16:02:04+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">WINDOWS CMD 命令行下载文件的几种方法</title><link href="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html" rel="alternate" type="text/html" title="WINDOWS CMD 命令行下载文件的几种方法" /><published>2020-10-01T23:44:00+08:00</published><updated>2020-10-01T23:44:00+08:00</updated><id>https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD</id><content type="html" xml:base="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html">&lt;h2 id=&quot;certutil&quot;&gt;certutil&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;certutil.exe &lt;span class=&quot;nt&quot;&gt;-urlcache&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-split&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; http://7-zip.org/a/7z1604-x64.exe 7zip.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;bitsdmin&quot;&gt;bitsdmin&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bitsadmin /transfer taskname http://7-zip.org/a/7z1604-x64.exe c:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quot;&gt;\7&lt;/span&gt;zip.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;copy-file&quot;&gt;Copy file&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bitsadmin /create taskname
+$ bitsadmin /addfile taskname c:\temp\7zip.exe c:\7zip.exe
+$ bitsadmin /resume taskname
+$ bitsadmin /complete taskname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vbs&quot;&gt;vbs&lt;/h2&gt;
+&lt;p&gt;Windows 10 未测试成功。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 用echo写入&lt;/span&gt;
+On Error Resume Next
+Dim iRemote,iLocal
+iLocal &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; LCase&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WScript.Arguments&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+iRemote &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; LCase&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WScript.Arguments&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+Set xPost &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; createObject&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Microsoft.XMLHTTP&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+xPost.Open &lt;span class=&quot;s2&quot;&gt;&quot;GET&quot;&lt;/span&gt;,iRemote,0
+xPost.Send&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+Set sGet &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; createObject&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ADODB.Stream&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+sGet.Mode &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3
+sGet.Type &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+sGet.Open&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+sGet.Write&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;xPost.responseBody&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+sGet.SaveToFile iLocal,2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cscript ff.vbs http://7-zip.org/a/7z1604-x64.exe 7zip.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;powershell&quot;&gt;powershell&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;powershell &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;new-object System.Net.WebClient&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.DownloadFile&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://7-zip.org/a/7z1604-x64.exe'&lt;/span&gt;,&lt;span class=&quot;s1&quot;&gt;'c:\temp\7zip.exe'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ftp&quot;&gt;ftp&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;open 8.8.8.8 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; a.txt &amp;amp; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;get fuck.exe&amp;gt;&amp;gt;a.txt &amp;amp; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;bye&amp;gt;&amp;gt;a.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ftp &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;:a.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/&quot;&gt;Bitsadmin.exe&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.hackingarticles.in/windows-for-pentester-bitsadmin/&quot;&gt;Windows for Pentester: BITSAdmin&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/afb1e7b8acaf&quot;&gt;cmd 环境下载文件的几种方法&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name></name></author><category term="windows" /><category term="cmd" /><category term="pentest" /><summary type="html">certutil $ certutil.exe -urlcache -split -f http://7-zip.org/a/7z1604-x64.exe 7zip.exe</summary></entry><entry><title type="html">iOS 测试 - 准备</title><link href="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html" rel="alternate" type="text/html" title="iOS 测试 - 准备" /><published>2020-09-29T22:21:00+08:00</published><updated>2020-09-29T22:21:00+08:00</updated><id>https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing</id><content type="html" xml:base="https://blog.securitainment.io/ios/pentest/mobile/2020/09/29/getting-started-with-iOS-testing.html">&lt;h2 id=&quot;设备越狱&quot;&gt;设备越狱&lt;/h2&gt;
 &lt;p&gt;目前稳定的越狱途径是使用 &lt;a href=&quot;https://checkra.in/linux&quot;&gt;checkra1n&lt;/a&gt;，或者使用 &lt;a href=&quot;https://github.com/foxlet/bootra1n&quot;&gt;bootra1n&lt;/a&gt;，一个包含 checkra1n 的 USB Linux 启动盘。&lt;/p&gt;
 
 &lt;h2 id=&quot;安装需要测试的-app&quot;&gt;安装需要测试的 app&lt;/h2&gt;
@@ -53,8 +104,8 @@ docker inspect &amp;lt;container_id&amp;gt; | &lt;span class=&quot;nb&quot;&gt;g
 &lt;p&gt;然后浏览器访问 &lt;a href=&quot;http://IPAddress:8000/&quot;&gt;http://IPAddress:8000/&lt;/a&gt;，将上一步 dump 的 ipa 文件上传并开始静态分析。&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;参考：
-https://cornerpirate.com/2020/09/22/getting-started-with-ios-testing/&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cornerpirate.com/2020/09/22/getting-started-with-ios-testing/&quot;&gt;Getting started with iOS testing&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</content><author><name></name></author><category term="ios" /><category term="pentest" /><category term="mobile" /><summary type="html">设备越狱 目前稳定的越狱途径是使用 checkra1n，或者使用 bootra1n，一个包含 checkra1n 的 USB Linux 启动盘。</summary></entry><entry><title type="html">学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook</title><link href="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html" rel="alternate" type="text/html" title="学习：通过寻找 MobileIron MDM 上的远程代码执行漏洞黑进 Facebook" /><published>2020-09-29T00:53:00+08:00</published><updated>2020-09-29T00:53:00+08:00</updated><id>https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm</id><content type="html" xml:base="https://blog.securitainment.io/pentest/2020/09/29/hack-facebook-by-mdm.html">&lt;h2 id=&quot;整理-mobileiron&quot;&gt;整理 MobileIron&lt;/h2&gt;
 
 &lt;p&gt;使用 Google Search 在一个公开网站根目录找到疑似开发商测试用的 RPM 包&lt;/p&gt;
@@ -2136,113 +2187,4 @@ NetworkMa   891   903 gdbus               root  txt       REG              253,0
   &lt;p&gt;http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html&lt;/p&gt;
 
   &lt;p&gt;http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><category term="linux" /><summary type="html">最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</summary></entry><entry><title type="html">CentOS VPS 安全加固</title><link href="https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps.html" rel="alternate" type="text/html" title="CentOS VPS 安全加固" /><published>2020-06-09T18:24:13+08:00</published><updated>2020-06-09T18:24:13+08:00</updated><id>https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps</id><content type="html" xml:base="https://blog.securitainment.io/centos/vps/2020/06/09/secure-your-centos-vps.html">&lt;p&gt;由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;添加-alias-信息&quot;&gt;添加 alias 信息&lt;/h2&gt;
-&lt;p&gt;编辑本地 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.ssh/config&lt;/code&gt; 文件，添加 VPS 的 alias 信息，方便以后通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh alias-name&lt;/code&gt; 连接 VPS。&lt;/p&gt;
-
-&lt;p&gt;以 masOS 为例，首先打开 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.ssh/config&lt;/code&gt; 文件：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi ~/.ssh/config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;然后将自己的 VPS 信息填写进去，格式如下：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Host alias-name	&lt;span class=&quot;c&quot;&gt;# 自定义的主机昵称&lt;/span&gt;
-   HostName ip_address	&lt;span class=&quot;c&quot;&gt;# VPS 主机地址&lt;/span&gt;
-   Port port_number	&lt;span class=&quot;c&quot;&gt;# 端口号&lt;/span&gt;
-   User user	&lt;span class=&quot;c&quot;&gt;# 登陆用户名&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;如果记不住那么多机器的 alias ，可以写个脚本命令列出已经添加的配置，例如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sshl&lt;/code&gt; ，每次需要的显示一下敲一下就 OK 了。&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;sshl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'cat ~/.ssh/config | grep &quot;Host &quot;'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;安装-ntp-服务&quot;&gt;安装 NTP 服务&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ntp ntpdate	&lt;span class=&quot;c&quot;&gt;# 安装 ntp 服务&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chkconfig ntpd on	&lt;span class=&quot;c&quot;&gt;# 开机自动启动&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ntpdate pool.ntp.org	&lt;span class=&quot;c&quot;&gt;# 添加 ntp 服务器&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl start ntpd	&lt;span class=&quot;c&quot;&gt;# 启动 ntp 服务&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;centos-8-使用-chrony&quot;&gt;CentOS 8 使用 chrony&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;chrony
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl start chronyd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;在登陆时提示上次登录失败的信息&quot;&gt;在登陆时提示上次登录失败的信息&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vim /etc/pam.d/systemd-user
-&lt;span class=&quot;c&quot;&gt;# 将下面这一行复制进去&lt;/span&gt;
-session required pam_lastlog.so showfailed
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;设置每个会话最大密码尝试次数&quot;&gt;设置每个会话最大密码尝试次数&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vim  /etc/pam.d/systemd-user
-&lt;span class=&quot;c&quot;&gt;# 将下面这一行复制进去&lt;/span&gt;
-auth pam_pwquality.so  &lt;span class=&quot;nv&quot;&gt;retry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;阻止错误密码尝试&quot;&gt;阻止错误密码尝试&lt;/h2&gt;
-&lt;p&gt;编辑 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/pam.d/system-auth&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/pam.d/password-auth&lt;/code&gt; 两个 PAM 配置文件（尝试3次错误锁定20分钟），添加下面两行进去&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;auth &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;die] pam_faillock.so authfail &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3 &lt;span class=&quot;nv&quot;&gt;unlock_time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1200 &lt;span class=&quot;nv&quot;&gt;fail_interval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;900
-auth required pam_faillock.so authsucc &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3 &lt;span class=&quot;nv&quot;&gt;unlock_time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1200 &lt;span class=&quot;nv&quot;&gt;fail_interval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;900
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;限制密码重用&quot;&gt;限制密码重用&lt;/h2&gt;
-&lt;p&gt;使用 PAM 模块配置，在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/pam.d/system-auth&lt;/code&gt; 这个 PAM 配置文件里面，在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pam_unix.so&lt;/code&gt; 所在的行添加 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remember=24&lt;/code&gt; 。这样服务器就会记录历史上的前 24 个旧密码，为啥为 24？因为这是美国国防部的标准。&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;password sufficient  pam_unix.so existing_options  &lt;span class=&quot;nv&quot;&gt;remember&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;24
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;设置-bootgrub2grubcfg-权限&quot;&gt;设置 /boot/grub2/grub.cfg 权限&lt;/h2&gt;
-&lt;p&gt;设置 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/boot/grub2/grub.cfg&lt;/code&gt; 的权限为 600&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod &lt;/span&gt;600 /boot/grub2/grub.cfg
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;创建具有-sudo-权限的普通用户&quot;&gt;创建具有 sudo 权限的普通用户&lt;/h2&gt;
-&lt;h3 id=&quot;创建一个新用户&quot;&gt;创建一个新用户&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adduser demo
-passwd demo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;查看当前活跃用户&quot;&gt;查看当前活跃用户&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;w
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;查看用户列表&quot;&gt;查看用户列表&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/passwd|grep &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; nologin|grep &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; halt|grep &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; shutdown|awk &lt;span class=&quot;nt&quot;&gt;-F&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{ print $1&quot;|&quot;$3&quot;|&quot;$4 }'&lt;/span&gt;|more
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;给新用户-sudo-权限&quot;&gt;给新用户 sudo 权限&lt;/h3&gt;
-&lt;p&gt;现在，我们有了普通用户，进行普通的操作，但是有时，我们需要更大的权限进行操作，如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yum update&lt;/code&gt;，进行这样的操作，我们一般不会使用 root 登进登录，一般使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt; （Super User do）命令。&lt;/p&gt;
-
-&lt;p&gt;为了将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt; 权限给普通用户，我们需要将新用户加入 wheel 组中，CentOS 默认的 wheel 组有运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt; 的权限。&lt;/p&gt;
-
-&lt;p&gt;我们使用 root 用户，将 demo 用户加入到 wheel 组中。&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpasswd &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; demo wheel
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;配置-ssh-服务&quot;&gt;配置 SSH 服务&lt;/h2&gt;
-&lt;p&gt;我们添加了普通用户，也可以执行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt; 命令，需要配置 ssh 服务，去掉 root 用户的远程登录，这样更加安全。&lt;/p&gt;
-
-&lt;h3 id=&quot;登录到服务器&quot;&gt;登录到服务器&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh demo@SERVER_IP_ADDRESS
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;进行配置&quot;&gt;进行配置&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/ssh/sshd_config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;将&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#PermitRootLogin yes&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;改为&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PermitRootLogin no
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:wq&lt;/code&gt; 保存并退出。&lt;/p&gt;
-&lt;h3 id=&quot;重启-ssh-服务&quot;&gt;重启 ssh 服务&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload sshd
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这样，服务器的 root 用户就被禁止了远程登录。&lt;/p&gt;
-
-&lt;h3 id=&quot;修改端口&quot;&gt;修改端口&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/ssh/sshd_config
-Port &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;禁止空密码登录&quot;&gt;禁止空密码登录&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/ssh/sshd_config:
-
-PermitEmptyPasswords no
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;只允许-ssh-proto-2&quot;&gt;只允许 ssh proto 2&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/ssh/sshd_config
-
-Protocol 2
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><summary type="html">由于正常上网和经常产生新的 idea 需要，手上的 VPS 越来越多，每次都要对新 VPS 进行安全加固，防止被黑。顺便记录常用加固项。</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><category term="linux" /><summary type="html">最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</summary></entry></feed>
