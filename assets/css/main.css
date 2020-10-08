@@ -1,6 +1,38 @@
 html { color: black; background-color: white; font-family: geneo-std; font-size: 1.3rem; line-height: 1.3; -webkit-font-smoothing: antialiased; }
 
-h2, h3, h4, h5, h6 { margin-top: 3rem; }
+h1 { color: #313131; font-weight: bold; line-height: 1.3; }
+
+h2 { font-weight: bold; color: #0099cc; }
+
+h3 { color: #2fb88c; font-weight: bold; }
+
+h2, h3, h4, h5, h6 { margin-top: 1rem; }
+
+strong, b { color: #d19a66; }
+
+em, i { color: #c678dd; }
+
+a { color: #333333; }
+
+code, pre { font-size: 15px; }
+
+pre { overflow: auto; background-color: #F8F8F8; width: auto; padding: 15px; }
+
+pre code { overflow: auto; width: auto; background-color: #F8F8F8; border: none; padding: 0; white-space: pre-wrap; word-wrap: break-word; }
+
+code { background-color: #F8F8F8; color: #1f1f1f; padding: 1px 2px 1px 2px; }
+
+table { margin: 1em; border-collapse: collapse; width: 90%; }
+
+td, th { padding: .5em; border: 1px solid #d5ece4; }
+
+thead { background: #f6f6f7; }
+
+blockquote { color: #bcbdbf; font-style: italic; border-left: 4px solid #b6e5e1; padding: 0 18px; }
+
+hr { border: none; border-bottom: 1px dotted #b6e5e1; }
+
+div.footnotes { font-size: 14px; }
 
 hr { margin: 2rem 0; }
 
@@ -18,16 +50,10 @@ hr:before { content: '/////'; }
 
 hr:after { content: attr(data-content) "/////"; }
 
-table, th, td { width: 100%; border: thin solid black; border-collapse: collapse; padding: 0.4rem; }
-
-code { background-color: #F8F8F8; }
-
-div.highlighter-rouge code { display: block; overflow-x: auto; padding: 1rem; }
-
-blockquote { font-style: italic; border: thin solid black; padding: 1rem; }
-
-blockquote p { margin: 0; }
-
+/*table, th, td { width: 100%; border: thin solid black; border-collapse: collapse; padding: 0.4rem; }*/
+/*code { background-color: #F8F8F8; }*/
+/*div.highlighter-rouge code { display: block; overflow-x: auto; padding: 1rem; }*/
+/*blockquote { font-style: italic; border: thin solid black; padding: 1rem; p { margin: 0; } }*/
 img { width: 80%; max-width: 80ch; height: auto; }
 
 .highlight table td { padding: 5px; }

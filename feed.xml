@@ -1,4 +1,328 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-10-07T14:22:26+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">WINDOWS CMD 命令行下载文件的几种方法</title><link href="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html" rel="alternate" type="text/html" title="WINDOWS CMD 命令行下载文件的几种方法" /><published>2020-10-01T23:44:00+08:00</published><updated>2020-10-01T23:44:00+08:00</updated><id>https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD</id><content type="html" xml:base="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html">&lt;h2 id=&quot;certutil&quot;&gt;certutil&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-10-08T18:16:07+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">Kali Linux 渗透测试(OSCP)笔记 0x01</title><link href="https://blog.securitainment.io/pentest,/kali,/linux/2020/10/08/pentesting-with-kali-0x01.html" rel="alternate" type="text/html" title="Kali Linux 渗透测试(OSCP)笔记 0x01" /><published>2020-10-08T17:02:46+08:00</published><updated>2020-10-08T17:02:46+08:00</updated><id>https://blog.securitainment.io/pentest,/kali,/linux/2020/10/08/pentesting-with-kali-0x01</id><content type="html" xml:base="https://blog.securitainment.io/pentest,/kali,/linux/2020/10/08/pentesting-with-kali-0x01.html">&lt;h2 id=&quot;认识-kali&quot;&gt;认识 Kali&lt;/h2&gt;
+&lt;h3 id=&quot;linux-文件系统&quot;&gt;Linux 文件系统&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin&lt;/code&gt; - 基础命令（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;, etc）&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/sbin&lt;/code&gt; - 系统应用（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fdisk&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkfs&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sysctl&lt;/code&gt;, etc）&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc&lt;/code&gt; - 配置文件&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/tmp&lt;/code&gt; - 临时文件（在引导&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boot&lt;/code&gt;时被删除）&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/bin&lt;/code&gt; - 一般应用（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ncat&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nmap&lt;/code&gt;, etc）&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/share&lt;/code&gt; - 存放应用共享文件和数据的目录&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;基础-linux-命令&quot;&gt;基础 Linux 命令&lt;/h3&gt;
+&lt;h4 id=&quot;man-命令&quot;&gt;man 命令&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt; 显示命令的使用手册（manual pages），比如查看&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;命令的使用手册：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在使用手册页面，命令右边会有一个角标，表示应用的级别，命令的级别分别为：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;级别&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;内容&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户命令&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;系统内核调用的程序接口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;C语言库调用的程序接口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;特殊文件比如设备节点和驱动&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;档案格式&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;6&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;游戏&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;7&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;杂项&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;8&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;管理员命令&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;假如我们想要查看&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;etc/passwd&lt;/code&gt;文件的帮助，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man passwd&lt;/code&gt;显然不是我们想要的，这时使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-k&lt;/code&gt;参数来搜索&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;passwd&lt;/code&gt;关键词相关的内容：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; passwd
+checkPasswdAccess &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - query the SELinux policy database &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;the kernel
+chgpasswd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        - update group passwords &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;batch mode
+chpasswd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;         - update passwords &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;batch mode
+passwd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           - the password file
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;还可以使用正则来匹配&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;passwd&lt;/code&gt;单词：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'^passwd$'&lt;/span&gt;
+passwd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           - change user password
+passwd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1ssl&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        - compute password hashes
+passwd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           - the password file
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这时就可以使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man 5 passwd&lt;/code&gt;来查看&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;passwd&lt;/code&gt;文件的帮助：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man 5 passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;apropos&quot;&gt;apropos&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apropos&lt;/code&gt; 命令和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man -k&lt;/code&gt; 命令是一样的&lt;/p&gt;
+
+&lt;h4 id=&quot;列出文件&quot;&gt;列出文件&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; 命令输出基本的文件列表，可以通过多个参数丰富输出的内容，比如使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt;参数输出所有文件（包括隐藏文件），使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-l&lt;/code&gt;参数输出文件更多信息：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;Desktop  Documents  Downloads  Music  PentestEnv  Pictures  Public  Templates  Videos
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; /etc/apache2/sites-available/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.conf
+/etc/apache2/sites-available/000-default.conf
+/etc/apache2/sites-available/default-ssl.conf
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-al&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+..
+.bash_history
+.bashrc
+.cache
+.config
+Desktop
+Documents
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;定位到不同目录&quot;&gt;定位到不同目录&lt;/h4&gt;
+&lt;p&gt;Linux 不使用 Windows 风格的盘符，所有文件、文件夹、设备等，全部在根目录&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt;下的子目录中。使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt;命令来更改当前所在目录，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwd&lt;/code&gt;命令输出当前所在目录，使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd ~&lt;/code&gt;命令回到用户根目录：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/share/metasploit-framework/
+/usr/share/metasploit-framework&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+/usr/share/metasploit-framework
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~
+/home/kali
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;新建目录&quot;&gt;新建目录&lt;/h4&gt;
+&lt;p&gt;使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir&lt;/code&gt;+目录名来新建目录：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;notes
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;notes/
+~/notes&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;module one
+~/notes&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;module  one
+~/notes&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; module/ one/
+~/notes&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;module one&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;module&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;one/
+~/notes/module one&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mkdir -p&lt;/code&gt;命令一次创建多个目录：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;/&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;recon,exploit,report&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;/
+exploit
+recon
+report
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;查找文件&quot;&gt;查找文件&lt;/h2&gt;
+&lt;p&gt;在 Kali Linux 中查找文件或文件夹的三个常用命令为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find, locate, which&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;which&quot;&gt;which&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/1/which&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;which&lt;/code&gt;&lt;/a&gt; 命令在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$PATH&lt;/code&gt; 定义的环境中查找文件，返回完整路径：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;which sbd
+/usr/bin/sbd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;locate&quot;&gt;locate&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/1/locate&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;locate&lt;/code&gt;&lt;/a&gt;命令查找文件或文件夹最快，实际上是通过搜索内置的数据库 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;locate.db&lt;/code&gt; 查找的，这个数据库自动更新，也可以使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updatedb&lt;/code&gt; 命令手动更新。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;updatedb
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;locate sbd.exe
+/usr/share/windows-resources/sbd/sbd.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;find&quot;&gt;find&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/1/find&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt;&lt;/a&gt; 命令是这三个里最复杂和灵活的搜索工具。如在根目录中搜索开头是 “sbd” 的文件：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+/usr/bin/sbd
+/usr/share/doc/sbd
+/usr/share/windows-resources/sbd
+/usr/share/windows-resources/sbd/sbd.exe
+/usr/share/windows-resources/sbd/sbdbg.exe
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; 不仅可以搜索文件和目录名，还可以搜索文件时间、大小、所属、文件类型、权限等…&lt;/p&gt;
+
+&lt;h2 id=&quot;管理-kali-linux-服务&quot;&gt;管理 Kali Linux 服务&lt;/h2&gt;
+&lt;h3 id=&quot;ssh-服务&quot;&gt;SSH 服务&lt;/h3&gt;
+&lt;p&gt;SSH 服务基于 TCP，默认监听 22 端口。开启 SSH 服务的命令为：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start ssh
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;该命令不输出结果，但是可以通过查找监听 TCP 22 端口的服务来确认已经启动：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ss &lt;span class=&quot;nt&quot;&gt;-antlp&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;sshd
+LISTEN     0      128          &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:22                       &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;                   &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sshd&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;472,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+LISTEN     0      128         :::22                      :::&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;                   &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sshd&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;472,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果希望 SSH 服务在 Kali 开启时自动启动，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;systemctl&lt;/code&gt; 命令，该命令可以启用或 禁用大部分服务。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;ssh
+Synchronizing state of ssh.service with SysV service script with /lib/systemd/systemd-
+Executing: /lib/systemd/systemd-sysv-install &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;ssh
+Created symlink /etc/systemd/system/sshd.service → /lib/systemd/system/ssh.service.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;http-服务&quot;&gt;HTTP 服务&lt;/h3&gt;
+&lt;p&gt;HTTP 服务基于 TCP 协议，默认监听 80  端口。启动 HTTP 服务和启用 SSH 服务相似：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start apache2
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;同样的方法确认 HTTP 服务已经启动：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ss &lt;span class=&quot;nt&quot;&gt;-antlp&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;apache
+LISTEN     0      128         :::80                      :::&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;                   &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;apache2&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2434,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;,&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;apache2&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2433,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;,&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;apache2&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2431,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;让 HTTP 服务开机时启动的方法和设置 SSH 服务的方法一样，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;systemctl&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;apache2
+Synchronizing state of apache2.service with SysV service script with /lib/systemd/syst
+Executing: /lib/systemd/systemd-sysv-install &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;apache2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在 Kali 中大多数服务的操作和操作 SSH 以及 HTTP 服务一样，查看所有可用的服务，运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;systemctl list-unit-files&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl list-unit-files
+...
+UNIT FILE   STATE
+proc-sys-fs-binfmt_misc.automount   static
+-.mount generated
+dev-hugepages.mount static
+dev-mqueue.mount    static
+media-cdrom0.mount  generated
+proc-sys-fs-binfmt_misc.mount   static
+run-vmblock&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;2dfuse.mount   disabled
+sys-fs-fuse-connections.mount   static
+sys-kernel-config.mount static
+sys-kernel-debug.mount  static
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;搜索安装移除工具&quot;&gt;搜索、安装、移除工具&lt;/h2&gt;
+&lt;p&gt;APT 是 Debian-based 系统中管理包和应用的工具，可以安装、移除应用，升级包，甚至升级整个系统。&lt;/p&gt;
+
+&lt;h3 id=&quot;apt-update&quot;&gt;apt update&lt;/h3&gt;
+&lt;p&gt;为了加快查找 APT 数据库相关操作的速度，APT 包是缓存在本地的。一个好的习惯是升级可用包和相关信息，包括版本等信息列表。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt update&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+Hit:1 http://kali.mirror.globo.tech/kali kali-rolling InRelease
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+699 packages can be upgraded.
+Run &lt;span class=&quot;s1&quot;&gt;'apt list --upgradable'&lt;/span&gt; to see them.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apt-upgrade&quot;&gt;apt upgrade&lt;/h3&gt;
+&lt;p&gt;升级完 APT 数据库，就可以升级以安装的包或者系统。比如升级 metasploit-framework：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt upgrade metasploit-framework
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apt-cache-search-和-apt-show&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-cache search&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt show&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-cache search&lt;/code&gt; 命令查找内置缓存数据库并提供相关信息。比如要安装 &lt;em&gt;pure-ftpd&lt;/em&gt;，第一件事就是查找该工具是否包含在 Kali 源里面：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-cache search pure-ftpd
+ftpd - File Transfer Protocol &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;FTP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; server
+mysqmail-pure-ftpd-logger - real-time logging system &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;MySQL - Pure-FTPd traffic-logger
+pure-ftpd - Secure and efficient FTP server
+pure-ftpd-common - Pure-FTPd FTP server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Common Files&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+pure-ftpd-ldap - Secure and efficient FTP server with LDAP user authentication
+pure-ftpd-mysql - Secure and efficient FTP server with MySQL user authentication
+pure-ftpd-postgresql - Secure and efficient FTP server with PostgreSQL user authentication
+resource-agents - Cluster Resource Agents
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;搜索结果中出现了一个 &lt;em&gt;resource-agents&lt;/em&gt;，是因为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-cache search&lt;/code&gt; 会搜索整个描述文档。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-show&lt;/code&gt; 来确认 &lt;em&gt;resource-agents&lt;/em&gt; 描述中是否包含 “pure-ftpd”：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt show resource-agents
+Package: resource-agents
+Version: 1:4.2.0-2
+...
+Description: Cluster Resource Agents
+This package contains cluster resource agents &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;RAs&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; compliant with the Open
+Cluster Framework &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;OCF&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; specification, used to interface with various services
+&lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;a High Availability environment managed by the Pacemaker resource manager.
+&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Agents included:
+AoEtarget: Manages ATA-over-Ethernet &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AoE&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; target exports
+AudibleAlarm: Emits audible beeps at a configurable interval
+...
+NodeUtilization: Node Utilization
+
+Pure-FTPd: Manages a Pure-FTPd FTP server instance
+
+Raid1: Manages Linux software RAID &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;MD&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; devices on shared storage
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apt-install&quot;&gt;apt install&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt install&lt;/code&gt; 将包安装到系统：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pure-ftpd
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  openbsd-inetd pure-ftpd-common
+The following NEW packages will be installed:
+  openbsd-inetd pure-ftpd pure-ftpd-common
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 341 kB of archives.
+After this operation, 883 kB of additional disk space will be used.
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;同样的，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt remove --purge&lt;/code&gt; 来移除包。&lt;/p&gt;
+
+&lt;h3 id=&quot;apt-remove-purge&quot;&gt;apt remove –purge&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt remove --purge&lt;/code&gt; 完全从系统中移除一个包。需要注意的是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt remove&lt;/code&gt; 也可以移除安装包但是会留下一些文件（通常是用户修改过的配置文件）。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt remove &lt;span class=&quot;nt&quot;&gt;--purge&lt;/span&gt; pure-ftpd
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  openbsd-inetd pure-ftpd-common
+Use &lt;span class=&quot;s1&quot;&gt;'sudo apt autoremove'&lt;/span&gt; to remove them.
+The following packages will be REMOVED:
+  pure-ftpd&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+0 upgraded, 0 newly installed, 1 to remove and 0 not upgraded.
+After this operation, 507 kB disk space will be freed.
+Do you want to &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Y/n] y
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Reading database ... 135806 files and directories currently installed.&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Removing pure-ftpd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.0.43-3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+Processing triggers &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;man-db &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.6.1-2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Reading database ... 135793 files and directories currently installed.&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Purging configuration files &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;pure-ftpd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.0.43-3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+Processing triggers &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;systemd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;232-25+deb9u12&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;dpkg&quot;&gt;dpkg&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;dpkg&lt;/em&gt; 是用来安装包的工具，无论是否直接通过 APT，它也可以很方便的在离线环境下使用。需要注意的是 &lt;em&gt;dpkg&lt;/em&gt; 不会安装任何依赖环境。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dpkg&lt;/code&gt; 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; 或者 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--install&lt;/code&gt; 选项来安装一个 .deb 包文件，这需要提前获取到 .deb 文件。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; man-db_2.7.0.2-5_amd64.deb
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Reading database ... 86425 files and directories currently installed.&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Preparing to unpack man-db_2.7.0.2-5_amd64.deb ...
+Unpacking man-db &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.0.2-5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; over &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.0.2-4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+Setting up man-db &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.0.2-5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+Updating database of manual pages ...
+Processing triggers &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;mime-support &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.58&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ...
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="pentest," /><category term="kali," /><category term="linux" /><summary type="html">认识 Kali Linux 文件系统 /bin - 基础命令（ls, cd, cat, etc） /sbin - 系统应用（fdisk, mkfs, sysctl, etc） /etc - 配置文件 /tmp - 临时文件（在引导boot时被删除） /usr/bin - 一般应用（apt, ncat, nmap, etc） /usr/share - 存放应用共享文件和数据的目录</summary></entry><entry><title type="html">WINDOWS CMD 命令行下载文件的几种方法</title><link href="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html" rel="alternate" type="text/html" title="WINDOWS CMD 命令行下载文件的几种方法" /><published>2020-10-01T23:44:00+08:00</published><updated>2020-10-01T23:44:00+08:00</updated><id>https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD</id><content type="html" xml:base="https://blog.securitainment.io/windows/cmd/pentest/2020/10/01/Download-Files-In-Windows-CMD.html">&lt;h2 id=&quot;certutil&quot;&gt;certutil&lt;/h2&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;certutil.exe &lt;span class=&quot;nt&quot;&gt;-urlcache&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-split&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; http://7-zip.org/a/7z1604-x64.exe 7zip.exe
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2112,79 +2436,4 @@ apboot&amp;gt; factory_reset   &lt;span class=&quot;c&quot;&gt;# ！重要：清
 
 &lt;p&gt;设置完毕，将 AP 连接到路由器上就可以正常使用了。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg&quot; alt=&quot;Overview&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="aruba" /><category term="ap" /><summary type="html">由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</summary></entry><entry><title type="html">查找并清理 CentOS 的存储空间</title><link href="https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html" rel="alternate" type="text/html" title="查找并清理 CentOS 的存储空间" /><published>2020-06-12T19:41:04+08:00</published><updated>2020-06-12T19:41:04+08:00</updated><id>https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps</id><content type="html" xml:base="https://blog.securitainment.io/centos/vps/linux/2020/06/12/clean-up-storage-for-vps.html">&lt;p&gt;最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;以下是记录。&lt;/p&gt;
-
-&lt;h2 id=&quot;查看磁盘空间使用量&quot;&gt;查看磁盘空间使用量&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
-Filesystem           Size  Used Avail Use% Mounted on
-devtmpfs             394M     0  394M   0% /dev
-tmpfs                411M     0  411M   0% /dev/shm
-tmpfs                411M   42M  369M  11% /run
-tmpfs                411M     0  411M   0% /sys/fs/cgroup
-/dev/mapper/cl-root   50G  2.3G   48G   5% /
-/dev/mapper/cl-home   47G  367M   47G   1% /home
-/dev/vda1            976M  175M  735M  20% /boot
-tmpfs                 83M     0   83M   0% /run/user/0
-tmpfs                 83M     0   83M   0% /run/user/1000
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;排查大文件所在目录&quot;&gt;排查大文件所在目录&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;du&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-sh&lt;/span&gt; .[!.]&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 查看当前目录下子目录大小（du: disk usage）;-s: 显示总和；-h: 易读模式&lt;/span&gt;
-4.0K	.bash_history
-4.0K	.bash_logout
-4.0K	.bash_profile
-4.0K	.bashrc
-4.0K	.ssh
-4.0K	.wget-hsts
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;du&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-sh&lt;/span&gt; /usr/[!.]&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 查看 /usr/ 目录下各个子目录大小&lt;/span&gt;
-202M	/usr/bin
-0	/usr/games
-84K	/usr/include
-614M	/usr/lib
-270M	/usr/lib64
-84M	/usr/libexec
-4.0K	/usr/local
-64M	/usr/sbin
-374M	/usr/share
-0	/usr/src
-0	/usr/tmp
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;查看大文件&quot;&gt;查看大文件&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-laShs&lt;/span&gt;
-total 20K
-4.0K &lt;span class=&quot;nt&quot;&gt;-rw-------&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; 1 groot groot 2.8K Jun 11 17:10 .bash_history
-4.0K &lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; 1 groot groot  312 Nov  9  2019 .bashrc
-4.0K &lt;span class=&quot;nt&quot;&gt;-rw-rw-r--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; 1 groot groot  204 Jun 12 13:32 .wget-hsts
-4.0K &lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; 1 groot groot  141 Nov  9  2019 .bash_profile
-4.0K &lt;span class=&quot;nt&quot;&gt;-rw-r--r--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; 1 groot groot   18 Nov  9  2019 .bash_logout
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;查看已标记为删除的文件占用的空间&quot;&gt;查看已标记为删除的文件占用的空间&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lsof &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;deleted
-systemd-j   619                           root  txt       REG              253,0   234488     650779 /usr/lib/systemd/systemd-journald &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-qemu-ga     843                           root  txt       REG              253,0   449064    1079814 /usr/bin/qemu-ga &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-systemd-l   873                           root  txt       REG              253,0   481696     650781 /usr/lib/systemd/systemd-logind &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-NetworkMa   891                           root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-NetworkMa   891   902 gmain               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-NetworkMa   891   903 gdbus               root  txt       REG              253,0  7350304   34213286 /usr/sbin/NetworkManager &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;释放空间已删除文件所占空间&quot;&gt;释放空间已删除文件所占空间&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-9&lt;/span&gt; %PID% &lt;span class=&quot;c&quot;&gt;# 结束相应的进程&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;https://blog.csdn.net/lk_db/article/details/78341698&lt;/p&gt;
-
-  &lt;p&gt;https://jaminzhang.github.io/os/File-Deleted-And-Still-Use-The-Filesystem-Space-Problem-In-Linux/&lt;/p&gt;
-
-  &lt;p&gt;http://blog.kankanan.com/article/63a75236-pm2-768465e55fd765874ef659275c0f.html&lt;/p&gt;
-
-  &lt;p&gt;http://einverne.github.io/post/2018/03/du-find-out-which-fold-take-space.html&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name></name></author><category term="centos" /><category term="vps" /><category term="linux" /><summary type="html">最近 VPS 磁盘空间一直警告不够用，就想看一下哪个文件占用空间比较大，删掉一些不用的大文件，腾出可用空间来。</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg&quot; alt=&quot;Overview&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="aruba" /><category term="ap" /><summary type="html">由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</summary></entry></feed>
