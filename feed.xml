@@ -1,4 +1,617 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-10-08T23:35:26+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">Kali Linux 渗透测试(OSCP)笔记 0x01</title><link href="https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01.html" rel="alternate" type="text/html" title="Kali Linux 渗透测试(OSCP)笔记 0x01" /><published>2020-10-08T17:02:46+08:00</published><updated>2020-10-08T17:02:46+08:00</updated><id>https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01</id><content type="html" xml:base="https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01.html">&lt;h2 id=&quot;认识-kali&quot;&gt;认识 Kali&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://blog.securitainment.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://blog.securitainment.io/" rel="alternate" type="text/html" /><updated>2020-12-16T17:13:53+08:00</updated><id>https://blog.securitainment.io/feed.xml</id><title type="html">Securitainment.io</title><subtitle>learn | code | hack</subtitle><entry><title type="html">Kali Linux 渗透测试(OSCP)笔记 0x02</title><link href="https://blog.securitainment.io/pentest/kali/linux/2020/10/10/pentesting-with-kali-0x02.html" rel="alternate" type="text/html" title="Kali Linux 渗透测试(OSCP)笔记 0x02" /><published>2020-10-10T14:49:39+08:00</published><updated>2020-10-10T14:49:39+08:00</updated><id>https://blog.securitainment.io/pentest/kali/linux/2020/10/10/pentesting-with-kali-0x02</id><content type="html" xml:base="https://blog.securitainment.io/pentest/kali/linux/2020/10/10/pentesting-with-kali-0x02.html">&lt;h2 id=&quot;bash-环境&quot;&gt;Bash 环境&lt;/h2&gt;
+&lt;h3 id=&quot;环境变量&quot;&gt;环境变量&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$&lt;/code&gt; 后面跟环境变量名来显示相应的环境变量：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export&lt;/code&gt; 命令来定义环境变量，假如需要扫描一个IP但是不想每次输入IP地址，可以定义一个IP变量：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.1.10
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 2 &lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;
+PING 192.168.1.10 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;192.168.1.10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 56&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;84&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; bytes of data.
+64 bytes from 192.168.1.10: &lt;span class=&quot;nv&quot;&gt;icmp_seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nv&quot;&gt;ttl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;64 &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3.50 ms
+64 bytes from 192.168.1.10: &lt;span class=&quot;nv&quot;&gt;icmp_seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2 &lt;span class=&quot;nv&quot;&gt;ttl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;64 &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.973 ms
+
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; 192.168.1.10 ping statistics &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
+2 packets transmitted, 2 received, 0% packet loss, &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;10ms
+rtt min/avg/max/mdev &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.973/2.237/3.501/1.264 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export&lt;/code&gt; 命令定义的变量名在当前 Bash 实例下的所有子进程中都可用。如新打开一个 shell ，查看 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$b&lt;/code&gt; 变量：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ $$&lt;/span&gt;
+bash: 4433
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bash
+
+&lt;span class=&quot;nv&quot;&gt;$ $$&lt;/span&gt;
+bash: 5132
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$b&lt;/span&gt;
+192.168.1.10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;env&lt;/code&gt; 命令查看所有环境变量：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;env
+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SHELL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/bash
+...
+&lt;span class=&quot;nv&quot;&gt;PWD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/kali
+&lt;span class=&quot;nv&quot;&gt;XDG_SESSION_DESKTOP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lightdm-xsession
+&lt;span class=&quot;nv&quot;&gt;LOGNAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;kali
+&lt;span class=&quot;nv&quot;&gt;XDG_SESSION_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;x11
+&lt;span class=&quot;nv&quot;&gt;XAUTHORITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/kali/.Xauthority
+&lt;span class=&quot;nv&quot;&gt;XDG_GREETER_DATA_DIR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/lib/lightdm/data/kali
+&lt;span class=&quot;nv&quot;&gt;HOME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/kali
+...
+&lt;span class=&quot;nv&quot;&gt;TERM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xterm-256color
+&lt;span class=&quot;nv&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;kali
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tab-自动补全&quot;&gt;Tab 自动补全&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Tab]&lt;/code&gt; 键自动补全当前输入：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;D[TAB]
+Desktop/   Documents/ Downloads/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls &lt;/span&gt;De[TAB]sktop/
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bash-历史记录&quot;&gt;Bash 历史记录&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;history&lt;/code&gt; 命令查看 bash 历史记录：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;history
+&lt;/span&gt;1   &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/lsb-release
+2   clear
+3   &lt;span class=&quot;nb&quot;&gt;history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!&lt;/code&gt; 后面跟数字来执行指定的历史命令：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;1    &lt;span class=&quot;c&quot;&gt;# 执行编号为 1 的历史命令，即 cat /etc/lsb-release&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/lsb-release
+&lt;span class=&quot;nv&quot;&gt;DISTRIB_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Kali
+&lt;span class=&quot;nv&quot;&gt;DISTRIB_RELEASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;kali-rolling
+&lt;span class=&quot;nv&quot;&gt;DISTRIB_CODENAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;kali-rolling
+&lt;span class=&quot;nv&quot;&gt;DISTRIB_DESCRIPTION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Kali GNU/Linux Rolling&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;!!&lt;/code&gt; 执行上一个历史命令：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart apache2
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart apache2
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Bash 命令历史记录默认保存在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bash_history&lt;/code&gt; 中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HISTSIZE&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HISTFILESIZE&lt;/code&gt; 环境变量可以调整当前会话记录历史记录条数和保存在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bash_history&lt;/code&gt; 中的历史命令条数，通过修改 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; Bash 配置文件来修改。&lt;/p&gt;
+
+&lt;p&gt;使用方向键上下来切换上一条或下一条历史记录。使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl+R&lt;/code&gt; 命令进入 &lt;em&gt;reverse-i-search&lt;/em&gt; 模式，来搜索指定开头的历史记录，然后通过回车键 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[Return]&lt;/code&gt; 执行，如：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;CTRL-R]l
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;reverse-i-search&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;l&lt;span class=&quot;s1&quot;&gt;': ls
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;管道和重定向&quot;&gt;&lt;a href=&quot;https://developer.ibm.com/zh/technologies/linux/tutorials/l-lpic1-103-4/&quot;&gt;管道和重定向&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;每个从命令行运行的命令，都存在三个连接到该命令的数据流，用来和外部环境通讯：
+|Stream Name|描述|
+|–|–|
+|STDIN|标准输入流|
+|STDOUT|标准输出流|
+|STDERR|标准错误流|&lt;/p&gt;
+
+&lt;p&gt;使用管道符 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; 和重定向符 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt; 和 &amp;gt;&lt;/code&gt; 连接不同程序和文件流。&lt;/p&gt;
+
+&lt;h3 id=&quot;重定向到新文件&quot;&gt;重定向到新文件&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; 操作符，将标准输出重定向到文件：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; redirection_test.txt
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls
+&lt;/span&gt;redirection_test.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;redirection_test.txt
+&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;重定向到已存在的文件&quot;&gt;重定向到已存在的文件&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&amp;gt;&lt;/code&gt; 将标准输出添加到已存在的文件：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello world&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; redirection_test.txt
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;redirection_test.txt
+&lt;span class=&quot;nb&quot;&gt;test
+&lt;/span&gt;hello world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;将文件内容重定向出来&quot;&gt;将文件内容重定向出来&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;&lt;/code&gt; 将文件内容重定向到前面输入的命令，如将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;redirection_test.txt&lt;/code&gt; 文件中的内容重定向到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wc&lt;/code&gt; 命令，计算文件中字符数：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;redirection_test.txt
+&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &amp;lt; redirection_test.txt
+5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;重定向标准错误流&quot;&gt;重定向标准错误流&lt;/h3&gt;
+&lt;p&gt;根据 &lt;strong&gt;POSIX&lt;/strong&gt; 标准，&lt;em&gt;STDIN, STDOUT, STDERR&lt;/em&gt; 分别用 &lt;em&gt;0, 1, 2&lt;/em&gt; 表示，这些数字可以用来从命令行操作相关的数据流，下面例子通过标准错误流来展示这些数字的作用：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; ./text
+&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;: cannot access &lt;span class=&quot;s1&quot;&gt;'./text'&lt;/span&gt;: No such file or directory
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; ./test 2&amp;gt;error.txt
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;error.txt
+&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;: cannot access &lt;span class=&quot;s1&quot;&gt;'./text'&lt;/span&gt;: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;error.txt&lt;/code&gt; 中包括了错误信息（由 &lt;em&gt;STDERR&lt;/em&gt; 生成），通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;gt;&lt;/code&gt; 操作符将错误信息重定向到了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;error.txt&lt;/code&gt; 文件中（2=STDERR）。&lt;/p&gt;
+
+&lt;h3 id=&quot;管道符&quot;&gt;管道符&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wc&lt;/code&gt; 命令，来展示 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; 管道符：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;error.txt
+&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;: cannot access &lt;span class=&quot;s1&quot;&gt;'./text'&lt;/span&gt;: No such file or directory
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;error.txt | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;
+54
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;error.txt | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; count.txt
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;count.txt
+54
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面例子中，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; 管道符将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat error.txt&lt;/code&gt; 命令的输出重定向到了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wc -m&lt;/code&gt; 命令的输入中。&lt;/p&gt;
+
+&lt;h2 id=&quot;文字搜索和相关操作&quot;&gt;文字搜索和相关操作&lt;/h2&gt;
+&lt;p&gt;这部分主要熟悉 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep, sed, cut, awk&lt;/code&gt; 命令。&lt;/p&gt;
+
+&lt;h3 id=&quot;grep&quot;&gt;&lt;a href=&quot;https://linux.die.net/man/1/grep&quot;&gt;grep&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; 命令从当前出现的字符中通过给定的表达式搜索结果，并将包含结果的行输出到标准输出（通常是当前终端）。通常配合 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-r&lt;/code&gt; (强调搜索子目录，同 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d recurse&lt;/code&gt;) 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt; （忽略大小写）：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-la&lt;/span&gt; /usr/bin | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;zip
+lrwxrwxrwx.  1 root root          5 May 10  2019 bunzip2 -&amp;gt; bzip2
+lrwxrwxrwx.  1 root root          5 May 10  2019 bzcat -&amp;gt; bzip2
+&lt;span class=&quot;nt&quot;&gt;-rwxr-xr-x&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  1 root root      38472 May 10  2019 bzip2
+&lt;span class=&quot;nt&quot;&gt;-rwxr-xr-x&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;  1 root root      17560 May 10  2019 bzip2recover
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sed&quot;&gt;&lt;a href=&quot;https://www.gnu.org/software/sed/manual/sed.html&quot;&gt;sed&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;sed&lt;/strong&gt; 是一个功能强大的流编辑器，也很复杂。一个简单的例子：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;I need to try hard&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/hard/harder/'&lt;/span&gt;
+I need to try harder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个例子中，通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; 命令将 “I need to try hard” 字符串中的 &lt;em&gt;hard&lt;/em&gt; 提换成了 &lt;em&gt;harder&lt;/em&gt;，然后输出。&lt;/p&gt;
+
+&lt;h3 id=&quot;cut&quot;&gt;&lt;a href=&quot;https://linux.die.net/man/1/cut&quot;&gt;cut&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cut&lt;/code&gt; 命令是一个简单顺手的命令，用来将字符从字符串中提取出来并输出。常用的选项是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt;（字段编号） 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;（分隔符）：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;I hack binaries,web apps,mobile apps, and just about anything else&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 2 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;,&quot;&lt;/span&gt;
+web apps
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;从 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/passwd&lt;/code&gt; 中提取所有用户名：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cut&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 1 /etc/passwd
+root
+daemon
+bin
+sys
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;awk&quot;&gt;&lt;a href=&quot;https://www.gnu.org/software/gawk/manual/gawk.html&quot;&gt;awk&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt; 是一种程序设计语言，应用于各种计算和数据处理任务，很强大也很复杂。一个常用的操作选项是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-F&lt;/code&gt; 选项（分割字段）和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;print&lt;/code&gt; 命令（输出结果）：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hello::there::friend&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-F&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;::&quot;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{print $1, $3}'&lt;/span&gt;
+hello friend
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;在命令行编辑文件&quot;&gt;在命令行编辑文件&lt;/h2&gt;
+&lt;h3 id=&quot;nano&quot;&gt;&lt;a href=&quot;https://www.nano-editor.org/docs.php&quot;&gt;nano&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Nano 是一个简单易用的文本编辑器，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nano&lt;/code&gt; 命令运行：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nano intro_to_nano.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;该命令会打开一个编辑窗口。常用操作包括：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ctrl + o：将更改写入文件&lt;/li&gt;
+  &lt;li&gt;Ctrl + k：剪切当前行&lt;/li&gt;
+  &lt;li&gt;Ctrl + u：将剪切的内容粘贴到当前光标位置&lt;/li&gt;
+  &lt;li&gt;Ctrl + w：搜索&lt;/li&gt;
+  &lt;li&gt;Ctrl + x：退出&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vi&quot;&gt;vi&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;vi&lt;/em&gt; 是一个强大的文本编辑器，效率很高，学习成本也比较大。使用命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vi&lt;/code&gt; 来编辑文件：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi intro_to_vi.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;当文件编辑窗口打开后，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;i&lt;/code&gt; 命令，启用编辑模式。&lt;/p&gt;
+
+&lt;p&gt;当编辑完成后，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Esc&lt;/code&gt; 键退出编辑模式，回到命令模式。在命令模式下，常用操作为：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dd&lt;/code&gt; : 删除当前行&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yy&lt;/code&gt; : 复制当前行&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p&lt;/code&gt; : 粘贴已复制的内容&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt; : 删除当前光标处的字符&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:w&lt;/code&gt; : 保存文件&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:q!&lt;/code&gt; : 强制退出编辑并放弃保存&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;:wq&lt;/code&gt; : 保存文件并退出&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过以下资料了解更多：&lt;/p&gt;
+&lt;blockquote&gt;
+
+  &lt;p&gt;https://en.wikibooks.org/wiki/Learning_the_vi_Editor/vi_Reference&lt;/p&gt;
+
+  &lt;p&gt;https://www.debian.org/doc/manuals/debian-tutorial/ch-editor.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;文件对比&quot;&gt;文件对比&lt;/h2&gt;
+&lt;h3 id=&quot;comm&quot;&gt;&lt;a href=&quot;https://linux.die.net/man/1/comm&quot;&gt;comm&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;comm&lt;/em&gt; 命令简单对比两文件，输出每行的对比结果。对比结果共三列，分辨代表近第一个文件中的行，两文件中同时存在的行，以及仅在第二个文件中的行。可通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-n&lt;/code&gt; 选项，选择显示对比结果。效果如下：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;scan-a.txt
+192.168.1.1
+192.168.1.2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;scan-b.txt
+192.168.1.1
+192.168.1.3
+192.168.1.4
+192.168.1.5
+192.168.1.6
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;comm &lt;/span&gt;scan-a.txt scan-b.txt
+		192.168.1.1
+192.168.1.2
+	192.168.1.3
+	192.168.1.4
+	192.168.1.5
+	192.168.1.6
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;comm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; scan-a.txt scan-b.txt &lt;span class=&quot;c&quot;&gt;# 仅显示 scan-b.txt 文件中的内容&lt;/span&gt;
+	192.168.1.1
+192.168.1.3
+192.168.1.4
+192.168.1.5
+192.168.1.6
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;comm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-12&lt;/span&gt; scan-a.txt scan-b.txt    &lt;span class=&quot;c&quot;&gt;# 显示两文件中同时存在的行&lt;/span&gt;
+192.168.1.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;diff&quot;&gt;&lt;a href=&quot;https://linux.die.net/man/1/diff&quot;&gt;diff&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;diff&lt;/em&gt; 命令和 &lt;em&gt;comm&lt;/em&gt; 命令差不多，但是支持更多输出选项。两个常用的选项是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-c&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-u&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;diff &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; scan-a.txt scan-b.txt
+&lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; scan-a.txt  2018-02-07 14:46:21.557861848 &lt;span class=&quot;nt&quot;&gt;-0700&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; scan-b.txt  2018-02-07 14:46:44.275002421 &lt;span class=&quot;nt&quot;&gt;-0700&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;***************&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;***&lt;/span&gt; 1,5 &lt;span class=&quot;k&quot;&gt;****&lt;/span&gt;
+  192.168.1.1
+- 192.168.1.2
+  192.168.1.3
+  192.168.1.4
+  192.168.1.5
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; 1,5 &lt;span class=&quot;nt&quot;&gt;----&lt;/span&gt;
+  192.168.1.1
+  192.168.1.3
+  192.168.1.4
+  192.168.1.5
++ 192.168.1.6
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;diff &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; scan-a.txt scan-b.txt
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; scan-a.txt  2018-02-07 14:46:21.557861848 &lt;span class=&quot;nt&quot;&gt;-0700&lt;/span&gt;
++++ scan-b.txt  2018-02-07 14:46:44.275002421 &lt;span class=&quot;nt&quot;&gt;-0700&lt;/span&gt;
+@@ &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;,5 +1,5 @@
+ 192.168.1.1
+&lt;span class=&quot;nt&quot;&gt;-192&lt;/span&gt;.168.1.2
+ 192.168.1.3
+ 192.168.1.4
+ 192.168.1.5
++192.168.1.6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;vimdiff&quot;&gt;&lt;a href=&quot;http://www.vim.org/&quot;&gt;vimdiff&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;vimdiff&lt;/em&gt; 通过 &lt;em&gt;vim&lt;/em&gt; 打开多个文件，不同部分高亮显示。常用快捷键：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;do&lt;/code&gt; : 从其他窗口获取修改，应用到当前窗口&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dp&lt;/code&gt; : 将当前窗口中的改变应用到另一个窗口&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;]c&lt;/code&gt; : 跳到下一处修改部分&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[c&lt;/code&gt; : 跳到上一处&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl+w&lt;/code&gt; : 切换到另一个窗口&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;管理进程&quot;&gt;管理进程&lt;/h2&gt;
+&lt;p&gt;Linux 内核通过进程管理多任务。内核掌握每个进程的信息，每个进程拥有一个 PID（Process ID）。&lt;/p&gt;
+
+&lt;p&gt;Linux shell 引入 &lt;em&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Job_control_(Unix)&quot;&gt;jobs&lt;/a&gt;&lt;/em&gt; 这个概念。比如，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat error.txt | wc -m&lt;/code&gt; 是一个拥有两个进程的管道命令，shell 将其视为一个 job。&lt;/p&gt;
+&lt;h3 id=&quot;后台进程bg&quot;&gt;后台进程（bg）&lt;/h3&gt;
+&lt;p&gt;之前的命令都是运行在前台的（foreground），这意味着在当前命令结束前，不能执行其他命令。我们可以将命令后台执行以便同时执行其他命令。&lt;/p&gt;
+
+&lt;p&gt;一个简单方法是在命令后添加 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; 符号，这表示在命令开始时将其送到后台。例如：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 400 localhost &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ping_results.txt &amp;amp;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1] 844
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面命令将给 localhost 发送 400 个 ICMP echo 包，将结果写入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping_results.txt&lt;/code&gt;。该命令自动在后台执行。&lt;/p&gt;
+
+&lt;p&gt;如果执行命令时忘记添加 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; 将命令放在后台，可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + c&lt;/code&gt; 结束命令，添加后再执行。另一个方法是使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + z&lt;/code&gt; 暂停命令，然后使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bg&lt;/code&gt; 命令将该进程放置到后台：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ping -c 400 localhost &amp;gt; ping_results.txt
+^Z
+[1]+  Stopped                 ping -c 400 localhost &amp;gt; ping_results.txt
+$ bg
+[1]+ ping -c 400 localhost &amp;gt; ping_results.txt &amp;amp;
+$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这时该任务就被放置到了后台执行。需要注意的是有些命令对时间敏感，如果暂停过长时间会导致输出结果异常。如上面的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping&lt;/code&gt; 命令，如果在接收返回数据包时暂停了命令，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ping&lt;/code&gt; 就会无法获取到返回包，导致结果不正确。&lt;/p&gt;
+
+&lt;h3 id=&quot;任务管理jobs-和-fg-命令&quot;&gt;任务管理：jobs 和 fg 命令&lt;/h3&gt;
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fg&lt;/code&gt; 命令可以快速检查 ICMP echo 的状态。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs&lt;/code&gt; 命令可以列举出当前终端会话下运行着的任务，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fg&lt;/code&gt; 命令可以将后台任务放置到前台。&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 400 localhost &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ping_results.txt
+^Z
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1]+  Stopped                 ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 400 localhost &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ping_results.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd.exe
+^Z
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;2]+  Stopped                 find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd.exe
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;jobs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1]-  Stopped                 ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 400 localhost &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ping_results.txt
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;2]+  Stopped                 find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd.exe
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;fg&lt;/span&gt; %1
+ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 400 localhost &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ping_results.txt
+^C
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;jobs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;2]+  Stopped                 find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd.exe
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;fg
+&lt;/span&gt;find / &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; sbd.exe
+/usr/share/windows-resources/sbd/sbd.exe
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在上面的命令中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^C&lt;/code&gt; 表示 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + c&lt;/code&gt;，用来终止当前进程。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fg&lt;/code&gt; 命令后面的参数 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%1&lt;/code&gt; 表示将任务编号为 1 的命令放到前台执行。有多种方式来表示后台任务，将一个后台任务放置到前台：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%n&lt;/code&gt; : 指定任务编号，任务编号由 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs&lt;/code&gt; 命令提供。比如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%1&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%2&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%s&lt;/code&gt; : 指定任务开头的命令，比如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%ping&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%+&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%%&lt;/code&gt; : 指当前任务&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%-&lt;/code&gt; : 指上一个任务&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;任务管理ps-和-kill&quot;&gt;任务管理：ps 和 kill&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;http://www.linfo.org/ps.html&quot;&gt;ps&lt;/a&gt;&lt;/em&gt; 命令相比 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jobs&lt;/code&gt; 命令更强大和使用。该命令不止列举出当前终端会话下的进程，而且列出系统进程等。（在 Windows PowerShell 中也存在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; 命令，是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Get-Process&lt;/code&gt; 的别名）&lt;/p&gt;
+
+&lt;p&gt;在渗透测试中，访问主机后的一件事就是检查系统中运行着那些软件，这可以帮助我们评估当前权限、收集附加信息，为后续的操作做准备。&lt;/p&gt;
+
+&lt;p&gt;尝试打开 &lt;em&gt;Leafpad&lt;/em&gt; 然后使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; 命令找到进程ID（&lt;a href=&quot;https://en.wikipedia.org/wiki/Process_identifier&quot;&gt;PID&lt;/a&gt;）：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt;
+...
+groot       869    829  1 00:05 pts/0    00:00:00 leafpad
+www-data    973    506  0 00:05 ?        00:00:00 /usr/sbin/apache2 &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; start
+www-data    974    506  0 00:05 ?        00:00:00 /usr/sbin/apache2 &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; start
+groot      1069    829  0 00:05 pts/0    00:00:00 ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ef&lt;/code&gt; 选项表示：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; : 选出所有进程&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt; : 显示全部列（UID, PID, PPID,等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在相当多的进程中找到我们的 &lt;em&gt;Leafpad&lt;/em&gt; 程序有些复杂，这时可以将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; 选项替换为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-C&lt;/code&gt; （通过命令名称选择）选项：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ps &lt;span class=&quot;nt&quot;&gt;-fC&lt;/span&gt; leafpad
+UID         PID   PPID  C STIME TTY          TIME CMD
+groot       869    829  0 00:05 pts/0    00:00:00 leafpad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面的结果返回了 &lt;em&gt;leafpad&lt;/em&gt; 的 PID。通过查看手册了解 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; 命令的更多用法（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man ps&lt;/code&gt;），会发现 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; 命令相当于进程管理的瑞士军刀。&lt;/p&gt;
+
+&lt;p&gt;如果要结束一个进程，可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kill&lt;/code&gt; 命令后跟 PID 来实现。比如结束 &lt;em&gt;leafpad&lt;/em&gt; 程序：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;kill &lt;/span&gt;869
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ps aux | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;leafpad
+groot      1086  0.0  0.1  12780  1012 pts/0    S+   00:14   0:00 &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;leafpad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这相当于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kill&lt;/code&gt; 命令给 &lt;em&gt;Leafpad&lt;/em&gt; 发送了一个 &lt;em&gt;SIGTERM&lt;/em&gt; （请求结束进程信号）。&lt;/p&gt;
+
+&lt;h2 id=&quot;文件和命令监控&quot;&gt;文件和命令监控&lt;/h2&gt;
+&lt;p&gt;对文件和命令进行实时监控在渗透测试中非常重要。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;watch&lt;/code&gt; 是两个很有帮助的命令。&lt;/p&gt;
+
+&lt;h3 id=&quot;tail&quot;&gt;tail&lt;/h3&gt;
+&lt;p&gt;通常用 &lt;em&gt;&lt;a href=&quot;https://linux.die.net/man/1/tail&quot;&gt;tail&lt;/a&gt;&lt;/em&gt; 命令来监控日志文件。比如监控 Apache 日志：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo tail&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /var/log/apache2/access.log
+127.0.0.1 - - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;12/Oct/2020:01:50:39 &lt;span class=&quot;nt&quot;&gt;-0400&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;GET / HTTP/1.1&quot;&lt;/span&gt; 200 3380 &lt;span class=&quot;s2&quot;&gt;&quot;-&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15&quot;&lt;/span&gt;
+127.0.0.1 - - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;12/Oct/2020:01:50:39 &lt;span class=&quot;nt&quot;&gt;-0400&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;GET /icons/openlogo-75.png HTTP/1.1&quot;&lt;/span&gt; 200 6040 &lt;span class=&quot;s2&quot;&gt;&quot;http://127.0.0.1/&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15&quot;&lt;/span&gt;
+127.0.0.1 - - &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;12/Oct/2020:01:50:39 &lt;span class=&quot;nt&quot;&gt;-0400&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;GET /favicon.ico HTTP/1.1&quot;&lt;/span&gt; 404 492 &lt;span class=&quot;s2&quot;&gt;&quot;http://127.0.0.1/&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-f&lt;/code&gt; 选项可以在目标文件更新时持续更新输出。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-nX&lt;/code&gt; 选项可以输出指定行数（n），代替默认输出 10 行。&lt;/p&gt;
+
+&lt;h3 id=&quot;watch&quot;&gt;watch&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&quot;https://linux.die.net/man/1/watch&quot;&gt;watch&lt;/a&gt;&lt;/em&gt; 命令可以用指定的时间间隔运行一个（已定义的）命令，默认间隔时间是 2s，可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-n X&lt;/code&gt; 选项来自定义。比如列出登录用户（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;w&lt;/code&gt; 命令），每 5s 刷新：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;watch &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 5 w
+Every 5.0s: w                                                           kali: Mon Oct 12 02:08:25 2020
+
+ 02:08:25 up 1 day,  2:50,  1 user,  load average: 0.00, 0.04, 0.01
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+root    pts/0    :0    23:05    7.00s  3.17s  0.00s watch &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 5 w
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + c&lt;/code&gt; 结束命令。&lt;/p&gt;
+
+&lt;h2 id=&quot;下载文件&quot;&gt;下载文件&lt;/h2&gt;
+&lt;p&gt;从命令行下载文件到 Linux 系统中。&lt;/p&gt;
+&lt;h3 id=&quot;wget&quot;&gt;wget&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/wget/manual/wget.html&quot;&gt;wget&lt;/a&gt; 命令会经常用到，可以通过 HTTP/HTTPS 或 FTP 协议下载文件。使用选项 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-O&lt;/code&gt; 将文件以指定的名称下载到指定位置：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; report_wget.pdf https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+&lt;span class=&quot;nt&quot;&gt;--2020-10-12&lt;/span&gt; 02:13:41--  https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+Resolving www.offensive-security.com &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;www.offensive-security.com&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;... 192.124.249.5
+Connecting to www.offensive-security.com &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;www.offensive-security.com&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;|192.124.249.5|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 27691955 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;26M&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;application/pdf]
+Saving to: ‘report_wget.pdf’
+
+report_wget.pdf               100%[&lt;span class=&quot;o&quot;&gt;=================================================&amp;gt;]&lt;/span&gt;  26.41M  6.44MB/s    &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;4.5s
+
+2020-10-12 02:13:48 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5.83 MB/s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - ‘report_wget.pdf’ saved &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;27691955/27691955]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;curl&quot;&gt;curl&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.mit.edu/afs.new/sipb/user/ssen/src/curl-7.11.1/docs/curl.html&quot;&gt;curl&lt;/a&gt;  可以从服务器获取数据或将数据传输到服务端，该工具支持多种协议，包括 IMAP/S, POP3/S, SCP, SFTP, SMB/S, SMTP/S, TELNET, TFTP 等。在渗透测试中，使用该工具可以下载或上传文件，或者构造更复杂的请求。基本操作为：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; report.pdf https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 26.4M  100 26.4M    0     0  3795k      0  0:00:07  0:00:07 &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;:--:-- 5679k
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;axel&quot;&gt;axel&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;http://manpages.ubuntu.com/manpages/xenial/man1/axel.1.html&quot;&gt;axel&lt;/a&gt; 是一个下载加速器，通过多连接将文件从 FTP/HTTP 服务器下载下来。该工具有很多特性，较常用的是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-n&lt;/code&gt; 选项，指定连接数。一个例子（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-a&lt;/code&gt; 显示进度条；&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-o&lt;/code&gt; 指定保存文件名）：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;axel &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 20 &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; report_axel.pdf https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+Initializing download: https://www.offensive-security.com/reports/penetration-testing-sample-report-2013.pdf
+File size: 27691955 bytes
+Opening output file report_axel.pdf
+Starting download
+
+Connection 0 finished
+Connection 1 finished
+Connection 3 finished
+Connection 4 finished
+Connection 7 finished
+Connection 2 finished
+Connection 5 finished
+Connection 6 finished
+Connection 8 finished
+Connection 9 finished
+Connection 10 finished
+Connection 12 finished
+Connection 14 finished
+Connection 17 finished
+Connection 18 finished
+Connection 13 finished
+Connection 11 finished
+Connection 15 finished
+Connection 16 finished
+Connection 19 unexpectedly closed
+
+Downloaded 26.4091 Megabyte&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;2 second&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;12716.98 KB/s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;自定义-bash-环境&quot;&gt;自定义 Bash 环境&lt;/h2&gt;
+&lt;h3 id=&quot;定制-bash-历史记录&quot;&gt;定制 Bash 历史记录&lt;/h3&gt;
+&lt;p&gt;常用的三个自定义 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;history&lt;/code&gt; 命令操作和相关返回数据的环境变量是 &lt;em&gt;HISTCONTROL, HISTIGNORE, HISTTIMEFORMAT&lt;/em&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;HISTCONTROL&lt;/em&gt; 参数定义了是否移除重复的命令，或者开头是空格的命令，默认是移除。调整该参数，使其只移除重复命令：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HISTCONTROL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ignoredups
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;HISTIGNORE&lt;/em&gt; 参数可以定义为过滤常用命令比如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls, exit, history, bg&lt;/code&gt; 等：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HISTIGNORE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ls:[bf]g:exit:history&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir test&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd test&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+/home/kali/test
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;history
+   &lt;/span&gt;1  &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HISTIGNORE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ls:[bf]g:exit:history&quot;&lt;/span&gt;
+   2  &lt;span class=&quot;nb&quot;&gt;mkdir test
+   &lt;/span&gt;3  &lt;span class=&quot;nb&quot;&gt;cd test
+   &lt;/span&gt;4  &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;HISTTIMEFORMAT&lt;/em&gt; 参数可以控制时间戳的显示：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HISTTIMEFORMART&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'%F %T '&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;history
+   &lt;/span&gt;1  2020-10-12 03:22:18 &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HISTIGNORE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ls:[bf]g:exit:history&quot;&lt;/span&gt;
+   2  2020-10-12 03:22:25 &lt;span class=&quot;nb&quot;&gt;mkdir test
+   &lt;/span&gt;3  2020-10-12 03:22:26 &lt;span class=&quot;nb&quot;&gt;cd test
+   &lt;/span&gt;4  2020-10-12 03:22:29 &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%F&lt;/code&gt; 表示使用（ISO 8601 格式），&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;%T&lt;/code&gt; 表示 24 小时制。更多格式可以参考 &lt;em&gt;&lt;a href=&quot;http://man7.org/linux/man-pages/man3/strftime.3.html&quot;&gt;strftime&lt;/a&gt;&lt;/em&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;别名alias&quot;&gt;别名（Alias）&lt;/h3&gt;
+&lt;p&gt;别名是一串可以代替常用命令和参数的字符串，使用别名可以使常用命令更简短。比如给常用的命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -la&lt;/code&gt; 设置别名：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;lsa&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls -la'&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lsa
+total 8
+drwxr-xr-x  2 kali kali 4096 Oct 12 03:22 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+drwxr-xr-x 15 kali kali 4096 Oct 12 03:22 ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;通过输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alias&lt;/code&gt; 不带任何参数来查看已经设置了的别名：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;alias
+alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'diff --color=auto'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;egrep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'egrep --color=auto'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fgrep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fgrep --color=auto'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias grep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grep --color=auto'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ip --color=auto'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls -CF'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;la&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls -A'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls -l'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls --color=auto'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;设置别名时不检测已使用的关键字冲突问题，这意味着可以使用系统命令来当作其他命令的别名。比如：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;alias mkdir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ping -c 1 localhost'&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir
+&lt;/span&gt;PING localhost&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;localhost &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;::1&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; 56 data bytes
+64 bytes from localhost &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;::1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: &lt;span class=&quot;nv&quot;&gt;icmp_seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nv&quot;&gt;ttl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;64 &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.093 ms
+
+&lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt; localhost ping statistics &lt;span class=&quot;nt&quot;&gt;---&lt;/span&gt;
+1 packets transmitted, 1 received, 0% packet loss, &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;0ms
+rtt min/avg/max/mdev &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0.093/0.093/0.093/0.000 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果不小心将已存在的命令设置为了别名，解决办法就是退出当前会话，或者使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unalias&lt;/code&gt; 命令：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;unalias mkdir&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir
+mkdir&lt;/span&gt;: missing operand
+Try &lt;span class=&quot;s1&quot;&gt;'mkdir --help'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more information.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;持久化-bash-配置&quot;&gt;持久化 Bash 配置&lt;/h3&gt;
+&lt;p&gt;Bash 的系统配置在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/bash.bashrc&lt;/code&gt;。每个用户都可以通过编辑用户根目录下的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bashrc 文件&lt;/code&gt;（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;）自定义自己的配置。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; 文件在每次用户登录时执行，本质上是一个 shell 脚本，所以我们可以插入任何希望执行的命令。下面是 kali 默认的配置：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; ~/.bashrc
+&lt;span class=&quot;c&quot;&gt;# ~/.bashrc: executed by bash(1) for non-login shells.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# for examples&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# If not running interactively, don't do anything&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$-&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;i&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;esac&lt;/span&gt;
+...
+&lt;span class=&quot;c&quot;&gt;# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;HISTSIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1000
+&lt;span class=&quot;nv&quot;&gt;HISTFILESIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2000
+...
+&lt;span class=&quot;c&quot;&gt;# enable color support of ls, less and man, and also add handy aliases&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; /usr/bin/dircolors &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; ~/.dircolors &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dircolors&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; ~/.dircolors&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;dircolors&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ls --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#alias dir='dir --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;#alias vdir='vdir --color=auto'&lt;/span&gt;
+
+    &lt;span class=&quot;nb&quot;&gt;alias grep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'grep --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;fgrep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fgrep --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;egrep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'egrep --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;diff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'diff --color=auto'&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ip --color=auto'&lt;/span&gt;
+
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_mb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[1;31m'&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# begin blink&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_md&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[1;36m'&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# begin bold&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_me&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[0m'&lt;/span&gt;        &lt;span class=&quot;c&quot;&gt;# reset bold/blink&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_so&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[01;33m'&lt;/span&gt;    &lt;span class=&quot;c&quot;&gt;# begin reverse video&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_se&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[0m'&lt;/span&gt;        &lt;span class=&quot;c&quot;&gt;# reset reverse video&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_us&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[1;32m'&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;# begin underline&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LESS_TERMCAP_ue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;$'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\E&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;[0m'&lt;/span&gt;        &lt;span class=&quot;c&quot;&gt;# reset underline&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;从上面可以找到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HISTSIZE&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HISTFILESIZE&lt;/code&gt; 环境变量以及 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;alias&lt;/code&gt; 别名配置。&lt;/p&gt;</content><author><name></name></author><category term="pentest" /><category term="kali" /><category term="linux" /><summary type="html">Bash 环境 环境变量 使用 echo 和 $ 后面跟环境变量名来显示相应的环境变量： $ echo $PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</summary></entry><entry><title type="html">Kali Linux 渗透测试(OSCP)笔记 0x01</title><link href="https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01.html" rel="alternate" type="text/html" title="Kali Linux 渗透测试(OSCP)笔记 0x01" /><published>2020-10-08T17:02:46+08:00</published><updated>2020-10-08T17:02:46+08:00</updated><id>https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01</id><content type="html" xml:base="https://blog.securitainment.io/pentest/kali/linux/2020/10/08/pentesting-with-kali-0x01.html">&lt;h2 id=&quot;认识-kali&quot;&gt;认识 Kali&lt;/h2&gt;
 &lt;h3 id=&quot;linux-文件系统&quot;&gt;Linux 文件系统&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/bin&lt;/code&gt; - 基础命令（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;, etc）&lt;/li&gt;
@@ -400,18 +1013,44 @@ sGet.SaveToFile iLocal,2
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libusbmuxd-tools
-ssh &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 22 root@localhost    &lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
 git clone https://github.com/AloneMonkey/frida-ios-dump.git
 &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;frida-ios-dump
 pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; requirements.txt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;然后运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py&lt;/code&gt; ：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python3 dump.py &amp;lt;target_app_name&amp;gt;
+&lt;ul&gt;
+  &lt;li&gt;使用 iproxy 将设备的 SSH 端口映射到本机&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iproxy 2222 44  &lt;span class=&quot;c&quot;&gt;# 将设备的 44 端口（SSH）映射为本机 2222端口&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;frida-ps&lt;/code&gt; 来找到正确的 app 名称&lt;/p&gt;
+&lt;p&gt;然后运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dump.py&lt;/code&gt; ：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 2222 root@localhost&amp;amp;
+python3 dump.py &amp;lt;target_app_name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;frida-ps&lt;/code&gt; 来找到正确的 app 名称（target_app_name）&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frida-ps &lt;span class=&quot;nt&quot;&gt;-Uai&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;app 下载后使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unzip target_app_name&lt;/code&gt; 解压 app。&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-debugserver-调试&quot;&gt;使用 debugserver 调试&lt;/h2&gt;
+&lt;p&gt;安装 &lt;a href=&quot;https://github.com/wstclzy2010/iOS-debugserver&quot;&gt;debugserver&lt;/a&gt; 到越狱的设备上。&lt;/p&gt;
+
+&lt;p&gt;运行 app，使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps ax | grep **target_app_name**&lt;/code&gt; 来查找 app 的进程编号，通过下面命令开启调试：&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;debugserver &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:1234 &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;**&lt;/span&gt;target_app_name&lt;span class=&quot;k&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 1234:远程调试端口&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在电脑端打开 LLDB 进行调试。如出现 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Segmentation fault: 11&lt;/code&gt; 则程序开启了反调试。&lt;/p&gt;
+
+&lt;h2 id=&quot;使用-cycript-注入-dylib-动态库&quot;&gt;使用 Cycript 注入 dylib 动态库&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cycript &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 5911   &lt;span class=&quot;c&quot;&gt;# 注入 5911 进程&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 弹出 Alert&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;var alert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;UIAlertView alloc] initWithTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;Hack You&quot;&lt;/span&gt; message:@&lt;span class=&quot;s2&quot;&gt;&quot;I've hacked you&quot;&lt;/span&gt; delegate:nil cancelButtonTitle:@&lt;span class=&quot;s2&quot;&gt;&quot;Yes&quot;&lt;/span&gt; otherButtonTitles:@&lt;span class=&quot;s2&quot;&gt;&quot;No&quot;&lt;/span&gt;, nil]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;alert show]&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;mobsf-静态扫描&quot;&gt;MobSF 静态扫描&lt;/h2&gt;
@@ -2323,117 +2962,4 @@ John Doe
 
 &lt;p&gt;例如获取 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config&lt;/code&gt; 命令的帮助手册&lt;/p&gt;
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;config
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</summary></entry><entry><title type="html">捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）</title><link href="https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html" rel="alternate" type="text/html" title="捡垃圾的快乐 - Aruba AP（瘦AP）刷机变家用 IAP（胖AP）" /><published>2020-06-19T01:59:00+08:00</published><updated>2020-06-19T01:59:00+08:00</updated><id>https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap</id><content type="html" xml:base="https://blog.securitainment.io/aruba/ap/2020/06/19/aruba-fit-ap-upgrade-to-fat-ap.html">&lt;p&gt;由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;购买一条-ttl-线&quot;&gt;购买一条 TTL 线&lt;/h2&gt;
-
-&lt;p&gt;查看 aruba 官网相应版本的说明书（&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AP-XXX_Install_Guide.pdf&lt;/code&gt;），找到相应的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Console Port&lt;/code&gt; 说明信息，再查找推荐的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AP-CBL-SERU cable&lt;/code&gt; 信息，根据文档里的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CONNECTOR&lt;/code&gt; 去淘宝找相应的型号，根据文档提供的线序购买。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618174916.jpg&quot; alt=&quot;查询 Installation Guide&quot; /&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175122.jpg&quot; alt=&quot;查看 Console Port 支持的线缆&quot; /&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175155.jpg&quot; alt=&quot;查询相关线缆&quot; /&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175252.jpg&quot; alt=&quot;查看线缆线序和新片&quot; /&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175301.jpeg&quot; alt=&quot;购买 Console 线&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;准备软件和资料&quot;&gt;准备软件和资料&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Serial（串口）连接软件（Windows: &lt;a href=&quot;https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html&quot;&gt;Putty&lt;/a&gt;; macOS: &lt;a href=&quot;https://www.decisivetactics.com/products/serial/&quot;&gt;Serial.app&lt;/a&gt;）&lt;/li&gt;
-  &lt;li&gt;TFTP Server 软件（Windows: &lt;a href=&quot;https://www.solarwinds.com/free-tools/free-tftp-server&quot;&gt;SolarWinds TFTP Server&lt;/a&gt;; macOS: 自带 TFTP Server）&lt;/li&gt;
-  &lt;li&gt;需要刷入 AP 的系统固件（如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ArubaInstant_Vela_8.5.0.3_72498&lt;/code&gt;，以及&lt;a href=&quot;https://support.arubanetworks.com/Documentation/tabid/77/DMXModule/512/Default.aspx?EntryId=8868&quot;&gt;其他固件&lt;/a&gt;）
-    &lt;ul&gt;
-      &lt;li&gt;将固件移动到 TFTP Server 的根目录下，如 SolarWinds TFTP Server 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C:\TFTP-Root&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;重要&lt;/strong&gt;：关闭电脑防火墙&lt;/li&gt;
-  &lt;li&gt;启动 SolarWinds TFTP Server ，显示如下：
-  &lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175437.jpg&quot; alt=&quot;SolarWinds TFTP Server&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;启动-ap&quot;&gt;启动 AP&lt;/h2&gt;
-
-&lt;p&gt;（使用的软件以 Windows 平台为例）首先断开 AP 的电源，把 AP 通过串口连接到电脑上，等待提示驱动安装成功后，打开 Putty，选择连接方式为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Serial&lt;/code&gt;，按照&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;开始菜单（右键） - 设备管理器&lt;/code&gt;中显示的串口号，选择连接的串口，如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;COM1&lt;/code&gt;，点击 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Open&lt;/code&gt; 打开：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/2020/06/DeviceMgr.jpg&quot; alt=&quot;查看设备的串口号&quot; /&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175335.jpg&quot; alt=&quot;Putty 配置&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后把 AP 接上电源，等待窗口中出现如下字符：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hit &amp;lt;Enter&amp;gt; to stop autoboot:  5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;立即按回车，进入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apboot&lt;/code&gt; 模式：&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apboot&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;配置网络&quot;&gt;配置网络&lt;/h2&gt;
-
-&lt;p&gt;将 AP 通过网线连接到电脑，在电脑上设置相关接口为固定 IP 地址，如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;192.168.2.10&lt;/code&gt;：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175402.jpg&quot; alt=&quot;和 AP 连接的网卡 IP 配置&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;然后开始设置 AP 的地址和 TFTP 服务器&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apboot&amp;gt; setenv ipaddr 192.168.2.20  &lt;span class=&quot;c&quot;&gt;# 配置 AP 的 IP 地址&lt;/span&gt;
-apboot&amp;gt; setenv netmask 255.255.255.0    &lt;span class=&quot;c&quot;&gt;# 配置 AP 的子网掩码&lt;/span&gt;
-apboot&amp;gt; setenv serverip 192.168.2.10    &lt;span class=&quot;c&quot;&gt;# 配置 TFTP 服务器地址，即电脑的 IP 地址&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;开始给-ap-刷入新固件&quot;&gt;开始给 AP 刷入新固件&lt;/h2&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apboot&amp;gt; osinfo  &lt;span class=&quot;c&quot;&gt;# 显示系统中的固件&lt;/span&gt;
-Partition 0:
-    image &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: 0
-  machine &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: 46
-          size: 13864872
-       version: 6.5.2.0-6.5.2.0
-  build string: ArubaOS version 6.5.2.0-6.5.2.0 &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Vela &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p4build@pr-hpn-build01&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gcc version 4.7.2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#59123 Fri Apr 7 09:37:25 AST 2017&lt;/span&gt;
-         flags: Instant preserve
-           oem: aruba
-
-Image is signed&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; verifying checksum... passed
-SHA2 Signature available
-Signer Cert OK
-Policy Cert OK
-RSA signature verified using SHA2.
-
-Partition 1:
-    image &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: 0
-  machine &lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt;: 46
-          size: 13864872
-       version: 6.5.2.0-6.5.2.0
-  build string: ArubaOS version 6.5.2.0-6.5.2.0 &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Vela &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p4build@pr-hpn-build01&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gcc version 4.7.2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#59123 Fri Apr 7 09:37:25 AST 2017&lt;/span&gt;
-         flags: Instant preserve
-           oem: aruba
-
-Image is signed&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; verifying checksum... passed
-SHA2 Signature available
-Signer Cert OK
-Policy Cert OK
-RSA signature verified using SHA2.
-
-apboot&amp;gt; clear os 0  &lt;span class=&quot;c&quot;&gt;# 清除分区 0 的系统&lt;/span&gt;
-apboot&amp;gt; upgrade os 0 ArubaInstant_Vela_8.5.0.3_72498    &lt;span class=&quot;c&quot;&gt;# os 0 分区刷入 TFTP Server 中的 ArubaInstant_Vela_8.5.0.3_72498 固件&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# 当看到 Upgrade successful 表示刷入成功&lt;/span&gt;
-
-apboot&amp;gt; factory_reset   &lt;span class=&quot;c&quot;&gt;# ！重要：清除原来的配置&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;建议将两个分区刷入同样的固件。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;配置-iap&quot;&gt;配置 IAP&lt;/h2&gt;
-
-&lt;p&gt;等待 5 分钟左右，会出现一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetMeUp-XX:XX:XX&lt;/code&gt; 类似的名字的 Wi-Fi 信号，就是刷新后的 Aruba IAP 的初始网络。&lt;/p&gt;
-
-&lt;p&gt;连接上去后，打开浏览器，输入网址 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://setmeup.arubanetworks.com:4343/&lt;/code&gt; （有可能浏览器会提示此网站证书不受信任，直接点仍然继续访问）进入 web 设置界面，使用账号 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin&lt;/code&gt; 和密码 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;机器的 SN 号&lt;/code&gt; 登陆（8.5 以下系统是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;admin/admin&lt;/code&gt;，开始和普通无线路由器一样设置网络。&lt;/p&gt;
-
-&lt;p&gt;需要配置的地方为：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;配置 - 接入点：设置 AP 的接入方式，如连接主路由，只需要在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;常规&lt;/code&gt;选项中选择 DHCP 即可&lt;/li&gt;
-  &lt;li&gt;配置 - 网络：设置 Wi-Fi，新建即可，在高级选项中可以选择 2.4G 或 5G 网络，是否隐藏 SSID，加密方式等&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;设置完毕，将 AP 连接到路由器上就可以正常使用了。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/5cr1pt/img4markdown/master/pics/20200618175509.jpg&quot; alt=&quot;Overview&quot; /&gt;&lt;/p&gt;</content><author><name></name></author><category term="aruba" /><category term="ap" /><summary type="html">由于现在无线设备越来越多，同时需要兼顾看电影、打游戏、办公、智能家居、NAS 下载等，所以感觉现有的无线路由器有点力不从心，就咸鱼 200 块淘了一个 Aruba 的 AP-203R，希望 MU-MIMO 能带来更好的体验。然后淘回来发现是个没办法单独使用的瘦 AP，查找了一番资料，发现可以刷机变成胖 AP 单独使用，这里做个记录。</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="git" /><category term="github" /><category term="progit" /><category term="note" /><summary type="html">本部分主要介绍了 Git 的逻辑、特点、处理文件的方式、工作流程以及基本的配置。</summary></entry></feed>
